@@ -1,4 +1,8 @@
 
+moved {
+  from = module.kinesis
+  to   = module.kinesis[0]
+}
 module "network" {
   source = "../../modules/network"
 
@@ -20,6 +24,7 @@ module "identity" {
 }
 
 module "kinesis" {
+  count  = var.enable_ingestion ? 1 : 0
   source = "../../modules/kinesis"
 
   environment = var.environment

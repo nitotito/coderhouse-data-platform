@@ -30,11 +30,9 @@ output "data_lake_bucket_name" {
 }
 
 output "kinesis_stream_arn" {
-  description = "ARN del stream de transacciones"
-  value       = module.kinesis.stream_arn
+  value = try(module.kinesis[0].stream_arn, null)
 }
 
 output "kinesis_stream_name" {
-  description = "Nombre del stream de transacciones"
-  value       = module.kinesis.stream_name
+  value = try(module.kinesis[0].stream_name, null)
 }
