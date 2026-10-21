@@ -29,3 +29,12 @@ output "data_lake_bucket_name" {
   value       = aws_s3_bucket.data_lake.id
 }
 
+output "kinesis_stream_arn" {
+  description = "ARN del stream de transacciones"
+  value       = module.kinesis.stream_arn
+}
+
+output "kinesis_stream_name" {
+  description = "Nombre del stream de transacciones"
+  value       = module.kinesis.stream_name
+}

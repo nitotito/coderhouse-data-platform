@@ -19,3 +19,13 @@ module "identity" {
   data_prefix          = "raw/"
 }
 
+module "kinesis" {
+  source = "../../modules/kinesis"
+
+  environment = var.environment
+  stream_name = "transactions"
+  shard_count = 2
+
+  data_lake_bucket_arn  = aws_s3_bucket.data_lake.arn
+  data_lake_bucket_name = aws_s3_bucket.data_lake.id
+}

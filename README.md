@@ -188,4 +188,103 @@ El uso de S3, DynamoDB y otros servicios puede generar cargos según consumo. Se
 
 ## Autor
 
-Proyecto académico — Coderhouse, Data Engineering.
+Lopez Nicolas. Proyecto académico — Coderhouse, Data Engineering.
+
+## Pre-entrega 2 — Ingesta de datos en tiempo real
+
+### Objetivo
+
+Implementar un pipeline de ingesta de eventos utilizando Amazon Kinesis Data Streams, Amazon Data Firehose y Amazon S3, administrado mediante Terraform.
+
+### Arquitectura
+
+```text
+Producer Python (Boto3)
+        |
+        v
+Kinesis Data Streams
+PROVISIONED - 2 shards - KMS
+        |
+        v
+Amazon Data Firehose
+Buffer: 5 MiB / 60 segundos
+        |
+        v
+Amazon S3 - Bronze Layer
+ingesta/year=YYYY/month=MM/day=DD/
+```
+
+### Componentes implementados
+
+- Kinesis Data Streams en modo Provisioned con dos shards y retención de 24 horas.
+- Cifrado del stream mediante AWS KMS.
+- Amazon Data Firehose como consumidor de Kinesis y destino S3.
+- Rol IAM de Firehose con permisos para consumir eventos y escribir en el Data Lake.
+- CloudWatch Logs para registrar errores de entrega.
+- Alarmas para `ReadProvisionedThroughputExceeded` y `WriteProvisionedThroughputExceeded`.
+- Producer Python que genera 100 transacciones ficticias utilizando UUID como claves de partición.
+
+### Prueba de ingesta
+
+Para ejecutar el producer:
+
+```powershell
+python -m pip install boto3
+python scripts/producer.py
+```
+
+Resultado obtenido:
+
+```text
+Registros enviados: 100
+Registros fallidos: 0
+```
+
+Se observaron registros asignados a los dos shards del stream.
+
+### Ejemplo de envío mediante AWS CLI
+
+```powershell
+$evento = '{"transaction_id":"TX-1001","amount":15000,"status":"approved"}'
+$bytes = [System.Text.Encoding]::UTF8.GetBytes($evento)
+$base64 = [Convert]::ToBase64String($bytes)
+
+aws kinesis put-record `
+  --stream-name dev-transactions-stream `
+  --partition-key "TX-1001" `
+  --data $base64 `
+  --region us-east-1 `
+  --profile coderhouse-dev
+```
+
+### Evidencia de entrega en S3
+
+Se verificó la creación de objetos dentro de:
+
+`s3://coderhouse-data-lake-672049777597/ingesta/year=2026/month=10/day=21/`
+
+Archivos observados:
+
+| Archivo | Tamaño |
+|---|---:|
+| Evento inicial | 128 bytes |
+| Lote de Firehose 1 | 8.260 bytes |
+| Lote de Firehose 2 | 9.323 bytes |
+
+Comando de verificación:
+
+```powershell
+aws s3 ls `
+  s3://coderhouse-data-lake-672049777597/ingesta/ `
+  --recursive `
+  --profile coderhouse-dev
+```
+
+La prueba confirmó la recepción de 100 registros en Kinesis y la generación de archivos por Firehose en S3. El conteo exacto de registros persistidos se verifica por separado.
+
+### Consideraciones
+
+Las claves de partición variables permiten distribuir eventos entre shards y reducen el riesgo de hot shards.
+
+La infraestructura de ingesta permanece desplegada temporalmente para reutilizarla en la siguiente etapa del proyecto. Los recursos provisionados pueden generar cargos mientras permanezcan activos.
+
