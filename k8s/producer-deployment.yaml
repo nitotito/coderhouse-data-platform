@@ -1,0 +1,32 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: urban-producer
+  namespace: urban-streaming
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: urban-producer
+  template:
+    metadata:
+      labels:
+        app: urban-producer
+    spec:
+      containers:
+        - name: producer
+          image: urban-sensors-producer:1.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: "kafka:9092"
+            - name: KAFKA_TOPIC
+              value: "urban_sensors"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"

@@ -288,3 +288,164 @@ Las claves de partición variables permiten distribuir eventos entre shards y re
 
 La infraestructura de ingesta permanece desplegada temporalmente para reutilizarla en la siguiente etapa del proyecto. Los recursos provisionados pueden generar cargos mientras permanezcan activos.
 
+## Pre-entrega 3 — Plataforma de Muestreo Urbano en Tiempo Real
+
+### Objetivo
+
+Implementar una plataforma de procesamiento de datos en tiempo real utilizando Kubernetes, Apache Kafka y Apache Spark Structured Streaming.
+
+El sistema simula sensores urbanos que generan mediciones ambientales y calcula promedios de temperatura y calidad del aire por sensor en ventanas de un minuto.
+
+### Arquitectura
+
+```mermaid
+flowchart TD
+    A["Python Producer<br/>Sensores urbanos"] --> B["Apache Kafka<br/>urban_sensors · 3 particiones"]
+    B --> C["Apache Spark Structured Streaming"]
+    C --> D["Window de 1 minuto"]
+    D --> E["AVG temperatura / AVG AQI por sensor"]
+    E --> F["Resultados en logs de Spark"]
+```
+
+### Componentes
+
+**Kubernetes:** administra los Deployments, Services, ConfigMaps y el Job de inicialización del tópico.
+
+**Kafka:** recibe eventos JSON en el tópico `urban_sensors`, configurado con tres particiones y factor de replicación 1.
+
+**Python Producer:** simula cinco sensores urbanos y publica eventos cada dos segundos.
+
+**Spark Structured Streaming:** consume Kafka y calcula los promedios de temperatura y calidad del aire por `sensor_id`, utilizando ventanas de tiempo de evento de un minuto y un watermark de dos minutos.
+
+### Estructura
+
+```text
+k8s/
+  namespace.yaml
+  kafka-configmap.yaml
+  kafka-deployment.yaml
+  kafka-service.yaml
+  kafka-topic-job.yaml
+  spark-configmap.yaml
+  spark-deployment.yaml
+  producer-deployment.yaml
+
+urban-producer/
+  Dockerfile
+  requirements.txt
+  producer.py
+
+spark/
+  Dockerfile
+  streaming_job.py
+
+docs/evidence/
+  producer-logs.txt
+  spark-logs.txt
+  kubernetes-pods.txt
+```
+
+### Requisitos
+
+- Docker Desktop con Kubernetes habilitado.
+- kubectl.
+- Docker Engine funcionando.
+- Recursos locales suficientes para ejecutar Kafka y Spark.
+
+### Despliegue
+
+Desde la raíz del repositorio:
+
+**1. Construir las imágenes:**
+
+```powershell
+docker build -t urban-sensors-producer:1.0 ./urban-producer
+docker build -t urban-spark-streaming:1.1 ./spark
+```
+
+**2. Crear namespace y configuración:**
+
+```powershell
+kubectl apply -f k8s/namespace.yaml
+kubectl apply -f k8s/kafka-configmap.yaml
+kubectl apply -f k8s/kafka-service.yaml
+kubectl apply -f k8s/kafka-deployment.yaml
+```
+
+**3. Esperar a Kafka:**
+
+```powershell
+kubectl rollout status deployment/kafka -n urban-streaming --timeout=180s
+```
+
+**4. Crear el tópico:**
+
+```powershell
+kubectl apply -f k8s/kafka-topic-job.yaml
+kubectl wait --for=condition=complete job/kafka-create-topic -n urban-streaming --timeout=120s
+```
+
+**5. Desplegar productor y Spark:**
+
+```powershell
+kubectl apply -f k8s/spark-configmap.yaml
+kubectl apply -f k8s/producer-deployment.yaml
+kubectl apply -f k8s/spark-deployment.yaml
+```
+
+**6. Verificar los componentes:**
+
+```powershell
+kubectl get pods -n urban-streaming
+kubectl logs -n urban-streaming deployment/urban-producer --tail=20
+kubectl logs -n urban-streaming deployment/urban-spark --tail=100
+```
+
+### Formato de eventos
+
+```json
+{
+  "sensor_id": "sensor-002",
+  "temperature": 27.9,
+  "humidity": 65.2,
+  "air_quality_index": 143,
+  "timestamp": "2026-10-22T03:22:00Z"
+}
+```
+
+### Evidencia del procesamiento
+
+Spark procesó eventos del tópico Kafka y generó agregaciones por sensor.
+
+Ejemplo real obtenido durante la prueba:
+
+| Sensor | Temperatura promedio | AQI promedio | Eventos |
+|---|---:|---:|---:|
+| sensor-004 | 29.645 | 104.00 | 2 |
+| sensor-005 | 28.703 | 77.67 | 3 |
+| sensor-002 | 27.900 | 143.33 | 3 |
+| sensor-001 | 30.225 | 92.00 | 2 |
+
+Ventana: 2026-10-22 03:22:00–03:23:00 UTC.
+
+Las evidencias completas se encuentran en `docs/evidence/`.
+
+### Consideraciones técnicas
+
+La implementación utiliza un broker Kafka en modo KRaft con tres particiones y replicación 1.
+
+Spark se ejecuta en modo `local[2]` dentro de Kubernetes. Esto demuestra el procesamiento con Structured Streaming, pero no implementa un clúster Spark distribuido entre varios workers.
+
+El almacenamiento de Kafka utiliza `emptyDir`, por lo que no está diseñado para persistencia ante reemplazos del Pod.
+
+La solución está orientada a un laboratorio local y no debe considerarse una configuración de producción.
+
+### Limpieza del entorno
+
+Para eliminar los recursos Kubernetes del laboratorio:
+
+```powershell
+kubectl delete namespace urban-streaming
+```
+
+Esto elimina los recursos del namespace, pero no las imágenes Docker locales.
