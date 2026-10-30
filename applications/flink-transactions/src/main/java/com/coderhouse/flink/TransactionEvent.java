@@ -54,8 +54,20 @@ public class TransactionEvent {
     }
 
     public long getEventTimeMillis() {
-        return OffsetDateTime.parse(timestamp)
-                .toInstant()
-                .toEpochMilli();
+    if (timestamp == null || timestamp.isBlank()) {
+        throw new IllegalArgumentException("Timestamp vacío o nulo");
     }
+
+    String value = timestamp.trim();
+
+    // Timestamp Unix en milisegundos
+    if (value.matches("\\d{13}")) {
+        return Long.parseLong(value);
+    }
+
+    // Timestamp ISO 8601
+    return OffsetDateTime.parse(value)
+            .toInstant()
+            .toEpochMilli();
+}
 }

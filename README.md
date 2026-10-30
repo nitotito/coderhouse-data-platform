@@ -449,3 +449,92 @@ kubectl delete namespace urban-streaming
 ```
 
 Esto elimina los recursos del namespace, pero no las imágenes Docker locales.
+
+
+## Pre-entrega 4 — Procesamiento de transacciones en tiempo real con Apache Flink
+
+### Objetivo
+
+Implementar una capa de procesamiento de datos en tiempo real utilizando Amazon Managed Service for Apache Flink, consumiendo las transacciones del stream de Kinesis desarrollado en la Pre-entrega 2.
+
+### Arquitectura
+
+```text
+Amazon Kinesis Data Streams
+    dev-transactions-stream
+            |
+            v
+Apache Flink 2.2
+    |
+    +-- Deserialización y validación JSON
+    +-- Asignación de timestamps y watermarks
+    +-- Filtrado de transacciones aprobadas
+    +-- Agrupación por método de pago
+    +-- Ventanas de tiempo de evento de 1 minuto
+    +-- Cálculo de cantidad, total y promedio
+            |
+            v
+    Sink: salida estándar
+```
+
+### Lógica de negocio
+
+La aplicación procesa transacciones financieras en formato JSON con los campos `transaction_id`, `amount`, `payment_method`, `status` y `timestamp`.
+
+El procesamiento consiste en:
+
+1. Consumir eventos desde Amazon Kinesis Data Streams.
+2. Deserializar y validar los registros JSON.
+3. Descartar eventos inválidos y filtrar transacciones con estado `APPROVED`.
+4. Agrupar las transacciones por método de pago.
+5. Aplicar ventanas de un minuto mediante `TumblingEventTimeWindows`.
+6. Calcular cantidad de transacciones, importe total e importe promedio por ventana y método de pago.
+
+### WatermarkStrategy
+
+Se utiliza una estrategia de tiempo de evento con tolerancia de 10 segundos para eventos fuera de orden.
+
+Se configura una detección de inactividad de 30 segundos para evitar que las particiones inactivas bloqueen el avance de los watermarks.
+
+La aplicación admite timestamps ISO 8601 y Unix epoch en milisegundos.
+
+### Infraestructura Terraform
+
+La aplicación se define mediante `aws_kinesisanalyticsv2_application`, utilizando el módulo `modules/managed-flink`.
+
+El código Java se compila mediante Maven y se despliega como archivo JAR almacenado en Amazon S3.
+
+La configuración incluye checkpoints habilitados para recuperación del estado del procesamiento.
+
+### Paralelismo y KPUs
+
+Configuración del entorno de desarrollo:
+
+- Paralelismo: 1.
+- Autoescalado: deshabilitado.
+- Intervalo de checkpoints: 60 segundos.
+- Pausa mínima entre checkpoints: 5 segundos.
+
+Amazon Managed Service for Apache Flink administra los recursos mediante KPUs. La cantidad efectiva de KPUs depende de la configuración y asignación del servicio.
+
+### Evidencia de ejecución
+
+Se verificó la ejecución del job `Transactions Streaming Job` mediante el dashboard de Apache Flink.
+
+Durante las pruebas se observaron:
+
+- Job en estado `RUNNING`.
+- Dos tareas activas.
+- Consumo de registros desde Kinesis.
+- Propagación de watermarks.
+- 11 resultados emitidos por el operador de ventanas.
+- 11 resultados recibidos por el sink.
+- Checkpoints completados correctamente.
+
+Las capturas del dashboard se utilizarán como evidencia del procesamiento.
+
+### Consideraciones
+
+La implementación utiliza un sink de salida estándar. No se incluye persistencia de las agregaciones en S3, dado que no es un requisito explícito de esta pre-entrega.
+
+Los recursos administrados de AWS pueden generar costos mientras permanezcan activos.

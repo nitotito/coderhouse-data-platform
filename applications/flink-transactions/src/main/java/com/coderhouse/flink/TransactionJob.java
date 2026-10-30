@@ -17,9 +17,13 @@ import org.apache.flink.connector.kinesis.source.config.KinesisSourceConfigOptio
 
 import org.apache.flink.streaming.api.environment.CheckpointConfig;
 import org.apache.flink.configuration.ExternalizedCheckpointRetention;
+import com.amazonaws.services.kinesisanalytics.runtime.KinesisAnalyticsRuntime;
 
 
 import java.time.Duration;
+import java.util.Map;
+import java.util.Properties;
+
 
 public class TransactionJob {
 
@@ -32,17 +36,22 @@ public class TransactionJob {
         // 2. Habilitar checkpoints cada 60 segundos
         env.enableCheckpointing(60000);
 
-        env.getCheckpointConfig().setExternalizedCheckpointRetention(
-            ExternalizedCheckpointRetention.RETAIN_ON_CANCELLATION
-        );
-
         // 3. Obtener el ARN del stream de Kinesis
         String streamArn = System.getenv("KINESIS_STREAM_ARN");
 
         if (streamArn == null || streamArn.isBlank()) {
-            throw new IllegalArgumentException(
-                    "Falta la variable KINESIS_STREAM_ARN"
-            );
+            Map<String, Properties> applicationProperties =
+                    KinesisAnalyticsRuntime.getApplicationProperties();
+
+            Properties properties = applicationProperties.get("ApplicationProperties");
+
+            if (properties != null) {
+                streamArn = properties.getProperty("KINESIS_STREAM_ARN");
+            }
+        }
+
+        if (streamArn == null || streamArn.isBlank()) {
+            throw new IllegalArgumentException("Falta KINESIS_STREAM_ARN");
         }
 
         // 4. Configurar Kinesis como fuente de datos
@@ -68,24 +77,37 @@ public class TransactionJob {
                 Types.STRING
         );
 
-        // 6. Convertir cada JSON en un TransactionEvent
-        DataStream<TransactionEvent> transactions =
-                rawTransactions
-                        .map(json -> {
+        // 6. Convertir JSON en TransactionEvent, descartando registros inválidos
+DataStream<TransactionEvent> transactions =
+        rawTransactions
+                .map(json -> {
+                    try {
+                        ObjectMapper mapper = new ObjectMapper();
 
-                            ObjectMapper mapper = new ObjectMapper();
+                        mapper.setPropertyNamingStrategy(
+                                PropertyNamingStrategies.SNAKE_CASE
+                        );
 
-                            mapper.setPropertyNamingStrategy(
-                                    PropertyNamingStrategies.SNAKE_CASE
-                            );
+                        TransactionEvent event = mapper.readValue(
+                                json.trim(),
+                                TransactionEvent.class
+                        );
 
-                            return mapper.readValue(
-                                    json.trim(),
-                                    TransactionEvent.class
-                            );
+                        // Validamos el timestamp antes de enviar el evento a Flink.
+                        event.getEventTimeMillis();
 
-                        })
-                        .returns(TransactionEvent.class);
+                        return event;
+
+                    } catch (Exception e) {
+                        System.err.println(
+                                "Transacción descartada por JSON inválido: "
+                                + e.getMessage()
+                        );
+                        return null;
+                    }
+                })
+                .returns(TransactionEvent.class)
+                .filter(event -> event != null);
 
         // 7. Configurar Event Time y Watermarks
         WatermarkStrategy<TransactionEvent> watermarkStrategy =
