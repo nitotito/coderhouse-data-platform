@@ -1,0 +1,17 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ReadTransactionsStream",
+      "Effect": "Allow",
+      "Action": [
+        "kinesis:DescribeStream",
+        "kinesis:DescribeStreamSummary",
+        "kinesis:ListShards",
+        "kinesis:GetShardIterator",
+        "kinesis:GetRecords"
+      ],
+      "Resource": "arn:aws:kinesis:us-east-1:672049777597:stream/dev-transactions-stream"
+    }
+  ]
+}

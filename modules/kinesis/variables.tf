@@ -30,3 +30,9 @@ variable "data_lake_bucket_name" {
   description = "Nombre del bucket S3 utilizado como Data Lake"
   type        = string
 }
+
+variable "enable_firehose" {
+  description = "Habilita la entrega de Kinesis a S3 mediante Firehose"
+  type        = bool
+  default     = false
+}

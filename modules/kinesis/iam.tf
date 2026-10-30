@@ -15,11 +15,14 @@ data "aws_iam_policy_document" "firehose_trust" {
 }
 
 resource "aws_iam_role" "firehose" {
+  count = var.enable_firehose ? 1 : 0
+
   name               = "coderhouse-${var.environment}-firehose"
   assume_role_policy = data.aws_iam_policy_document.firehose_trust.json
 }
 
 data "aws_iam_policy_document" "firehose" {
+  count = var.enable_firehose ? 1 : 0
   statement {
     sid    = "ReadKinesis"
     effect = "Allow"
@@ -64,14 +67,16 @@ data "aws_iam_policy_document" "firehose" {
     ]
 
     resources = [
-      "${aws_cloudwatch_log_group.firehose.arn}:log-stream:*"
+      "${aws_cloudwatch_log_group.firehose[0].arn}:log-stream:*"
     ]
   }
 
 }
 
 resource "aws_iam_role_policy" "firehose" {
+  count = var.enable_firehose ? 1 : 0
+
   name   = "coderhouse-firehose-policy"
-  role   = aws_iam_role.firehose.id
-  policy = data.aws_iam_policy_document.firehose.json
+  role   = aws_iam_role.firehose[0].id
+  policy = data.aws_iam_policy_document.firehose[0].json
 }

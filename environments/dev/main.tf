@@ -24,8 +24,9 @@ module "identity" {
 }
 
 module "kinesis" {
-  count  = var.enable_ingestion ? 1 : 0
-  source = "../../modules/kinesis"
+  enable_firehose = false
+  count           = var.enable_ingestion ? 1 : 0
+  source          = "../../modules/kinesis"
 
   environment = var.environment
   stream_name = "transactions"

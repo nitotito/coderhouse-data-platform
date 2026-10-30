@@ -1,11 +1,15 @@
 resource "aws_cloudwatch_log_group" "firehose" {
+  count = var.enable_firehose ? 1 : 0
+
   name              = "/aws/kinesisfirehose/${var.environment}-transactions"
   retention_in_days = 7
 }
 
 resource "aws_cloudwatch_log_stream" "firehose" {
+  count = var.enable_firehose ? 1 : 0
+
   name           = "S3Delivery"
-  log_group_name = aws_cloudwatch_log_group.firehose.name
+  log_group_name = aws_cloudwatch_log_group.firehose[0].name
 }
 
 resource "aws_cloudwatch_metric_alarm" "read_throughput" {
