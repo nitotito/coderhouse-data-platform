@@ -17,3 +17,10 @@ terraform.rc
 .env.*
 *.pem
 *.key
+
+# Maven
+**/target/
+
+# Checkpoints locales de Flink
+flink-data/checkpoints/
+

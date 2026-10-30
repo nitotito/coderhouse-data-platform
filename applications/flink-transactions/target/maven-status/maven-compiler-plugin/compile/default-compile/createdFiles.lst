@@ -1,6 +1,0 @@
-com\coderhouse\flink\TransactionEvent.class
-com\coderhouse\flink\TransactionWindowResult.class
-com\coderhouse\flink\TransactionAccumulator.class
-com\coderhouse\flink\TransactionSummary.class
-com\coderhouse\flink\TransactionAggregate.class
-com\coderhouse\flink\TransactionJob.class
