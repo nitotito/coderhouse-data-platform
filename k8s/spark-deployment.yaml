@@ -1,0 +1,30 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: urban-spark
+  namespace: urban-streaming
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: urban-spark
+  template:
+    metadata:
+      labels:
+        app: urban-spark
+    spec:
+      containers:
+        - name: spark
+          image: urban-spark-streaming:1.1
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: spark-config
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "500m"
+            limits:
+              memory: "3Gi"
+              cpu: "2000m"

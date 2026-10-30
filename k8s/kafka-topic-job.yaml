@@ -1,0 +1,36 @@
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kafka-create-topic
+  namespace: urban-streaming
+spec:
+  backoffLimit: 5
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: create-topic
+          image: apache/kafka:3.9.1
+          command:
+            - /bin/bash
+            - -c
+            - |
+              until /opt/kafka/bin/kafka-broker-api-versions.sh \
+                --bootstrap-server kafka:9092 >/dev/null 2>&1; do
+                echo "Esperando a Kafka..."
+                sleep 5
+              done
+
+              /opt/kafka/bin/kafka-topics.sh \
+                --bootstrap-server kafka:9092 \
+                --create \
+                --if-not-exists \
+                --topic urban_sensors \
+                --partitions 3 \
+                --replication-factor 1
+
+              /opt/kafka/bin/kafka-topics.sh \
+                --bootstrap-server kafka:9092 \
+                --describe \
+                --topic urban_sensors

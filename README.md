@@ -188,4 +188,353 @@ El uso de S3, DynamoDB y otros servicios puede generar cargos según consumo. Se
 
 ## Autor
 
-Proyecto académico — Coderhouse, Data Engineering.
+Lopez Nicolas. Proyecto académico — Coderhouse, Data Engineering.
+
+## Pre-entrega 2 — Ingesta de datos en tiempo real
+
+### Objetivo
+
+Implementar un pipeline de ingesta de eventos utilizando Amazon Kinesis Data Streams, Amazon Data Firehose y Amazon S3, administrado mediante Terraform.
+
+### Arquitectura
+
+```text
+Producer Python (Boto3)
+        |
+        v
+Kinesis Data Streams
+PROVISIONED - 2 shards - KMS
+        |
+        v
+Amazon Data Firehose
+Buffer: 5 MiB / 60 segundos
+        |
+        v
+Amazon S3 - Bronze Layer
+ingesta/year=YYYY/month=MM/day=DD/
+```
+
+### Componentes implementados
+
+- Kinesis Data Streams en modo Provisioned con dos shards y retención de 24 horas.
+- Cifrado del stream mediante AWS KMS.
+- Amazon Data Firehose como consumidor de Kinesis y destino S3.
+- Rol IAM de Firehose con permisos para consumir eventos y escribir en el Data Lake.
+- CloudWatch Logs para registrar errores de entrega.
+- Alarmas para `ReadProvisionedThroughputExceeded` y `WriteProvisionedThroughputExceeded`.
+- Producer Python que genera 100 transacciones ficticias utilizando UUID como claves de partición.
+
+### Prueba de ingesta
+
+Para ejecutar el producer:
+
+```powershell
+python -m pip install boto3
+python scripts/producer.py
+```
+
+Resultado obtenido:
+
+```text
+Registros enviados: 100
+Registros fallidos: 0
+```
+
+Se observaron registros asignados a los dos shards del stream.
+
+### Ejemplo de envío mediante AWS CLI
+
+```powershell
+$evento = '{"transaction_id":"TX-1001","amount":15000,"status":"approved"}'
+$bytes = [System.Text.Encoding]::UTF8.GetBytes($evento)
+$base64 = [Convert]::ToBase64String($bytes)
+
+aws kinesis put-record `
+  --stream-name dev-transactions-stream `
+  --partition-key "TX-1001" `
+  --data $base64 `
+  --region us-east-1 `
+  --profile coderhouse-dev
+```
+
+### Evidencia de entrega en S3
+
+Se verificó la creación de objetos dentro de:
+
+`s3://coderhouse-data-lake-672049777597/ingesta/year=2026/month=10/day=21/`
+
+Archivos observados:
+
+| Archivo | Tamaño |
+|---|---:|
+| Evento inicial | 128 bytes |
+| Lote de Firehose 1 | 8.260 bytes |
+| Lote de Firehose 2 | 9.323 bytes |
+
+Comando de verificación:
+
+```powershell
+aws s3 ls `
+  s3://coderhouse-data-lake-672049777597/ingesta/ `
+  --recursive `
+  --profile coderhouse-dev
+```
+
+La prueba confirmó la recepción de 100 registros en Kinesis y la generación de archivos por Firehose en S3. El conteo exacto de registros persistidos se verifica por separado.
+
+### Consideraciones
+
+Las claves de partición variables permiten distribuir eventos entre shards y reducen el riesgo de hot shards.
+
+La infraestructura de ingesta permanece desplegada temporalmente para reutilizarla en la siguiente etapa del proyecto. Los recursos provisionados pueden generar cargos mientras permanezcan activos.
+
+## Pre-entrega 3 — Plataforma de Muestreo Urbano en Tiempo Real
+
+### Objetivo
+
+Implementar una plataforma de procesamiento de datos en tiempo real utilizando Kubernetes, Apache Kafka y Apache Spark Structured Streaming.
+
+El sistema simula sensores urbanos que generan mediciones ambientales y calcula promedios de temperatura y calidad del aire por sensor en ventanas de un minuto.
+
+### Arquitectura
+
+```mermaid
+flowchart TD
+    A["Python Producer<br/>Sensores urbanos"] --> B["Apache Kafka<br/>urban_sensors · 3 particiones"]
+    B --> C["Apache Spark Structured Streaming"]
+    C --> D["Window de 1 minuto"]
+    D --> E["AVG temperatura / AVG AQI por sensor"]
+    E --> F["Resultados en logs de Spark"]
+```
+
+### Componentes
+
+**Kubernetes:** administra los Deployments, Services, ConfigMaps y el Job de inicialización del tópico.
+
+**Kafka:** recibe eventos JSON en el tópico `urban_sensors`, configurado con tres particiones y factor de replicación 1.
+
+**Python Producer:** simula cinco sensores urbanos y publica eventos cada dos segundos.
+
+**Spark Structured Streaming:** consume Kafka y calcula los promedios de temperatura y calidad del aire por `sensor_id`, utilizando ventanas de tiempo de evento de un minuto y un watermark de dos minutos.
+
+### Estructura
+
+```text
+k8s/
+  namespace.yaml
+  kafka-configmap.yaml
+  kafka-deployment.yaml
+  kafka-service.yaml
+  kafka-topic-job.yaml
+  spark-configmap.yaml
+  spark-deployment.yaml
+  producer-deployment.yaml
+
+urban-producer/
+  Dockerfile
+  requirements.txt
+  producer.py
+
+spark/
+  Dockerfile
+  streaming_job.py
+
+docs/evidence/
+  producer-logs.txt
+  spark-logs.txt
+  kubernetes-pods.txt
+```
+
+### Requisitos
+
+- Docker Desktop con Kubernetes habilitado.
+- kubectl.
+- Docker Engine funcionando.
+- Recursos locales suficientes para ejecutar Kafka y Spark.
+
+### Despliegue
+
+Desde la raíz del repositorio:
+
+**1. Construir las imágenes:**
+
+```powershell
+docker build -t urban-sensors-producer:1.0 ./urban-producer
+docker build -t urban-spark-streaming:1.1 ./spark
+```
+
+**2. Crear namespace y configuración:**
+
+```powershell
+kubectl apply -f k8s/namespace.yaml
+kubectl apply -f k8s/kafka-configmap.yaml
+kubectl apply -f k8s/kafka-service.yaml
+kubectl apply -f k8s/kafka-deployment.yaml
+```
+
+**3. Esperar a Kafka:**
+
+```powershell
+kubectl rollout status deployment/kafka -n urban-streaming --timeout=180s
+```
+
+**4. Crear el tópico:**
+
+```powershell
+kubectl apply -f k8s/kafka-topic-job.yaml
+kubectl wait --for=condition=complete job/kafka-create-topic -n urban-streaming --timeout=120s
+```
+
+**5. Desplegar productor y Spark:**
+
+```powershell
+kubectl apply -f k8s/spark-configmap.yaml
+kubectl apply -f k8s/producer-deployment.yaml
+kubectl apply -f k8s/spark-deployment.yaml
+```
+
+**6. Verificar los componentes:**
+
+```powershell
+kubectl get pods -n urban-streaming
+kubectl logs -n urban-streaming deployment/urban-producer --tail=20
+kubectl logs -n urban-streaming deployment/urban-spark --tail=100
+```
+
+### Formato de eventos
+
+```json
+{
+  "sensor_id": "sensor-002",
+  "temperature": 27.9,
+  "humidity": 65.2,
+  "air_quality_index": 143,
+  "timestamp": "2026-10-22T03:22:00Z"
+}
+```
+
+### Evidencia del procesamiento
+
+Spark procesó eventos del tópico Kafka y generó agregaciones por sensor.
+
+Ejemplo real obtenido durante la prueba:
+
+| Sensor | Temperatura promedio | AQI promedio | Eventos |
+|---|---:|---:|---:|
+| sensor-004 | 29.645 | 104.00 | 2 |
+| sensor-005 | 28.703 | 77.67 | 3 |
+| sensor-002 | 27.900 | 143.33 | 3 |
+| sensor-001 | 30.225 | 92.00 | 2 |
+
+Ventana: 2026-10-22 03:22:00–03:23:00 UTC.
+
+Las evidencias completas se encuentran en `docs/evidence/`.
+
+### Consideraciones técnicas
+
+La implementación utiliza un broker Kafka en modo KRaft con tres particiones y replicación 1.
+
+Spark se ejecuta en modo `local[2]` dentro de Kubernetes. Esto demuestra el procesamiento con Structured Streaming, pero no implementa un clúster Spark distribuido entre varios workers.
+
+El almacenamiento de Kafka utiliza `emptyDir`, por lo que no está diseñado para persistencia ante reemplazos del Pod.
+
+La solución está orientada a un laboratorio local y no debe considerarse una configuración de producción.
+
+### Limpieza del entorno
+
+Para eliminar los recursos Kubernetes del laboratorio:
+
+```powershell
+kubectl delete namespace urban-streaming
+```
+
+Esto elimina los recursos del namespace, pero no las imágenes Docker locales.
+
+
+## Pre-entrega 4 — Procesamiento de transacciones en tiempo real con Apache Flink
+
+### Objetivo
+
+Implementar una capa de procesamiento de datos en tiempo real utilizando Amazon Managed Service for Apache Flink, consumiendo las transacciones del stream de Kinesis desarrollado en la Pre-entrega 2.
+
+### Arquitectura
+
+```text
+Amazon Kinesis Data Streams
+    dev-transactions-stream
+            |
+            v
+Apache Flink 2.2
+    |
+    +-- Deserialización y validación JSON
+    +-- Asignación de timestamps y watermarks
+    +-- Filtrado de transacciones aprobadas
+    +-- Agrupación por método de pago
+    +-- Ventanas de tiempo de evento de 1 minuto
+    +-- Cálculo de cantidad, total y promedio
+            |
+            v
+    Sink: salida estándar
+```
+
+### Lógica de negocio
+
+La aplicación procesa transacciones financieras en formato JSON con los campos `transaction_id`, `amount`, `payment_method`, `status` y `timestamp`.
+
+El procesamiento consiste en:
+
+1. Consumir eventos desde Amazon Kinesis Data Streams.
+2. Deserializar y validar los registros JSON.
+3. Descartar eventos inválidos y filtrar transacciones con estado `APPROVED`.
+4. Agrupar las transacciones por método de pago.
+5. Aplicar ventanas de un minuto mediante `TumblingEventTimeWindows`.
+6. Calcular cantidad de transacciones, importe total e importe promedio por ventana y método de pago.
+
+### WatermarkStrategy
+
+Se utiliza una estrategia de tiempo de evento con tolerancia de 10 segundos para eventos fuera de orden.
+
+Se configura una detección de inactividad de 30 segundos para evitar que las particiones inactivas bloqueen el avance de los watermarks.
+
+La aplicación admite timestamps ISO 8601 y Unix epoch en milisegundos.
+
+### Infraestructura Terraform
+
+La aplicación se define mediante `aws_kinesisanalyticsv2_application`, utilizando el módulo `modules/managed-flink`.
+
+El código Java se compila mediante Maven y se despliega como archivo JAR almacenado en Amazon S3.
+
+La configuración incluye checkpoints habilitados para recuperación del estado del procesamiento.
+
+### Paralelismo y KPUs
+
+Configuración del entorno de desarrollo:
+
+- Paralelismo: 1.
+- Autoescalado: deshabilitado.
+- Intervalo de checkpoints: 60 segundos.
+- Pausa mínima entre checkpoints: 5 segundos.
+
+Amazon Managed Service for Apache Flink administra los recursos mediante KPUs. La cantidad efectiva de KPUs depende de la configuración y asignación del servicio.
+
+### Evidencia de ejecución
+
+Se verificó la ejecución del job `Transactions Streaming Job` mediante el dashboard de Apache Flink.
+
+Durante las pruebas se observaron:
+
+- Job en estado `RUNNING`.
+- Dos tareas activas.
+- Consumo de registros desde Kinesis.
+- Propagación de watermarks.
+- 11 resultados emitidos por el operador de ventanas.
+- 11 resultados recibidos por el sink.
+- Checkpoints completados correctamente.
+
+Las capturas del dashboard se utilizarán como evidencia del procesamiento.
+
+### Consideraciones
+
+La implementación utiliza un sink de salida estándar. No se incluye persistencia de las agregaciones en S3, dado que no es un requisito explícito de esta pre-entrega.
+
+Los recursos administrados de AWS pueden generar costos mientras permanezcan activos.

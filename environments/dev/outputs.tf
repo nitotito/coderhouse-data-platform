@@ -29,3 +29,10 @@ output "data_lake_bucket_name" {
   value       = aws_s3_bucket.data_lake.id
 }
 
+output "kinesis_stream_arn" {
+  value = try(module.kinesis[0].stream_arn, null)
+}
+
+output "kinesis_stream_name" {
+  value = try(module.kinesis[0].stream_name, null)
+}

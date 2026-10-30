@@ -1,0 +1,40 @@
+services:
+  jobmanager:
+    image: flink:2.2.1-scala_2.12-java17
+    command: jobmanager
+    ports:
+      - "8081:8081"
+    environment:
+      - JOB_MANAGER_RPC_ADDRESS=jobmanager
+      - AWS_PROFILE=coderhouse-dev
+      - AWS_REGION=us-east-1
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_EC2_METADATA_DISABLED=true
+      - AWS_SHARED_CREDENTIALS_FILE=/home/flink/.aws/credentials
+      - AWS_CONFIG_FILE=/home/flink/.aws/config
+      - KINESIS_STREAM_ARN=${KINESIS_STREAM_ARN}
+      - "FLINK_PROPERTIES=execution.checkpointing.dir: file:///opt/flink/checkpoints"
+    volumes:
+      - ./applications/flink-transactions/target:/opt/flink/usrlib
+      - ${USERPROFILE}/.aws:/home/flink/.aws:ro
+      - ./flink-data/checkpoints:/opt/flink/checkpoints
+
+  taskmanager:
+    image: flink:2.2.1-scala_2.12-java17
+    command: taskmanager
+    depends_on:
+      - jobmanager
+    environment:
+      - JOB_MANAGER_RPC_ADDRESS=jobmanager
+      - AWS_PROFILE=coderhouse-dev
+      - AWS_REGION=us-east-1
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_EC2_METADATA_DISABLED=true
+      - AWS_SHARED_CREDENTIALS_FILE=/home/flink/.aws/credentials
+      - AWS_CONFIG_FILE=/home/flink/.aws/config
+      - KINESIS_STREAM_ARN=${KINESIS_STREAM_ARN}
+      - "FLINK_PROPERTIES=execution.checkpointing.dir: file:///opt/flink/checkpoints"
+    volumes:
+      - ./applications/flink-transactions/target:/opt/flink/usrlib
+      - ${USERPROFILE}/.aws:/home/flink/.aws:ro
+      - ./flink-data/checkpoints:/opt/flink/checkpoints

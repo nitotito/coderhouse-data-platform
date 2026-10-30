@@ -1,0 +1,10 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spark-config
+  namespace: urban-streaming
+data:
+  KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
+  KAFKA_TOPIC: "urban_sensors"
+  SPARK_MASTER: "local[2]"

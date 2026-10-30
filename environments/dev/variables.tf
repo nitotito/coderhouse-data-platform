@@ -16,3 +16,9 @@ variable "vpc_cidr" {
   type        = string
   default     = "10.10.0.0/16"
 }
+
+variable "enable_ingestion" {
+  description = "Habilita la infraestructura de ingesta"
+  type        = bool
+  default     = false
+}
