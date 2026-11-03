@@ -1,8 +1,43 @@
 # Despliegue y prueba AWS — Pre-entrega 5
 
-Estado: preparado; **no ejecutado en AWS**. Requiere aprobación de costos y
-un perfil autorizado. El usuario `terraform-dev` recibió AccessDenied para
-`glue:GetDatabase`; no se otorgaron permisos ni se cambiaron credenciales.
+Estado: preparado; **no desplegado en AWS**. El usuario autorizó el despliegue,
+los costos del ensayo y la detención posterior de Flink el 03/11/2026.
+La comprobación posterior sigue bloqueada por permisos del perfil: AccessDenied
+para `glue:GetDatabase` y `athena:GetWorkGroup`. No se otorgaron permisos ni se
+cambiaron credenciales; la aplicación permanece READY.
+
+### Desbloqueo del operador
+
+La propuesta adicional está en [iceberg-operator-access.json](iceberg-operator-access.json).
+Concede acceso a la base `lakehouse_db`, lectura de su única tabla de agregados,
+consultas en el workgroup Athena `primary`, lectura de los datos y escritura del
+JAR 1.1.0/resultados de Athena en prefijos específicos, publicación de eventos
+controlados y lectura de logs. No concede administración IAM ni permisos globales
+de Glue/Athena/S3. Complementa los permisos Terraform/Flink existentes.
+Es una propuesta: todavía no fue adjuntada ni validada por AWS Access Analyzer.
+
+Un administrador de la cuenta puede adjuntarla desde IAM al usuario `terraform-dev`,
+o ejecutar desde la raíz del repositorio con **su perfil administrativo real**:
+
+```powershell
+# Reemplazar PERFIL_ADMIN por un perfil administrativo ya autorizado.
+aws iam put-user-policy --user-name terraform-dev --policy-name CoderhouseLakehouseDelivery --policy-document file://docs/iceberg-operator-access.json --profile PERFIL_ADMIN
+powershell -NoProfile -File scripts/iceberg-preflight.ps1
+```
+
+No configurar credenciales de administrador dentro del repositorio ni compartirlas
+por chat. La política no elimina posibles restricciones de boundaries, SCP o Lake
+Formation; si existen, también requieren revisión administrativa. El preflight
+guarda las respuestas reales en `docs/evidence/iceberg-aws-preflight.json`.
+`ABSENT` para la base permite su creación posterior por Terraform; `BLOCKED`
+requiere corregir permisos antes de iniciar servicios o subir el JAR.
+
+La sesión IAM abierta en Chrome se identificó en el inventario de ventanas,
+pero el acceso a esa aplicación mediante Computer Use no fue aprobado. No se
+interactuó con la consola ni se guardaron cambios de permisos desde el navegador.
+
+Referencias: [permisos Glue y sus ancestros](https://docs.aws.amazon.com/athena/latest/ug/fine-grained-access-to-glue-resources.html)
+y [acciones Athena por workgroup](https://docs.aws.amazon.com/service-authorization/latest/reference/list_athena.html).
 
 ## Permisos del operador
 

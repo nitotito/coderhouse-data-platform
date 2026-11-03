@@ -14,6 +14,7 @@ No se ejecutó terraform apply ni se publicaron objetos S3; Flink no se inició.
 | iceberg-aws-flink-before.json | READY, FLINK-2_2, checkpoints 60000 ms, paralelismo 1 |
 | iceberg-aws-versioning.json | Versionado S3 Enabled |
 | iceberg-glue-access.txt | AccessDenied real del operador al consultar Glue |
+| iceberg-aws-preflight.json | Reintento autorizado: identidad válida, Glue/Athena bloqueados, Flink READY |
 
 La prueba IcebergCheckpointTest ejecuta un MiniCluster Flink local, escribe 12
 filas a Parquet y comprueba snapshots de commits periódicos además del cierre
@@ -39,7 +40,15 @@ directamente en ese archivo. La política de ejecución declara explícitamente 
 operaciones de GlueCatalog/S3FileIO y sus recursos; no se subió ninguna política
 desde esa herramienta.
 
-Pendientes: autorización de despliegue/costos, permisos Glue del operador,
+El 03/11/2026 el usuario autorizó desplegar y probar con costos, deteniendo Flink
+al finalizar. El preflight posterior volvió a encontrar AccessDenied para
+glue:GetDatabase y athena:GetWorkGroup. IAM también denegó listar políticas del
+usuario y simular sus permisos. Solo se encontró el perfil local coderhouse-dev.
+Computer Use no recibió aprobación para acceder a Google Chrome; no se modificó
+IAM ni se inició Flink. La propuesta de acceso adicional está en
+../iceberg-operator-access.json y aún requiere que la adjunte un administrador.
+
+Pendientes: permisos Glue/Athena del operador,
 comprobar/importar la base si ya existe, crear tabla al arrancar el job, comprobar
 commits/metadata_location en Glue, archivos Iceberg en S3, resultados Athena y
 logs de concurrencia durante el ensayo. No hay capturas AWS de estos pendientes.

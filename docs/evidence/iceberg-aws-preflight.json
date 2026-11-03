@@ -1,0 +1,31 @@
+{
+    "CheckedAtUtc":  "2026-11-03T11:59:13.0009774Z",
+    "Profile":  "coderhouse-dev",
+    "Region":  "us-east-1",
+    "Checks":  [
+                   {
+                       "Check":  "identity",
+                       "State":  "PASS",
+                       "ExitCode":  0,
+                       "Output":  "{\r\n    \"UserId\": \"AIDAZY6KJZO6Z7U6KERKV\",\r\n    \"Account\": \"672049777597\",\r\n    \"Arn\": \"arn:aws:iam::672049777597:user/terraform-dev\"\r\n}"
+                   },
+                   {
+                       "Check":  "glue_database",
+                       "State":  "BLOCKED",
+                       "ExitCode":  254,
+                       "Output":  "System.Management.Automation.RemoteException\r\naws: [ERROR]: An error occurred (AccessDeniedException) when calling the GetDatabase operation: User: arn:aws:iam::672049777597:user/terraform-dev is not authorized to perform: glue:GetDatabase on resource: arn:aws:glue:us-east-1:672049777597:catalog because no identity-based policy allows the glue:GetDatabase action"
+                   },
+                   {
+                       "Check":  "athena_workgroup",
+                       "State":  "BLOCKED",
+                       "ExitCode":  254,
+                       "Output":  "System.Management.Automation.RemoteException\r\naws: [ERROR]: An error occurred (AccessDeniedException) when calling the GetWorkGroup operation: You are not authorized to perform: athena:GetWorkGroup on the resource. After your AWS administrator or you have updated your permissions, please try again."
+                   },
+                   {
+                       "Check":  "flink_status",
+                       "State":  "PASS",
+                       "ExitCode":  0,
+                       "Output":  "{\r\n    \"Status\": \"READY\",\r\n    \"Runtime\": \"FLINK-2_2\",\r\n    \"Version\": 5\r\n}"
+                   }
+               ]
+}

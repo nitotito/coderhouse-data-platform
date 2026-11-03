@@ -720,11 +720,19 @@ Validaciones del 02–03/11/2026 (Argentina), registradas en `docs/evidence/`:
 | Bucket y stream existentes | Versionado Enabled; Kinesis ACTIVE, 2 shards |
 | Base/tabla Glue desplegadas | Pendientes; operador sin glue:GetDatabase |
 | Datos y metadatos Iceberg en S3 | Pendientes de despliegue autorizado |
-| Athena y concurrencia Glue en AWS | Pendientes de prueba autorizada |
+| Athena y concurrencia Glue en AWS | Prueba autorizada; bloqueada por permisos Glue/Athena |
 
 La prueba local valida el sink y sus commits; no utiliza Glue ni Kinesis y no
 sustituye la prueba AWS. Las evidencias locales no son capturas de AWS.
 No se fabricaron resultados ni se iniciaron servicios facturables.
+
+Actualización del 03/11/2026: el despliegue y sus costos ya fueron autorizados.
+El preflight real (`scripts/iceberg-preflight.ps1`) confirma AccessDenied en
+Glue y Athena; Flink permanece READY. Se preparó una
+[política adicional acotada para el operador](docs/iceberg-operator-access.json)
+y el [procedimiento administrativo](docs/iceberg-deployment.md) para resolverlo.
+Esta política aún no fue adjuntada. El código todavía no constituye una entrega
+AWS validada de extremo a extremo.
 
 ### Costos
 
