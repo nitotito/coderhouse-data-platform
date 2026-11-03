@@ -1,0 +1,24 @@
+{
+    "Status": "READY",
+    "Runtime": "FLINK-2_2",
+    "Configuration": {
+        "CheckpointConfigurationDescription": {
+            "ConfigurationType": "CUSTOM",
+            "CheckpointingEnabled": true,
+            "CheckpointInterval": 60000,
+            "MinPauseBetweenCheckpoints": 5000
+        },
+        "MonitoringConfigurationDescription": {
+            "ConfigurationType": "CUSTOM",
+            "MetricsLevel": "APPLICATION",
+            "LogLevel": "INFO"
+        },
+        "ParallelismConfigurationDescription": {
+            "ConfigurationType": "CUSTOM",
+            "Parallelism": 1,
+            "ParallelismPerKPU": 1,
+            "CurrentParallelism": 1,
+            "AutoScalingEnabled": false
+        }
+    }
+}

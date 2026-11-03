@@ -1,0 +1,4 @@
+Algorithm : SHA256
+Hash      : 2023C7CC8D7CB5D99740D41202118B3369BDC66BEFCA22F639C38FFF24D8BB4F
+Path      : C:\Users\Nicolas
+            Lopez\coderhouse-data-platform\applications\flink-transactions\target\flink-transactions-1.1.0.jar

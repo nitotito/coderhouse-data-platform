@@ -24,3 +24,7 @@ terraform.rc
 # Checkpoints locales de Flink
 flink-data/checkpoints/
 
+# Local validation logs and Python cache
+applications/flink-transactions/target-*.log
+**/__pycache__/
+

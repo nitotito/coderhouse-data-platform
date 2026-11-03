@@ -104,6 +104,10 @@ resource "aws_kinesisanalyticsv2_application" "flink" {
 
         property_map = {
           KINESIS_STREAM_ARN = var.stream_arn
+          ICEBERG_WAREHOUSE  = var.iceberg_warehouse
+          ICEBERG_DATABASE   = var.iceberg_database
+          ICEBERG_TABLE      = var.iceberg_table
+          AWS_REGION         = var.aws_region
         }
       }
     }
@@ -136,7 +140,8 @@ resource "aws_kinesisanalyticsv2_application" "flink" {
   }
 
   depends_on = [
-    aws_iam_role_policy.flink
+    aws_iam_role_policy.flink,
+    aws_iam_role_policy.lakehouse
   ]
 
   tags = {

@@ -1,8 +1,6 @@
 
 package com.coderhouse.flink;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
@@ -12,16 +10,12 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
 import org.apache.flink.api.common.typeinfo.Types;
 import org.apache.flink.configuration.Configuration;
-import org.apache.flink.configuration.Configuration;
 import org.apache.flink.connector.kinesis.source.config.KinesisSourceConfigOptions;
 
-import org.apache.flink.streaming.api.environment.CheckpointConfig;
-import org.apache.flink.configuration.ExternalizedCheckpointRetention;
-import com.amazonaws.services.kinesisanalytics.runtime.KinesisAnalyticsRuntime;
+
 
 
 import java.time.Duration;
-import java.util.Map;
 import java.util.Properties;
 
 
@@ -36,23 +30,10 @@ public class TransactionJob {
         // 2. Habilitar checkpoints cada 60 segundos
         env.enableCheckpointing(60000);
 
-        // 3. Obtener el ARN del stream de Kinesis
-        String streamArn = System.getenv("KINESIS_STREAM_ARN");
-
-        if (streamArn == null || streamArn.isBlank()) {
-            Map<String, Properties> applicationProperties =
-                    KinesisAnalyticsRuntime.getApplicationProperties();
-
-            Properties properties = applicationProperties.get("ApplicationProperties");
-
-            if (properties != null) {
-                streamArn = properties.getProperty("KINESIS_STREAM_ARN");
-            }
-        }
-
-        if (streamArn == null || streamArn.isBlank()) {
-            throw new IllegalArgumentException("Falta KINESIS_STREAM_ARN");
-        }
+        Properties properties = JobSettings.load();
+        String streamArn = JobSettings.require(properties, "KINESIS_STREAM_ARN");
+        env.getCheckpointConfig().setMinPauseBetweenCheckpoints(5000);
+        env.getCheckpointConfig().setMaxConcurrentCheckpoints(1);
 
         // 4. Configurar Kinesis como fuente de datos
        Configuration kinesisConfig = new Configuration();
@@ -80,32 +61,7 @@ public class TransactionJob {
         // 6. Convertir JSON en TransactionEvent, descartando registros inválidos
 DataStream<TransactionEvent> transactions =
         rawTransactions
-                .map(json -> {
-                    try {
-                        ObjectMapper mapper = new ObjectMapper();
-
-                        mapper.setPropertyNamingStrategy(
-                                PropertyNamingStrategies.SNAKE_CASE
-                        );
-
-                        TransactionEvent event = mapper.readValue(
-                                json.trim(),
-                                TransactionEvent.class
-                        );
-
-                        // Validamos el timestamp antes de enviar el evento a Flink.
-                        event.getEventTimeMillis();
-
-                        return event;
-
-                    } catch (Exception e) {
-                        System.err.println(
-                                "Transacción descartada por JSON inválido: "
-                                + e.getMessage()
-                        );
-                        return null;
-                    }
-                })
+                .map(TransactionParser::parse)
                 .returns(TransactionEvent.class)
                 .filter(event -> event != null);
 
@@ -154,6 +110,8 @@ DataStream<TransactionEvent> transactions =
                                 new TransactionAggregate(),
                                 new TransactionWindowResult()
                         );
+
+        IcebergLakehouse.attach(summaries, properties);
 
         // 9. Mostrar los resultados
         summaries

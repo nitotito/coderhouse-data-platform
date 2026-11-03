@@ -1,11 +1,12 @@
 package com.coderhouse.flink;
 
 import java.time.OffsetDateTime;
+import java.math.BigDecimal;
 
 public class TransactionEvent {
 
     private String transactionId;
-    private double amount;
+    private BigDecimal amount;
     private String paymentMethod;
     private String status;
     private String timestamp;
@@ -21,11 +22,11 @@ public class TransactionEvent {
         this.transactionId = transactionId;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

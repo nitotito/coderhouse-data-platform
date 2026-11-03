@@ -13,6 +13,9 @@ services:
       - AWS_SHARED_CREDENTIALS_FILE=/home/flink/.aws/credentials
       - AWS_CONFIG_FILE=/home/flink/.aws/config
       - KINESIS_STREAM_ARN=${KINESIS_STREAM_ARN}
+      - ICEBERG_WAREHOUSE=${ICEBERG_WAREHOUSE}
+      - ICEBERG_DATABASE=lakehouse_db
+      - ICEBERG_TABLE=transaction_aggregates
       - "FLINK_PROPERTIES=execution.checkpointing.dir: file:///opt/flink/checkpoints"
     volumes:
       - ./applications/flink-transactions/target:/opt/flink/usrlib
@@ -33,6 +36,9 @@ services:
       - AWS_SHARED_CREDENTIALS_FILE=/home/flink/.aws/credentials
       - AWS_CONFIG_FILE=/home/flink/.aws/config
       - KINESIS_STREAM_ARN=${KINESIS_STREAM_ARN}
+      - ICEBERG_WAREHOUSE=${ICEBERG_WAREHOUSE}
+      - ICEBERG_DATABASE=lakehouse_db
+      - ICEBERG_TABLE=transaction_aggregates
       - "FLINK_PROPERTIES=execution.checkpointing.dir: file:///opt/flink/checkpoints"
     volumes:
       - ./applications/flink-transactions/target:/opt/flink/usrlib

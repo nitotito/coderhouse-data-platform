@@ -16,7 +16,7 @@ public class TransactionAggregate implements
             TransactionAccumulator accumulator) {
 
         accumulator.count++;
-        accumulator.totalAmount += event.getAmount();
+        accumulator.totalAmount = accumulator.totalAmount.add(event.getAmount());
         return accumulator;
     }
 
@@ -32,7 +32,7 @@ public class TransactionAggregate implements
 
         TransactionAccumulator merged = new TransactionAccumulator();
         merged.count = a.count + b.count;
-        merged.totalAmount = a.totalAmount + b.totalAmount;
+        merged.totalAmount = a.totalAmount.add(b.totalAmount);
         return merged;
     }
 }

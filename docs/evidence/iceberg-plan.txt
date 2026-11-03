@@ -1,0 +1,267 @@
+Warning: Deprecated Parameter
+
+The parameter "dynamodb_table" is deprecated. Use parameter "use_lockfile"
+instead.
+module.network.data.aws_availability_zones.available: Reading...
+module.managed_flink[0].data.aws_iam_policy_document.flink_assume_role: Reading...
+module.kinesis[0].data.aws_caller_identity.current: Reading...
+module.kinesis[0].data.aws_iam_policy_document.firehose_trust: Reading...
+module.identity.data.aws_caller_identity.current: Reading...
+module.kinesis[0].data.aws_region.current: Reading...
+module.network.data.aws_region.current: Reading...
+module.network.aws_vpc.main: Refreshing state... [id=vpc-0b85171c643372dba]
+module.managed_flink[0].aws_cloudwatch_log_group.flink: Refreshing state... [id=/aws/kinesis-analytics/coderhouse-dev-transactions-flink]
+module.kinesis[0].aws_kinesis_stream.transactions: Refreshing state... [id=arn:aws:kinesis:us-east-1:672049777597:stream/dev-transactions-stream]
+module.kinesis[0].data.aws_region.current: Read complete after 0s [id=us-east-1]
+module.network.data.aws_region.current: Read complete after 0s [id=us-east-1]
+module.kinesis[0].data.aws_iam_policy_document.firehose_trust: Read complete after 0s [id=414810265]
+module.managed_flink[0].data.aws_iam_policy_document.flink_assume_role: Read complete after 0s [id=28356347]
+module.managed_flink[0].data.aws_caller_identity.lakehouse: Reading...
+module.managed_flink[0].data.aws_partition.lakehouse: Reading...
+module.identity.data.aws_iam_policy_document.processing_trust: Reading...
+module.managed_flink[0].data.aws_partition.lakehouse: Read complete after 0s [id=aws]
+module.identity.data.aws_iam_policy_document.processing_trust: Read complete after 0s [id=1237821689]
+module.managed_flink[0].aws_iam_role.flink: Refreshing state... [id=coderhouse-dev-flink]
+aws_s3_bucket.data_lake: Refreshing state... [id=coderhouse-data-lake-672049777597]
+module.identity.aws_iam_role.processing: Refreshing state... [id=coderhouse-dev-processing]
+module.kinesis[0].data.aws_caller_identity.current: Read complete after 0s [id=672049777597]
+module.identity.data.aws_caller_identity.current: Read complete after 0s [id=672049777597]
+module.identity.data.aws_iam_policy_document.audit_trust: Reading...
+module.identity.data.aws_iam_policy_document.audit_trust: Read complete after 0s [id=81669632]
+module.identity.aws_iam_role.audit: Refreshing state... [id=coderhouse-dev-audit]
+module.managed_flink[0].data.aws_caller_identity.lakehouse: Read complete after 1s [id=672049777597]
+module.network.data.aws_availability_zones.available: Read complete after 1s [id=us-east-1]
+module.managed_flink[0].aws_cloudwatch_log_stream.flink: Refreshing state... [id=application]
+module.kinesis[0].aws_cloudwatch_metric_alarm.read_throughput: Refreshing state... [id=dev-kinesis-read-throughput]
+module.kinesis[0].aws_cloudwatch_metric_alarm.write_throughput: Refreshing state... [id=dev-kinesis-write-throughput]
+module.network.aws_route_table.private[0]: Refreshing state... [id=rtb-0d69ac0f1349cb262]
+module.network.aws_route_table.private[1]: Refreshing state... [id=rtb-0c79918ca994c2b15]
+module.network.aws_subnet.private[0]: Refreshing state... [id=subnet-0e484b46487a0220c]
+module.network.aws_subnet.private[1]: Refreshing state... [id=subnet-001ae24851059e5ed]
+module.network.aws_vpc_endpoint.s3: Refreshing state... [id=vpce-05376664b99da4447]
+module.network.aws_route_table_association.private[0]: Refreshing state... [id=rtbassoc-023b6337c44b93796]
+module.network.aws_route_table_association.private[1]: Refreshing state... [id=rtbassoc-01cd4f41ab8ae837f]
+aws_s3_bucket_public_access_block.data_lake: Refreshing state... [id=coderhouse-data-lake-672049777597]
+aws_s3_bucket_versioning.data_lake: Refreshing state... [id=coderhouse-data-lake-672049777597]
+aws_s3_bucket_server_side_encryption_configuration.data_lake: Refreshing state... [id=coderhouse-data-lake-672049777597]
+module.identity.data.aws_iam_policy_document.audit: Reading...
+module.identity.data.aws_iam_policy_document.processing: Reading...
+module.managed_flink[0].data.aws_iam_policy_document.flink_permissions: Reading...
+module.identity.data.aws_iam_policy_document.audit: Read complete after 0s [id=3870355238]
+module.identity.data.aws_iam_policy_document.processing: Read complete after 0s [id=3847773883]
+module.managed_flink[0].data.aws_iam_policy_document.flink_permissions: Read complete after 0s [id=1492791529]
+module.identity.aws_iam_role_policy.audit: Refreshing state... [id=coderhouse-dev-audit:coderhouse-audit-readonly]
+module.identity.aws_iam_role_policy.processing: Refreshing state... [id=coderhouse-dev-processing:coderhouse-processing-s3]
+module.managed_flink[0].aws_iam_role_policy.flink: Refreshing state... [id=coderhouse-dev-flink:coderhouse-dev-flink-access]
+module.managed_flink[0].aws_kinesisanalyticsv2_application.flink: Refreshing state... [id=arn:aws:kinesisanalytics:us-east-1:672049777597:application/coderhouse-dev-transactions-flink]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+  ~ update in-place
+ <= read (data resources)
+
+Terraform will perform the following actions:
+
+  # module.lakehouse.aws_glue_catalog_database.lakehouse will be created
+  + resource "aws_glue_catalog_database" "lakehouse" {
+      + arn          = (known after apply)
+      + catalog_id   = (known after apply)
+      + description  = "Pre-entrega 5: agregaciones transaccionales Apache Iceberg"
+      + id           = (known after apply)
+      + location_uri = "s3://coderhouse-data-lake-672049777597/lakehouse/lakehouse_db/"
+      + name         = "lakehouse_db"
+      + region       = "us-east-1"
+      + tags_all     = {
+          + "Environment" = "dev"
+          + "ManagedBy"   = "Terraform"
+          + "Project"     = "coderhouse-data-platform"
+        }
+
+      + create_table_default_permission (known after apply)
+    }
+
+  # module.managed_flink[0].data.aws_iam_policy_document.lakehouse will be read during apply
+  # (config refers to values not yet known)
+ <= data "aws_iam_policy_document" "lakehouse" {
+      + id            = (known after apply)
+      + json          = (known after apply)
+      + minified_json = (known after apply)
+
+      + statement {
+          + actions   = [
+              + "glue:GetDatabase",
+            ]
+          + resources = [
+              + "arn:aws:glue:us-east-1:672049777597:catalog",
+              + (known after apply),
+            ]
+          + sid       = "ReadLakehouseDatabase"
+        }
+      + statement {
+          + actions   = [
+              + "glue:CreateTable",
+              + "glue:GetTable",
+              + "glue:UpdateTable",
+            ]
+          + resources = [
+              + "arn:aws:glue:us-east-1:672049777597:catalog",
+              + "arn:aws:glue:us-east-1:672049777597:table/lakehouse_db/transaction_aggregates",
+              + (known after apply),
+            ]
+          + sid       = "ManageAggregateTable"
+        }
+      + statement {
+          + actions   = [
+              + "s3:GetBucketLocation",
+            ]
+          + resources = [
+              + "arn:aws:s3:::coderhouse-data-lake-672049777597",
+            ]
+          + sid       = "LakehouseBucketLocation"
+        }
+      + statement {
+          + actions   = [
+              + "s3:ListBucket",
+            ]
+          + resources = [
+              + "arn:aws:s3:::coderhouse-data-lake-672049777597",
+            ]
+          + sid       = "ListAggregatePrefix"
+
+          + condition {
+              + test     = "StringLike"
+              + values   = [
+                  + "lakehouse/lakehouse_db/transaction_aggregates",
+                  + "lakehouse/lakehouse_db/transaction_aggregates/*",
+                ]
+              + variable = "s3:prefix"
+            }
+        }
+      + statement {
+          + actions   = [
+              + "s3:AbortMultipartUpload",
+              + "s3:DeleteObject",
+              + "s3:GetObject",
+              + "s3:ListMultipartUploadParts",
+              + "s3:PutObject",
+            ]
+          + resources = [
+              + "arn:aws:s3:::coderhouse-data-lake-672049777597/lakehouse/lakehouse_db/transaction_aggregates/*",
+            ]
+          + sid       = "ReadWriteIcebergObjects"
+        }
+    }
+
+  # module.managed_flink[0].aws_iam_role_policy.flink will be updated in-place
+  ~ resource "aws_iam_role_policy" "flink" {
+        id          = "coderhouse-dev-flink:coderhouse-dev-flink-access"
+        name        = "coderhouse-dev-flink-access"
+      ~ policy      = jsonencode(
+          ~ {
+              ~ Statement = [
+                    {
+                        Action   = [
+                            "kinesis:ListShards",
+                            "kinesis:GetShardIterator",
+                            "kinesis:GetRecords",
+                            "kinesis:DescribeStreamSummary",
+                            "kinesis:DescribeStream",
+                        ]
+                        Effect   = "Allow"
+                        Resource = "arn:aws:kinesis:us-east-1:672049777597:stream/dev-transactions-stream"
+                        Sid      = "ReadKinesisTransactions"
+                    },
+                  ~ {
+                      ~ Resource = "arn:aws:s3:::coderhouse-data-lake-672049777597/artifacts/flink/flink-transactions-1.0.0.jar" -> "arn:aws:s3:::coderhouse-data-lake-672049777597/artifacts/flink/flink-transactions-1.1.0.jar"
+                        # (3 unchanged attributes hidden)
+                    },
+                    {
+                        Action   = [
+                            "logs:PutLogEvents",
+                            "logs:DescribeLogStreams",
+                        ]
+                        Effect   = "Allow"
+                        Resource = "arn:aws:logs:us-east-1:672049777597:log-group:/aws/kinesis-analytics/coderhouse-dev-transactions-flink:*"
+                        Sid      = "WriteCloudWatchLogs"
+                    },
+                ]
+                # (1 unchanged attribute hidden)
+            }
+        )
+        # (2 unchanged attributes hidden)
+    }
+
+  # module.managed_flink[0].aws_iam_role_policy.lakehouse will be created
+  + resource "aws_iam_role_policy" "lakehouse" {
+      + id          = (known after apply)
+      + name        = "coderhouse-dev-flink-lakehouse"
+      + name_prefix = (known after apply)
+      + policy      = (known after apply)
+      + role        = "coderhouse-dev-flink"
+    }
+
+  # module.managed_flink[0].aws_kinesisanalyticsv2_application.flink will be updated in-place
+  ~ resource "aws_kinesisanalyticsv2_application" "flink" {
+        id                     = "arn:aws:kinesisanalytics:us-east-1:672049777597:application/coderhouse-dev-transactions-flink"
+        name                   = "coderhouse-dev-transactions-flink"
+        tags                   = {
+            "Name" = "coderhouse-dev-transactions-flink"
+        }
+        # (12 unchanged attributes hidden)
+
+      ~ application_configuration {
+          ~ application_code_configuration {
+                # (1 unchanged attribute hidden)
+
+              ~ code_content {
+                    # (1 unchanged attribute hidden)
+
+                  ~ s3_content_location {
+                      ~ file_key       = "artifacts/flink/flink-transactions-1.0.0.jar" -> "artifacts/flink/flink-transactions-1.1.0.jar"
+                        # (2 unchanged attributes hidden)
+                    }
+                }
+            }
+          ~ environment_properties {
+              - property_group {
+                  - property_group_id = "ApplicationProperties" -> null
+                  - property_map      = {
+                      - "KINESIS_STREAM_ARN" = "arn:aws:kinesis:us-east-1:672049777597:stream/dev-transactions-stream"
+                    } -> null
+                }
+              + property_group {
+                  + property_group_id = "ApplicationProperties"
+                  + property_map      = {
+                      + "AWS_REGION"         = "us-east-1"
+                      + "ICEBERG_DATABASE"   = "lakehouse_db"
+                      + "ICEBERG_TABLE"      = "transaction_aggregates"
+                      + "ICEBERG_WAREHOUSE"  = "s3://coderhouse-data-lake-672049777597/lakehouse"
+                      + "KINESIS_STREAM_ARN" = "arn:aws:kinesis:us-east-1:672049777597:stream/dev-transactions-stream"
+                    }
+                }
+            }
+
+            # (3 unchanged blocks hidden)
+        }
+
+        # (1 unchanged block hidden)
+    }
+
+Plan: 2 to add, 2 to change, 0 to destroy.
+
+Changes to Outputs:
+  + lakehouse             = {
+      + catalog_id     = (known after apply)
+      + database       = "lakehouse_db"
+      + table          = "transaction_aggregates"
+      + table_location = "s3://coderhouse-data-lake-672049777597/lakehouse/lakehouse_db/transaction_aggregates"
+      + warehouse      = "s3://coderhouse-data-lake-672049777597/lakehouse"
+    }
+
+─────────────────────────────────────────────────────────────────────────────
+
+Saved the plan to: iceberg.tfplan
+
+To perform exactly these actions, run the following command to apply:
+    terraform apply "iceberg.tfplan"
