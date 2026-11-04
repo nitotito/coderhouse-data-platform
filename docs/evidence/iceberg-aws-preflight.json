@@ -1,5 +1,5 @@
 {
-    "CheckedAtUtc":  "2026-11-03T11:59:13.0009774Z",
+    "CheckedAtUtc":  "2026-11-04T11:23:56.5913513Z",
     "Profile":  "coderhouse-dev",
     "Region":  "us-east-1",
     "Checks":  [
@@ -11,15 +11,15 @@
                    },
                    {
                        "Check":  "glue_database",
-                       "State":  "BLOCKED",
+                       "State":  "ABSENT",
                        "ExitCode":  254,
-                       "Output":  "System.Management.Automation.RemoteException\r\naws: [ERROR]: An error occurred (AccessDeniedException) when calling the GetDatabase operation: User: arn:aws:iam::672049777597:user/terraform-dev is not authorized to perform: glue:GetDatabase on resource: arn:aws:glue:us-east-1:672049777597:catalog because no identity-based policy allows the glue:GetDatabase action"
+                       "Output":  "System.Management.Automation.RemoteException\r\naws: [ERROR]: An error occurred (EntityNotFoundException) when calling the GetDatabase operation: Database lakehouse_db not found."
                    },
                    {
                        "Check":  "athena_workgroup",
-                       "State":  "BLOCKED",
-                       "ExitCode":  254,
-                       "Output":  "System.Management.Automation.RemoteException\r\naws: [ERROR]: An error occurred (AccessDeniedException) when calling the GetWorkGroup operation: You are not authorized to perform: athena:GetWorkGroup on the resource. After your AWS administrator or you have updated your permissions, please try again."
+                       "State":  "PASS",
+                       "ExitCode":  0,
+                       "Output":  "{\r\n    \"WorkGroup\": {\r\n        \"Name\": \"primary\",\r\n        \"State\": \"ENABLED\",\r\n        \"Configuration\": {\r\n            \"ResultConfiguration\": {},\r\n            \"EnforceWorkGroupConfiguration\": false,\r\n            \"PublishCloudWatchMetricsEnabled\": true,\r\n            \"RequesterPaysEnabled\": false,\r\n            \"EngineVersion\": {\r\n                \"SelectedEngineVersion\": \"AUTO\",\r\n                \"EffectiveEngineVersion\": \"Athena engine version 3\"\r\n            },\r\n            \"EnableMinimumEncryptionConfiguration\": false\r\n        },\r\n        \"CreationTime\": \"2026-11-04T08:23:49.090000-03:00\"\r\n    }\r\n}"
                    },
                    {
                        "Check":  "flink_status",

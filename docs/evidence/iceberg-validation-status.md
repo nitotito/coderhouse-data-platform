@@ -1,5 +1,16 @@
 # Evidencias Pre-entrega 5
 
+Actualización 04/11/2026: el preflight confirmó que los permisos Glue y Athena
+adjuntados ya funcionan (base ausente, Athena engine 3 disponible). Se publicó el
+JAR 1.1.0 en S3; versión y SHA256 en iceberg-deployed-artifact.json. El plan
+revisado siguió siendo 2 altas, 2 cambios, 0 bajas. Apply actualizó la política
+de lectura del JAR y se detuvo al crear la base: glue:TagResource requiere también
+el ARN del catálogo padre. La propuesta iceberg-operator-access.json ya incluye
+esa corrección, pendiente de actualizar en IAM por un administrador. El operador
+no tiene iam:GetPolicy. No existe aún lakehouse_db y no se inició Flink.
+La salida real está en iceberg-apply-attempt.txt. No reutilizar el plan aplicado
+parcialmente: regenerarlo después de corregir los permisos.
+
 Validaciones locales y lecturas AWS realizadas el 02–03/11/2026, hora Argentina.
 No se ejecutó terraform apply ni se publicaron objetos S3; Flink no se inició.
 

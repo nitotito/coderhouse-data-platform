@@ -14,7 +14,10 @@
       "Sid": "LakehouseDatabaseTags",
       "Effect": "Allow",
       "Action": ["glue:GetTags", "glue:TagResource", "glue:UntagResource"],
-      "Resource": "arn:aws:glue:us-east-1:672049777597:database/lakehouse_db"
+      "Resource": [
+        "arn:aws:glue:us-east-1:672049777597:catalog",
+        "arn:aws:glue:us-east-1:672049777597:database/lakehouse_db"
+      ]
     },
     {
       "Sid": "ReadOnlyAggregateTableMetadata",

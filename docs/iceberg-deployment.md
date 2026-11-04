@@ -16,12 +16,18 @@ controlados y lectura de logs. No concede administración IAM ni permisos global
 de Glue/Athena/S3. Complementa los permisos Terraform/Flink existentes.
 Es una propuesta: todavía no fue adjuntada ni validada por AWS Access Analyzer.
 
-Un administrador de la cuenta puede adjuntarla desde IAM al usuario `terraform-dev`,
+Crear una política administrada por el cliente, no una política insertada: el
+JSON ocupa 3081 caracteres sin espacios y supera el límite agregado de 2048
+para políticas insertadas de un usuario. Cabe en el límite de 6144 por política
+administrada. Dividirlo en varias insertadas no evita el límite agregado.
+
+Un administrador de la cuenta puede crearla en IAM > Políticas y adjuntarla al usuario `terraform-dev`,
 o ejecutar desde la raíz del repositorio con **su perfil administrativo real**:
 
 ```powershell
 # Reemplazar PERFIL_ADMIN por un perfil administrativo ya autorizado.
-aws iam put-user-policy --user-name terraform-dev --policy-name CoderhouseLakehouseDelivery --policy-document file://docs/iceberg-operator-access.json --profile PERFIL_ADMIN
+aws iam create-policy --policy-name CoderhouseLakehouseDelivery --policy-document file://docs/iceberg-operator-access.json --profile PERFIL_ADMIN
+aws iam attach-user-policy --user-name terraform-dev --policy-arn arn:aws:iam::672049777597:policy/CoderhouseLakehouseDelivery --profile PERFIL_ADMIN
 powershell -NoProfile -File scripts/iceberg-preflight.ps1
 ```
 
