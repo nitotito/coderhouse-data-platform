@@ -710,10 +710,10 @@ Ver [restricciones oficiales Athena](https://docs.aws.amazon.com/athena/latest/u
 
 ### Resultados reales y estado de aceptación
 
-**Captura obligatoria de Glue:** pendiente de incorporar la imagen real de la
-consola. Ver [qué capturar y dónde guardarlo](docs/glue-screenshots.md).
-Las respuestas API que siguen verifican la implementación, pero no sustituyen
-el requisito visual de la consigna.
+**Captura de la consola AWS Glue:** tabla `transaction_aggregates` registrada en
+`lakehouse_db`, formato Apache Iceberg, ubicación S3 y esquema completo.
+
+![Tabla Apache Iceberg transaction_aggregates en AWS Glue, con base lakehouse_db y seis columnas](docs/evidence/glue-transaction-aggregates.png)
 
 **Prueba completa AWS exitosa el 04/11/2026.** RunId `pe5_20261104_113142`.
 Flink ejecutó el pipeline en AWS, confirmó el commit del checkpoint 2 y Athena
@@ -748,9 +748,9 @@ El archivo Parquet tiene una fila agregada y 2101 bytes; la transformación
 
 Resultados y enlaces a archivos reales: [docs/evidence/iceberg-validation-status.md](docs/evidence/iceberg-validation-status.md).
 Resumen automatizado: [iceberg-aws-test-summary.json](docs/evidence/iceberg-aws-test-summary.json).
-Las evidencias provienen de AWS CLI, Athena, Glue, S3 y CloudWatch; no son
-capturas simuladas. No se obtuvieron capturas de consola porque Computer Use
-no pudo verificar la URL de Chrome. La ausencia de errores en este ensayo no
+Las evidencias provienen de AWS CLI, Athena, Glue, S3 y CloudWatch, junto con la
+captura real de Glue proporcionada por el propietario y revisada visualmente.
+La ausencia de errores en este ensayo no
 constituye una prueba de carga ni una garantía frente a cualquier concurrencia.
 
 Los permisos del operador fueron habilitados por el propietario mediante una

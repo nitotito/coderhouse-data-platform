@@ -19,9 +19,10 @@ están en `app/flink-transactions/`. Se conservan la clave remota
 migró el estado ni se duplicó infraestructura. Los directorios antiguos solo
 conservan guías de traslado y archivos locales ignorados.
 
-Las capturas de Glue que exige la consigna se describen en
-[glue-screenshots.md](glue-screenshots.md). La captura real todavía debe
-incorporarse; las respuestas CLI no sustituyen ese requisito.
+La captura real de Glue está incorporada en
+[evidence/glue-transaction-aggregates.png](evidence/glue-transaction-aggregates.png)
+y en el README. Muestra la tabla Iceberg, su base, ubicación y esquema.
+La [guía de captura](glue-screenshots.md) queda como referencia para repetirla.
 
 ### Desbloqueo del operador
 

@@ -1,5 +1,10 @@
 # Captura requerida por la consigna
 
+**Completada:** [captura real de AWS Glue](evidence/glue-transaction-aggregates.png),
+proporcionada por el propietario y revisada visualmente. La imagen muestra la
+tabla, la base lakehouse_db, el formato Apache Iceberg, la ubicación S3 y los seis
+campos. Está incluida en el README y en el índice de evidencias.
+
 La prueba AWS ya está verificada por API, pero la consigna también exige una
 captura de la consola Glue. Una respuesta JSON no sustituye esa captura.
 

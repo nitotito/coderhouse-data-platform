@@ -16,10 +16,11 @@ Evidencias adicionales: [plan tras el traslado](iceberg-layout-plan.txt),
 [direcciones anteriores](iceberg-state-addresses-before-layout.txt) y
 [direcciones posteriores](iceberg-state-addresses-after-layout.txt).
 
-La consigna original exige una captura de consola Glue. **Esa imagen está
-pendiente**; las evidencias API prueban el pipeline pero no sustituyen el requisito
-visual. Ver [la guía de captura](../glue-screenshots.md). El PR debe permanecer en
-borrador hasta incorporar la captura real.
+La captura real de la consola Glue ya está incorporada y revisada visualmente:
+se ven la tabla, la base lakehouse_db, el formato Apache Iceberg, la ubicación S3
+y las seis columnas con sus tipos. Cubre el requisito visual de la consigna.
+
+![Tabla Iceberg y esquema en la consola AWS Glue](glue-transaction-aggregates.png)
 
 ## Resultado de negocio observado
 
@@ -87,9 +88,9 @@ aprobados. Ventana local de Argentina: 08:33–08:34 del 04/11/2026.
 
 Los archivos de descripción de Flink omiten el ConditionalToken de concurrencia,
 que no es necesario para la entrega. No contienen credenciales ni enlaces firmados.
-Las evidencias son respuestas reales de APIs/consultas, no capturas simuladas.
-No se pudieron obtener capturas de consola: Computer Use no pudo determinar la
-URL de Chrome con suficiente confianza para aplicar sus controles.
+Las evidencias incluyen respuestas reales de APIs/consultas y la captura de Glue
+proporcionada por el propietario. La captura fue revisada visualmente y coincide
+con el catálogo, la ubicación y el esquema de las respuestas API.
 
 ## Validación local y antecedentes
 
