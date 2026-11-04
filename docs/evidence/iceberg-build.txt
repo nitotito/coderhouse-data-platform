@@ -1,0 +1,605 @@
+[INFO] Scanning for projects...
+[INFO]
+[INFO] -----------------< com.coderhouse:flink-transactions >------------------
+[INFO] Building flink-transactions 1.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- clean:3.2.0:clean (default-clean) @ flink-transactions ---
+[INFO] Deleting C:\Users\Nicolas Lopez\coderhouse-data-platform\applications\flink-transactions\target
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ flink-transactions ---
+[INFO] skip non existing resourceDirectory C:\Users\Nicolas Lopez\coderhouse-data-platform\applications\flink-transactions\src\main\resources
+[INFO]
+[INFO] --- compiler:3.14.0:compile (default-compile) @ flink-transactions ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 9 source files with javac [debug release 17] to target\classes
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ flink-transactions ---
+[INFO] skip non existing resourceDirectory C:\Users\Nicolas Lopez\coderhouse-data-platform\applications\flink-transactions\src\test\resources
+[INFO]
+[INFO] --- compiler:3.14.0:testCompile (default-testCompile) @ flink-transactions ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 2 source files with javac [debug release 17] to target\test-classes
+[INFO]
+[INFO] --- surefire:3.5.2:test (default-test) @ flink-transactions ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.coderhouse.flink.IcebergCheckpointTest
+mvn : [main] WARN org.apache.hadoop.util.Shell - Did not find winutils.exe: {}
+En línea: 2 Carácter: 1
++ mvn -B -ntp clean package > target-build.log 2>&1; Get-Content target ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([main] WARN org...inutils.exe: {}:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+java.io.FileNotFoundException: java.io.FileNotFoundException: HADOOP_HOME and hadoop.home.dir are unset. -see
+https://cwiki.apache.org/confluence/display/HADOOP2/WindowsProblems
+	at org.apache.hadoop.util.Shell.fileNotFoundException(Shell.java:601)
+	at org.apache.hadoop.util.Shell.getHadoopHomeDir(Shell.java:622)
+	at org.apache.hadoop.util.Shell.getQualifiedBin(Shell.java:645)
+	at org.apache.hadoop.util.Shell.<clinit>(Shell.java:742)
+	at org.apache.hadoop.util.StringUtils.<clinit>(StringUtils.java:80)
+	at org.apache.hadoop.conf.Configuration.getBoolean(Configuration.java:1733)
+	at org.apache.hadoop.fs.FileSystem.get(FileSystem.java:552)
+	at org.apache.hadoop.fs.Path.getFileSystem(Path.java:366)
+	at org.apache.iceberg.hadoop.Util.getFs(Util.java:55)
+	at org.apache.iceberg.hadoop.HadoopTableOperations.getFileSystem(HadoopTableOperations.java:419)
+	at org.apache.iceberg.hadoop.HadoopTableOperations.findVersion(HadoopTableOperations.java:315)
+	at org.apache.iceberg.hadoop.HadoopTableOperations.refresh(HadoopTableOperations.java:103)
+	at org.apache.iceberg.hadoop.HadoopTableOperations.current(HadoopTableOperations.java:83)
+	at org.apache.iceberg.hadoop.HadoopTables$HadoopTableBuilder.create(HadoopTables.java:333)
+	at org.apache.iceberg.hadoop.HadoopTables.create(HadoopTables.java:157)
+	at org.apache.iceberg.Tables.create(Tables.java:41)
+	at
+com.coderhouse.flink.IcebergCheckpointTest.localFlinkWritesParquetAndCommitsSnapshots(IcebergCheckpointTest.java:35)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:767)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorCha
+in.java:131)
+	at org.junit.jupiter.engine.extension.SameThreadTimeoutInvocation.proceed(SameThreadTimeoutInvocation.java:45)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(In
+terceptingExecutableInvoker.java:103)
+	at
+org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorCh
+ain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$8(TestMethodTestDescriptor.jav
+a:217)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:213)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:138)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:68)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:156)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierar
+chicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierar
+chicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchi
+calTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.jav
+a:141)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:56)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:184)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:148)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:122)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: java.io.FileNotFoundException: HADOOP_HOME and hadoop.home.dir are unset.
+	at org.apache.hadoop.util.Shell.checkHadoopHomeInner(Shell.java:521)
+	at org.apache.hadoop.util.Shell.checkHadoopHome(Shell.java:492)
+	at org.apache.hadoop.util.Shell.<clinit>(Shell.java:569)
+	... 85 more
+[main] WARN org.apache.hadoop.util.NativeCodeLoader - Unable to load native-hadoop library for your platform... using
+builtin-java classes where applicable
+[main] WARN org.apache.flink.runtime.metrics.util.MetricUtils - Cannot access
+com.sun.management.UnixOperatingSystemMXBean.getOpenFileDescriptorCount() - FileDescriptor metrics will not be
+available.
+java.lang.UnsupportedOperationException: Can't find com.sun.management.UnixOperatingSystemMXBean in JVM.
+	at org.apache.flink.runtime.metrics.util.MetricUtils.instantiateFileDescriptorMetrics(MetricUtils.java:355)
+	at org.apache.flink.runtime.metrics.util.MetricUtils.instantiateStatusMetrics(MetricUtils.java:142)
+	at org.apache.flink.runtime.metrics.util.MetricUtils.createAndInitializeStatusMetricGroup(MetricUtils.java:129)
+	at org.apache.flink.runtime.metrics.util.MetricUtils.instantiateProcessMetricGroup(MetricUtils.java:100)
+	at org.apache.flink.runtime.minicluster.MiniCluster.start(MiniCluster.java:412)
+	at org.apache.flink.client.program.PerJobMiniClusterFactory.submitJob(PerJobMiniClusterFactory.java:76)
+	at org.apache.flink.client.deployment.executors.LocalExecutor.execute(LocalExecutor.java:101)
+	at org.apache.flink.streaming.api.environment.StreamExecutionEnvironment.executeAsync(StreamExecutionEnvironment.java:
+1993)
+	at org.apache.flink.streaming.api.environment.StreamExecutionEnvironment.execute(StreamExecutionEnvironment.java:1872)
+	at org.apache.flink.streaming.api.environment.LocalStreamEnvironment.execute(LocalStreamEnvironment.java:68)
+	at org.apache.flink.streaming.api.environment.StreamExecutionEnvironment.execute(StreamExecutionEnvironment.java:1846)
+	at
+com.coderhouse.flink.IcebergCheckpointTest.localFlinkWritesParquetAndCommitsSnapshots(IcebergCheckpointTest.java:51)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:767)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorCha
+in.java:131)
+	at org.junit.jupiter.engine.extension.SameThreadTimeoutInvocation.proceed(SameThreadTimeoutInvocation.java:45)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(In
+terceptingExecutableInvoker.java:103)
+	at
+org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorCh
+ain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$8(TestMethodTestDescriptor.jav
+a:217)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:213)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:138)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:68)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:156)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierar
+chicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierar
+chicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchi
+calTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.jav
+a:141)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:56)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:184)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:148)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:122)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+[main] WARN org.apache.flink.runtime.util.HadoopUtils - Could not find Hadoop configuration via any of the supported
+methods (Flink configuration, environment variables).
+[main] WARN org.apache.flink.runtime.util.HadoopUtils - Could not find Hadoop configuration via any of the supported
+methods (Flink configuration, environment variables).
+[main] WARN org.apache.flink.runtime.security.token.DefaultDelegationTokenManager - No tokens obtained so skipping
+notifications
+[main] WARN org.apache.flink.runtime.metrics.util.MetricUtils - Cannot access
+com.sun.management.UnixOperatingSystemMXBean.getOpenFileDescriptorCount() - FileDescriptor metrics will not be
+available.
+java.lang.UnsupportedOperationException: Can't find com.sun.management.UnixOperatingSystemMXBean in JVM.
+	at org.apache.flink.runtime.metrics.util.MetricUtils.instantiateFileDescriptorMetrics(MetricUtils.java:355)
+	at org.apache.flink.runtime.metrics.util.MetricUtils.instantiateStatusMetrics(MetricUtils.java:142)
+	at org.apache.flink.runtime.metrics.util.MetricUtils.createAndInitializeStatusMetricGroup(MetricUtils.java:129)
+	at org.apache.flink.runtime.metrics.util.MetricUtils.instantiateTaskManagerMetricGroup(MetricUtils.java:117)
+	at org.apache.flink.runtime.taskexecutor.TaskManagerRunner.startTaskManager(TaskManagerRunner.java:637)
+	at org.apache.flink.runtime.minicluster.MiniCluster.startTaskManager(MiniCluster.java:767)
+	at org.apache.flink.runtime.minicluster.MiniCluster.startTaskManagers(MiniCluster.java:748)
+	at org.apache.flink.runtime.minicluster.MiniCluster.start(MiniCluster.java:459)
+	at org.apache.flink.client.program.PerJobMiniClusterFactory.submitJob(PerJobMiniClusterFactory.java:76)
+	at org.apache.flink.client.deployment.executors.LocalExecutor.execute(LocalExecutor.java:101)
+	at org.apache.flink.streaming.api.environment.StreamExecutionEnvironment.executeAsync(StreamExecutionEnvironment.java:
+1993)
+	at org.apache.flink.streaming.api.environment.StreamExecutionEnvironment.execute(StreamExecutionEnvironment.java:1872)
+	at org.apache.flink.streaming.api.environment.LocalStreamEnvironment.execute(LocalStreamEnvironment.java:68)
+	at org.apache.flink.streaming.api.environment.StreamExecutionEnvironment.execute(StreamExecutionEnvironment.java:1846)
+	at
+com.coderhouse.flink.IcebergCheckpointTest.localFlinkWritesParquetAndCommitsSnapshots(IcebergCheckpointTest.java:51)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:767)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorCha
+in.java:131)
+	at org.junit.jupiter.engine.extension.SameThreadTimeoutInvocation.proceed(SameThreadTimeoutInvocation.java:45)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(In
+terceptingExecutableInvoker.java:103)
+	at
+org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorCh
+ain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$8(TestMethodTestDescriptor.jav
+a:217)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:213)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:138)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:68)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:156)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierar
+chicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierar
+chicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:160)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:146)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:144)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:143)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:100)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchi
+calTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.jav
+a:141)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:56)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:184)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:148)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:122)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+[main] WARN org.apache.flink.runtime.webmonitor.WebMonitorUtils - Log file environment variable 'log.file' is not set.
+[main] WARN org.apache.flink.runtime.webmonitor.WebMonitorUtils - JobManager log files are unavailable in the web
+dashboard. Log file location not found in environment variable 'log.file' or configuration key 'web.log.path'.
+[flink-pekko.actor.default-dispatcher-4] WARN org.apache.flink.runtime.security.token.DefaultDelegationTokenManager -
+No tokens obtained so skipping notifications
+[flink-pekko.actor.default-dispatcher-4] WARN org.apache.flink.runtime.security.token.DefaultDelegationTokenManager -
+Tokens update task not started because either no tokens obtained or none of the tokens specified its renewal date
+[jobmanager-io-thread-1] WARN org.apache.flink.runtime.metrics.util.MetricUtils - The operator name Source: Sequence
+Source -> Map -> local-iceberg-test-IcebergStreamWriter -> local-iceberg-test-IcebergFilesCommitter ->
+local-iceberg-test-IcebergSink file:///C:/Users/NICOLA~1/AppData/Local/Temp/junit-6478327781125822076/aggregates:
+Writer exceeded the 80 characters length limit and was truncated.
+[Source: Sequence Source -> Map -> local-iceberg-test-IcebergStreamWriter -> local-iceberg-test-IcebergFilesCommitter
+-> local-iceberg-test-IcebergSink file:///C:/Users/NICOLA~1/AppData/Local/Temp/junit-6478327781125822076/aggregates:
+Writer (1/1)#0] WARN org.apache.flink.runtime.metrics.util.MetricUtils - The operator name
+local-iceberg-test-IcebergSink file:///C:/Users/NICOLA~1/AppData/Local/Temp/junit-6478327781125822076/aggregates:
+Writer exceeded the 80 characters length limit and was truncated.
+[Source: Sequence Source -> Map -> local-iceberg-test-IcebergStreamWriter -> local-iceberg-test-IcebergFilesCommitter
+-> local-iceberg-test-IcebergSink file:///C:/Users/NICOLA~1/AppData/Local/Temp/junit-6478327781125822076/aggregates:
+Writer (1/1)#0] WARN org.apache.iceberg.flink.sink.IcebergStreamWriterMetrics - Cannot load Dropwizard metrics; is
+org.apache.flink:flink-metrics-dropwizard on the classpath?
+java.lang.ClassNotFoundException: Cannot find class; alternatives: com.codahale.metrics.Reservoir
+	at org.apache.iceberg.common.DynClasses$Builder.buildChecked(DynClasses.java:105)
+	at org.apache.iceberg.flink.sink.IcebergStreamWriterMetrics.loadDropwizardCtors(IcebergStreamWriterMetrics.java:134)
+	at org.apache.iceberg.flink.sink.IcebergStreamWriterMetrics.<clinit>(IcebergStreamWriterMetrics.java:46)
+	at org.apache.iceberg.flink.sink.IcebergStreamWriter.open(IcebergStreamWriter.java:54)
+	at org.apache.flink.streaming.runtime.tasks.RegularOperatorChain.initializeStateAndOpenOperators(RegularOperatorChain.
+java:107)
+	at org.apache.flink.streaming.runtime.tasks.StreamTask.restoreStateAndGates(StreamTask.java:866)
+	at org.apache.flink.streaming.runtime.tasks.StreamTask.lambda$restoreInternal$5(StreamTask.java:820)
+	at org.apache.flink.streaming.runtime.tasks.StreamTaskActionExecutor$1.call(StreamTaskActionExecutor.java:55)
+	at org.apache.flink.streaming.runtime.tasks.StreamTask.restoreInternal(StreamTask.java:820)
+	at org.apache.flink.streaming.runtime.tasks.StreamTask.restore(StreamTask.java:779)
+	at org.apache.flink.runtime.taskmanager.Task.runWithSystemExitMonitoring(Task.java:973)
+	at org.apache.flink.runtime.taskmanager.Task.restoreAndInvoke(Task.java:945)
+	at org.apache.flink.runtime.taskmanager.Task.doRun(Task.java:760)
+	at org.apache.flink.runtime.taskmanager.Task.run(Task.java:569)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+[jobmanager-io-thread-4] WARN org.apache.flink.runtime.checkpoint.CheckpointFailureManager - Failed to trigger or
+complete checkpoint 15 for job a6b71f8cf0617774a90d64d3c6e7ee7b. (0 consecutive failed attempts so far)
+org.apache.flink.runtime.checkpoint.CheckpointException: Checkpoint was declined (task is closing)
+	at org.apache.flink.runtime.messages.checkpoint.SerializedCheckpointException.unwrap(SerializedCheckpointException.jav
+a:51)
+	at org.apache.flink.runtime.checkpoint.CheckpointCoordinator.receiveDeclineMessage(CheckpointCoordinator.java:1146)
+	at org.apache.flink.runtime.scheduler.ExecutionGraphHandler.lambda$declineCheckpoint$3(ExecutionGraphHandler.java:123)
+	at org.apache.flink.runtime.scheduler.ExecutionGraphHandler.lambda$processCheckpointCoordinatorMessage$4(ExecutionGrap
+hHandler.java:139)
+	at org.apache.flink.util.MdcUtils.lambda$wrapRunnable$1(MdcUtils.java:70)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: org.apache.flink.runtime.checkpoint.CheckpointException:
+org.apache.flink.runtime.checkpoint.CheckpointException: Task name with subtask : Source: Sequence Source -> Map ->
+local-iceberg-test-IcebergStreamWriter -> local-iceberg-test-IcebergFilesCommitter -> local-iceberg-test-IcebergSink
+file:///C:/Users/NICOLA~1/AppData/Local/Temp/junit-6478327781125822076/aggregates: Writer (1/1)#0 Failure reason:
+Checkpoint was declined (task is closing)
+	at org.apache.flink.runtime.taskmanager.Task.declineCheckpoint(Task.java:1435)
+	at org.apache.flink.runtime.taskmanager.Task.declineCheckpoint(Task.java:1428)
+	at org.apache.flink.runtime.taskmanager.Task.triggerCheckpointBarrier(Task.java:1394)
+	at org.apache.flink.runtime.taskexecutor.TaskExecutor.triggerCheckpoint(TaskExecutor.java:1097)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.apache.flink.runtime.rpc.pekko.PekkoRpcActor.lambda$handleRpcInvocation$1(PekkoRpcActor.java:318)
+	at org.apache.flink.runtime.concurrent.ClassLoadingUtils.runWithContextClassLoader(ClassLoadingUtils.java:83)
+	at org.apache.flink.runtime.rpc.pekko.PekkoRpcActor.handleRpcInvocation(PekkoRpcActor.java:316)
+	at org.apache.flink.runtime.rpc.pekko.PekkoRpcActor.handleRpcMessage(PekkoRpcActor.java:229)
+	at org.apache.flink.runtime.rpc.pekko.PekkoRpcActor.handleMessage(PekkoRpcActor.java:174)
+	at org.apache.pekko.japi.pf.UnitCaseStatement.apply(CaseStatements.scala:33)
+	at org.apache.pekko.japi.pf.UnitCaseStatement.apply(CaseStatements.scala:29)
+	at scala.PartialFunction.applyOrElse(PartialFunction.scala:127)
+	at scala.PartialFunction.applyOrElse$(PartialFunction.scala:126)
+	at org.apache.pekko.japi.pf.UnitCaseStatement.applyOrElse(CaseStatements.scala:29)
+	at scala.PartialFunction$OrElse.applyOrElse(PartialFunction.scala:175)
+	at scala.PartialFunction$OrElse.applyOrElse(PartialFunction.scala:176)
+	at scala.PartialFunction$OrElse.applyOrElse(PartialFunction.scala:176)
+	at org.apache.pekko.actor.Actor.aroundReceive(Actor.scala:547)
+	at org.apache.pekko.actor.Actor.aroundReceive$(Actor.scala:545)
+	at org.apache.pekko.actor.AbstractActor.aroundReceive(AbstractActor.scala:229)
+	at org.apache.pekko.actor.ActorCell.receiveMessage(ActorCell.scala:590)
+	at org.apache.pekko.actor.ActorCell.invoke(ActorCell.scala:557)
+	at org.apache.pekko.dispatch.Mailbox.processMailbox(Mailbox.scala:272)
+	at org.apache.pekko.dispatch.Mailbox.run(Mailbox.scala:233)
+	at org.apache.pekko.dispatch.Mailbox.exec(Mailbox.scala:245)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1182)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165)
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.484 s -- in com.coderhouse.flink.IcebergCheckpointTest
+[INFO] Running com.coderhouse.flink.TransactionPipelineTest
+[main] WARN com.coderhouse.flink.TransactionParser - Transacci�n descartada: JsonParseException
+[main] WARN com.coderhouse.flink.TransactionParser - Transacci�n descartada: IllegalArgumentException
+[main] WARN com.coderhouse.flink.TransactionParser - Transacci�n descartada: IllegalArgumentException
+[main] WARN com.coderhouse.flink.TransactionParser - Transacci�n descartada: ArithmeticException
+[main] WARN com.coderhouse.flink.TransactionParser - Transacci�n descartada: DateTimeParseException
+[main] WARN com.coderhouse.flink.TransactionParser - Transacci�n descartada: IllegalArgumentException
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.700 s -- in com.coderhouse.flink.TransactionPipelineTest
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO]
+[INFO] --- jar:3.4.1:jar (default-jar) @ flink-transactions ---
+[INFO] Building jar: C:\Users\Nicolas Lopez\coderhouse-data-platform\applications\flink-transactions\target\flink-transactions-1.1.0.jar
+[INFO]
+[INFO] --- shade:3.6.0:shade (default) @ flink-transactions ---
+[INFO] Including org.apache.iceberg:iceberg-flink-runtime-2.2:jar:1.12.0 in the shaded jar.
+[INFO] Including software.amazon.awssdk:glue:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:aws-json-protocol:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:third-party-jackson-core:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:protocol-core:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:http-auth-aws:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:sdk-core:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:retries:jar:2.54.17 in the shaded jar.
+[INFO] Including org.reactivestreams:reactive-streams:jar:1.0.4 in the shaded jar.
+[INFO] Including software.amazon.awssdk:auth:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:http-auth-aws-eventstream:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.eventstream:eventstream:jar:1.0.1 in the shaded jar.
+[INFO] Including software.amazon.awssdk:http-auth-spi:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:http-auth:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:identity-spi:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:http-client-spi:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:regions:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:annotations:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:utils:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:aws-core:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:utils-lite:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:metrics-spi:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:json-utils:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:endpoints-spi:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:retries-spi:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:netty-nio-client:jar:2.54.17 in the shaded jar.
+[INFO] Including io.netty:netty-codec-http:jar:4.1.138.Final in the shaded jar.
+[INFO] Including io.netty:netty-codec-http2:jar:4.1.138.Final in the shaded jar.
+[INFO] Including io.netty:netty-codec:jar:4.1.138.Final in the shaded jar.
+[INFO] Including io.netty:netty-transport:jar:4.1.138.Final in the shaded jar.
+[INFO] Including io.netty:netty-common:jar:4.1.138.Final in the shaded jar.
+[INFO] Including io.netty:netty-buffer:jar:4.1.138.Final in the shaded jar.
+[INFO] Including io.netty:netty-handler:jar:4.1.138.Final in the shaded jar.
+[INFO] Including io.netty:netty-transport-native-unix-common:jar:4.1.138.Final in the shaded jar.
+[INFO] Including io.netty:netty-transport-classes-epoll:jar:4.1.138.Final in the shaded jar.
+[INFO] Including io.netty:netty-resolver:jar:4.1.138.Final in the shaded jar.
+[INFO] Including software.amazon.awssdk:s3:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:aws-xml-protocol:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:arns:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:profiles:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:crt-core:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:checksums:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:checksums-spi:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:sts:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:aws-query-protocol:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:kms:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:dynamodb:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:apache5-client:jar:2.54.17 in the shaded jar.
+[INFO] Including org.apache.httpcomponents.client5:httpclient5:jar:5.6.4 in the shaded jar.
+[INFO] Including org.apache.httpcomponents.core5:httpcore5-h2:jar:5.4.3 in the shaded jar.
+[INFO] Including org.apache.httpcomponents.core5:httpcore5:jar:5.4.3 in the shaded jar.
+[INFO] Including com.google.code.findbugs:jsr305:jar:1.3.9 in the shaded jar.
+[INFO] Including org.apache.hadoop:hadoop-client-api:jar:3.4.2 in the shaded jar.
+[INFO] Including org.xerial.snappy:snappy-java:jar:1.1.10.4 in the shaded jar.
+[INFO] Including org.apache.hadoop:hadoop-client-runtime:jar:3.4.2 in the shaded jar.
+[INFO] Including commons-logging:commons-logging:jar:1.3.0 in the shaded jar.
+[INFO] Including com.amazonaws:aws-kinesisanalytics-runtime:jar:1.2.0 in the shaded jar.
+[INFO] Including org.apache.flink:flink-connector-aws-kinesis-streams:jar:6.0.1-2.0 in the shaded jar.
+[INFO] Including org.apache.flink:flink-connector-aws-base:jar:6.0.1-2.0 in the shaded jar.
+[INFO] Including software.amazon.awssdk:apache-client:jar:2.54.17 in the shaded jar.
+[INFO] Including org.apache.httpcomponents:httpclient:jar:4.5.13 in the shaded jar.
+[INFO] Including org.apache.httpcomponents:httpcore:jar:4.4.16 in the shaded jar.
+[INFO] Including commons-codec:commons-codec:jar:1.17.1 in the shaded jar.
+[INFO] Including software.amazon.awssdk:kinesis:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:aws-cbor-protocol:jar:2.54.17 in the shaded jar.
+[INFO] Including software.amazon.awssdk:third-party-jackson-dataformat-cbor:jar:2.54.17 in the shaded jar.
+[INFO] Including com.fasterxml.jackson.datatype:jackson-datatype-jsr310:jar:2.17.2 in the shaded jar.
+[INFO] Including com.fasterxml.jackson.datatype:jackson-datatype-jdk8:jar:2.17.2 in the shaded jar.
+[INFO] Including com.fasterxml.jackson.core:jackson-databind:jar:2.17.2 in the shaded jar.
+[INFO] Including com.fasterxml.jackson.core:jackson-annotations:jar:2.17.2 in the shaded jar.
+[INFO] Including com.fasterxml.jackson.core:jackson-core:jar:2.17.2 in the shaded jar.
+[WARNING] iceberg-flink-runtime-2.2-1.12.0.jar, jackson-core-2.17.2.jar, third-party-jackson-core-2.54.17.jar define 1 overlapping resource:
+[WARNING]   - META-INF/FastDoubleParser-LICENSE
+[WARNING] httpclient5-5.6.4.jar, iceberg-flink-runtime-2.2-1.12.0.jar define 3 overlapping resources:
+[WARNING]   - META-INF/maven/org.apache.httpcomponents.client5/httpclient5/pom.properties
+[WARNING]   - META-INF/maven/org.apache.httpcomponents.client5/httpclient5/pom.xml
+[WARNING]   - org/publicsuffix/list/effective_tld_names.dat
+[WARNING] httpcore5-5.4.3.jar, iceberg-flink-runtime-2.2-1.12.0.jar define 2 overlapping resources:
+[WARNING]   - META-INF/maven/org.apache.httpcomponents.core5/httpcore5/pom.properties
+[WARNING]   - META-INF/maven/org.apache.httpcomponents.core5/httpcore5/pom.xml
+[WARNING] flink-connector-aws-base-6.0.1-2.0.jar, flink-connector-aws-kinesis-streams-6.0.1-2.0.jar, httpclient-4.5.13.jar, httpclient5-5.6.4.jar, httpcore-4.4.16.jar, httpcore5-5.4.3.jar, httpcore5-h2-5.4.3.jar, jackson-annotations-2.17.2.jar, jackson-core-2.17.2.jar, jackson-databind-2.17.2.jar, jackson-datatype-jdk8-2.17.2.jar, jackson-datatype-jsr310-2.17.2.jar, third-party-jackson-core-2.54.17.jar, third-party-jackson-dataformat-cbor-2.54.17.jar define 2 overlapping resources:
+[WARNING]   - META-INF/LICENSE
+[WARNING]   - META-INF/NOTICE
+[WARNING] hadoop-client-runtime-3.4.2.jar, iceberg-flink-runtime-2.2-1.12.0.jar, jackson-core-2.17.2.jar define 2 overlapping resources:
+[WARNING]   - META-INF/maven/com.fasterxml.jackson.core/jackson-core/pom.properties
+[WARNING]   - META-INF/maven/com.fasterxml.jackson.core/jackson-core/pom.xml
+[WARNING] hadoop-client-runtime-3.4.2.jar, iceberg-flink-runtime-2.2-1.12.0.jar define 16 overlapping resources:
+[WARNING]   - META-INF/maven/com.google.errorprone/error_prone_annotations/pom.properties
+[WARNING]   - META-INF/maven/com.google.errorprone/error_prone_annotations/pom.xml
+[WARNING]   - META-INF/maven/com.google.guava/failureaccess/pom.properties
+[WARNING]   - META-INF/maven/com.google.guava/failureaccess/pom.xml
+[WARNING]   - META-INF/maven/com.google.guava/guava/pom.properties
+[WARNING]   - META-INF/maven/com.google.guava/guava/pom.xml
+[WARNING]   - META-INF/maven/com.google.guava/listenablefuture/pom.properties
+[WARNING]   - META-INF/maven/com.google.guava/listenablefuture/pom.xml
+[WARNING]   - META-INF/maven/org.apache.avro/avro/pom.properties
+[WARNING]   - META-INF/maven/org.apache.avro/avro/pom.xml
+[WARNING]   - 6 more...
+[WARNING] httpcore5-h2-5.4.3.jar, iceberg-flink-runtime-2.2-1.12.0.jar define 2 overlapping resources:
+[WARNING]   - META-INF/maven/org.apache.httpcomponents.core5/httpcore5-h2/pom.properties
+[WARNING]   - META-INF/maven/org.apache.httpcomponents.core5/httpcore5-h2/pom.xml
+[WARNING] hadoop-client-runtime-3.4.2.jar, httpclient-4.5.13.jar define 3 overlapping resources:
+[WARNING]   - META-INF/maven/org.apache.httpcomponents/httpclient/pom.properties
+[WARNING]   - META-INF/maven/org.apache.httpcomponents/httpclient/pom.xml
+[WARNING]   - mozilla/public-suffix-list.txt
+[WARNING] hadoop-client-runtime-3.4.2.jar, iceberg-flink-runtime-2.2-1.12.0.jar, jackson-annotations-2.17.2.jar define 2 overlapping resources:
+[WARNING]   - META-INF/maven/com.fasterxml.jackson.core/jackson-annotations/pom.properties
+[WARNING]   - META-INF/maven/com.fasterxml.jackson.core/jackson-annotations/pom.xml
+[WARNING] iceberg-flink-runtime-2.2-1.12.0.jar, third-party-jackson-core-2.54.17.jar define 2 overlapping resources:
+[WARNING]   - META-INF/FastDoubleParser-ThirdParty-LICENSE
+[WARNING]   - META-INF/Schubfach-LICENSE
+[WARNING] commons-codec-1.17.1.jar, hadoop-client-runtime-3.4.2.jar define 2 overlapping resources:
+[WARNING]   - META-INF/maven/commons-codec/commons-codec/pom.properties
+[WARNING]   - META-INF/maven/commons-codec/commons-codec/pom.xml
+[WARNING] hadoop-client-runtime-3.4.2.jar, iceberg-flink-runtime-2.2-1.12.0.jar, jackson-databind-2.17.2.jar define 2 overlapping resources:
+[WARNING]   - META-INF/maven/com.fasterxml.jackson.core/jackson-databind/pom.properties
+[WARNING]   - META-INF/maven/com.fasterxml.jackson.core/jackson-databind/pom.xml
+[WARNING] netty-buffer-4.1.138.Final.jar, netty-codec-4.1.138.Final.jar, netty-codec-http-4.1.138.Final.jar, netty-codec-http2-4.1.138.Final.jar, netty-common-4.1.138.Final.jar, netty-handler-4.1.138.Final.jar, netty-resolver-4.1.138.Final.jar, netty-transport-4.1.138.Final.jar, netty-transport-classes-epoll-4.1.138.Final.jar, netty-transport-native-unix-common-4.1.138.Final.jar define 1 overlapping resource:
+[WARNING]   - META-INF/io.netty.versions.properties
+[WARNING] annotations-2.54.17.jar, apache-client-2.54.17.jar, apache5-client-2.54.17.jar, arns-2.54.17.jar, auth-2.54.17.jar, aws-cbor-protocol-2.54.17.jar, aws-core-2.54.17.jar, aws-json-protocol-2.54.17.jar, aws-kinesisanalytics-runtime-1.2.0.jar, aws-query-protocol-2.54.17.jar, aws-xml-protocol-2.54.17.jar, checksums-2.54.17.jar, checksums-spi-2.54.17.jar, commons-codec-1.17.1.jar, commons-logging-1.3.0.jar, crt-core-2.54.17.jar, dynamodb-2.54.17.jar, endpoints-spi-2.54.17.jar, eventstream-1.0.1.jar, flink-connector-aws-base-6.0.1-2.0.jar, flink-connector-aws-kinesis-streams-6.0.1-2.0.jar, flink-transactions-1.1.0.jar, glue-2.54.17.jar, hadoop-client-api-3.4.2.jar, hadoop-client-runtime-3.4.2.jar, http-auth-2.54.17.jar, http-auth-aws-2.54.17.jar, http-auth-aws-eventstream-2.54.17.jar, http-auth-spi-2.54.17.jar, http-client-spi-2.54.17.jar, httpclient-4.5.13.jar, httpclient5-5.6.4.jar, httpcore-4.4.16.jar, httpcore5-5.4.3.jar, httpcore5-h2-5.4.3.jar, iceberg-flink-runtime-2.2-1.12.0.jar, identity-spi-2.54.17.jar, jackson-annotations-2.17.2.jar, jackson-core-2.17.2.jar, jackson-databind-2.17.2.jar, jackson-datatype-jdk8-2.17.2.jar, jackson-datatype-jsr310-2.17.2.jar, json-utils-2.54.17.jar, jsr305-1.3.9.jar, kinesis-2.54.17.jar, kms-2.54.17.jar, metrics-spi-2.54.17.jar, netty-buffer-4.1.138.Final.jar, netty-codec-4.1.138.Final.jar, netty-codec-http-4.1.138.Final.jar, netty-codec-http2-4.1.138.Final.jar, netty-common-4.1.138.Final.jar, netty-handler-4.1.138.Final.jar, netty-nio-client-2.54.17.jar, netty-resolver-4.1.138.Final.jar, netty-transport-4.1.138.Final.jar, netty-transport-classes-epoll-4.1.138.Final.jar, netty-transport-native-unix-common-4.1.138.Final.jar, profiles-2.54.17.jar, protocol-core-2.54.17.jar, reactive-streams-1.0.4.jar, regions-2.54.17.jar, retries-2.54.17.jar, retries-spi-2.54.17.jar, s3-2.54.17.jar, sdk-core-2.54.17.jar, snappy-java-1.1.10.4.jar, sts-2.54.17.jar, third-party-jackson-core-2.54.17.jar, third-party-jackson-dataformat-cbor-2.54.17.jar, utils-2.54.17.jar, utils-lite-2.54.17.jar define 1 overlapping resource:
+[WARNING]   - META-INF/MANIFEST.MF
+[WARNING] hadoop-client-runtime-3.4.2.jar, httpcore-4.4.16.jar define 2 overlapping resources:
+[WARNING]   - META-INF/maven/org.apache.httpcomponents/httpcore/pom.properties
+[WARNING]   - META-INF/maven/org.apache.httpcomponents/httpcore/pom.xml
+[WARNING] flink-connector-aws-base-6.0.1-2.0.jar, flink-connector-aws-kinesis-streams-6.0.1-2.0.jar, hadoop-client-runtime-3.4.2.jar, httpclient-4.5.13.jar, httpclient5-5.6.4.jar, httpcore-4.4.16.jar, httpcore5-5.4.3.jar, httpcore5-h2-5.4.3.jar, iceberg-flink-runtime-2.2-1.12.0.jar define 1 overlapping resource:
+[WARNING]   - META-INF/DEPENDENCIES
+[WARNING] annotations-2.54.17.jar, apache-client-2.54.17.jar, apache5-client-2.54.17.jar, arns-2.54.17.jar, auth-2.54.17.jar, aws-cbor-protocol-2.54.17.jar, aws-core-2.54.17.jar, aws-json-protocol-2.54.17.jar, aws-query-protocol-2.54.17.jar, aws-xml-protocol-2.54.17.jar, checksums-2.54.17.jar, checksums-spi-2.54.17.jar, commons-codec-1.17.1.jar, commons-logging-1.3.0.jar, crt-core-2.54.17.jar, dynamodb-2.54.17.jar, endpoints-spi-2.54.17.jar, glue-2.54.17.jar, hadoop-client-api-3.4.2.jar, hadoop-client-runtime-3.4.2.jar, http-auth-2.54.17.jar, http-auth-aws-2.54.17.jar, http-auth-aws-eventstream-2.54.17.jar, http-auth-spi-2.54.17.jar, http-client-spi-2.54.17.jar, identity-spi-2.54.17.jar, json-utils-2.54.17.jar, kinesis-2.54.17.jar, kms-2.54.17.jar, metrics-spi-2.54.17.jar, netty-nio-client-2.54.17.jar, profiles-2.54.17.jar, protocol-core-2.54.17.jar, regions-2.54.17.jar, retries-2.54.17.jar, retries-spi-2.54.17.jar, s3-2.54.17.jar, sdk-core-2.54.17.jar, sts-2.54.17.jar, third-party-jackson-core-2.54.17.jar, third-party-jackson-dataformat-cbor-2.54.17.jar, utils-2.54.17.jar, utils-lite-2.54.17.jar define 2 overlapping resources:
+[WARNING]   - META-INF/LICENSE.txt
+[WARNING]   - META-INF/NOTICE.txt
+[WARNING] maven-shade-plugin has detected that some files are
+[WARNING] present in two or more JARs. When this happens, only one
+[WARNING] single version of the file is copied to the uber jar.
+[WARNING] Usually this is not harmful and you can skip these warnings,
+[WARNING] otherwise try to manually exclude artifacts based on
+[WARNING] mvn dependency:tree -Ddetail=true and the above output.
+[WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
+[INFO] Replacing original artifact with shaded artifact.
+[INFO] Replacing C:\Users\Nicolas Lopez\coderhouse-data-platform\applications\flink-transactions\target\flink-transactions-1.1.0.jar with C:\Users\Nicolas Lopez\coderhouse-data-platform\applications\flink-transactions\target\flink-transactions-1.1.0-shaded.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  27.330 s
+[INFO] Finished at: 2026-11-03T00:23:41-03:00
+[INFO] ------------------------------------------------------------------------

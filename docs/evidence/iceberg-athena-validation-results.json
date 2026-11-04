@@ -1,0 +1,127 @@
+{
+    "ResultSet":  {
+                      "Rows":  [
+                                   {
+                                       "Data":  [
+                                                    {
+                                                        "VarCharValue":  "window_start"
+                                                    },
+                                                    {
+                                                        "VarCharValue":  "window_end"
+                                                    },
+                                                    {
+                                                        "VarCharValue":  "payment_method"
+                                                    },
+                                                    {
+                                                        "VarCharValue":  "transaction_count"
+                                                    },
+                                                    {
+                                                        "VarCharValue":  "total_amount"
+                                                    },
+                                                    {
+                                                        "VarCharValue":  "average_amount"
+                                                    }
+                                                ]
+                                   },
+                                   {
+                                       "Data":  [
+                                                    {
+                                                        "VarCharValue":  "2026-11-04 11:33:00.000000"
+                                                    },
+                                                    {
+                                                        "VarCharValue":  "2026-11-04 11:34:00.000000"
+                                                    },
+                                                    {
+                                                        "VarCharValue":  "card_pe5_20261104_113142"
+                                                    },
+                                                    {
+                                                        "VarCharValue":  "2"
+                                                    },
+                                                    {
+                                                        "VarCharValue":  "30.30"
+                                                    },
+                                                    {
+                                                        "VarCharValue":  "15.150000"
+                                                    }
+                                                ]
+                                   }
+                               ],
+                      "ResultSetMetadata":  {
+                                                "ColumnInfo":  [
+                                                                   {
+                                                                       "CatalogName":  "hive",
+                                                                       "SchemaName":  "",
+                                                                       "TableName":  "",
+                                                                       "Name":  "window_start",
+                                                                       "Label":  "window_start",
+                                                                       "Type":  "timestamp",
+                                                                       "Precision":  3,
+                                                                       "Scale":  0,
+                                                                       "Nullable":  "UNKNOWN",
+                                                                       "CaseSensitive":  false
+                                                                   },
+                                                                   {
+                                                                       "CatalogName":  "hive",
+                                                                       "SchemaName":  "",
+                                                                       "TableName":  "",
+                                                                       "Name":  "window_end",
+                                                                       "Label":  "window_end",
+                                                                       "Type":  "timestamp",
+                                                                       "Precision":  3,
+                                                                       "Scale":  0,
+                                                                       "Nullable":  "UNKNOWN",
+                                                                       "CaseSensitive":  false
+                                                                   },
+                                                                   {
+                                                                       "CatalogName":  "hive",
+                                                                       "SchemaName":  "",
+                                                                       "TableName":  "",
+                                                                       "Name":  "payment_method",
+                                                                       "Label":  "payment_method",
+                                                                       "Type":  "varchar",
+                                                                       "Precision":  2147483647,
+                                                                       "Scale":  0,
+                                                                       "Nullable":  "UNKNOWN",
+                                                                       "CaseSensitive":  true
+                                                                   },
+                                                                   {
+                                                                       "CatalogName":  "hive",
+                                                                       "SchemaName":  "",
+                                                                       "TableName":  "",
+                                                                       "Name":  "transaction_count",
+                                                                       "Label":  "transaction_count",
+                                                                       "Type":  "bigint",
+                                                                       "Precision":  19,
+                                                                       "Scale":  0,
+                                                                       "Nullable":  "UNKNOWN",
+                                                                       "CaseSensitive":  false
+                                                                   },
+                                                                   {
+                                                                       "CatalogName":  "hive",
+                                                                       "SchemaName":  "",
+                                                                       "TableName":  "",
+                                                                       "Name":  "total_amount",
+                                                                       "Label":  "total_amount",
+                                                                       "Type":  "decimal",
+                                                                       "Precision":  38,
+                                                                       "Scale":  2,
+                                                                       "Nullable":  "UNKNOWN",
+                                                                       "CaseSensitive":  false
+                                                                   },
+                                                                   {
+                                                                       "CatalogName":  "hive",
+                                                                       "SchemaName":  "",
+                                                                       "TableName":  "",
+                                                                       "Name":  "average_amount",
+                                                                       "Label":  "average_amount",
+                                                                       "Type":  "decimal",
+                                                                       "Precision":  38,
+                                                                       "Scale":  6,
+                                                                       "Nullable":  "UNKNOWN",
+                                                                       "CaseSensitive":  false
+                                                                   }
+                                                               ]
+                                            }
+                  },
+    "UpdateCount":  0
+}

@@ -1,0 +1,91 @@
+{
+    "ResultSet":  {
+                      "Rows":  [
+                                   {
+                                       "Data":  [
+                                                    {
+                                                        "VarCharValue":  "file_path"
+                                                    },
+                                                    {
+                                                        "VarCharValue":  "file_format"
+                                                    },
+                                                    {
+                                                        "VarCharValue":  "record_count"
+                                                    },
+                                                    {
+                                                        "VarCharValue":  "file_size_in_bytes"
+                                                    }
+                                                ]
+                                   },
+                                   {
+                                       "Data":  [
+                                                    {
+                                                        "VarCharValue":  "s3://coderhouse-data-lake-672049777597/lakehouse/lakehouse_db/transaction_aggregates/data/window_start_day=2026-11-04/00000-0-e09e5869-00f5-4ada-b1ed-0ce37c27988b-00001.parquet"
+                                                    },
+                                                    {
+                                                        "VarCharValue":  "PARQUET"
+                                                    },
+                                                    {
+                                                        "VarCharValue":  "1"
+                                                    },
+                                                    {
+                                                        "VarCharValue":  "2101"
+                                                    }
+                                                ]
+                                   }
+                               ],
+                      "ResultSetMetadata":  {
+                                                "ColumnInfo":  [
+                                                                   {
+                                                                       "CatalogName":  "hive",
+                                                                       "SchemaName":  "",
+                                                                       "TableName":  "",
+                                                                       "Name":  "file_path",
+                                                                       "Label":  "file_path",
+                                                                       "Type":  "varchar",
+                                                                       "Precision":  2147483647,
+                                                                       "Scale":  0,
+                                                                       "Nullable":  "UNKNOWN",
+                                                                       "CaseSensitive":  true
+                                                                   },
+                                                                   {
+                                                                       "CatalogName":  "hive",
+                                                                       "SchemaName":  "",
+                                                                       "TableName":  "",
+                                                                       "Name":  "file_format",
+                                                                       "Label":  "file_format",
+                                                                       "Type":  "varchar",
+                                                                       "Precision":  2147483647,
+                                                                       "Scale":  0,
+                                                                       "Nullable":  "UNKNOWN",
+                                                                       "CaseSensitive":  true
+                                                                   },
+                                                                   {
+                                                                       "CatalogName":  "hive",
+                                                                       "SchemaName":  "",
+                                                                       "TableName":  "",
+                                                                       "Name":  "record_count",
+                                                                       "Label":  "record_count",
+                                                                       "Type":  "bigint",
+                                                                       "Precision":  19,
+                                                                       "Scale":  0,
+                                                                       "Nullable":  "UNKNOWN",
+                                                                       "CaseSensitive":  false
+                                                                   },
+                                                                   {
+                                                                       "CatalogName":  "hive",
+                                                                       "SchemaName":  "",
+                                                                       "TableName":  "",
+                                                                       "Name":  "file_size_in_bytes",
+                                                                       "Label":  "file_size_in_bytes",
+                                                                       "Type":  "bigint",
+                                                                       "Precision":  19,
+                                                                       "Scale":  0,
+                                                                       "Nullable":  "UNKNOWN",
+                                                                       "CaseSensitive":  false
+                                                                   }
+                                                               ]
+                                            }
+                  },
+    "UpdateCount":  0
+}

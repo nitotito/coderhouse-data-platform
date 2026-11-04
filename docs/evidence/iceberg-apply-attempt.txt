@@ -1,0 +1,23 @@
+Warning: Deprecated Parameter
+
+The parameter "dynamodb_table" is deprecated. Use parameter "use_lockfile"
+instead.
+Acquiring state lock. This may take a few moments...
+module.lakehouse.aws_glue_catalog_database.lakehouse: Creating...
+module.managed_flink[0].aws_iam_role_policy.flink: Modifying... [id=coderhouse-dev-flink:coderhouse-dev-flink-access]
+module.managed_flink[0].aws_iam_role_policy.flink: Modifications complete after 1s [id=coderhouse-dev-flink:coderhouse-dev-flink-access]
+terraform :
+En línea: 2 Carácter: 1235
++ ... ifact.json; terraform '-chdir=environments/dev' apply -input=false -n ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+Error: creating Glue Catalog Database (lakehouse_db): operation error Glue: CreateDatabase, https response error
+StatusCode: 400, RequestID: 7a9900b4-3597-407e-a35e-d0903caa2d78, AccessDeniedException: User:
+arn:aws:iam::672049777597:user/terraform-dev is not authorized to perform: glue:TagResource on resource:
+arn:aws:glue:us-east-1:672049777597:catalog because no identity-based policy allows the glue:TagResource action
+
+  with module.lakehouse.aws_glue_catalog_database.lakehouse,
+  on ..\..\modules\lakehouse\main.tf line 20, in resource "aws_glue_catalog_database" "lakehouse":
+  20: resource "aws_glue_catalog_database" "lakehouse" {

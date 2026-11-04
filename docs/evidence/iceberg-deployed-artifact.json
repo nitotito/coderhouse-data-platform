@@ -1,0 +1,12 @@
+﻿{
+    "AcceptRanges": "bytes",
+    "LastModified": "2026-11-04T11:24:40+00:00",
+    "ContentLength": 127691488,
+    "ETag": "\"c0513fd1034f679482eaa492d77f58c9-16\"",
+    "VersionId": "7JTahtiHWFcdbnVV3cv.Oo2p.i9v4Ccr",
+    "ContentType": "application/java-archive",
+    "ServerSideEncryption": "AES256",
+    "Metadata": {
+        "sha256": "2023c7cc8d7cb5d99740d41202118b3369bdc66befca22f639c38fff24d8bb4f"
+    }
+}

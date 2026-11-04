@@ -1,0 +1,42 @@
+{
+    "QueryExecution":  {
+                           "QueryExecutionId":  "206f0429-3e36-4aed-9a6a-4eb61a15c843",
+                           "Query":  "SELECT file_path, file_format, record_count, file_size_in_bytes FROM \"lakehouse_db\".\"transaction_aggregates$files\"",
+                           "StatementType":  "DML",
+                           "ResultConfiguration":  {
+                                                       "OutputLocation":  "s3://coderhouse-data-lake-672049777597/athena-results/pre-entrega-5/206f0429-3e36-4aed-9a6a-4eb61a15c843.csv"
+                                                   },
+                           "ResultReuseConfiguration":  {
+                                                            "ResultReuseByAgeConfiguration":  {
+                                                                                                  "Enabled":  false
+                                                                                              }
+                                                        },
+                           "QueryExecutionContext":  {
+                                                         "Database":  "lakehouse_db",
+                                                         "Catalog":  "awsdatacatalog"
+                                                     },
+                           "Status":  {
+                                          "State":  "SUCCEEDED",
+                                          "SubmissionDateTime":  "2026-11-04T08:35:02.296000-03:00",
+                                          "CompletionDateTime":  "2026-11-04T08:35:03.253000-03:00"
+                                      },
+                           "Statistics":  {
+                                              "EngineExecutionTimeInMillis":  756,
+                                              "DataScannedInBytes":  1050,
+                                              "TotalExecutionTimeInMillis":  957,
+                                              "QueryQueueTimeInMillis":  98,
+                                              "ServicePreProcessingTimeInMillis":  79,
+                                              "QueryPlanningTimeInMillis":  8,
+                                              "ServiceProcessingTimeInMillis":  24,
+                                              "ResultReuseInformation":  {
+                                                                             "ReusedPreviousResult":  false
+                                                                         }
+                                          },
+                           "WorkGroup":  "primary",
+                           "EngineVersion":  {
+                                                 "SelectedEngineVersion":  "AUTO",
+                                                 "EffectiveEngineVersion":  "Athena engine version 3"
+                                             },
+                           "SubstatementType":  "SELECT"
+                       }
+}

@@ -1,0 +1,102 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ManageOnlyLakehouseDatabase",
+      "Effect": "Allow",
+      "Action": ["glue:GetDatabase", "glue:CreateDatabase", "glue:UpdateDatabase"],
+      "Resource": [
+        "arn:aws:glue:us-east-1:672049777597:catalog",
+        "arn:aws:glue:us-east-1:672049777597:database/lakehouse_db"
+      ]
+    },
+    {
+      "Sid": "LakehouseDatabaseTags",
+      "Effect": "Allow",
+      "Action": ["glue:GetTags", "glue:TagResource", "glue:UntagResource"],
+      "Resource": [
+        "arn:aws:glue:us-east-1:672049777597:catalog",
+        "arn:aws:glue:us-east-1:672049777597:database/lakehouse_db"
+      ]
+    },
+    {
+      "Sid": "ReadOnlyAggregateTableMetadata",
+      "Effect": "Allow",
+      "Action": ["glue:GetTable", "glue:GetTableVersion", "glue:GetTableVersions", "glue:GetPartition", "glue:GetPartitions"],
+      "Resource": [
+        "arn:aws:glue:us-east-1:672049777597:catalog",
+        "arn:aws:glue:us-east-1:672049777597:database/lakehouse_db",
+        "arn:aws:glue:us-east-1:672049777597:table/lakehouse_db/transaction_aggregates"
+      ]
+    },
+    {
+      "Sid": "ValidateWithPrimaryAthenaWorkgroup",
+      "Effect": "Allow",
+      "Action": ["athena:GetWorkGroup", "athena:StartQueryExecution", "athena:GetQueryExecution", "athena:GetQueryResults", "athena:GetQueryRuntimeStatistics", "athena:StopQueryExecution"],
+      "Resource": "arn:aws:athena:us-east-1:672049777597:workgroup/primary"
+    },
+    {
+      "Sid": "ReadAwsDataCatalog",
+      "Effect": "Allow",
+      "Action": "athena:GetDataCatalog",
+      "Resource": "arn:aws:athena:us-east-1:672049777597:datacatalog/AwsDataCatalog"
+    },
+    {
+      "Sid": "GetExistingBucketLocation",
+      "Effect": "Allow",
+      "Action": "s3:GetBucketLocation",
+      "Resource": "arn:aws:s3:::coderhouse-data-lake-672049777597"
+    },
+    {
+      "Sid": "ListOnlyDeliveryPrefixes",
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "arn:aws:s3:::coderhouse-data-lake-672049777597",
+      "Condition": {
+        "StringLike": {
+          "s3:prefix": [
+            "lakehouse/lakehouse_db/transaction_aggregates",
+            "lakehouse/lakehouse_db/transaction_aggregates/*",
+            "athena-results/pre-entrega-5",
+            "athena-results/pre-entrega-5/*",
+            "artifacts/flink/flink-transactions-1.1.0.jar"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "ReadDeliveryArtifactsAndEvidence",
+      "Effect": "Allow",
+      "Action": ["s3:GetObject", "s3:GetObjectVersion"],
+      "Resource": [
+        "arn:aws:s3:::coderhouse-data-lake-672049777597/lakehouse/lakehouse_db/transaction_aggregates/*",
+        "arn:aws:s3:::coderhouse-data-lake-672049777597/athena-results/pre-entrega-5/*",
+        "arn:aws:s3:::coderhouse-data-lake-672049777597/artifacts/flink/flink-transactions-1.1.0.jar"
+      ]
+    },
+    {
+      "Sid": "WriteOnlyJarAndAthenaResults",
+      "Effect": "Allow",
+      "Action": ["s3:PutObject", "s3:AbortMultipartUpload", "s3:ListMultipartUploadParts"],
+      "Resource": [
+        "arn:aws:s3:::coderhouse-data-lake-672049777597/athena-results/pre-entrega-5/*",
+        "arn:aws:s3:::coderhouse-data-lake-672049777597/artifacts/flink/flink-transactions-1.1.0.jar"
+      ]
+    },
+    {
+      "Sid": "PublishControlledTestEvents",
+      "Effect": "Allow",
+      "Action": "kinesis:PutRecord",
+      "Resource": "arn:aws:kinesis:us-east-1:672049777597:stream/dev-transactions-stream"
+    },
+    {
+      "Sid": "ReadOnlyFlinkTestLogs",
+      "Effect": "Allow",
+      "Action": ["logs:FilterLogEvents", "logs:GetLogEvents", "logs:DescribeLogStreams"],
+      "Resource": [
+        "arn:aws:logs:us-east-1:672049777597:log-group:/aws/kinesis-analytics/coderhouse-dev-transactions-flink",
+        "arn:aws:logs:us-east-1:672049777597:log-group:/aws/kinesis-analytics/coderhouse-dev-transactions-flink:*"
+      ]
+    }
+  ]
+}

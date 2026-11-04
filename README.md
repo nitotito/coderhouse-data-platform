@@ -19,34 +19,40 @@ El proyecto establece los componentes de red, almacenamiento de estado remoto e 
 
 ## Estructura del proyecto
 
+Estructura actual de entrega, ajustada a las carpetas `infra/` y `app/` de la
+consigna. La reorganización conserva las pre-entregas anteriores y las direcciones
+Terraform de todos los recursos. El estado remoto mantiene su clave original
+`environments/dev/terraform.tfstate`: cambiar carpetas no crea otro entorno.
+
 ```text
-coderhouse-data-platform/
-├── bootstrap/
-│   └── bootstrap.ps1
-├── modules/
-│   ├── network/
-│   │   ├── main.tf
-│   │   ├── variables.tf
-│   │   ├── outputs.tf
-│   │   └── versions.tf
-│   └── identity/
-│       ├── main.tf
-│       ├── variables.tf
-│       ├── outputs.tf
-│       └── versions.tf
-├── environments/
-│   └── dev/
-│       ├── backend.tf
-│       ├── providers.tf
-│       ├── variables.tf
-│       ├── main.tf
-│       ├── storage.tf
-│       ├── outputs.tf
-│       └── .terraform.lock.hcl
-├── .gitignore
-├── PLAN_OUTPUT.md
-└── README.md
+infra/
+  main.tf                 # Composición de los módulos del entorno dev
+  lakehouse.tf            # Base Glue y outputs Iceberg
+  managed-flink.tf         # Aplicación, catálogo y permisos
+  backend.tf              # Mismo backend remoto existente
+  storage.tf              # Bucket existente y versionado
+  modules/
+    network/
+    identity/
+    kinesis/
+    managed-flink/
+    lakehouse/
+app/
+  flink-transactions/
+    pom.xml
+    src/main/java/com/coderhouse/flink/
+    src/test/java/com/coderhouse/flink/
+scripts/
+docs/evidence/
+k8s/
+spark/
+urban-producer/
 ```
+
+Las referencias históricas a `modules/`, `environments/dev/` y
+`applications/flink-transactions/` corresponden a la organización previa.
+Los comandos vigentes de despliegue están en
+[docs/iceberg-deployment.md](docs/iceberg-deployment.md).
 
 ## Requisitos
 
@@ -134,14 +140,14 @@ No incluye acciones de modificación de infraestructura.
 
 ## Despliegue
 
-Desde el directorio `environments/dev`:
+Desde el directorio `infra`:
 
 ```powershell
 terraform init
 terraform fmt -check -recursive
 terraform validate
-terraform plan
-terraform apply
+terraform plan -var='enable_ingestion=true'
+terraform apply -var='enable_ingestion=true'
 ```
 
 Para consultar los identificadores de los recursos:
@@ -153,7 +159,7 @@ terraform output
 Para verificar diferencias posteriores:
 
 ```powershell
-terraform plan
+terraform plan -var='enable_ingestion=true'
 ```
 
 ## Validaciones
@@ -500,7 +506,7 @@ La aplicación admite timestamps ISO 8601 y Unix epoch en milisegundos.
 
 ### Infraestructura Terraform
 
-La aplicación se define mediante `aws_kinesisanalyticsv2_application`, utilizando el módulo `modules/managed-flink`.
+La aplicación se define mediante `aws_kinesisanalyticsv2_application`, utilizando el módulo `infra/modules/managed-flink`.
 
 El código Java se compila mediante Maven y se despliega como archivo JAR almacenado en Amazon S3.
 
@@ -538,3 +544,231 @@ Las capturas del dashboard se utilizarán como evidencia del procesamiento.
 La implementación utiliza un sink de salida estándar. No se incluye persistencia de las agregaciones en S3, dado que no es un requisito explícito de esta pre-entrega.
 
 Los recursos administrados de AWS pueden generar costos mientras permanezcan activos.
+
+## Pre-entrega 5 — Lakehouse con Apache Iceberg y AWS Glue
+
+### Objetivo y arquitectura
+
+Persistir las agregaciones por método de pago en una tabla transaccional
+`lakehouse_db.transaction_aggregates`, reutilizando Kinesis, el bucket y la
+aplicación Managed Flink de la Pre-entrega 4.
+
+```text
+Kinesis dev-transactions-stream (2 shards)
+  → Flink 2.2: JSON válido → watermarks → approved → ventanas de 1 minuto
+  → agregados → Iceberg format v2 / Parquet
+  → S3 lakehouse/ + AWS Glue Data Catalog
+  → Athena engine 3 / AwsDataCatalog
+```
+
+Se conserva también la salida estándar. Servicios: Kinesis Data Streams,
+Managed Service for Apache Flink, S3, Glue Data Catalog, IAM, CloudWatch y Athena.
+No se agregan un crawler, Glue ETL, DynamoDB de locking Iceberg ni otro bucket.
+
+### Estructura y recursos reutilizados
+
+| Consigna | Ubicación real | Responsabilidad |
+|---|---|---|
+| `infra/` | `infra/main.tf` + `infra/modules/` | Terraform modular incremental |
+| `app/` | `app/flink-transactions/` | Código Java, Maven y pruebas |
+| Evidencias | `docs/evidence/` | Resultados reales de comandos y pruebas |
+| Procedimiento AWS | `docs/iceberg-deployment.md` | Despliegue, consultas, cierre |
+
+La estructura satisface literalmente la separación `infra/` y `app/`, sin
+mantener dos copias de los recursos. `infra/modules/lakehouse` declara la base
+Glue, ubicación, catálogo y outputs; Managed Flink agrega permisos y propiedades. Se reutiliza el versionado S3 existente, confirmado `Enabled` en AWS.
+
+Terraform **administra la infraestructura necesaria para la tabla**, no su
+puntero mutable `metadata_location`. El esquema, particionado y propiedades se
+declaran en `IcebergLakehouse.java`; al enviar el job, la API Iceberg crea la
+tabla si falta y rechaza esquemas incompatibles si ya existe. No se crea una
+tabla Glue genérica sin metadatos Iceberg válidos, ni se usa un crawler para
+actualizar sus metadatos. La base debe existir previamente mediante Terraform.
+
+### Compatibilidad y dependencias
+
+| Componente | Versión elegida |
+|---|---|
+| Java | 17 |
+| Flink API / runtime AWS | 2.2.1 / `FLINK-2_2` |
+| Iceberg runtime Flink 2.2 | 1.12.0 |
+| Kinesis Streams connector | 6.0.1-2.0 |
+| AWS SDK v2 BOM | 2.54.17 |
+| Hadoop client API/runtime | 3.4.2 |
+| Jackson BOM | 2.17.2 |
+| JUnit Jupiter | 5.11.4 |
+| Aplicación | 1.1.0 |
+
+La [matriz oficial Iceberg](https://iceberg.apache.org/multi-engine-support/)
+asocia Flink 2.2 con Iceberg 1.12.0, publicado el 29/09/2026 según
+[releases oficiales](https://iceberg.apache.org/releases/). Se resolvió el
+artefacto `iceberg-flink-runtime-2.2:1.12.0` en Maven Central. No fue necesario
+cambiar el runtime. AWS documenta la familia del conector Kinesis
+[6.x para Flink 2.2](https://docs.aws.amazon.com/managed-flink/latest/java/flink-2-2.html);
+se conserva el patch 6.0.1-2.0 ya usado por el proyecto.
+
+El runtime Iceberg incluye GlueCatalog y S3FileIO. Se agregan módulos SDK
+Glue/S3/STS/KMS/DynamoDB y Apache5 con una sola versión BOM, alineada con
+[la release Iceberg 1.12.0](https://github.com/apache/iceberg/blob/apache-iceberg-1.12.0/gradle/libs.versions.toml).
+La carga de los clientes Glue/S3/Kinesis se prueba sin peticiones AWS;
+su integración real fue verificada en AWS el 04/11/2026. El módulo SDK DynamoDB permite cargar interfaces del factory
+AWS; **no configura locking ni crea una tabla DynamoDB**. Se evita combinar el
+bundle AWS con otra copia del SDK. Flink core y Table runtime son `provided`;
+Hadoop cliente se incluye para las clases de configuración usadas por el loader,
+pero la escritura productiva utiliza S3FileIO. ServicesResourceTransformer
+conserva los proveedores de servicios. Jackson se alinea con BOM y RowData usa
+el serializador interno de Flink, evitando Kryo genérico para las filas.
+
+### Esquema y precisión
+
+| Campo | Iceberg / Athena | Semántica |
+|---|---|---|
+| `window_start` | timestamp sin zona | Inicio inclusivo, UTC |
+| `window_end` | timestamp sin zona | Fin exclusivo, UTC |
+| `payment_method` | string | Método de pago |
+| `transaction_count` | long / bigint | Cantidad de aprobadas |
+| `total_amount` | decimal(38,2) | Suma exacta |
+| `average_amount` | decimal(38,6) | Promedio, HALF_UP |
+
+Todos los campos son obligatorios. Se usa BigDecimal desde la deserialización;
+los eventos deben tener ID, método, estado, timestamp válido e importe no
+negativo con centavos exactos y hasta 18 dígitos de precisión. No se redondean
+silenciosamente fracciones de centavo. Un desbordamiento al convertir la suma
+falla explícitamente en lugar de persistir nulos. Los datos inválidos generan
+un warning sin imprimir el contenido completo de la transacción.
+
+### Particionado y Partition Pruning
+
+La transformación oculta `day(window_start)` agrupa ventanas por día UTC,
+sin particionar por minuto ni por método de pago. Las consultas que filtran
+rangos de `window_start` permiten a Iceberg descartar particiones diarias que
+no coinciden antes de leer Parquet; los manifests y estadísticas ayudan a
+omitir archivos adicionales. Se benefician consultas por día y por períodos
+acotados. Un filtro solo por método no elimina particiones diarias.
+
+Cada checkpoint puede cerrar archivos aunque no lleguen al target de 128 MiB.
+Con bajo volumen y commits por minuto se generan archivos pequeños; el target
+no es un mínimo. Se fija un writer en este laboratorio y se deja la compactación,
+expiración de snapshots y limpieza de huérfanos como mantenimiento planificado.
+No aplicar reglas de expiración S3 sobre archivos referenciados por Iceberg.
+El versionado S3 también conserva versiones antiguas y aumenta almacenamiento.
+
+### Catálogo, IAM y commits
+
+- Catálogo: `org.apache.iceberg.aws.glue.GlueCatalog`.
+- FileIO: `org.apache.iceberg.aws.s3.S3FileIO`.
+- Warehouse: `s3://coderhouse-data-lake-672049777597/lakehouse`.
+- Tabla: `s3://coderhouse-data-lake-672049777597/lakehouse/lakehouse_db/transaction_aggregates`.
+- Runtime properties: KINESIS_STREAM_ARN, ICEBERG_WAREHOUSE, ICEBERG_DATABASE,
+  ICEBERG_TABLE y AWS_REGION; también se aceptan variables de entorno locales.
+
+El rol del job obtiene GetDatabase y Get/Create/UpdateTable para esa base/tabla
+y sus ancestros Glue; acceso a objetos exclusivamente bajo el prefijo de la
+tabla. Terraform conserva la responsabilidad de crear/actualizar la base.
+No se habilita eliminación de tablas ni administración global del catálogo.
+
+El sink estable `FlinkSink` hace append y coordina sus commits con checkpoints
+exitosos. Producción: intervalo 60 s, pausa mínima 5 s, un checkpoint concurrente,
+paralelismo 1 y autoescalado deshabilitado. Glue usa optimistic locking con
+version IDs y reintentos de Iceberg; el SDK supera el mínimo 2.17.131 indicado
+por la [documentación de integración AWS](https://iceberg.apache.org/docs/latest/aws/).
+No se configura un lock manager adicional. La atomicidad de un commit no
+implica deduplicación de los eventos de negocio.
+
+Se preservan watermarks de 10 s, idleness de 30 s, ventanas de tiempo de evento
+de un minuto y filtro approved. Eventos posteriores al watermark pueden ser
+descartados como tardíos; no se incorporó deduplicación por transaction_id.
+TRIM_HORIZON sigue siendo el inicio de una ejecución sin estado restaurado:
+reprocesar históricos puede agregar filas repetidas. No se garantiza exactamente
+una vez de extremo a extremo para nuevos jobs o replays. El cambio de double a
+BigDecimal exige revisar migración de snapshots anteriores; el ensayo AWS
+preparado utiliza SKIP_RESTORE_FROM_SNAPSHOT en el laboratorio.
+
+### Despliegue y validación Athena
+
+Procedimiento completo y comandos: [docs/iceberg-deployment.md](docs/iceberg-deployment.md).
+Incluye permisos previos, compilación, plan, publicación de JAR 1.1.0 con clave
+nueva, aplicación aprobada, arranque, lote controlado, verificación y detención.
+No se ejecuta apply ni se inicia Flink sin aprobación de costos.
+Al clonar, usar `-var='enable_ingestion=true'` al generar el plan para conservar
+los recursos de ingesta existentes.
+
+Consultas completas: [docs/iceberg-validation.sql](docs/iceberg-validation.sql).
+Ejemplo que permite pruning:
+
+```sql
+SELECT window_start, payment_method, transaction_count, total_amount, average_amount
+FROM lakehouse_db.transaction_aggregates
+WHERE window_start >= TIMESTAMP '2026-11-04 00:00:00'
+  AND window_start < TIMESTAMP '2026-11-05 00:00:00';
+```
+
+Athena engine 3 admite tablas Iceberg format v2 en Glue. Se limita el writer a
+format v2 y tipos/Parquet básicos: no se asume soporte en Athena de todas las
+funciones de la librería Iceberg 1.12.0. La consulta real fue exitosa en engine 3.
+Ver [restricciones oficiales Athena](https://docs.aws.amazon.com/athena/latest/ug/querying-iceberg.html).
+
+### Resultados reales y estado de aceptación
+
+**Captura de la consola AWS Glue:** tabla `transaction_aggregates` registrada en
+`lakehouse_db`, formato Apache Iceberg, ubicación S3 y esquema completo.
+
+![Tabla Apache Iceberg transaction_aggregates en AWS Glue, con base lakehouse_db y seis columnas](docs/evidence/glue-transaction-aggregates.png)
+
+**Prueba completa AWS exitosa el 04/11/2026.** RunId `pe5_20261104_113142`.
+Flink ejecutó el pipeline en AWS, confirmó el commit del checkpoint 2 y Athena
+consultó la fila esperada. Se enviaron cuatro eventos al mismo shard: dos
+aprobados, uno rechazado y un marcador rechazado que avanzó el watermark.
+
+| Inicio UTC | Fin UTC | Método | Cantidad | Total | Promedio |
+|---|---|---|---:|---:|---:|
+| 2026-11-04 11:33:00 | 2026-11-04 11:34:00 | card_pe5_20261104_113142 | 2 | 30.30 | 15.150000 |
+
+La ventana corresponde a 08:33–08:34 de Argentina. Athena ejecutó la consulta
+`578d831f-7595-43c3-8c20-e7716ebd1307` con estado `SUCCEEDED` y engine 3.
+El archivo Parquet tiene una fila agregada y 2101 bytes; la transformación
+`day(window_start)` produjo la partición `window_start_day=2026-11-04`.
+
+| Requisito | Resultado verificado |
+|---|---|
+| Terraform fmt y validate | Exitosos |
+| Terraform desplegado | Base Glue y política lakehouse creadas; aplicación y lectura del JAR actualizadas |
+| Plan final contra AWS | No changes; código de salida 0 |
+| Maven clean package | BUILD SUCCESS |
+| Pruebas automatizadas | 7 exitosas, 0 fallos, 0 errores |
+| Contenido JAR | Dependencias requeridas presentes; Flink core/Table excluidos |
+| Base/tabla Glue | lakehouse_db.transaction_aggregates registrada con table_type=ICEBERG |
+| S3 | Parquet, manifests y JSON de metadatos presentes |
+| Checkpoints | 1 y 2 completados en logs; commit de datos asociado al checkpoint 2 |
+| Snapshot Iceberg | 8171898520026477263, format-version 2 |
+| Glue metadata_location | Cambió de 00000 a 00001 tras el commit |
+| Athena | Consultas de datos, snapshots y archivos SUCCEEDED |
+| Concurrencia durante el ensayo | 0 eventos ERROR y ningún conflicto observado en el intervalo revisado |
+| Cierre y costos | Flink detenido y confirmado READY el 04/11/2026 a las 08:36 de Argentina |
+
+Resultados y enlaces a archivos reales: [docs/evidence/iceberg-validation-status.md](docs/evidence/iceberg-validation-status.md).
+Resumen automatizado: [iceberg-aws-test-summary.json](docs/evidence/iceberg-aws-test-summary.json).
+Las evidencias provienen de AWS CLI, Athena, Glue, S3 y CloudWatch, junto con la
+captura real de Glue proporcionada por el propietario y revisada visualmente.
+La ausencia de errores en este ensayo no
+constituye una prueba de carga ni una garantía frente a cualquier concurrencia.
+
+Los permisos del operador fueron habilitados por el propietario mediante una
+política administrada acotada. `scripts/iceberg-preflight.ps1` permite comprobar
+accesos. Para repetir el ensayo con costos autorizados, ejecutar
+`powershell -NoProfile -File scripts/iceberg-aws-smoke.ps1 -Run`: verifica el
+resultado y usa finally para detener Flink, también si la prueba falla. Cada
+repetición inicia sin el snapshot anterior y puede releer eventos retenidos;
+aplican las limitaciones de duplicados documentadas arriba.
+
+Rama de entrega: `feature/iceberg-lakehouse`, [Pull Request #1](https://github.com/nitotito/coderhouse-data-platform/pull/1).
+El merge final requiere aprobación del propietario.
+
+### Costos
+
+La ejecución de Flink consume KPUs mientras está activa. Kinesis conserva sus
+dos shards provisionados aun con Flink detenido. S3 cobra objetos, operaciones y
+versiones; Athena las consultas; Glue y CloudWatch según su uso. Los commits
+frecuentes generan metadatos y archivos pequeños. Tras el ensayo, detener Flink
+y verificar READY. No ejecutar destroy ni borrar datos para reducir costos sin
+una decisión explícita sobre retención y recursos compartidos.
