@@ -1,0 +1,91 @@
+{
+    "ResultSet":  {
+                      "Rows":  [
+                                   {
+                                       "Data":  [
+                                                    {
+                                                        "VarCharValue":  "committed_at"
+                                                    },
+                                                    {
+                                                        "VarCharValue":  "snapshot_id"
+                                                    },
+                                                    {
+                                                        "VarCharValue":  "operation"
+                                                    },
+                                                    {
+                                                        "VarCharValue":  "summary"
+                                                    }
+                                                ]
+                                   },
+                                   {
+                                       "Data":  [
+                                                    {
+                                                        "VarCharValue":  "2026-11-04 11:34:43.747 UTC"
+                                                    },
+                                                    {
+                                                        "VarCharValue":  "8171898520026477263"
+                                                    },
+                                                    {
+                                                        "VarCharValue":  "append"
+                                                    },
+                                                    {
+                                                        "VarCharValue":  "{engine-version=2.2.1, added-data-files=1, total-equality-deletes=0, added-records=1, flink.job-id=e338450f7862342f2741b9c9284ec889, total-records=1, flink.max-committed-checkpoint-id=2, changed-partition-count=1, flink.operator-id=09595c6b02227b9f9644ac1598b42305, engine-name=flink, manifests-created=1, total-position-deletes=0, added-files-size=2101, total-delete-files=0, iceberg-version=Apache Iceberg 1.12.0 (commit 212aa894e919ff9fdf89160da4aadcbe6858ac01), manifests-kept=0, manifests-replaced=0, total-files-size=2101, total-data-files=1}"
+                                                    }
+                                                ]
+                                   }
+                               ],
+                      "ResultSetMetadata":  {
+                                                "ColumnInfo":  [
+                                                                   {
+                                                                       "CatalogName":  "hive",
+                                                                       "SchemaName":  "",
+                                                                       "TableName":  "",
+                                                                       "Name":  "committed_at",
+                                                                       "Label":  "committed_at",
+                                                                       "Type":  "timestamp with time zone",
+                                                                       "Precision":  3,
+                                                                       "Scale":  0,
+                                                                       "Nullable":  "UNKNOWN",
+                                                                       "CaseSensitive":  false
+                                                                   },
+                                                                   {
+                                                                       "CatalogName":  "hive",
+                                                                       "SchemaName":  "",
+                                                                       "TableName":  "",
+                                                                       "Name":  "snapshot_id",
+                                                                       "Label":  "snapshot_id",
+                                                                       "Type":  "bigint",
+                                                                       "Precision":  19,
+                                                                       "Scale":  0,
+                                                                       "Nullable":  "UNKNOWN",
+                                                                       "CaseSensitive":  false
+                                                                   },
+                                                                   {
+                                                                       "CatalogName":  "hive",
+                                                                       "SchemaName":  "",
+                                                                       "TableName":  "",
+                                                                       "Name":  "operation",
+                                                                       "Label":  "operation",
+                                                                       "Type":  "varchar",
+                                                                       "Precision":  2147483647,
+                                                                       "Scale":  0,
+                                                                       "Nullable":  "UNKNOWN",
+                                                                       "CaseSensitive":  true
+                                                                   },
+                                                                   {
+                                                                       "CatalogName":  "hive",
+                                                                       "SchemaName":  "",
+                                                                       "TableName":  "",
+                                                                       "Name":  "summary",
+                                                                       "Label":  "summary",
+                                                                       "Type":  "map",
+                                                                       "Precision":  0,
+                                                                       "Scale":  0,
+                                                                       "Nullable":  "UNKNOWN",
+                                                                       "CaseSensitive":  false
+                                                                   }
+                                                               ]
+                                            }
+                  },
+    "UpdateCount":  0
+}

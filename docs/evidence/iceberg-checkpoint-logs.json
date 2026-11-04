@@ -1,0 +1,32 @@
+[
+    {
+        "Timestamp":  1793792022511,
+        "Level":  "INFO",
+        "Logger":  "org.apache.flink.runtime.checkpoint.CheckpointCoordinator",
+        "Message":  "Completed checkpoint 1 for job e338450f7862342f2741b9c9284ec889 (24909 bytes, checkpointDuration=801 ms, finalizationTime=175 ms)."
+    },
+    {
+        "Timestamp":  1793792022521,
+        "Level":  "INFO",
+        "Logger":  "org.apache.iceberg.flink.sink.IcebergFilesCommitter",
+        "Message":  "Skip commit for checkpoint 1 due to no data files or delete files."
+    },
+    {
+        "Timestamp":  1793792082508,
+        "Level":  "INFO",
+        "Logger":  "org.apache.iceberg.flink.sink.IcebergFilesCommitter",
+        "Message":  "Start to flush snapshot state to state backend, table: glue.lakehouse_db.transaction_aggregates, checkpointId: 2"
+    },
+    {
+        "Timestamp":  1793792083427,
+        "Level":  "INFO",
+        "Logger":  "org.apache.flink.traces.slf4j.Slf4jTraceReporter",
+        "Message":  "Reported span: SimpleSpan{scope=org.apache.flink.runtime.checkpoint.CheckpointStatsTracker, name=Checkpoint, startTsMillis=1793792081533, endTsMillis=1793792082845, attributes={maxStateSizeBytes=29313, checkpointId=2, \u003chost\u003e=flink-jobmanager, sumProcessedDataBytes=0, checkpointedSize=29992, maxPersistedDataBytes=0, sumPersistedDataBytes=0, \u003cjob_id\u003e=e338450f7862342f2741b9c9284ec889, sumSyncCheckpointDurationMs=318, sumCheckpointStartDelayMs=380, maxCheckpointedSizeBytes=29313, checkpointType=Checkpoint, maxAlignmentDurationMs=0, maxProcessedDataBytes=0, maxCheckpointStartDelayMs=190, maxAsyncCheckpointDurationMs=11, isUnaligned=false, fullSize=29992, metadataSize=34023, checkpointStatus=COMPLETED, maxSyncCheckpointDurationMs=318, jobId=e338450f7862342f2741b9c9284ec889, sumAsyncCheckpointDurationMs=12, sumAlignmentDurationMs=0, \u003cjob_name\u003e=Transactions Streaming Job}, children=[]}"
+    },
+    {
+        "Timestamp":  1793792083428,
+        "Level":  "INFO",
+        "Logger":  "org.apache.flink.runtime.checkpoint.CheckpointCoordinator",
+        "Message":  "Completed checkpoint 2 for job e338450f7862342f2741b9c9284ec889 (30403 bytes, checkpointDuration=1612 ms, finalizationTime=282 ms)."
+    }
+]

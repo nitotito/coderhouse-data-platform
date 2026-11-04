@@ -1,0 +1,82 @@
+{
+  "ApplicationDetail": {
+    "ApplicationARN": "arn:aws:kinesisanalytics:us-east-1:672049777597:application/coderhouse-dev-transactions-flink",
+    "ApplicationDescription": "Procesamiento de transacciones Kinesis con Apache Flink",
+    "ApplicationName": "coderhouse-dev-transactions-flink",
+    "RuntimeEnvironment": "FLINK-2_2",
+    "ServiceExecutionRole": "arn:aws:iam::672049777597:role/coderhouse-dev-flink",
+    "ApplicationStatus": "READY",
+    "ApplicationVersionId": 6,
+    "CreateTimestamp": "2026-10-30T18:35:11-03:00",
+    "LastUpdateTimestamp": "2026-11-04T08:35:56-03:00",
+    "ApplicationConfigurationDescription": {
+      "ApplicationCodeConfigurationDescription": {
+        "CodeContentType": "ZIPFILE",
+        "CodeContentDescription": {
+          "CodeMD5": "e4a61862c948b017c4138d1683c9b5af",
+          "CodeSize": 127691488,
+          "S3ApplicationCodeLocationDescription": {
+            "BucketARN": "arn:aws:s3:::coderhouse-data-lake-672049777597",
+            "FileKey": "artifacts/flink/flink-transactions-1.1.0.jar"
+          }
+        }
+      },
+      "FlinkApplicationConfigurationDescription": {
+        "CheckpointConfigurationDescription": {
+          "ConfigurationType": "CUSTOM",
+          "CheckpointingEnabled": true,
+          "CheckpointInterval": 60000,
+          "MinPauseBetweenCheckpoints": 5000
+        },
+        "MonitoringConfigurationDescription": {
+          "ConfigurationType": "CUSTOM",
+          "MetricsLevel": "APPLICATION",
+          "LogLevel": "INFO"
+        },
+        "ParallelismConfigurationDescription": {
+          "ConfigurationType": "CUSTOM",
+          "Parallelism": 1,
+          "ParallelismPerKPU": 1,
+          "CurrentParallelism": 1,
+          "AutoScalingEnabled": false
+        }
+      },
+      "EnvironmentPropertyDescriptions": {
+        "PropertyGroupDescriptions": [
+          {
+            "PropertyGroupId": "ApplicationProperties",
+            "PropertyMap": {
+              "AWS_REGION": "us-east-1",
+              "ICEBERG_DATABASE": "lakehouse_db",
+              "ICEBERG_TABLE": "transaction_aggregates",
+              "ICEBERG_WAREHOUSE": "s3://coderhouse-data-lake-672049777597/lakehouse",
+              "KINESIS_STREAM_ARN": "arn:aws:kinesis:us-east-1:672049777597:stream/dev-transactions-stream"
+            }
+          }
+        ]
+      },
+      "ApplicationSnapshotConfigurationDescription": {
+        "SnapshotsEnabled": false
+      },
+      "ApplicationSystemRollbackConfigurationDescription": {
+        "RollbackEnabled": false
+      },
+      "ApplicationEncryptionConfigurationDescription": {
+        "KeyType": "AWS_OWNED_KEY"
+      }
+    },
+    "CloudWatchLoggingOptionDescriptions": [
+      {
+        "CloudWatchLoggingOptionId": "1.1",
+        "LogStreamARN": "arn:aws:logs:us-east-1:672049777597:log-group:/aws/kinesis-analytics/coderhouse-dev-transactions-flink:log-stream:application"
+      }
+    ],
+    "ApplicationMaintenanceConfigurationDescription": {
+      "ApplicationMaintenanceWindowStartTime": "03:00",
+      "ApplicationMaintenanceWindowEndTime": "11:00"
+    },
+    "ApplicationVersionUpdatedFrom": 5,
+    "ApplicationVersionCreateTimestamp": "2026-11-04T08:29:36-03:00",
+    "ApplicationMode": "STREAMING"
+  }
+}

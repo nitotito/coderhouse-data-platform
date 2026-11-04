@@ -1,0 +1,50 @@
+[
+    {
+        "amount":  10.1,
+        "status":  "APPROVED",
+        "timestamp":  "2026-11-04T11:33:01.0000000Z",
+        "transaction_id":  "pe5_20261104_113142-1",
+        "payment_method":  "card_pe5_20261104_113142"
+    },
+    {
+        "amount":  20.2,
+        "status":  "approved",
+        "timestamp":  "2026-11-04T11:33:02.0000000Z",
+        "transaction_id":  "pe5_20261104_113142-2",
+        "payment_method":  "card_pe5_20261104_113142"
+    },
+    {
+        "amount":  999,
+        "status":  "rejected",
+        "timestamp":  "2026-11-04T11:33:03.0000000Z",
+        "transaction_id":  "pe5_20261104_113142-rejected",
+        "payment_method":  "card_pe5_20261104_113142"
+    },
+    {
+        "amount":  0,
+        "status":  "rejected",
+        "timestamp":  "2026-11-04T11:34:15.0000000Z",
+        "transaction_id":  "pe5_20261104_113142-watermark",
+        "payment_method":  "card_pe5_20261104_113142"
+    }
+]
+{
+    "ShardId": "shardId-000000000000",
+    "SequenceNumber": "49679759770194942529568291466137069512940045797051858946",
+    "EncryptionType": "KMS"
+}
+{
+    "ShardId": "shardId-000000000000",
+    "SequenceNumber": "49679759770194942529568291467376218478045040838564642818",
+    "EncryptionType": "KMS"
+}
+{
+    "ShardId": "shardId-000000000000",
+    "SequenceNumber": "49679759770194942529568291468730215396013425582955036674",
+    "EncryptionType": "KMS"
+}
+{
+    "ShardId": "shardId-000000000000",
+    "SequenceNumber": "49679759770194942529568291470103555127095644394140729346",
+    "EncryptionType": "KMS"
+}

@@ -1,10 +1,15 @@
 # Despliegue y prueba AWS — Pre-entrega 5
 
-Estado: preparado; **no desplegado en AWS**. El usuario autorizó el despliegue,
-los costos del ensayo y la detención posterior de Flink el 03/11/2026.
-La comprobación posterior sigue bloqueada por permisos del perfil: AccessDenied
-para `glue:GetDatabase` y `athena:GetWorkGroup`. No se otorgaron permisos ni se
-cambiaron credenciales; la aplicación permanece READY.
+Estado: **desplegado y validado en AWS el 04/11/2026**. El ensayo
+`pe5_20261104_113142` obtuvo en Athena cantidad 2, total 30.30 y promedio
+15.150000; checkpoint 2 y snapshot 8171898520026477263. Flink fue detenido y
+confirmado READY a las 08:36 de Argentina. Terraform terminó sin diferencias.
+El despliegue y los costos habían sido autorizados por el propietario.
+
+Evidencia: [evidence/iceberg-validation-status.md](evidence/iceberg-validation-status.md).
+Para repetir con costos autorizados, después de las verificaciones de este
+procedimiento, usar `powershell -NoProfile -File scripts/iceberg-aws-smoke.ps1 -Run`.
+El script valida los resultados y detiene Flink mediante finally.
 
 ### Desbloqueo del operador
 
@@ -14,10 +19,11 @@ consultas en el workgroup Athena `primary`, lectura de los datos y escritura del
 JAR 1.1.0/resultados de Athena en prefijos específicos, publicación de eventos
 controlados y lectura de logs. No concede administración IAM ni permisos globales
 de Glue/Athena/S3. Complementa los permisos Terraform/Flink existentes.
-Es una propuesta: todavía no fue adjuntada ni validada por AWS Access Analyzer.
+Fue adjuntada por el propietario como política administrada y sus accesos fueron
+comprobados con el despliegue y las consultas. No se ejecutó AWS Access Analyzer.
 
 Crear una política administrada por el cliente, no una política insertada: el
-JSON ocupa 3081 caracteres sin espacios y supera el límite agregado de 2048
+JSON ocupa 3129 caracteres sin espacios y supera el límite agregado de 2048
 para políticas insertadas de un usuario. Cabe en el límite de 6144 por política
 administrada. Dividirlo en varias insertadas no evita el límite agregado.
 
@@ -67,7 +73,8 @@ aws glue get-database --name lakehouse_db --profile coderhouse-dev --region us-e
 terraform -chdir=environments/dev import module.lakehouse.aws_glue_catalog_database.lakehouse 672049777597:lakehouse_db
 ```
 
-La importación cambia el estado y requiere autorización. No se ejecutó.
+La importación cambia el estado. En esta entrega no fue necesaria: se comprobó
+EntityNotFound antes de crear la base con Terraform.
 
 ## Validaciones locales
 
@@ -104,8 +111,9 @@ terraform -chdir=environments/dev apply iceberg.tfplan
 
 El plan de revisión guardado localmente se generó con `-lock=false` para evitar
 escribir locks durante la inspección. En el despliegue regenerar con locking
-normal y revisar nuevamente. El plan actual: 2 altas, 2 cambios, 0 bajas
-(la política de lectura del JAR también cambia para apuntar a 1.1.0).
+normal y revisar nuevamente. El despliegue se completó sin eliminaciones;
+el plan final es No changes. Consultar las evidencias de plan/apply antes de
+intentar repetir cambios ya aplicados.
 
 ## Arrancar y enviar el lote controlado
 

@@ -1,12 +1,12 @@
 -- Athena engine 3, catalog AwsDataCatalog. Replace the run ID from the producer.
 SELECT window_start, window_end, payment_method, transaction_count, total_amount, average_amount
 FROM lakehouse_db.transaction_aggregates
-WHERE window_start >= TIMESTAMP '2026-11-02 00:00:00'
-  AND window_start < TIMESTAMP '2026-11-03 00:00:00'
+WHERE window_start >= TIMESTAMP '2026-11-04 00:00:00'
+  AND window_start < TIMESTAMP '2026-11-05 00:00:00'
 ORDER BY window_start, payment_method;
 
 SELECT * FROM lakehouse_db.transaction_aggregates
-WHERE payment_method = 'card_REPLACE_RUN_ID';
+WHERE payment_method = 'card_pe5_20261104_113142';
 -- Expected for a fresh run: exactly one row, count=2, total=30.30, average=15.150000.
 
 SELECT committed_at, snapshot_id, operation, summary

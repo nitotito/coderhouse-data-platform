@@ -606,7 +606,7 @@ El runtime Iceberg incluye GlueCatalog y S3FileIO. Se agregan módulos SDK
 Glue/S3/STS/KMS/DynamoDB y Apache5 con una sola versión BOM, alineada con
 [la release Iceberg 1.12.0](https://github.com/apache/iceberg/blob/apache-iceberg-1.12.0/gradle/libs.versions.toml).
 La carga de los clientes Glue/S3/Kinesis se prueba sin peticiones AWS;
-su integración real permanece pendiente. El módulo SDK DynamoDB permite cargar interfaces del factory
+su integración real fue verificada en AWS el 04/11/2026. El módulo SDK DynamoDB permite cargar interfaces del factory
 AWS; **no configura locking ni crea una tabla DynamoDB**. Se evita combinar el
 bundle AWS con otra copia del SDK. Flink core y Table runtime son `provided`;
 Hadoop cliente se incluye para las clases de configuración usadas por el loader,
@@ -694,45 +694,65 @@ Ejemplo que permite pruning:
 ```sql
 SELECT window_start, payment_method, transaction_count, total_amount, average_amount
 FROM lakehouse_db.transaction_aggregates
-WHERE window_start >= TIMESTAMP '2026-11-02 00:00:00'
-  AND window_start < TIMESTAMP '2026-11-03 00:00:00';
+WHERE window_start >= TIMESTAMP '2026-11-04 00:00:00'
+  AND window_start < TIMESTAMP '2026-11-05 00:00:00';
 ```
 
 Athena engine 3 admite tablas Iceberg format v2 en Glue. Se limita el writer a
 format v2 y tipos/Parquet básicos: no se asume soporte en Athena de todas las
-funciones de la librería Iceberg 1.12.0. La consulta real está pendiente.
+funciones de la librería Iceberg 1.12.0. La consulta real fue exitosa en engine 3.
 Ver [restricciones oficiales Athena](https://docs.aws.amazon.com/athena/latest/ug/querying-iceberg.html).
 
 ### Resultados reales y estado de aceptación
 
-Validaciones del 02–03/11/2026 (Argentina), registradas en `docs/evidence/`:
+**Prueba completa AWS exitosa el 04/11/2026.** RunId `pe5_20261104_113142`.
+Flink ejecutó el pipeline en AWS, confirmó el commit del checkpoint 2 y Athena
+consultó la fila esperada. Se enviaron cuatro eventos al mismo shard: dos
+aprobados, uno rechazado y un marcador rechazado que avanzó el watermark.
 
-| Requisito | Estado / evidencia |
+| Inicio UTC | Fin UTC | Método | Cantidad | Total | Promedio |
+|---|---|---|---:|---:|---:|
+| 2026-11-04 11:33:00 | 2026-11-04 11:34:00 | card_pe5_20261104_113142 | 2 | 30.30 | 15.150000 |
+
+La ventana corresponde a 08:33–08:34 de Argentina. Athena ejecutó la consulta
+`578d831f-7595-43c3-8c20-e7716ebd1307` con estado `SUCCEEDED` y engine 3.
+El archivo Parquet tiene una fila agregada y 2101 bytes; la transformación
+`day(window_start)` produjo la partición `window_start_day=2026-11-04`.
+
+| Requisito | Resultado verificado |
 |---|---|
-| Código, catálogo, sink, decimales, particionado | Implementados |
 | Terraform fmt y validate | Exitosos |
-| Plan contra estado remoto | 2 altas, 2 cambios, 0 bajas; no aplicado |
+| Terraform desplegado | Base Glue y política lakehouse creadas; aplicación y lectura del JAR actualizadas |
+| Plan final contra AWS | No changes; código de salida 0 |
 | Maven clean package | BUILD SUCCESS |
 | Pruebas automatizadas | 7 exitosas, 0 fallos, 0 errores |
-| Checkpoints/Parquet/snapshots | Verificados localmente con MiniCluster y HadoopTables |
-| Contenido JAR | Clases requeridas presentes; Flink core/Table excluidos |
-| Runtime/checkpoints AWS existentes | READY, FLINK-2_2, 60 s, paralelismo 1, autoescalado false |
-| Bucket y stream existentes | Versionado Enabled; Kinesis ACTIVE, 2 shards |
-| Base/tabla Glue desplegadas | Pendientes; operador sin glue:GetDatabase |
-| Datos y metadatos Iceberg en S3 | Pendientes de despliegue autorizado |
-| Athena y concurrencia Glue en AWS | Prueba autorizada; bloqueada por permisos Glue/Athena |
+| Contenido JAR | Dependencias requeridas presentes; Flink core/Table excluidos |
+| Base/tabla Glue | lakehouse_db.transaction_aggregates registrada con table_type=ICEBERG |
+| S3 | Parquet, manifests y JSON de metadatos presentes |
+| Checkpoints | 1 y 2 completados en logs; commit de datos asociado al checkpoint 2 |
+| Snapshot Iceberg | 8171898520026477263, format-version 2 |
+| Glue metadata_location | Cambió de 00000 a 00001 tras el commit |
+| Athena | Consultas de datos, snapshots y archivos SUCCEEDED |
+| Concurrencia durante el ensayo | 0 eventos ERROR y ningún conflicto observado en el intervalo revisado |
+| Cierre y costos | Flink detenido y confirmado READY el 04/11/2026 a las 08:36 de Argentina |
 
-La prueba local valida el sink y sus commits; no utiliza Glue ni Kinesis y no
-sustituye la prueba AWS. Las evidencias locales no son capturas de AWS.
-No se fabricaron resultados ni se iniciaron servicios facturables.
+Resultados y enlaces a archivos reales: [docs/evidence/iceberg-validation-status.md](docs/evidence/iceberg-validation-status.md).
+Resumen automatizado: [iceberg-aws-test-summary.json](docs/evidence/iceberg-aws-test-summary.json).
+Las evidencias provienen de AWS CLI, Athena, Glue, S3 y CloudWatch; no son
+capturas simuladas. No se obtuvieron capturas de consola porque Computer Use
+no pudo verificar la URL de Chrome. La ausencia de errores en este ensayo no
+constituye una prueba de carga ni una garantía frente a cualquier concurrencia.
 
-Actualización del 03/11/2026: el despliegue y sus costos ya fueron autorizados.
-El preflight real (`scripts/iceberg-preflight.ps1`) confirma AccessDenied en
-Glue y Athena; Flink permanece READY. Se preparó una
-[política adicional acotada para el operador](docs/iceberg-operator-access.json)
-y el [procedimiento administrativo](docs/iceberg-deployment.md) para resolverlo.
-Esta política aún no fue adjuntada. El código todavía no constituye una entrega
-AWS validada de extremo a extremo.
+Los permisos del operador fueron habilitados por el propietario mediante una
+política administrada acotada. `scripts/iceberg-preflight.ps1` permite comprobar
+accesos. Para repetir el ensayo con costos autorizados, ejecutar
+`powershell -NoProfile -File scripts/iceberg-aws-smoke.ps1 -Run`: verifica el
+resultado y usa finally para detener Flink, también si la prueba falla. Cada
+repetición inicia sin el snapshot anterior y puede releer eventos retenidos;
+aplican las limitaciones de duplicados documentadas arriba.
+
+Rama de entrega: `feature/iceberg-lakehouse`, [Pull Request #1](https://github.com/nitotito/coderhouse-data-platform/pull/1).
+El merge final requiere aprobación del propietario.
 
 ### Costos
 

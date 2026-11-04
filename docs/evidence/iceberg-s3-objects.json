@@ -1,0 +1,61 @@
+{
+    "Contents":  [
+                     {
+                         "Key":  "lakehouse/lakehouse_db/transaction_aggregates/data/window_start_day=2026-11-04/00000-0-e09e5869-00f5-4ada-b1ed-0ce37c27988b-00001.parquet",
+                         "LastModified":  "2026-11-04T11:34:43+00:00",
+                         "ETag":  "\"fffe6d8cf44a4eea0a14d07992d1fb31\"",
+                         "ChecksumAlgorithm":  [
+                                                   "CRC32"
+                                               ],
+                         "ChecksumType":  "FULL_OBJECT",
+                         "Size":  2101,
+                         "StorageClass":  "STANDARD"
+                     },
+                     {
+                         "Key":  "lakehouse/lakehouse_db/transaction_aggregates/metadata/00000-270ceb65-5454-460a-9fa4-175dd5d9040e.metadata.json",
+                         "LastModified":  "2026-11-04T11:33:13+00:00",
+                         "ETag":  "\"74b7a87d0ebbec35c96bba59c226b6f0\"",
+                         "ChecksumAlgorithm":  [
+                                                   "CRC32"
+                                               ],
+                         "ChecksumType":  "FULL_OBJECT",
+                         "Size":  1225,
+                         "StorageClass":  "STANDARD"
+                     },
+                     {
+                         "Key":  "lakehouse/lakehouse_db/transaction_aggregates/metadata/00001-a6ac508c-2e43-4de5-9437-57f0bb426279.metadata.json",
+                         "LastModified":  "2026-11-04T11:34:44+00:00",
+                         "ETag":  "\"56812adf1de7a21c21d1ebcca541e977\"",
+                         "ChecksumAlgorithm":  [
+                                                   "CRC32"
+                                               ],
+                         "ChecksumType":  "FULL_OBJECT",
+                         "Size":  2480,
+                         "StorageClass":  "STANDARD"
+                     },
+                     {
+                         "Key":  "lakehouse/lakehouse_db/transaction_aggregates/metadata/e2271e55-6b10-4945-8ea7-69c689c0b63a-m0.avro",
+                         "LastModified":  "2026-11-04T11:34:44+00:00",
+                         "ETag":  "\"be464fe73b3d48fea40d0f810b261ffe\"",
+                         "ChecksumAlgorithm":  [
+                                                   "CRC32"
+                                               ],
+                         "ChecksumType":  "FULL_OBJECT",
+                         "Size":  7699,
+                         "StorageClass":  "STANDARD"
+                     },
+                     {
+                         "Key":  "lakehouse/lakehouse_db/transaction_aggregates/metadata/snap-8171898520026477263-1-e2271e55-6b10-4945-8ea7-69c689c0b63a.avro",
+                         "LastModified":  "2026-11-04T11:34:44+00:00",
+                         "ETag":  "\"1689ea39a25f8b4ed9df61a7363a8a82\"",
+                         "ChecksumAlgorithm":  [
+                                                   "CRC32"
+                                               ],
+                         "ChecksumType":  "FULL_OBJECT",
+                         "Size":  4491,
+                         "StorageClass":  "STANDARD"
+                     }
+                 ],
+    "RequestCharged":  null,
+    "Prefix":  "lakehouse/lakehouse_db/transaction_aggregates/"
+}

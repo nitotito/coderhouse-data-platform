@@ -1,0 +1,21 @@
+{
+    "RunId":  "pe5_20261104_113142",
+    "StartedAtUtc":  "2026-11-04T11:31:42.1536200+00:00",
+    "Status":  "PASSED",
+    "InitialMetadataLocation":  "s3://coderhouse-data-lake-672049777597/lakehouse/lakehouse_db/transaction_aggregates/metadata/00000-270ceb65-5454-460a-9fa4-175dd5d9040e.metadata.json",
+    "PaymentMethod":  "card_pe5_20261104_113142",
+    "FinalMetadataLocation":  "s3://coderhouse-data-lake-672049777597/lakehouse/lakehouse_db/transaction_aggregates/metadata/00001-a6ac508c-2e43-4de5-9437-57f0bb426279.metadata.json",
+    "SnapshotId":  8171898520026477263,
+    "CheckpointId":  "2",
+    "ValidatedRow":  [
+                         "2026-11-04 11:33:00.000000",
+                         "2026-11-04 11:34:00.000000",
+                         "card_pe5_20261104_113142",
+                         "2",
+                         "30.30",
+                         "15.150000"
+                     ],
+    "ErrorLogEvents":  0,
+    "FinalApplicationState":  "READY",
+    "FinishedAtUtc":  "2026-11-04T11:36:14.1585902+00:00"
+}
