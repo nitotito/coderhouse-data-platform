@@ -18,7 +18,7 @@ services:
       - ICEBERG_TABLE=transaction_aggregates
       - "FLINK_PROPERTIES=execution.checkpointing.dir: file:///opt/flink/checkpoints"
     volumes:
-      - ./applications/flink-transactions/target:/opt/flink/usrlib
+      - ./app/flink-transactions/target:/opt/flink/usrlib
       - ${USERPROFILE}/.aws:/home/flink/.aws:ro
       - ./flink-data/checkpoints:/opt/flink/checkpoints
 
@@ -41,6 +41,6 @@ services:
       - ICEBERG_TABLE=transaction_aggregates
       - "FLINK_PROPERTIES=execution.checkpointing.dir: file:///opt/flink/checkpoints"
     volumes:
-      - ./applications/flink-transactions/target:/opt/flink/usrlib
+      - ./app/flink-transactions/target:/opt/flink/usrlib
       - ${USERPROFILE}/.aws:/home/flink/.aws:ro
       - ./flink-data/checkpoints:/opt/flink/checkpoints

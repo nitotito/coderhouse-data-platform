@@ -19,34 +19,40 @@ El proyecto establece los componentes de red, almacenamiento de estado remoto e 
 
 ## Estructura del proyecto
 
+Estructura actual de entrega, ajustada a las carpetas `infra/` y `app/` de la
+consigna. La reorganización conserva las pre-entregas anteriores y las direcciones
+Terraform de todos los recursos. El estado remoto mantiene su clave original
+`environments/dev/terraform.tfstate`: cambiar carpetas no crea otro entorno.
+
 ```text
-coderhouse-data-platform/
-├── bootstrap/
-│   └── bootstrap.ps1
-├── modules/
-│   ├── network/
-│   │   ├── main.tf
-│   │   ├── variables.tf
-│   │   ├── outputs.tf
-│   │   └── versions.tf
-│   └── identity/
-│       ├── main.tf
-│       ├── variables.tf
-│       ├── outputs.tf
-│       └── versions.tf
-├── environments/
-│   └── dev/
-│       ├── backend.tf
-│       ├── providers.tf
-│       ├── variables.tf
-│       ├── main.tf
-│       ├── storage.tf
-│       ├── outputs.tf
-│       └── .terraform.lock.hcl
-├── .gitignore
-├── PLAN_OUTPUT.md
-└── README.md
+infra/
+  main.tf                 # Composición de los módulos del entorno dev
+  lakehouse.tf            # Base Glue y outputs Iceberg
+  managed-flink.tf         # Aplicación, catálogo y permisos
+  backend.tf              # Mismo backend remoto existente
+  storage.tf              # Bucket existente y versionado
+  modules/
+    network/
+    identity/
+    kinesis/
+    managed-flink/
+    lakehouse/
+app/
+  flink-transactions/
+    pom.xml
+    src/main/java/com/coderhouse/flink/
+    src/test/java/com/coderhouse/flink/
+scripts/
+docs/evidence/
+k8s/
+spark/
+urban-producer/
 ```
+
+Las referencias históricas a `modules/`, `environments/dev/` y
+`applications/flink-transactions/` corresponden a la organización previa.
+Los comandos vigentes de despliegue están en
+[docs/iceberg-deployment.md](docs/iceberg-deployment.md).
 
 ## Requisitos
 
@@ -134,14 +140,14 @@ No incluye acciones de modificación de infraestructura.
 
 ## Despliegue
 
-Desde el directorio `environments/dev`:
+Desde el directorio `infra`:
 
 ```powershell
 terraform init
 terraform fmt -check -recursive
 terraform validate
-terraform plan
-terraform apply
+terraform plan -var='enable_ingestion=true'
+terraform apply -var='enable_ingestion=true'
 ```
 
 Para consultar los identificadores de los recursos:
@@ -153,7 +159,7 @@ terraform output
 Para verificar diferencias posteriores:
 
 ```powershell
-terraform plan
+terraform plan -var='enable_ingestion=true'
 ```
 
 ## Validaciones
@@ -500,7 +506,7 @@ La aplicación admite timestamps ISO 8601 y Unix epoch en milisegundos.
 
 ### Infraestructura Terraform
 
-La aplicación se define mediante `aws_kinesisanalyticsv2_application`, utilizando el módulo `modules/managed-flink`.
+La aplicación se define mediante `aws_kinesisanalyticsv2_application`, utilizando el módulo `infra/modules/managed-flink`.
 
 El código Java se compila mediante Maven y se despliega como archivo JAR almacenado en Amazon S3.
 
@@ -563,15 +569,14 @@ No se agregan un crawler, Glue ETL, DynamoDB de locking Iceberg ni otro bucket.
 
 | Consigna | Ubicación real | Responsabilidad |
 |---|---|---|
-| `infra/` | `modules/` + `environments/dev/` | Terraform modular incremental |
-| `app/` | `applications/flink-transactions/` | Aplicación Java existente |
+| `infra/` | `infra/main.tf` + `infra/modules/` | Terraform modular incremental |
+| `app/` | `app/flink-transactions/` | Código Java, Maven y pruebas |
 | Evidencias | `docs/evidence/` | Resultados reales de comandos y pruebas |
 | Procedimiento AWS | `docs/iceberg-deployment.md` | Despliegue, consultas, cierre |
 
-Estas equivalencias satisfacen la separación infraestructura/aplicación sin
-mantener dos copias de los mismos recursos. `modules/lakehouse` declara la base
-Glue, ubicación, catálogo y outputs; el módulo Managed Flink agrega permisos y
-propiedades. Se reutiliza el versionado S3 existente, confirmado `Enabled` en AWS.
+La estructura satisface literalmente la separación `infra/` y `app/`, sin
+mantener dos copias de los recursos. `infra/modules/lakehouse` declara la base
+Glue, ubicación, catálogo y outputs; Managed Flink agrega permisos y propiedades. Se reutiliza el versionado S3 existente, confirmado `Enabled` en AWS.
 
 Terraform **administra la infraestructura necesaria para la tabla**, no su
 puntero mutable `metadata_location`. El esquema, particionado y propiedades se
@@ -704,6 +709,11 @@ funciones de la librería Iceberg 1.12.0. La consulta real fue exitosa en engine
 Ver [restricciones oficiales Athena](https://docs.aws.amazon.com/athena/latest/ug/querying-iceberg.html).
 
 ### Resultados reales y estado de aceptación
+
+**Captura obligatoria de Glue:** pendiente de incorporar la imagen real de la
+consola. Ver [qué capturar y dónde guardarlo](docs/glue-screenshots.md).
+Las respuestas API que siguen verifican la implementación, pero no sustituyen
+el requisito visual de la consigna.
 
 **Prueba completa AWS exitosa el 04/11/2026.** RunId `pe5_20261104_113142`.
 Flink ejecutó el pipeline en AWS, confirmó el commit del checkpoint 2 y Athena

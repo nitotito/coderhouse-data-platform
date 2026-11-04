@@ -26,5 +26,7 @@ flink-data/checkpoints/
 
 # Local validation logs and Python cache
 applications/flink-transactions/target-*.log
+app/flink-transactions/target-*.log
+infra/*.log
 **/__pycache__/
 

@@ -1,5 +1,5 @@
 module "managed_flink" {
-  source = "../../modules/managed-flink"
+  source = "./modules/managed-flink"
 
   count = var.enable_ingestion ? 1 : 0
 

@@ -1,5 +1,5 @@
 module "lakehouse" {
-  source      = "../../modules/lakehouse"
+  source      = "./modules/lakehouse"
   bucket_name = aws_s3_bucket.data_lake.id
 }
 

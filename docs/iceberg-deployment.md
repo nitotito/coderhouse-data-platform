@@ -11,6 +11,18 @@ Para repetir con costos autorizados, después de las verificaciones de este
 procedimiento, usar `powershell -NoProfile -File scripts/iceberg-aws-smoke.ps1 -Run`.
 El script valida los resultados y detiene Flink mediante finally.
 
+### Estructura vigente de la entrega
+
+Terraform está en `infra/main.tf` y `infra/modules/`; Java/Maven y las pruebas
+están en `app/flink-transactions/`. Se conservan la clave remota
+`environments/dev/terraform.tfstate` y todas las direcciones de recursos; no se
+migró el estado ni se duplicó infraestructura. Los directorios antiguos solo
+conservan guías de traslado y archivos locales ignorados.
+
+Las capturas de Glue que exige la consigna se describen en
+[glue-screenshots.md](glue-screenshots.md). La captura real todavía debe
+incorporarse; las respuestas CLI no sustituyen ese requisito.
+
 ### Desbloqueo del operador
 
 La propuesta adicional está en [iceberg-operator-access.json](iceberg-operator-access.json).
@@ -70,7 +82,7 @@ Si existe fuera del estado, importarla en lugar de recrearla:
 ```powershell
 aws glue get-database --name lakehouse_db --profile coderhouse-dev --region us-east-1
 # Solo si existe y no está administrada por este estado:
-terraform -chdir=environments/dev import module.lakehouse.aws_glue_catalog_database.lakehouse 672049777597:lakehouse_db
+terraform -chdir=infra import module.lakehouse.aws_glue_catalog_database.lakehouse 672049777597:lakehouse_db
 ```
 
 La importación cambia el estado. En esta entrega no fue necesaria: se comprobó
@@ -82,14 +94,14 @@ Desde la raíz, en PowerShell:
 
 ```powershell
 terraform fmt -check -recursive
-terraform -chdir=environments/dev init
-terraform -chdir=environments/dev validate
-mvn -B -ntp -f applications/flink-transactions/pom.xml clean package
+terraform -chdir=infra init
+terraform -chdir=infra validate
+mvn -B -ntp -f app/flink-transactions/pom.xml clean package
 python scripts/verify-iceberg-jar.py
 powershell -NoProfile -File scripts/iceberg-test-events.ps1
 ```
 
-`environments/dev/flink.auto.tfvars` local contiene `enable_ingestion = true`.
+`infra/flink.auto.tfvars` local contiene `enable_ingestion = true`.
 Está excluido de Git. Al clonar, pasar **siempre** `-var='enable_ingestion=true'`
 en el plan de esta entrega para conservar Kinesis y Flink. No reutilizar planes
 antiguos de limpieza. Nunca ejecutar destroy para esta entrega.
@@ -101,12 +113,12 @@ No sobrescribir esa clave anterior. Registrar la versión y el checksum del nuev
 objeto; no volver a subir builds distintos bajo la misma versión de entrega.
 
 ```powershell
-aws s3 cp applications/flink-transactions/target/flink-transactions-1.1.0.jar s3://coderhouse-data-lake-672049777597/artifacts/flink/flink-transactions-1.1.0.jar --profile coderhouse-dev --region us-east-1
+aws s3 cp app/flink-transactions/target/flink-transactions-1.1.0.jar s3://coderhouse-data-lake-672049777597/artifacts/flink/flink-transactions-1.1.0.jar --profile coderhouse-dev --region us-east-1
 aws s3api head-object --bucket coderhouse-data-lake-672049777597 --key artifacts/flink/flink-transactions-1.1.0.jar --profile coderhouse-dev --region us-east-1
-terraform -chdir=environments/dev plan -var='enable_ingestion=true' -out='iceberg.tfplan'
-terraform -chdir=environments/dev show -no-color iceberg.tfplan
+terraform -chdir=infra plan -var='enable_ingestion=true' -out='iceberg.tfplan'
+terraform -chdir=infra show -no-color iceberg.tfplan
 # Continuar únicamente con plan revisado, sin eliminaciones ni reemplazos.
-terraform -chdir=environments/dev apply iceberg.tfplan
+terraform -chdir=infra apply iceberg.tfplan
 ```
 
 El plan de revisión guardado localmente se generó con `-lock=false` para evitar
@@ -125,8 +137,8 @@ retenidos; no ejecutar dos escritores del mismo pipeline para este ensayo.
 
 ```powershell
 $runConfig = @{ ApplicationRestoreConfiguration = @{ ApplicationRestoreType = 'SKIP_RESTORE_FROM_SNAPSHOT' } }
-$runConfig | ConvertTo-Json -Depth 5 | Set-Content -Encoding ascii applications/flink-transactions/target/iceberg-run.json
-aws kinesisanalyticsv2 start-application --application-name coderhouse-dev-transactions-flink --run-configuration file://applications/flink-transactions/target/iceberg-run.json --profile coderhouse-dev --region us-east-1
+$runConfig | ConvertTo-Json -Depth 5 | Set-Content -Encoding ascii app/flink-transactions/target/iceberg-run.json
+aws kinesisanalyticsv2 start-application --application-name coderhouse-dev-transactions-flink --run-configuration file://app/flink-transactions/target/iceberg-run.json --profile coderhouse-dev --region us-east-1
 aws kinesisanalyticsv2 describe-application --application-name coderhouse-dev-transactions-flink --profile coderhouse-dev --region us-east-1 --query 'ApplicationDetail.ApplicationStatus'
 # Esperar RUNNING antes de enviar. Ejecutar en un laboratorio sin otros productores.
 powershell -NoProfile -File scripts/iceberg-test-events.ps1 -Send

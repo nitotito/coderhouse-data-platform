@@ -2,6 +2,25 @@
 
 **Resultado: PASSED en AWS el 04/11/2026. Flink terminó detenido en READY.**
 
+## Ajuste a la estructura literal de la consigna
+
+La configuración ahora está en `infra/main.tf` y `infra/modules/`; la aplicación,
+el pom.xml y las pruebas están en `app/flink-transactions/`. La clave del backend
+sigue siendo `environments/dev/terraform.tfstate`. No se migró el estado ni se
+modificaron recursos AWS. Las listas de direcciones antes/después coinciden y el
+plan desde infra/ devolvió No changes (exit code 0). Las siete pruebas volvieron
+a pasar desde app/.
+
+Evidencias adicionales: [plan tras el traslado](iceberg-layout-plan.txt),
+[tests tras el traslado](iceberg-layout-tests.txt),
+[direcciones anteriores](iceberg-state-addresses-before-layout.txt) y
+[direcciones posteriores](iceberg-state-addresses-after-layout.txt).
+
+La consigna original exige una captura de consola Glue. **Esa imagen está
+pendiente**; las evidencias API prueban el pipeline pero no sustituyen el requisito
+visual. Ver [la guía de captura](../glue-screenshots.md). El PR debe permanecer en
+borrador hasta incorporar la captura real.
+
 ## Resultado de negocio observado
 
 RunId: `pe5_20261104_113142`.

@@ -2,7 +2,7 @@
 from pathlib import Path
 from zipfile import ZipFile
 
-jar = Path(__file__).resolve().parents[1] / "applications/flink-transactions/target/flink-transactions-1.1.0.jar"
+jar = Path(__file__).resolve().parents[1] / "app/flink-transactions/target/flink-transactions-1.1.0.jar"
 required = [
     "com/coderhouse/flink/TransactionJob.class",
     "org/apache/iceberg/flink/sink/FlinkSink.class",

@@ -4,7 +4,7 @@ moved {
   to   = module.kinesis[0]
 }
 module "network" {
-  source = "../../modules/network"
+  source = "./modules/network"
 
   environment = var.environment
   vpc_cidr    = var.vpc_cidr
@@ -16,7 +16,7 @@ module "network" {
 }
 
 module "identity" {
-  source = "../../modules/identity"
+  source = "./modules/identity"
 
   environment          = var.environment
   data_lake_bucket_arn = aws_s3_bucket.data_lake.arn
@@ -26,7 +26,7 @@ module "identity" {
 module "kinesis" {
   enable_firehose = false
   count           = var.enable_ingestion ? 1 : 0
-  source          = "../../modules/kinesis"
+  source          = "./modules/kinesis"
 
   environment = var.environment
   stream_name = "transactions"
