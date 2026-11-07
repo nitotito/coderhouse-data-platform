@@ -1,0 +1,18 @@
+{
+  "Id": "b615bac5-2b2b-4feb-8196-905dd3833c7e",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": -1,
+  "Error": "ERROR: \n  -----------------------------------------------\n  error:  exception name : UnauthorizedException, error type : 138, message: Not authorized to get credentials of role arn:aws:iam::672049777597:role/coderhouse-dev-analytics-execution, should retry : 0\n  code:      30000\n  context:   \n  query:     -1[child_sequence:1]\n  location:  xen_aws_credentials_mgr.cpp:1011\n  process:   padbmaster [pid=1073963129]\n  -----------------------------------------------\n",
+  "Status": "FAILED",
+  "CreatedAt": "2026-11-07T00:35:06.075000-03:00",
+  "UpdatedAt": "2026-11-07T00:35:06.711000-03:00",
+  "RedshiftPid": 1073963129,
+  "HasResultSet": false,
+  "QueryString": "CREATE MATERIALIZED VIEW streaming.transactions_raw\nAUTO REFRESH NO AS\nSELECT approximate_arrival_timestamp, refresh_time, partition_key,\n       shard_id, sequence_number, kinesis_data,\n       CAN_JSON_PARSE(kinesis_data) AS valid_json,\n       CASE WHEN CAN_JSON_PARSE(kinesis_data)\n            THEN JSON_PARSE(kinesis_data) ELSE NULL END AS payload\nFROM kinesis_source.\"dev-transactions-stream\"",
+  "ResultRows": -1,
+  "ResultSize": -1,
+  "RedshiftQueryId": 0,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

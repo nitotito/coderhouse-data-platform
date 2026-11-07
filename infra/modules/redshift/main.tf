@@ -37,10 +37,15 @@ resource "aws_iam_role" "analytics" {
       Principal = { Service = ["redshift.amazonaws.com", "redshift-serverless.amazonaws.com"] }
       Action    = "sts:AssumeRole"
       Condition = {
-        StringEquals = { "aws:SourceAccount" = local.account }
-        # AWS assigns UUIDs to namespace/workgroup ARNs. Account/region constrained;
-        # do not interpolate the workgroup resource here (would cause an IAM cycle).
-        ArnLike = { "aws:SourceArn" = "${local.arn_prefix}:redshift-serverless:${var.region}:${local.account}:workgroup/*" }
+        # SQL service-role assumption uses the documented Serverless DB-user
+        # ExternalId. Require account/region there even if global source context
+        # is absent; enforce the global context too whenever AWS supplies it.
+        StringLike           = { "sts:ExternalId" = "${local.arn_prefix}:redshift:${var.region}:${local.account}:dbuser:serverless-${local.account}-*/*" }
+        StringEqualsIfExists = { "aws:SourceAccount" = local.account }
+        ArnLikeIfExists = { "aws:SourceArn" = [
+          "${local.arn_prefix}:redshift-serverless:${var.region}:${local.account}:*",
+          "${local.arn_prefix}:redshift:${var.region}:${local.account}:*"
+        ] }
       }
     }]
   })

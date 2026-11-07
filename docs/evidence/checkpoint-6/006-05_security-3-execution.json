@@ -1,0 +1,17 @@
+{
+  "Id": "668f9eb3-f5c5-4edb-a6a1-189a43a3c6c6",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 192343632,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-07T00:36:53.528000-03:00",
+  "UpdatedAt": "2026-11-07T00:36:54.188000-03:00",
+  "RedshiftPid": 1073954932,
+  "HasResultSet": false,
+  "QueryString": "REVOKE ALL ON SCHEMA analytics FROM PUBLIC",
+  "ResultRows": 0,
+  "ResultSize": 0,
+  "RedshiftQueryId": 0,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

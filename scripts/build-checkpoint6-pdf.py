@@ -5,6 +5,7 @@ Dependencies: reportlab, pypdf, pymupdf. Does not call AWS or modify infrastruct
 from pathlib import Path
 from xml.sax.saxutils import escape
 import re
+import json
 
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_CENTER
@@ -73,7 +74,7 @@ def architecture():
         else:
             points=[x2,y2,x2-6,y2+3,x2-6,y2-3]
         d.add(Polygon(points,fillColor=BLUE,strokeColor=BLUE))
-    d.add(String(0,13,'Ramas existentes: Kinesis / Flink / Lakehouse. Redshift: pendiente de despliegue.',
+    d.add(String(0,13,'Ramas existentes: Kinesis / Flink / Lakehouse. Redshift: ensayo temporal validado en AWS.',
                  fontName='Helvetica',fontSize=8,fillColor=AMBER))
     return d
 
@@ -149,32 +150,68 @@ def footer(canvas, doc):
 def main():
     OUT.parent.mkdir(parents=True,exist_ok=True)
     TMP.mkdir(parents=True,exist_ok=True)
+    evidence = ROOT/'docs/evidence/checkpoint-6'
+    actual = json.loads((evidence/'test-summary.json').read_text(encoding='utf-8'))
+    security = json.loads((evidence/'security-summary.json').read_text(encoding='utf-8'))
+    cleanup = json.loads((evidence/'cleanup-summary.json').read_text(encoding='utf-8'))
+    state = 'Pruebas funcionales y seguridad: PASSED. '
+    state += 'Recursos temporales retirados.' if cleanup['executed'] else 'Retiro temporal en proceso.'
     story = [Spacer(1,35*mm), p('CODERHOUSE / DATA ENGINEERING','ReportH2'),
              p('Redshift<br/>Streaming Analytics','ReportTitle'),
              p('Pre-entrega 6 · Nicolás López','ReportH1'),
              p('Kinesis, Apache Flink, Iceberg, AWS Glue y Amazon Redshift'),
              Spacer(1,14*mm),
-             p('Implementación preparada. Despliegue y pruebas Redshift pendientes de autorización.'),
-             p('Documento de avance técnico - 6 de noviembre de 2026','ReportCaption'),
+             p(state),
+             p('Informe de ensayo real - 7 de noviembre de 2026','ReportCaption'),
+             p('Pendiente visual: capturas de consola Redshift. Resultados API reales incluidos.','ReportCaption'),
              p('Repositorio: https://github.com/nitotito/coderhouse-data-platform'),
              PageBreak()]
     story.extend(markdown_blocks((ROOT/'docs/redshift-checkpoint-6.md').read_text(encoding='utf-8')))
-    story.extend([PageBreak(),p('Evidencia real del Lakehouse existente','ReportH1'),
+    story.extend([PageBreak(),p('Resultados reales del ensayo AWS','ReportH1'),
+                  p('RunId: '+actual['run_id']+'. Un único envío de nueve registros a Kinesis.'),
+                  p('Las siguientes tablas son resultados exportados de Data API. No son capturas de consola.','ReportCaption')])
+    def table(headers,rows,widths):
+        cells=[[p(str(x),'ReportCaption') for x in row] for row in [headers]+rows]
+        item=Table(cells,colWidths=[w*mm for w in widths],repeatRows=1,hAlign='LEFT')
+        item.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,0),LIGHT),
+                                  ('LINEBELOW',(0,0),(-1,0),1,BLUE),
+                                  ('VALIGN',(0,0),(-1,-1),'TOP'),
+                                  ('TOPPADDING',(0,0),(-1,-1),6),
+                                  ('BOTTOMPADDING',(0,0),(-1,-1),6)]))
+        return item
+    metric=actual['metrics'][0]
+    story.append(table(['Metrica actual','Valor observado'],
+                        [[key,metric[key]] for key in ['window_start','transaction_count','total_amount',
+                         'average_amount','approved_count','rejected_count','approved_amount']], [90,76]))
+    story.extend([Spacer(1,10*mm),p('Conciliacion con Iceberg','ReportH2')])
+    joined=actual['join'][0]
+    story.append(table(['Fuente','Aprobadas','Importe'],
+                        [['Streaming',joined['recent_approved_count'],joined['recent_approved_amount']],
+                         ['Iceberg',joined['iceberg_approved_count'],joined['iceberg_approved_amount']],
+                         ['Diferencia',joined['count_difference'],joined['amount_difference']]], [70,48,48]))
+    story.extend([Spacer(1,7*mm),p('Seguridad y calidad','ReportH2'),
+                  p('Usuario SQL comprobado: '+security['identity'][0]['db_user']+'. '
+                    'SELECT sobre metricas y JOIN permitido; raw y REFRESH denegados. '
+                    'Seis eventos validos y tres invalidos clasificados. Cero errores de escaneo observados.'),
+                  p('Refresco incremental manual exitoso: 9.735348 s. Ensayo completo: '
+                    +str(actual['observation_upper_bound_seconds'])+' s, incluyendo envio y diagnosticos. '
+                    'No es una medida de latencia automatica ni una factura de AWS.'),
+                  PageBreak(),p('Evidencia real del Lakehouse existente','ReportH1'),
                   p('Captura proporcionada por el propietario en la entrega 5. Confirma catálogo, '
                     'formato Iceberg y esquema; no demuestra un despliegue de Redshift.'),
                   Image(str(ROOT/'docs/evidence/glue-transaction-aggregates.png'),width=166*mm,height=81*mm),
                   p('Antecedente PE5: Athena verificó dos aprobadas, total 30.30 y promedio 15.150000. '
-                    'Snapshot 8171898520026477263. Nuevos resultados Redshift: pendientes.'),
-                  p('Resultados locales y pendientes','ReportH1'),
-                  p('Terraform fmt y validate: correctos. Plan: ocho altas, cero cambios, cero bajas. '
-                    'Parser SQL local: cobertura parcial; las extensiones específicas de AWS requieren '
-                    'ejecución real. El runner compila y su modo predeterminado no llama AWS.'),
+                    'Snapshot 8171898520026477263. Redshift leyo y concilio esta muestra durante el ensayo.'),
+                  p('Resultados y cierre','ReportH1'),
+                  p('Terraform: ocho altas exitosas y retiro limitado al modulo temporal. '
+                    'Tres pruebas locales del runner correctas. SQL ejecutado realmente en Redshift. '
+                    +state+' Las entregas anteriores permanecen desplegadas.'),
                   p('Conclusiones técnicas','ReportH1'),
                   p('La separación de ingesta, validación y métricas reduce el riesgo de bloquear el '
                     'stream por conversiones. La conciliación por minuto y método respeta la granularidad '
-                    'de Iceberg. El diseño conserva las entregas previas. Falta desplegar, confirmar '
-                    'privilegios SQL, ejecutar el ensayo y adjuntar capturas Redshift para aceptar '
-                    'funcionalmente la entrega.'), PageBreak(),p('Anexo: SQL reproducible','ReportH1')])
+                    'de Iceberg. Se comprobaron ingesta, conversiones, metricas, JOIN y privilegios SQL. '
+                    'Faltan capturas de consola Redshift para completar ese requisito visual de la consigna. '
+                    'El PDF no las reemplaza con imagenes sinteticas.'), PageBreak(),p('Anexo: SQL reproducible','ReportH1')])
     for part in sorted((ROOT/'sql/redshift').glob('[0-9][0-9]_*.sql')):
         story.append(p(part.name,'ReportH2'))
         story.append(Preformatted(part.read_text(encoding='utf-8'),styles['ReportCode'],maxLineLength=99))

@@ -1,0 +1,9 @@
+{
+  "scope": "module.redshift[0] only",
+  "deletions": [],
+  "other_resources_changed": false,
+  "executed": true,
+  "total_test_resources_removed": 8,
+  "role_removed_via_authorized_api": true,
+  "final_state_synced": true
+}

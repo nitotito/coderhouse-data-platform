@@ -25,10 +25,13 @@
       "timeout cancels active statement"
     ]
   },
-  "aws_smoke": "NOT_EXECUTED",
+  "aws_smoke": "PASSED: pe6_20261107_033721",
   "screenshots_redshift": "PENDING",
   "flink": "READY observed by preflight; not started",
   "terraform_disabled_plan": "NO_CHANGES",
   "deployment_cost_approval": "AUTHORIZED_SINGLE_TEST_AND_REMOVAL",
-  "terraform_apply": "FAILED: iam:CreateRole and ec2:CreateSecurityGroup denied; no managed resources created"
+  "terraform_apply": "PASSED: 8 temporary resources created",
+  "sql_engine_execution": "PASSED for deployed schemas, MV, views, grants and monitoring",
+  "security_smoke": "PASSED",
+  "temporary_resources": "REMOVED; verified by cleanup-verification.json"
 }

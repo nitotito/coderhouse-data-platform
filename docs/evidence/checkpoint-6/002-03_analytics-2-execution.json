@@ -1,0 +1,17 @@
+{
+  "Id": "524b8760-e39a-4228-9091-69164e081151",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 159870916,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-07T00:36:42.226000-03:00",
+  "UpdatedAt": "2026-11-07T00:36:42.869000-03:00",
+  "RedshiftPid": 1073938552,
+  "HasResultSet": false,
+  "QueryString": "CREATE OR REPLACE VIEW analytics.transactions_per_minute AS\nSELECT DATE_TRUNC('minute',event_time) AS window_start, payment_method,\n       COUNT(*) AS transaction_count,\n       SUM(amount) AS total_amount,\n       AVG(amount)::decimal(38,6) AS average_amount,\n       SUM(CASE WHEN status='approved' THEN 1 ELSE 0 END) AS approved_count,\n       SUM(CASE WHEN status='rejected' THEN 1 ELSE 0 END) AS rejected_count,\n       SUM(CASE WHEN status='approved' THEN amount ELSE 0 END) AS approved_amount\nFROM analytics.transactions_typed\nWHERE validation_error IS NULL\nGROUP BY 1,2",
+  "ResultRows": 0,
+  "ResultSize": 0,
+  "RedshiftQueryId": 0,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

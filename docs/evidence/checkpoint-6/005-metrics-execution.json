@@ -1,0 +1,17 @@
+{
+  "Id": "4e444e3f-d113-4d9d-8cff-6cb71d5cbc7d",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 374787262,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-07T00:37:59.020000-03:00",
+  "UpdatedAt": "2026-11-07T00:37:59.963000-03:00",
+  "RedshiftPid": 1073889452,
+  "HasResultSet": true,
+  "QueryString": "SELECT * FROM analytics.transactions_per_minute WHERE payment_method='card_pe6_20261107_033721'",
+  "ResultRows": 1,
+  "ResultSize": 125,
+  "RedshiftQueryId": 1693,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

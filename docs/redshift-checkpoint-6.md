@@ -1,8 +1,9 @@
 # Pre-entrega 6 - Analítica avanzada in-stream con Redshift
 
 Autor: Nicolás López. Cuenta AWS: 672049777597. Región: us-east-1.
-Rama: `feature/redshift-streaming-analytics`. **Estado: implementación preparada;
-despliegue y validación funcional Redshift pendientes de autorización y permisos.**
+Rama: `feature/redshift-streaming-analytics`. **Prueba funcional y seguridad PASSED
+en AWS el 07/11/2026. Ensayo único autorizado con retiro posterior del módulo
+temporal. Pendiente visual: capturas de consola Redshift.**
 
 ## Objetivo y arquitectura
 
@@ -42,11 +43,11 @@ Glue mantiene la tabla ICEBERG y el metadata_location del snapshot probado en PE
 
 La primera consulta KMS DescribeKey fue denegada; el error identificó el ARN de la clave
 `arn:aws:kms:us-east-1:672049777597:key/8cd750a2-438b-42dc-935d-24f3cb6855f4`.
-Tras habilitar permisos de inventario, DescribeKey confirmó ese ARN y las consultas
-ListWorkgroups/DescribeClusters devolvieron listas vacías. El ensayo y su retiro
-fueron autorizados. El apply se detuvo en CreateRole/CreateSecurityGroup por
-permisos del operador todavía faltantes; no se creó ningún recurso temporal.
-La política actualizada está en `docs/redshift-test-operator-access.json`.
+Tras habilitar permisos, DescribeKey confirmó ese ARN y las consultas
+ListWorkgroups/DescribeClusters devolvieron listas vacías. El primer apply fue
+denegado por IAM/EC2; la política del operador se corrigió y el siguiente apply
+creó los ocho recursos. El ensayo y su retiro fueron autorizados expresamente.
+La política está en `docs/redshift-test-operator-access.json`.
 
 Las pruebas reales PE5 están en [el índice anterior](evidence/iceberg-validation-status.md).
 Son antecedentes, no resultados Redshift. La tabla tiene seis columnas y
@@ -93,9 +94,10 @@ continúan; Flink no se inicia en la prueba propuesta.
 `infra/redshift.tf` habilita `infra/modules/redshift/` mediante
 `enable_redshift=false` por defecto. Los ocho recursos nuevos son rol IAM,
 política del rol, dos security groups, endpoint Kinesis, namespace, workgroup y
-usage limit. El plan realizado propone **8 altas, 0 cambios, 0 bajas**.
-El primer apply autorizado falló antes de crear recursos por permisos IAM/EC2.
-El backend y todas las direcciones de entregas previas se conservan.
+usage limit. El apply exitoso registró **8 altas, 0 cambios, 0 bajas**. Dos
+ajustes posteriores afectaron únicamente la confianza del rol temporal hasta
+verificar su funcionamiento con ExternalId. El retiro planifica exclusivamente
+esas ocho bajas. El backend y las direcciones de entregas previas se conservan.
 
 ```powershell
 terraform -chdir=infra init
@@ -118,8 +120,12 @@ false propondría eliminar el módulo; no ejecutarlo sin aprobación específica
 ## IAM, autenticación y rol SQL
 
 El rol AWS `coderhouse-dev-analytics-execution` se confía a ambos principales
-Redshift, restringidos por cuenta y ARN de workgroups de la región. AWS asigna UUID
-al workgroup, por eso el ARN de confianza usa `workgroup/*` sin dependencia circular.
+Redshift. La asunción SQL exige el ExternalId documentado de un usuario Serverless:
+`arn:aws:redshift:us-east-1:672049777597:dbuser:serverless-672049777597-*/*`.
+Restringe cuenta y región sin dependencia circular con el UUID del workgroup.
+SourceAccount/SourceArn se verifican además cuando están presentes (IfExists).
+Exigir solo esas claves globales bloqueó la asunción SQL durante la prueba;
+la condición obligatoria por ExternalId resolvió el acceso.
 La política permite lectura de un stream, decrypt de una clave con contexto de ese
 stream, Glue Get de la base/tabla y S3 solo en el prefijo Iceberg. ListStreams
 requiere Resource '*'; GetTables admite descubrir nombres del namespace, pero
@@ -130,16 +136,18 @@ no se agregan permisos globales preventivos.
 
 El operador usa su perfil AWS y Redshift Data API por HTTPS, credenciales IAM
 temporales y GetCredentials. No hay passwords en Terraform, SQL o scripts.
-El principal de despliegue necesita privilegios SQL para crear esquemas, MV y roles;
-GetCredentials por sí solo no acredita esos privilegios. Verificar `current_user`
-y realizar bootstrap con el administrador de namespace si hace falta.
+El propietario observado fue `IAM:terraform-dev`, que pudo crear esquemas, MV,
+rol y usuario de prueba. GetCredentials por sí solo no acredita esos privilegios
+en otro namespace; verificar current_user al reproducir en otra cuenta.
 
 `checkpoint6_analyst` es un **rol de base de datos**, distinto del IAM execution
-role. Solo obtiene USAGE en analytics y SELECT en tres vistas publicadas. No
-obtiene REFRESH ni CREATE ni acceso al esquema raw. La asignación a un usuario
-autenticado real se deja explícita y no se inventa un usuario del alumno.
-Validar privilegios positivos/negativos con esa identidad antes de dar por
-completada la seguridad funcional.
+role. Obtiene USAGE en analytics y lakehouse y SELECT en tres vistas publicadas.
+USAGE en el esquema externo es necesario para resolver la vista late-binding;
+IAM sigue limitando las lecturas a la tabla Iceberg. No obtiene REFRESH ni CREATE
+ni acceso raw. Se creó `checkpoint6_access_test` con PASSWORD DISABLE y se le
+otorgó el rol. En una sesión Data API se verificó su identidad con SET SESSION
+AUTHORIZATION, SELECT permitido en métricas/JOIN y permisos denegados en raw y
+REFRESH. Es un usuario SQL temporal, eliminado junto con el namespace.
 
 ## SQL, JSON y refresco
 
@@ -185,17 +193,23 @@ La prueba usa una MV desplegada, envía seis eventos válidos (tres actuales y t
 con event time del snapshot PE5), dos JSON con campos inválidos y un JSON malformado.
 Verifica ocho filas JSON, dos errores de campos, un JSON inválido conservado,
 métricas actuales: count 3, approved 2, rejected 1, total 1029.30,
-approved_amount 30.30. El JOIN histórico debe producir una fila con dos aprobadas,
-30.30 a ambos lados y diferencias cero. Son **resultados esperados**, no observados.
+approved_amount 30.30. El JOIN histórico produjo una fila con dos aprobadas,
+30.30 a ambos lados y diferencias cero. Son **resultados observados** del lote
+`pe6_20261107_033721`, publicado una sola vez el 07/11/2026. El promedio de las
+tres transacciones actuales fue 343.100000; el total incluye la rechazada 999.00.
 El marcador rechazado de la prueba PE5 no forma parte de este lote. Flink debe
 estar READY, se verifica antes de enviar. No se reescribe el lake ni se inicia Flink.
 
 El runner guarda SQL ejecutado, estado y resultados paginados de Data API con
 timeouts. `observation_upper_bound_seconds` incluye envío, refresco y consultas:
 no es latencia aislada del motor. Si falla, guarda last-failure.json y lanza error.
-Un PASSED prueba datos/métricas/JOIN, no sustituye la prueba de permisos del analista
-ni la revisión visual. Las vistas del motor deben ejecutarse realmente antes de
-declarar compatibilidad funcional final.
+El ensayo final devolvió PASSED y las pruebas independientes del analista también.
+La primera consulta tipada terminó a las 03:37:55.859 UTC; el refresco incremental
+duró 9.735348 s (03:37:39.815859 a 03:37:49.551207 UTC). El flujo completo de
+comprobación tardó 92.785636 s, incluyendo envío y consultas de diagnóstico;
+no es latencia aislada del motor ni una medida de AUTO REFRESH. Se almacenaron
+9 registros: 6 válidos, 1 invalid_amount, 1 invalid_timestamp y 1 invalid_json.
+SYS_STREAM_SCAN_ERRORS devolvió cero filas para el origen en ese intervalo.
 
 Antes de publicar el lote, el runner exige que no haya registros de la dimensión
 histórica en la MV: evita repetir la muestra y duplicar sus métricas. Si hubo un
@@ -213,15 +227,18 @@ ausencia universal de errores.
 
 ## Evidencias y estado real
 
-[Índice checkpoint 6](evidence/checkpoint-6/README.md). Hay inventario API y plan
-de Terraform; están pendientes deployment, ejecución SQL, identidad analista,
-consulta histórica/JOIN, latencia observada y capturas Redshift. La captura Glue
-de PE5 puede reutilizarse identificando su fecha, sin presentarla como nueva.
+[Índice checkpoint 6](evidence/checkpoint-6/README.md). Se conservan inventario,
+apply exitoso, ejecuciones/resultados Data API, JSON del lote y recibos Kinesis,
+monitoreo, pruebas de identidad/grants y planes de retiro. La captura Glue de PE5
+se reutiliza identificando su origen. No se obtuvieron capturas de consola Redshift:
+los resultados tabulados del PDF son exportaciones reales de API, no capturas.
 
 El [PDF](../output/pdf/CheckPoint_Redshift_Lopez_Nicolas.pdf) se genera con estas
-limitaciones explícitas. No está presentado como validación funcional final.
+limitaciones explícitas. La funcionalidad y seguridad están probadas; el requisito
+visual específico de la consigna permanece pendiente. No se mantiene un warehouse
+facturable abierto para obtenerlo después del ensayo único autorizado.
 
-El análisis local SQLGlot con dialecto Redshift interpretó 28 de 32 sentencias;
+El análisis local SQLGlot inicial interpretó 28 de 32 sentencias;
 dos CREATE EXTERNAL SCHEMA, CREATE ROLE y REFRESH MATERIALIZED VIEW quedan fuera
 de su cobertura. No hubo errores de parseo en las otras 28, lo que no verifica
 tipos, permisos ni objetos reales. Pasaron tres tests locales del runner:
@@ -229,6 +246,17 @@ paginación preservando decimales y NULL, propagación de fallos del motor y
 cancelación por timeout. No llaman AWS ni reemplazan el ensayo funcional.
 
 ## Cierre de costos sin afectar entregas previas
+
+**Retiro completado y verificado en AWS el 07/11/2026**: sin workgroups,
+namespaces, endpoints ni security groups del ensayo; el rol temporal ya no existe.
+Flink sigue READY, Kinesis ACTIVE y Glue conserva el mismo metadata_location de
+PE5. El plan de retiro inicial limitó ocho bajas al módulo. Terraform eliminó
+siete recursos y se frenó en un listado de perfiles IAM; se eliminó el rol exacto
+mediante DeleteRole autorizado, después de comprobar que no tenía políticas.
+Un segundo plan/apply sincronizó el estado sin modificaciones adicionales.
+No se crearon snapshots manuales. Ver `cleanup-verification.json` y los logs de
+retiro. No quedan recursos facturables temporales; los cargos ya incurridos
+durante el ensayo y los recursos anteriores no desaparecen de la factura.
 
 Tras el ensayo: dejar AUTO REFRESH NO, cancelar consultas activas, cerrar sesiones
 y comprobar `SYS_SERVERLESS_USAGE`/consola para observar inactividad. No existe
@@ -254,6 +282,7 @@ debe incluirse en el retiro para evitar su cargo permanente. No se ejecutó reti
 - [Precios PrivateLink](https://aws.amazon.com/privatelink/pricing/)
 - [Facturación on-demand y límites](https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-billing-on-demand.html)
 - [Trust IAM Serverless](https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-security-other-services.html)
+- [Restricción de roles por ExternalId Serverless](https://docs.aws.amazon.com/redshift/latest/mgmt/authorizing-redshift-service-database-users.html)
 - [Prevención de confused deputy](https://docs.aws.amazon.com/redshift/latest/mgmt/cross-service-confused-deputy-prevention.html)
 - [TRY_CAST](https://docs.aws.amazon.com/redshift/latest/dg/r_TRY_CAST.html)
 - [SYS_STREAM_SCAN_STATES](https://docs.aws.amazon.com/redshift/latest/dg/r_SYS_STREAM_SCAN_STATES.html)

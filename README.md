@@ -2,8 +2,10 @@
 
 ## Pre-entrega 6 — Analítica avanzada in-stream con Redshift
 
-**Implementación preparada en `feature/redshift-streaming-analytics`. Pendiente
-de autorización de costos, permisos y validación funcional en Redshift.**
+**Prueba funcional y seguridad PASSED en AWS el 07/11/2026**, en
+`feature/redshift-streaming-analytics`. Ensayo único con retiro posterior de los
+recursos temporales. Resultados reales guardados; capturas de consola Redshift
+pendientes. El PR sigue sin fusionar.
 
 Kinesis alimenta una MV de Streaming Ingestion; vistas SQL validan cinco campos
 JSON y calculan métricas por minuto. Un esquema externo lee la tabla Iceberg
@@ -19,18 +21,22 @@ minuto UTC y método de pago. La rama conserva el pipeline Flink y las entregas 
 - [Runner Data API y prueba controlada](scripts/redshift-checkpoint6.py): sin
   argumentos solo genera SQL; `--execute` exige despliegue/costos autorizados.
 - [Evidencias y capturas pendientes](docs/evidence/checkpoint-6/README.md).
-- [PDF del checkpoint, con pendientes declarados](output/pdf/CheckPoint_Redshift_Lopez_Nicolas.pdf).
+- [PDF del checkpoint, resultados y pendiente visual](output/pdf/CheckPoint_Redshift_Lopez_Nicolas.pdf).
 
-Validaciones locales: Terraform fmt/validate/plan y parser SQL parcial. No hay
-resultados exitosos Redshift declarados. Estimación: 1.50 USD/h de cómputo activo
+Validaciones: Terraform fmt/validate/plan/apply, parser SQL parcial y tres tests
+locales. El lote `pe6_20261107_033721` llegó a Redshift: 9 registros conservados,
+3 transacciones actuales válidas, 2 aprobadas, importe aprobado 30.30. El JOIN
+con Iceberg devolvió una fila con diferencias cero. El analista pudo leer métricas
+y JOIN; raw y REFRESH fueron denegados. Estimación: 1.50 USD/h de cómputo activo
 a 4 RPU y 0.02 USD/h del endpoint privado en dos AZ, más almacenamiento/tráfico.
 AUTO REFRESH NO evita una ingesta continua en el laboratorio. Serverless se vuelve
 inactivo sin consultas; PrivateLink y storage siguen facturando. El retiro del
 módulo temporal requiere un plan revisado y autorización; no se ejecuta destroy.
 
-La [política de inventario propuesta](docs/redshift-inventory-access.json) resuelve
-los permisos de lectura que hoy faltan para descartar warehouses preexistentes y
-confirmar la clave KMS. No crea recursos ni habilita consultas SQL.
+La [política del operador](docs/redshift-test-operator-access.json) se utilizó para
+desplegar, probar y retirar el ensayo. [Scripts de retiro](scripts/redshift-cleanup.py)
+verifican que el plan solo elimine `module.redshift[0]`. Los recursos anteriores
+Kinesis/S3 conservan sus cargos; la baja temporal no equivale a costo total cero.
 
 **Pre-entrega 1: Infraestructura Base con Entorno de Desarrollo e IAM Core**
 

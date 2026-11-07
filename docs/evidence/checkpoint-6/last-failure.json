@@ -1,0 +1,4 @@
+{
+  "status": "FAILED",
+  "error": "02_streaming-1: ERROR: \n  -----------------------------------------------\n  error:  exception name : UnauthorizedException, error type : 138, message: Not authorized to get credentials of role arn:aws:iam::672049777597:role/coderhouse-dev-analytics-execution, should retry : 0\n  code:      30000\n  context:   \n  query:     -1[child_sequence:1]\n  location:  xen_aws_credentials_mgr.cpp:1011\n  process:   padbmaster [pid=1073881186]\n  -----------------------------------------------\n"
+}
