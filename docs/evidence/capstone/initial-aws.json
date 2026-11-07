@@ -1,0 +1,265 @@
+{
+  "checked_at_utc": "2026-11-07T04:35:34.142143+00:00",
+  "checks": {
+    "identity": {
+      "exit_code": 0,
+      "response": {
+        "UserId": "AIDAZY6KJZO6Z7U6KERKV",
+        "Account": "672049777597",
+        "Arn": "arn:aws:iam::672049777597:user/terraform-dev"
+      },
+      "error": null
+    },
+    "stream": {
+      "exit_code": 0,
+      "response": {
+        "StreamDescriptionSummary": {
+          "StreamName": "dev-transactions-stream",
+          "StreamARN": "arn:aws:kinesis:us-east-1:672049777597:stream/dev-transactions-stream",
+          "StreamStatus": "ACTIVE",
+          "StreamModeDetails": {
+            "StreamMode": "PROVISIONED"
+          },
+          "RetentionPeriodHours": 24,
+          "StreamCreationTimestamp": "2026-10-30T16:31:19-03:00",
+          "EnhancedMonitoring": [
+            {
+              "ShardLevelMetrics": []
+            }
+          ],
+          "EncryptionType": "KMS",
+          "KeyId": "alias/aws/kinesis",
+          "OpenShardCount": 2,
+          "ConsumerCount": 0,
+          "MaxRecordSizeInKiB": 1024,
+          "ChannelCount": 0
+        }
+      },
+      "error": null
+    },
+    "flink": {
+      "exit_code": 0,
+      "response": {
+        "Name": "coderhouse-dev-transactions-flink",
+        "Status": "READY",
+        "Runtime": "FLINK-2_2",
+        "Configuration": {
+          "ApplicationCodeConfigurationDescription": {
+            "CodeContentType": "ZIPFILE",
+            "CodeContentDescription": {
+              "CodeMD5": "e4a61862c948b017c4138d1683c9b5af",
+              "CodeSize": 127691488,
+              "S3ApplicationCodeLocationDescription": {
+                "BucketARN": "arn:aws:s3:::coderhouse-data-lake-672049777597",
+                "FileKey": "artifacts/flink/flink-transactions-1.1.0.jar"
+              }
+            }
+          },
+          "FlinkApplicationConfigurationDescription": {
+            "CheckpointConfigurationDescription": {
+              "ConfigurationType": "CUSTOM",
+              "CheckpointingEnabled": true,
+              "CheckpointInterval": 60000,
+              "MinPauseBetweenCheckpoints": 5000
+            },
+            "MonitoringConfigurationDescription": {
+              "ConfigurationType": "CUSTOM",
+              "MetricsLevel": "APPLICATION",
+              "LogLevel": "INFO"
+            },
+            "ParallelismConfigurationDescription": {
+              "ConfigurationType": "CUSTOM",
+              "Parallelism": 1,
+              "ParallelismPerKPU": 1,
+              "CurrentParallelism": 1,
+              "AutoScalingEnabled": false
+            }
+          },
+          "EnvironmentPropertyDescriptions": {
+            "PropertyGroupDescriptions": [
+              {
+                "PropertyGroupId": "ApplicationProperties",
+                "PropertyMap": {
+                  "AWS_REGION": "us-east-1",
+                  "ICEBERG_DATABASE": "lakehouse_db",
+                  "ICEBERG_TABLE": "transaction_aggregates",
+                  "ICEBERG_WAREHOUSE": "s3://coderhouse-data-lake-672049777597/lakehouse",
+                  "KINESIS_STREAM_ARN": "arn:aws:kinesis:us-east-1:672049777597:stream/dev-transactions-stream"
+                }
+              }
+            ]
+          },
+          "ApplicationSnapshotConfigurationDescription": {
+            "SnapshotsEnabled": false
+          },
+          "ApplicationSystemRollbackConfigurationDescription": {
+            "RollbackEnabled": false
+          },
+          "ApplicationEncryptionConfigurationDescription": {
+            "KeyType": "AWS_OWNED_KEY"
+          }
+        }
+      },
+      "error": null
+    },
+    "glue": {
+      "exit_code": 0,
+      "response": {
+        "Table": {
+          "Name": "transaction_aggregates",
+          "DatabaseName": "lakehouse_db",
+          "CreateTime": "2026-11-04T08:33:12-03:00",
+          "UpdateTime": "2026-11-04T08:34:43-03:00",
+          "Retention": 0,
+          "StorageDescriptor": {
+            "Columns": [
+              {
+                "Name": "window_start",
+                "Type": "timestamp",
+                "Parameters": {
+                  "iceberg.field.current": "true",
+                  "iceberg.field.id": "1",
+                  "iceberg.field.optional": "false"
+                }
+              },
+              {
+                "Name": "window_end",
+                "Type": "timestamp",
+                "Parameters": {
+                  "iceberg.field.current": "true",
+                  "iceberg.field.id": "2",
+                  "iceberg.field.optional": "false"
+                }
+              },
+              {
+                "Name": "payment_method",
+                "Type": "string",
+                "Parameters": {
+                  "iceberg.field.current": "true",
+                  "iceberg.field.id": "3",
+                  "iceberg.field.optional": "false"
+                }
+              },
+              {
+                "Name": "transaction_count",
+                "Type": "bigint",
+                "Parameters": {
+                  "iceberg.field.current": "true",
+                  "iceberg.field.id": "4",
+                  "iceberg.field.optional": "false"
+                }
+              },
+              {
+                "Name": "total_amount",
+                "Type": "decimal(38,2)",
+                "Parameters": {
+                  "iceberg.field.current": "true",
+                  "iceberg.field.id": "5",
+                  "iceberg.field.optional": "false"
+                }
+              },
+              {
+                "Name": "average_amount",
+                "Type": "decimal(38,6)",
+                "Parameters": {
+                  "iceberg.field.current": "true",
+                  "iceberg.field.id": "6",
+                  "iceberg.field.optional": "false"
+                }
+              }
+            ],
+            "Location": "s3://coderhouse-data-lake-672049777597/lakehouse/lakehouse_db/transaction_aggregates",
+            "AdditionalLocations": [],
+            "Compressed": false,
+            "NumberOfBuckets": 0,
+            "SortColumns": [],
+            "StoredAsSubDirectories": false
+          },
+          "TableType": "EXTERNAL_TABLE",
+          "Parameters": {
+            "metadata_location": "s3://coderhouse-data-lake-672049777597/lakehouse/lakehouse_db/transaction_aggregates/metadata/00001-a6ac508c-2e43-4de5-9437-57f0bb426279.metadata.json",
+            "previous_metadata_location": "s3://coderhouse-data-lake-672049777597/lakehouse/lakehouse_db/transaction_aggregates/metadata/00000-270ceb65-5454-460a-9fa4-175dd5d9040e.metadata.json",
+            "table_type": "ICEBERG"
+          },
+          "CreatedBy": "arn:aws:sts::672049777597:assumed-role/coderhouse-dev-flink/kiam-flink",
+          "IsRegisteredWithLakeFormation": false,
+          "CatalogId": "672049777597",
+          "VersionId": "1",
+          "IsMultiDialectView": false,
+          "IsMaterializedView": false
+        }
+      },
+      "error": null
+    },
+    "versioning": {
+      "exit_code": 0,
+      "response": {
+        "Status": "Enabled"
+      },
+      "error": null
+    },
+    "s3_encryption": {
+      "exit_code": 0,
+      "response": {
+        "ServerSideEncryptionConfiguration": {
+          "Rules": [
+            {
+              "ApplyServerSideEncryptionByDefault": {
+                "SSEAlgorithm": "AES256"
+              },
+              "BucketKeyEnabled": false,
+              "BlockedEncryptionTypes": {
+                "EncryptionType": [
+                  "SSE-C"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "error": null
+    },
+    "s3_public_access": {
+      "exit_code": 0,
+      "response": {
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "IgnorePublicAcls": true,
+          "BlockPublicPolicy": true,
+          "RestrictPublicBuckets": true
+        }
+      },
+      "error": null
+    },
+    "redshift": {
+      "exit_code": 0,
+      "response": {
+        "workgroups": []
+      },
+      "error": null
+    },
+    "redshift_namespaces": {
+      "exit_code": 0,
+      "response": {
+        "namespaces": []
+      },
+      "error": null
+    },
+    "flink_role": {
+      "exit_code": 0,
+      "response": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "kinesisanalytics.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      },
+      "error": null
+    }
+  }
+}

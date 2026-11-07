@@ -1,0 +1,24 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "InspectExistingWarehousesInDeliveryRegion",
+      "Effect": "Allow",
+      "Action": [
+        "redshift-serverless:ListWorkgroups",
+        "redshift-serverless:ListNamespaces",
+        "redshift-serverless:GetWorkgroup",
+        "redshift-serverless:GetNamespace",
+        "redshift:DescribeClusters"
+      ],
+      "Resource": "*",
+      "Condition": { "StringEquals": { "aws:RequestedRegion": "us-east-1" } }
+    },
+    {
+      "Sid": "ConfirmExistingKinesisEncryptionKey",
+      "Effect": "Allow",
+      "Action": "kms:DescribeKey",
+      "Resource": "arn:aws:kms:us-east-1:672049777597:key/8cd750a2-438b-42dc-935d-24f3cb6855f4"
+    }
+  ]
+}

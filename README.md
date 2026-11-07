@@ -1,5 +1,82 @@
 # Coderhouse Data Platform — Infraestructura Base
 
+## Proyecto Final — Capstone Real-Time Data Platform
+
+Auditoría en `feature/final-capstone-audit`, basada en la entrega 6. **Pendiente
+de prueba limpia en AWS y autorización de costos.** Las pruebas PE5/PE6 son
+antecedentes verificados; no demuestran ambas rutas funcionando simultáneamente
+desde un despliegue nuevo. No se modificó infraestructura ni se fusionó main.
+
+Arquitectura: productor JSON → Kinesis → dos consumidores independientes:
+Flink → ventanas de aprobadas → Iceberg/S3 + Glue; Redshift → MV raw → vistas
+de validación/agregación → JOIN con Iceberg. La reconciliación compara cantidad,
+suma y promedio por minuto UTC y método, considerando descartes tardíos y
+duplicados. No se promete exactly-once global ni deduplicación de negocio.
+
+Código operativo: [`terraform/`](terraform/), [`flink-app/`](flink-app/),
+[`sql/`](sql/). Terraform mantiene módulos de red, IAM, Kinesis, Flink, Lakehouse
+y Redshift. La configuración nueva deriva la cuenta con STS y requiere nombres
+aislados; los IDs de evidencias antiguas conservan su contexto histórico.
+
+- [Auditoría inicial y matriz](docs/capstone-audit-initial.md).
+- [Matriz de cumplimiento actual](docs/capstone-compliance.md).
+- [DAAT y estado de cumplimiento](docs/capstone-daat.md).
+- [Procedimiento: requisitos, variables, despliegue, prueba, recuperación y limpieza](docs/capstone-runbook.md).
+- [PDF DAAT](output/pdf/Nicolas_Lopez_Capstone_RealTime.pdf), preliminar hasta verificar la prueba aislada.
+
+Verificación local: `mvn -f flink-app/pom.xml clean package`, `python
+scripts/verify-iceberg-jar.py`, `terraform -chdir=terraform fmt -recursive -check`
+y `python -m unittest discover -s scripts -p 'test_*.py'`. El runbook detalla
+validación de las tres raíces, backend remoto nuevo, carga versionada del JAR e
+inicialización SQL. El plan sobre dev no cambia recursos: agrega solo un output.
+
+Seguridad: roles de servicio separados, prefijos S3 acotados, SQL de lectura para
+analistas, Redshift privado, sin contraseñas en código. La prueba usa un perfil
+externo y necesita permisos adicionales revisados para `cap-…`. Costos estimados
+de recursos principales: USD1.77/h, sin almacenamiento/solicitudes/impuestos ni
+garantía de tope. Kinesis dev y el almacenamiento previo siguen generando cargos.
+No desplegar, reiniciar ni eliminar recursos sin la aprobación indicada en el runbook.
+
+Las secciones siguientes preservan las seis entregas como antecedentes.
+
+## Pre-entrega 6 — Analítica avanzada in-stream con Redshift
+
+**Prueba funcional y seguridad PASSED en AWS el 07/11/2026**, en
+`feature/redshift-streaming-analytics`. Ensayo único con retiro posterior de los
+recursos temporales. Resultados reales y tres capturas de Query Editor v2
+incorporados al PDF. El PR sigue sin fusionar.
+
+Kinesis alimenta una MV de Streaming Ingestion; vistas SQL validan cinco campos
+JSON y calculan métricas por minuto. Un esquema externo lee la tabla Iceberg
+existente mediante Glue y permite comparar agregados aprobados con un JOIN por
+minuto UTC y método de pago. La rama conserva el pipeline Flink y las entregas previas.
+
+- [Arquitectura, despliegue, seguridad, refresco y monitoreo](docs/redshift-checkpoint-6.md).
+- [Módulo Terraform](terraform/modules/redshift/main.tf), activado desde
+  [terraform/redshift.tf](terraform/redshift.tf): Serverless privado 4 RPU, IAM específico,
+  endpoint Kinesis y límite diario. Plan validado: 8 altas, 0 cambios, 0 bajas.
+- [SQL consolidado](sql/redshift/checkpoint_6_complete.sql); originales 01-07 en
+  `sql/redshift/`, separados por esquemas, ingesta, métricas, Iceberg, permisos y diagnóstico.
+- [Runner Data API y prueba controlada](scripts/redshift-checkpoint6.py): sin
+  argumentos solo genera SQL; `--execute` exige despliegue/costos autorizados.
+- [Evidencias y capturas reales](docs/evidence/checkpoint-6/README.md).
+- [PDF final del checkpoint](output/pdf/CheckPoint_Redshift_Lopez_Nicolas.pdf).
+
+Validaciones: Terraform fmt/validate/plan/apply, parser SQL parcial y tres tests
+locales. El lote `pe6_20261107_033721` llegó a Redshift: 9 registros conservados,
+3 transacciones actuales válidas, 2 aprobadas, importe aprobado 30.30. El JOIN
+con Iceberg devolvió una fila con diferencias cero. El analista pudo leer métricas
+y JOIN; raw y REFRESH fueron denegados. Estimación: 1.50 USD/h de cómputo activo
+a 4 RPU y 0.02 USD/h del endpoint privado en dos AZ, más almacenamiento/tráfico.
+AUTO REFRESH NO evita una ingesta continua en el laboratorio. Serverless se vuelve
+inactivo sin consultas; PrivateLink y storage siguen facturando. El retiro del
+módulo temporal requiere un plan revisado y autorización; no se ejecuta destroy.
+
+La [política del operador](docs/redshift-test-operator-access.json) se utilizó para
+desplegar, probar y retirar el ensayo. [Scripts de retiro](scripts/redshift-cleanup.py)
+verifican que el plan solo elimine `module.redshift[0]`. Los recursos anteriores
+Kinesis/S3 conservan sus cargos; la baja temporal no equivale a costo total cero.
+
 **Pre-entrega 1: Infraestructura Base con Entorno de Desarrollo e IAM Core**
 
 ## Descripción
@@ -19,13 +96,13 @@ El proyecto establece los componentes de red, almacenamiento de estado remoto e 
 
 ## Estructura del proyecto
 
-Estructura actual de entrega, ajustada a las carpetas `infra/` y `app/` de la
+Estructura actual de entrega, ajustada a las carpetas `terraform/` y `app/` de la
 consigna. La reorganización conserva las pre-entregas anteriores y las direcciones
 Terraform de todos los recursos. El estado remoto mantiene su clave original
 `environments/dev/terraform.tfstate`: cambiar carpetas no crea otro entorno.
 
 ```text
-infra/
+terraform/
   main.tf                 # Composición de los módulos del entorno dev
   lakehouse.tf            # Base Glue y outputs Iceberg
   managed-flink.tf         # Aplicación, catálogo y permisos
@@ -506,7 +583,7 @@ La aplicación admite timestamps ISO 8601 y Unix epoch en milisegundos.
 
 ### Infraestructura Terraform
 
-La aplicación se define mediante `aws_kinesisanalyticsv2_application`, utilizando el módulo `infra/modules/managed-flink`.
+La aplicación se define mediante `aws_kinesisanalyticsv2_application`, utilizando el módulo `terraform/modules/managed-flink`.
 
 El código Java se compila mediante Maven y se despliega como archivo JAR almacenado en Amazon S3.
 
@@ -569,13 +646,13 @@ No se agregan un crawler, Glue ETL, DynamoDB de locking Iceberg ni otro bucket.
 
 | Consigna | Ubicación real | Responsabilidad |
 |---|---|---|
-| `infra/` | `infra/main.tf` + `infra/modules/` | Terraform modular incremental |
-| `app/` | `app/flink-transactions/` | Código Java, Maven y pruebas |
+| `terraform/` | `terraform/main.tf` + `terraform/modules/` | Terraform modular incremental |
+| `app/` | `flink-app/` | Código Java, Maven y pruebas |
 | Evidencias | `docs/evidence/` | Resultados reales de comandos y pruebas |
 | Procedimiento AWS | `docs/iceberg-deployment.md` | Despliegue, consultas, cierre |
 
-La estructura satisface literalmente la separación `infra/` y `app/`, sin
-mantener dos copias de los recursos. `infra/modules/lakehouse` declara la base
+La estructura satisface literalmente la separación `terraform/` y `app/`, sin
+mantener dos copias de los recursos. `terraform/modules/lakehouse` declara la base
 Glue, ubicación, catálogo y outputs; Managed Flink agrega permisos y propiedades. Se reutiliza el versionado S3 existente, confirmado `Enabled` en AWS.
 
 Terraform **administra la infraestructura necesaria para la tabla**, no su

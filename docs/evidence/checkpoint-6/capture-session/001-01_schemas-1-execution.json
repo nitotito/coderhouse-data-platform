@@ -1,0 +1,17 @@
+{
+  "Id": "715efa28-6df7-4059-b2d3-2e636aa9e7f8",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 43675877,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-07T00:56:54.171000-03:00",
+  "UpdatedAt": "2026-11-07T00:56:55.045000-03:00",
+  "RedshiftPid": 1073815694,
+  "HasResultSet": false,
+  "QueryString": "SET timezone TO 'UTC'",
+  "ResultRows": 0,
+  "ResultSize": 0,
+  "RedshiftQueryId": 0,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

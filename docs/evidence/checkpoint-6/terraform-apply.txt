@@ -1,0 +1,48 @@
+
+Warning: Deprecated Parameter
+
+The parameter "dynamodb_table" is deprecated. Use parameter "use_lockfile"
+instead.
+Acquiring state lock. This may take a few moments...
+module.redshift[0].aws_iam_role.analytics: Creating...
+module.redshift[0].aws_security_group.warehouse: Creating...
+terraform :
+En línea: 2 Carácter: 1
++ terraform -chdir=infra apply -no-color -input=false checkpoint6.tfpla ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+Error: creating IAM Role (coderhouse-dev-analytics-execution): operation error IAM: CreateRole, https response error
+StatusCode: 403, RequestID: bea96f4e-6492-4db8-afa1-1abf56c93313, api error AccessDenied: User:
+arn:aws:iam::672049777597:user/terraform-dev is not authorized to perform: iam:CreateRole on resource:
+arn:aws:iam::672049777597:role/coderhouse-dev-analytics-execution because no identity-based policy allows the
+iam:CreateRole action. Go to
+https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-1#/authorization-details/c29kbez06me6iqyozz72tbbg for
+complete details, or call the GetRequestAuthorizationDetails API with the following authorization id:
+c29kbez06me6iqyozz72tbbg
+
+  with module.redshift[0].aws_iam_role.analytics,
+  on modules\redshift\main.tf line 31, in resource "aws_iam_role" "analytics":
+  31: resource "aws_iam_role" "analytics" {
+
+
+Error: creating Security Group (coderhouse-dev-analytics-b2d187569e090fef6a5f25ea27): operation error EC2:
+CreateSecurityGroup, https response error StatusCode: 403, RequestID: 73a177d6-fcba-4b13-ace9-7c3b71d70832, api error
+UnauthorizedOperation: You are not authorized to perform this operation. User:
+arn:aws:iam::672049777597:user/terraform-dev is not authorized to perform: ec2:CreateSecurityGroup on resource:
+arn:aws:ec2:us-east-1:672049777597:vpc/vpc-0b85171c643372dba because no identity-based policy allows the
+ec2:CreateSecurityGroup action. Go to
+https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-1#/authorization-details/a2sxc9yo40pqfq5zfhy8eyq6b
+for complete details, or call the GetRequestAuthorizationDetails API with the following authorization id:
+a2sxc9yo40pqfq5zfhy8eyq6b. Encoded authorization failure message: Eg_n8sRiOkjOKBBslO5w7vB8vip1bC4zvXqnjkUz6y7OuUhFFSGvK
+PDk_vLthGBFXx2aodes14N1oICoKhYIchIjIyWY30QYtFWtx3yMANloQ-YctPpS1fQXIE0T0MgDCRRjuaawpKDtWGX2GchKcW49Yky__Tdgr4PfywJjj-Hq
+w2MUBXnbZbPGanyaL4fNduiOD0hSVS578A4EQMkknZev7Vz1MsJYih6yLaeT9XR4zNgtQM5F-rWNtkR0pKw8uPLH9mPzDiv7rvz9llOnksCsp3HsCFzPzU7
+GLFpIGe1DRvCmInVc29BGUSRJSQWJhx_DTUbFUgw0pozfzX0Zo9A19Ls-Dbc3DGZhb5ToTDcU8xas1Lf7uXdsq2tUQZIVrYCetlPf1ierp6iTUKLJCRh0sV
+J-cOMmXdST7yK85z4oLxaOeiNoEJTiNfm4bNhZX9pWCxFvj23NlNrAv6CtLPdKJiXPKV0SeGmg8wRGHbm3vo9xU50DwN-yBxNNs_npSb5gIeh5t8Hp73nwo
+jXC1idXdRmq2Npga2tyBBgJKSiV2Ldhrme9oOVH98ACcNoPwaNNmFpUvnlTLHuj1MUFWalXH7GoxCwNeELjq2rQpiflAuMZiX6wZ-fMG_QCTXWvjW3CTPk7
+4xvftJ_jUOFhabbP8vkBIX0An1HQVF-2dgx9eog8629oTL4y8fhvAjeMEc1gZNmeDWVqXPr0oc8
+
+  with module.redshift[0].aws_security_group.warehouse,
+  on modules\redshift\main.tf line 100, in resource "aws_security_group" "warehouse":
+ 100: resource "aws_security_group" "warehouse" {

@@ -1,0 +1,14 @@
+{
+  "checked_at_utc": "2026-11-07T02:19:16.045807+00:00",
+  "command": [
+    "aws",
+    "kms",
+    "describe-key",
+    "--key-id",
+    "alias/aws/kinesis",
+    "--query",
+    "KeyMetadata.Arn"
+  ],
+  "exit_code": 0,
+  "response": "arn:aws:kms:us-east-1:672049777597:key/8cd750a2-438b-42dc-935d-24f3cb6855f4"
+}

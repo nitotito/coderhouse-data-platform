@@ -27,6 +27,13 @@ flink-data/checkpoints/
 # Local validation logs and Python cache
 applications/flink-transactions/target-*.log
 app/flink-transactions/target-*.log
+flink-app/target-*.log
 infra/*.log
+terraform/*.log
 **/__pycache__/
+.codex/checkpoint6-python/
+tmp/pdfs/
+docs/evidence/checkpoint-6/capture-session/timeout-helper*.log
+*.backend.hcl
+.capstone/
 

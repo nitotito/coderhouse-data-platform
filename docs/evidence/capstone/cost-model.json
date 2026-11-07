@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "pricing_review_date": "2026-11-07",
+  "usd_per_hour": {
+    "redshift_4_rpu": "1.500",
+    "flink_1_processing_plus_orchestration": "0.22",
+    "kinesis_2_shards": "0.030",
+    "privatelink_2_az": "0.02"
+  },
+  "subtotal_per_hour": "1.770",
+  "one_hour_compute_estimate": "1.770",
+  "two_hour_compute_estimate": "3.540",
+  "excludes": "Flink running storage, S3 requests/storage/versions, logs, Glue catalog requests, data transfer, KMS, taxes; not a bill or enforced cap",
+  "sources": [
+    "https://aws.amazon.com/redshift/pricing/",
+    "https://aws.amazon.com/managed-service-apache-flink/pricing/",
+    "https://aws.amazon.com/kinesis/data-streams/pricing/",
+    "https://aws.amazon.com/privatelink/pricing/"
+  ]
+}

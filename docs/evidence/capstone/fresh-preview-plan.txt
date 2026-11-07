@@ -1,0 +1,1198 @@
+data.aws_caller_identity.isolated: Reading...
+module.platform.module.managed_flink[0].data.aws_caller_identity.lakehouse: Reading...
+module.platform.data.aws_caller_identity.platform: Reading...
+module.platform.module.network.data.aws_availability_zones.available: Reading...
+module.platform.module.identity.data.aws_iam_policy_document.processing_trust: Reading...
+module.platform.module.redshift[0].data.aws_caller_identity.current: Reading...
+module.platform.module.redshift[0].data.aws_partition.current: Reading...
+module.platform.module.managed_flink[0].data.aws_partition.flink: Reading...
+module.platform.module.kinesis[0].data.aws_region.current: Reading...
+module.platform.module.redshift[0].data.aws_partition.current: Read complete after 0s [id=aws]
+module.platform.module.managed_flink[0].data.aws_partition.flink: Read complete after 0s [id=aws]
+module.platform.module.kinesis[0].data.aws_region.current: Read complete after 0s [id=us-east-1]
+module.platform.module.identity.data.aws_iam_policy_document.processing_trust: Read complete after 0s [id=1237821689]
+module.platform.module.identity.data.aws_caller_identity.current: Reading...
+module.platform.module.managed_flink[0].data.aws_partition.lakehouse: Reading...
+module.platform.module.kinesis[0].data.aws_iam_policy_document.firehose_trust: Reading...
+module.platform.module.kinesis[0].data.aws_caller_identity.current: Reading...
+module.platform.module.managed_flink[0].data.aws_partition.lakehouse: Read complete after 0s [id=aws]
+module.platform.module.network.data.aws_region.current: Reading...
+module.platform.module.kinesis[0].data.aws_iam_policy_document.firehose_trust: Read complete after 0s [id=414810265]
+module.platform.module.network.data.aws_region.current: Read complete after 0s [id=us-east-1]
+module.platform.module.managed_flink[0].data.aws_caller_identity.flink: Reading...
+data.aws_caller_identity.isolated: Read complete after 0s [id=672049777597]
+module.platform.module.managed_flink[0].data.aws_caller_identity.lakehouse: Read complete after 0s [id=672049777597]
+module.platform.module.redshift[0].data.aws_caller_identity.current: Read complete after 1s [id=672049777597]
+module.platform.data.aws_caller_identity.platform: Read complete after 1s [id=672049777597]
+module.platform.module.managed_flink[0].data.aws_caller_identity.flink: Read complete after 1s [id=672049777597]
+module.platform.module.identity.data.aws_caller_identity.current: Read complete after 1s [id=672049777597]
+module.platform.module.managed_flink[0].data.aws_iam_policy_document.flink_assume_role: Reading...
+module.platform.module.identity.data.aws_iam_policy_document.audit_trust: Reading...
+module.platform.module.managed_flink[0].data.aws_iam_policy_document.flink_assume_role: Read complete after 0s [id=2684216622]
+module.platform.module.identity.data.aws_iam_policy_document.audit_trust: Read complete after 0s [id=81669632]
+module.platform.module.kinesis[0].data.aws_caller_identity.current: Read complete after 1s [id=672049777597]
+module.platform.module.network.data.aws_availability_zones.available: Read complete after 1s [id=us-east-1]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+ <= read (data resources)
+
+Terraform will perform the following actions:
+
+  # module.platform.aws_s3_bucket.data_lake will be created
+  + resource "aws_s3_bucket" "data_lake" {
+      + acceleration_status         = (known after apply)
+      + acl                         = (known after apply)
+      + arn                         = (known after apply)
+      + bucket                      = "coderhouse-cap-6a3b6845b1-lake-672049777597"
+      + bucket_domain_name          = (known after apply)
+      + bucket_namespace            = (known after apply)
+      + bucket_prefix               = (known after apply)
+      + bucket_region               = (known after apply)
+      + bucket_regional_domain_name = (known after apply)
+      + force_destroy               = true
+      + hosted_zone_id              = (known after apply)
+      + id                          = (known after apply)
+      + object_lock_enabled         = (known after apply)
+      + policy                      = (known after apply)
+      + region                      = "us-east-1"
+      + request_payer               = (known after apply)
+      + tags                        = {
+          + "Name" = "cap-6a3b6845b1-data-lake"
+        }
+      + tags_all                    = {
+          + "Environment" = "cap-6a3b6845b1"
+          + "ManagedBy"   = "Terraform"
+          + "Name"        = "cap-6a3b6845b1-data-lake"
+          + "Project"     = "coderhouse-data-platform"
+        }
+      + website_domain              = (known after apply)
+      + website_endpoint            = (known after apply)
+
+      + cors_rule (known after apply)
+
+      + grant (known after apply)
+
+      + lifecycle_rule (known after apply)
+
+      + logging (known after apply)
+
+      + object_lock_configuration (known after apply)
+
+      + replication_configuration (known after apply)
+
+      + server_side_encryption_configuration (known after apply)
+
+      + versioning (known after apply)
+
+      + website (known after apply)
+    }
+
+  # module.platform.aws_s3_bucket_public_access_block.data_lake will be created
+  + resource "aws_s3_bucket_public_access_block" "data_lake" {
+      + block_public_acls       = true
+      + block_public_policy     = true
+      + bucket                  = (known after apply)
+      + id                      = (known after apply)
+      + ignore_public_acls      = true
+      + region                  = "us-east-1"
+      + restrict_public_buckets = true
+    }
+
+  # module.platform.aws_s3_bucket_server_side_encryption_configuration.data_lake will be created
+  + resource "aws_s3_bucket_server_side_encryption_configuration" "data_lake" {
+      + bucket = (known after apply)
+      + id     = (known after apply)
+      + region = "us-east-1"
+
+      + rule {
+          + blocked_encryption_types = (known after apply)
+          + bucket_key_enabled       = (known after apply)
+
+          + apply_server_side_encryption_by_default {
+              + kms_master_key_id = (known after apply)
+              + sse_algorithm     = "AES256"
+            }
+        }
+    }
+
+  # module.platform.aws_s3_bucket_versioning.data_lake will be created
+  + resource "aws_s3_bucket_versioning" "data_lake" {
+      + bucket = (known after apply)
+      + id     = (known after apply)
+      + region = "us-east-1"
+
+      + versioning_configuration {
+          + mfa_delete = (known after apply)
+          + status     = "Enabled"
+        }
+    }
+
+  # module.platform.aws_s3_object.flink_artifact[0] will be created
+  + resource "aws_s3_object" "flink_artifact" {
+      + acl                    = (known after apply)
+      + arn                    = (known after apply)
+      + bucket                 = (known after apply)
+      + bucket_key_enabled     = (known after apply)
+      + checksum_crc32         = (known after apply)
+      + checksum_crc32c        = (known after apply)
+      + checksum_crc64nvme     = (known after apply)
+      + checksum_sha1          = (known after apply)
+      + checksum_sha256        = (known after apply)
+      + content_type           = "application/java-archive"
+      + etag                   = (known after apply)
+      + force_destroy          = false
+      + id                     = (known after apply)
+      + key                    = "artifacts/flink/flink-transactions-1.2.0.jar"
+      + kms_key_id             = (known after apply)
+      + region                 = "us-east-1"
+      + server_side_encryption = (known after apply)
+      + source                 = "C:\\Users\\Nicolas Lopez\\coderhouse-data-platform\\flink-app\\target\\flink-transactions-1.2.0.jar"
+      + source_hash            = "e9027dfe15f6530cddcf50c51ab9e43d"
+      + storage_class          = (known after apply)
+      + tags_all               = {
+          + "Environment" = "cap-6a3b6845b1"
+          + "ManagedBy"   = "Terraform"
+          + "Project"     = "coderhouse-data-platform"
+        }
+      + version_id             = (known after apply)
+    }
+
+  # module.platform.terraform_data.initialize_platform[0] will be created
+  + resource "terraform_data" "initialize_platform" {
+      + id               = (known after apply)
+      + triggers_replace = [
+          + (known after apply),
+          + "fa60b24ff653ce468f4b893eb6152954ffea37719e8262bf0ba075201861e30f",
+          + "21c3053ab22db0835e5bd0ba978d0b44425dec0a10e68053a115df556758140b",
+          + "2f2039e43a94853a783eb5352c22352d3be8f13d66f3f97a53b4ad65122f7e29",
+          + "64f1d0430f81b589757cce444b0d21d8204fe91e00f99c156a2442cc6752b305",
+          + "268fec5ac619cfd727d8ae9138098d6c22562e79c50505e37793557017859d46",
+        ]
+    }
+
+  # module.platform.module.identity.data.aws_iam_policy_document.audit will be read during apply
+  # (config refers to values not yet known)
+ <= data "aws_iam_policy_document" "audit" {
+      + id            = (known after apply)
+      + json          = (known after apply)
+      + minified_json = (known after apply)
+
+      + statement {
+          + actions   = [
+              + "ec2:DescribeRouteTables",
+              + "ec2:DescribeSubnets",
+              + "ec2:DescribeVpcEndpoints",
+              + "ec2:DescribeVpcs",
+            ]
+          + effect    = "Allow"
+          + resources = [
+              + "*",
+            ]
+          + sid       = "ReadInfrastructure"
+        }
+      + statement {
+          + actions   = [
+              + "s3:GetBucketLocation",
+              + "s3:GetBucketVersioning",
+            ]
+          + effect    = "Allow"
+          + resources = [
+              + (known after apply),
+            ]
+          + sid       = "ReadDataLakeMetadata"
+        }
+    }
+
+  # module.platform.module.identity.data.aws_iam_policy_document.processing will be read during apply
+  # (config refers to values not yet known)
+ <= data "aws_iam_policy_document" "processing" {
+      + id            = (known after apply)
+      + json          = (known after apply)
+      + minified_json = (known after apply)
+
+      + statement {
+          + actions   = [
+              + "s3:ListBucket",
+            ]
+          + effect    = "Allow"
+          + resources = [
+              + (known after apply),
+            ]
+          + sid       = "ListRawPrefix"
+
+          + condition {
+              + test     = "StringLike"
+              + values   = [
+                  + "raw",
+                  + "raw/*",
+                ]
+              + variable = "s3:prefix"
+            }
+        }
+      + statement {
+          + actions   = [
+              + "s3:GetObject",
+              + "s3:PutObject",
+            ]
+          + effect    = "Allow"
+          + resources = [
+              + (known after apply),
+            ]
+          + sid       = "ReadWriteRawObjects"
+        }
+    }
+
+  # module.platform.module.identity.aws_iam_role.audit will be created
+  + resource "aws_iam_role" "audit" {
+      + arn                   = (known after apply)
+      + assume_role_policy    = jsonencode(
+            {
+              + Statement = [
+                  + {
+                      + Action    = "sts:AssumeRole"
+                      + Condition = {
+                          + ArnEquals = {
+                              + "aws:PrincipalArn" = "arn:aws:iam::672049777597:user/terraform-dev"
+                            }
+                        }
+                      + Effect    = "Allow"
+                      + Principal = {
+                          + AWS = "672049777597"
+                        }
+                    },
+                ]
+              + Version   = "2012-10-17"
+            }
+        )
+      + create_date           = (known after apply)
+      + force_detach_policies = false
+      + id                    = (known after apply)
+      + managed_policy_arns   = (known after apply)
+      + max_session_duration  = 3600
+      + name                  = "coderhouse-cap-6a3b6845b1-audit"
+      + name_prefix           = (known after apply)
+      + path                  = "/"
+      + tags_all              = {
+          + "Environment" = "cap-6a3b6845b1"
+          + "ManagedBy"   = "Terraform"
+          + "Project"     = "coderhouse-data-platform"
+        }
+      + unique_id             = (known after apply)
+
+      + inline_policy (known after apply)
+    }
+
+  # module.platform.module.identity.aws_iam_role.processing will be created
+  + resource "aws_iam_role" "processing" {
+      + arn                   = (known after apply)
+      + assume_role_policy    = jsonencode(
+            {
+              + Statement = [
+                  + {
+                      + Action    = "sts:AssumeRole"
+                      + Effect    = "Allow"
+                      + Principal = {
+                          + Service = [
+                              + "lambda.amazonaws.com",
+                              + "kinesisanalytics.amazonaws.com",
+                            ]
+                        }
+                    },
+                ]
+              + Version   = "2012-10-17"
+            }
+        )
+      + create_date           = (known after apply)
+      + force_detach_policies = false
+      + id                    = (known after apply)
+      + managed_policy_arns   = (known after apply)
+      + max_session_duration  = 3600
+      + name                  = "coderhouse-cap-6a3b6845b1-processing"
+      + name_prefix           = (known after apply)
+      + path                  = "/"
+      + tags_all              = {
+          + "Environment" = "cap-6a3b6845b1"
+          + "ManagedBy"   = "Terraform"
+          + "Project"     = "coderhouse-data-platform"
+        }
+      + unique_id             = (known after apply)
+
+      + inline_policy (known after apply)
+    }
+
+  # module.platform.module.identity.aws_iam_role_policy.audit will be created
+  + resource "aws_iam_role_policy" "audit" {
+      + id          = (known after apply)
+      + name        = "coderhouse-audit-readonly"
+      + name_prefix = (known after apply)
+      + policy      = (known after apply)
+      + role        = (known after apply)
+    }
+
+  # module.platform.module.identity.aws_iam_role_policy.processing will be created
+  + resource "aws_iam_role_policy" "processing" {
+      + id          = (known after apply)
+      + name        = "coderhouse-processing-s3"
+      + name_prefix = (known after apply)
+      + policy      = (known after apply)
+      + role        = (known after apply)
+    }
+
+  # module.platform.module.kinesis[0].aws_cloudwatch_metric_alarm.read_throughput will be created
+  + resource "aws_cloudwatch_metric_alarm" "read_throughput" {
+      + actions_enabled                       = true
+      + alarm_description                     = "Kinesis read throughput exceeded"
+      + alarm_name                            = "cap-6a3b6845b1-kinesis-read-throughput"
+      + arn                                   = (known after apply)
+      + comparison_operator                   = "GreaterThanThreshold"
+      + dimensions                            = {
+          + "StreamName" = "cap-6a3b6845b1-transactions-stream"
+        }
+      + evaluate_low_sample_count_percentiles = (known after apply)
+      + evaluation_periods                    = 1
+      + id                                    = (known after apply)
+      + metric_name                           = "ReadProvisionedThroughputExceeded"
+      + namespace                             = "AWS/Kinesis"
+      + period                                = 60
+      + region                                = "us-east-1"
+      + statistic                             = "Sum"
+      + tags_all                              = {
+          + "Environment" = "cap-6a3b6845b1"
+          + "ManagedBy"   = "Terraform"
+          + "Project"     = "coderhouse-data-platform"
+        }
+      + threshold                             = 0
+      + treat_missing_data                    = "notBreaching"
+    }
+
+  # module.platform.module.kinesis[0].aws_cloudwatch_metric_alarm.write_throughput will be created
+  + resource "aws_cloudwatch_metric_alarm" "write_throughput" {
+      + actions_enabled                       = true
+      + alarm_description                     = "Kinesis write throughput exceeded"
+      + alarm_name                            = "cap-6a3b6845b1-kinesis-write-throughput"
+      + arn                                   = (known after apply)
+      + comparison_operator                   = "GreaterThanThreshold"
+      + dimensions                            = {
+          + "StreamName" = "cap-6a3b6845b1-transactions-stream"
+        }
+      + evaluate_low_sample_count_percentiles = (known after apply)
+      + evaluation_periods                    = 1
+      + id                                    = (known after apply)
+      + metric_name                           = "WriteProvisionedThroughputExceeded"
+      + namespace                             = "AWS/Kinesis"
+      + period                                = 60
+      + region                                = "us-east-1"
+      + statistic                             = "Sum"
+      + tags_all                              = {
+          + "Environment" = "cap-6a3b6845b1"
+          + "ManagedBy"   = "Terraform"
+          + "Project"     = "coderhouse-data-platform"
+        }
+      + threshold                             = 0
+      + treat_missing_data                    = "notBreaching"
+    }
+
+  # module.platform.module.kinesis[0].aws_kinesis_stream.transactions will be created
+  + resource "aws_kinesis_stream" "transactions" {
+      + arn                       = (known after apply)
+      + encryption_type           = "KMS"
+      + enforce_consumer_deletion = false
+      + id                        = (known after apply)
+      + kms_key_id                = "alias/aws/kinesis"
+      + max_record_size_in_kib    = (known after apply)
+      + name                      = "cap-6a3b6845b1-transactions-stream"
+      + region                    = "us-east-1"
+      + retention_period          = 24
+      + shard_count               = 2
+      + tags                      = {
+          + "Environment" = "cap-6a3b6845b1"
+          + "Name"        = "cap-6a3b6845b1-transactions-stream"
+          + "Project"     = "coderhouse-data-platform"
+        }
+      + tags_all                  = {
+          + "Environment" = "cap-6a3b6845b1"
+          + "ManagedBy"   = "Terraform"
+          + "Name"        = "cap-6a3b6845b1-transactions-stream"
+          + "Project"     = "coderhouse-data-platform"
+        }
+
+      + stream_mode_details {
+          + stream_mode = "PROVISIONED"
+        }
+    }
+
+  # module.platform.module.lakehouse.aws_glue_catalog_database.lakehouse will be created
+  + resource "aws_glue_catalog_database" "lakehouse" {
+      + arn          = (known after apply)
+      + catalog_id   = (known after apply)
+      + description  = "Pre-entrega 5: agregaciones transaccionales Apache Iceberg"
+      + id           = (known after apply)
+      + location_uri = (known after apply)
+      + name         = "cap_6a3b6845b1_lakehouse"
+      + region       = "us-east-1"
+      + tags_all     = {
+          + "Environment" = "cap-6a3b6845b1"
+          + "ManagedBy"   = "Terraform"
+          + "Project"     = "coderhouse-data-platform"
+        }
+
+      + create_table_default_permission (known after apply)
+    }
+
+  # module.platform.module.managed_flink[0].data.aws_iam_policy_document.flink_permissions will be read during apply
+  # (config refers to values not yet known)
+ <= data "aws_iam_policy_document" "flink_permissions" {
+      + id            = (known after apply)
+      + json          = (known after apply)
+      + minified_json = (known after apply)
+
+      + statement {
+          + actions   = [
+              + "kinesis:DescribeStream",
+              + "kinesis:DescribeStreamSummary",
+              + "kinesis:GetRecords",
+              + "kinesis:GetShardIterator",
+              + "kinesis:ListShards",
+            ]
+          + effect    = "Allow"
+          + resources = [
+              + (known after apply),
+            ]
+          + sid       = "ReadKinesisTransactions"
+        }
+      + statement {
+          + actions   = [
+              + "s3:GetObject",
+              + "s3:GetObjectVersion",
+            ]
+          + effect    = "Allow"
+          + resources = [
+              + (known after apply),
+            ]
+          + sid       = "ReadApplicationJar"
+        }
+      + statement {
+          + actions   = [
+              + "logs:DescribeLogStreams",
+              + "logs:PutLogEvents",
+            ]
+          + effect    = "Allow"
+          + resources = [
+              + (known after apply),
+            ]
+          + sid       = "WriteCloudWatchLogs"
+        }
+    }
+
+  # module.platform.module.managed_flink[0].data.aws_iam_policy_document.lakehouse will be read during apply
+  # (config refers to values not yet known)
+ <= data "aws_iam_policy_document" "lakehouse" {
+      + id            = (known after apply)
+      + json          = (known after apply)
+      + minified_json = (known after apply)
+
+      + statement {
+          + actions   = [
+              + "glue:GetDatabase",
+            ]
+          + resources = [
+              + "arn:aws:glue:us-east-1:672049777597:catalog",
+              + (known after apply),
+            ]
+          + sid       = "ReadLakehouseDatabase"
+        }
+      + statement {
+          + actions   = [
+              + "glue:CreateTable",
+              + "glue:GetTable",
+              + "glue:UpdateTable",
+            ]
+          + resources = [
+              + "arn:aws:glue:us-east-1:672049777597:catalog",
+              + "arn:aws:glue:us-east-1:672049777597:table/cap_6a3b6845b1_lakehouse/transaction_aggregates",
+              + (known after apply),
+            ]
+          + sid       = "ManageAggregateTable"
+        }
+      + statement {
+          + actions   = [
+              + "s3:GetBucketLocation",
+            ]
+          + resources = [
+              + (known after apply),
+            ]
+          + sid       = "LakehouseBucketLocation"
+        }
+      + statement {
+          + actions   = [
+              + "s3:ListBucket",
+            ]
+          + resources = [
+              + (known after apply),
+            ]
+          + sid       = "ListAggregatePrefix"
+
+          + condition {
+              + test     = "StringLike"
+              + values   = [
+                  + "lakehouse/cap_6a3b6845b1_lakehouse/transaction_aggregates",
+                  + "lakehouse/cap_6a3b6845b1_lakehouse/transaction_aggregates/*",
+                ]
+              + variable = "s3:prefix"
+            }
+        }
+      + statement {
+          + actions   = [
+              + "s3:AbortMultipartUpload",
+              + "s3:DeleteObject",
+              + "s3:GetObject",
+              + "s3:ListMultipartUploadParts",
+              + "s3:PutObject",
+            ]
+          + resources = [
+              + (known after apply),
+            ]
+          + sid       = "ReadWriteIcebergObjects"
+        }
+    }
+
+  # module.platform.module.managed_flink[0].aws_cloudwatch_log_group.flink will be created
+  + resource "aws_cloudwatch_log_group" "flink" {
+      + arn                         = (known after apply)
+      + deletion_protection_enabled = (known after apply)
+      + id                          = (known after apply)
+      + log_group_class             = (known after apply)
+      + name                        = "/aws/kinesis-analytics/coderhouse-cap-6a3b6845b1-transactions-flink"
+      + name_prefix                 = (known after apply)
+      + region                      = "us-east-1"
+      + retention_in_days           = 7
+      + skip_destroy                = false
+      + tags_all                    = {
+          + "Environment" = "cap-6a3b6845b1"
+          + "ManagedBy"   = "Terraform"
+          + "Project"     = "coderhouse-data-platform"
+        }
+    }
+
+  # module.platform.module.managed_flink[0].aws_cloudwatch_log_stream.flink will be created
+  + resource "aws_cloudwatch_log_stream" "flink" {
+      + arn            = (known after apply)
+      + id             = (known after apply)
+      + log_group_name = "/aws/kinesis-analytics/coderhouse-cap-6a3b6845b1-transactions-flink"
+      + name           = "application"
+      + region         = "us-east-1"
+    }
+
+  # module.platform.module.managed_flink[0].aws_iam_role.flink will be created
+  + resource "aws_iam_role" "flink" {
+      + arn                   = (known after apply)
+      + assume_role_policy    = jsonencode(
+            {
+              + Statement = [
+                  + {
+                      + Action    = "sts:AssumeRole"
+                      + Condition = {
+                          + ArnEquals    = {
+                              + "aws:SourceArn" = "arn:aws:kinesisanalytics:us-east-1:672049777597:application/coderhouse-cap-6a3b6845b1-transactions-flink"
+                            }
+                          + StringEquals = {
+                              + "aws:SourceAccount" = "672049777597"
+                            }
+                        }
+                      + Effect    = "Allow"
+                      + Principal = {
+                          + Service = "kinesisanalytics.amazonaws.com"
+                        }
+                    },
+                ]
+              + Version   = "2012-10-17"
+            }
+        )
+      + create_date           = (known after apply)
+      + force_detach_policies = false
+      + id                    = (known after apply)
+      + managed_policy_arns   = (known after apply)
+      + max_session_duration  = 3600
+      + name                  = "coderhouse-cap-6a3b6845b1-flink"
+      + name_prefix           = (known after apply)
+      + path                  = "/"
+      + tags_all              = {
+          + "Environment" = "cap-6a3b6845b1"
+          + "ManagedBy"   = "Terraform"
+          + "Project"     = "coderhouse-data-platform"
+        }
+      + unique_id             = (known after apply)
+
+      + inline_policy (known after apply)
+    }
+
+  # module.platform.module.managed_flink[0].aws_iam_role_policy.flink will be created
+  + resource "aws_iam_role_policy" "flink" {
+      + id          = (known after apply)
+      + name        = "coderhouse-cap-6a3b6845b1-flink-access"
+      + name_prefix = (known after apply)
+      + policy      = (known after apply)
+      + role        = (known after apply)
+    }
+
+  # module.platform.module.managed_flink[0].aws_iam_role_policy.lakehouse will be created
+  + resource "aws_iam_role_policy" "lakehouse" {
+      + id          = (known after apply)
+      + name        = "coderhouse-cap-6a3b6845b1-flink-lakehouse"
+      + name_prefix = (known after apply)
+      + policy      = (known after apply)
+      + role        = (known after apply)
+    }
+
+  # module.platform.module.managed_flink[0].aws_kinesisanalyticsv2_application.flink will be created
+  + resource "aws_kinesisanalyticsv2_application" "flink" {
+      + application_mode       = (known after apply)
+      + arn                    = (known after apply)
+      + create_timestamp       = (known after apply)
+      + description            = "Procesamiento de transacciones Kinesis con Apache Flink"
+      + id                     = (known after apply)
+      + last_update_timestamp  = (known after apply)
+      + name                   = "coderhouse-cap-6a3b6845b1-transactions-flink"
+      + region                 = "us-east-1"
+      + runtime_environment    = "FLINK-2_2"
+      + service_execution_role = (known after apply)
+      + start_application      = true
+      + status                 = (known after apply)
+      + tags                   = {
+          + "Name" = "coderhouse-cap-6a3b6845b1-transactions-flink"
+        }
+      + tags_all               = {
+          + "Environment" = "cap-6a3b6845b1"
+          + "ManagedBy"   = "Terraform"
+          + "Name"        = "coderhouse-cap-6a3b6845b1-transactions-flink"
+          + "Project"     = "coderhouse-data-platform"
+        }
+      + version_id             = (known after apply)
+
+      + application_configuration {
+          + application_code_configuration {
+              + code_content_type = "ZIPFILE"
+
+              + code_content {
+                  + s3_content_location {
+                      + bucket_arn     = (known after apply)
+                      + file_key       = "artifacts/flink/flink-transactions-1.2.0.jar"
+                      + object_version = (known after apply)
+                    }
+                }
+            }
+          + application_encryption_configuration (known after apply)
+          + application_snapshot_configuration {
+              + snapshots_enabled = true
+            }
+          + environment_properties {
+              + property_group {
+                  + property_group_id = "ApplicationProperties"
+                  + property_map      = (known after apply)
+                }
+            }
+          + flink_application_configuration {
+              + checkpoint_configuration {
+                  + checkpoint_interval           = 60000
+                  + checkpointing_enabled         = true
+                  + configuration_type            = "CUSTOM"
+                  + min_pause_between_checkpoints = 5000
+                }
+              + monitoring_configuration {
+                  + configuration_type = "CUSTOM"
+                  + log_level          = "INFO"
+                  + metrics_level      = "APPLICATION"
+                }
+              + parallelism_configuration {
+                  + auto_scaling_enabled = false
+                  + configuration_type   = "CUSTOM"
+                  + parallelism          = 1
+                  + parallelism_per_kpu  = 1
+                }
+            }
+          + run_configuration (known after apply)
+        }
+
+      + cloudwatch_logging_options {
+          + cloudwatch_logging_option_id = (known after apply)
+          + log_stream_arn               = (known after apply)
+        }
+    }
+
+  # module.platform.module.network.aws_route_table.private[0] will be created
+  + resource "aws_route_table" "private" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + region           = "us-east-1"
+      + route            = (known after apply)
+      + tags             = {
+          + "Name" = "cap-6a3b6845b1-private-rt-1"
+        }
+      + tags_all         = {
+          + "Environment" = "cap-6a3b6845b1"
+          + "ManagedBy"   = "Terraform"
+          + "Name"        = "cap-6a3b6845b1-private-rt-1"
+          + "Project"     = "coderhouse-data-platform"
+        }
+      + vpc_id           = (known after apply)
+    }
+
+  # module.platform.module.network.aws_route_table.private[1] will be created
+  + resource "aws_route_table" "private" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + region           = "us-east-1"
+      + route            = (known after apply)
+      + tags             = {
+          + "Name" = "cap-6a3b6845b1-private-rt-2"
+        }
+      + tags_all         = {
+          + "Environment" = "cap-6a3b6845b1"
+          + "ManagedBy"   = "Terraform"
+          + "Name"        = "cap-6a3b6845b1-private-rt-2"
+          + "Project"     = "coderhouse-data-platform"
+        }
+      + vpc_id           = (known after apply)
+    }
+
+  # module.platform.module.network.aws_route_table_association.private[0] will be created
+  + resource "aws_route_table_association" "private" {
+      + id             = (known after apply)
+      + region         = "us-east-1"
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # module.platform.module.network.aws_route_table_association.private[1] will be created
+  + resource "aws_route_table_association" "private" {
+      + id             = (known after apply)
+      + region         = "us-east-1"
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # module.platform.module.network.aws_subnet.private[0] will be created
+  + resource "aws_subnet" "private" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "us-east-1a"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.10.1.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block                                = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + region                                         = "us-east-1"
+      + tags                                           = {
+          + "Name" = "cap-6a3b6845b1-private-1"
+        }
+      + tags_all                                       = {
+          + "Environment" = "cap-6a3b6845b1"
+          + "ManagedBy"   = "Terraform"
+          + "Name"        = "cap-6a3b6845b1-private-1"
+          + "Project"     = "coderhouse-data-platform"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # module.platform.module.network.aws_subnet.private[1] will be created
+  + resource "aws_subnet" "private" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "us-east-1b"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.10.2.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block                                = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + region                                         = "us-east-1"
+      + tags                                           = {
+          + "Name" = "cap-6a3b6845b1-private-2"
+        }
+      + tags_all                                       = {
+          + "Environment" = "cap-6a3b6845b1"
+          + "ManagedBy"   = "Terraform"
+          + "Name"        = "cap-6a3b6845b1-private-2"
+          + "Project"     = "coderhouse-data-platform"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # module.platform.module.network.aws_vpc.main will be created
+  + resource "aws_vpc" "main" {
+      + arn                                  = (known after apply)
+      + cidr_block                           = "10.10.0.0/16"
+      + default_network_acl_id               = (known after apply)
+      + default_route_table_id               = (known after apply)
+      + default_security_group_id            = (known after apply)
+      + dhcp_options_id                      = (known after apply)
+      + enable_dns_hostnames                 = true
+      + enable_dns_support                   = true
+      + enable_network_address_usage_metrics = (known after apply)
+      + id                                   = (known after apply)
+      + instance_tenancy                     = "default"
+      + ipv6_association_id                  = (known after apply)
+      + ipv6_cidr_block                      = (known after apply)
+      + ipv6_cidr_block_network_border_group = (known after apply)
+      + main_route_table_id                  = (known after apply)
+      + owner_id                             = (known after apply)
+      + region                               = "us-east-1"
+      + tags                                 = {
+          + "Name" = "cap-6a3b6845b1-data-vpc"
+        }
+      + tags_all                             = {
+          + "Environment" = "cap-6a3b6845b1"
+          + "ManagedBy"   = "Terraform"
+          + "Name"        = "cap-6a3b6845b1-data-vpc"
+          + "Project"     = "coderhouse-data-platform"
+        }
+    }
+
+  # module.platform.module.network.aws_vpc_endpoint.s3 will be created
+  + resource "aws_vpc_endpoint" "s3" {
+      + arn                   = (known after apply)
+      + cidr_blocks           = (known after apply)
+      + dns_entry             = (known after apply)
+      + id                    = (known after apply)
+      + ip_address_type       = (known after apply)
+      + network_interface_ids = (known after apply)
+      + owner_id              = (known after apply)
+      + policy                = (known after apply)
+      + prefix_list_id        = (known after apply)
+      + private_dns_enabled   = (known after apply)
+      + region                = "us-east-1"
+      + requester_managed     = (known after apply)
+      + route_table_ids       = (known after apply)
+      + security_group_ids    = (known after apply)
+      + service_name          = "com.amazonaws.us-east-1.s3"
+      + service_region        = (known after apply)
+      + state                 = (known after apply)
+      + subnet_ids            = (known after apply)
+      + tags                  = {
+          + "Name" = "cap-6a3b6845b1-s3-endpoint"
+        }
+      + tags_all              = {
+          + "Environment" = "cap-6a3b6845b1"
+          + "ManagedBy"   = "Terraform"
+          + "Name"        = "cap-6a3b6845b1-s3-endpoint"
+          + "Project"     = "coderhouse-data-platform"
+        }
+      + vpc_endpoint_type     = "Gateway"
+      + vpc_id                = (known after apply)
+
+      + dns_options (known after apply)
+
+      + subnet_configuration (known after apply)
+    }
+
+  # module.platform.module.redshift[0].aws_iam_role.analytics will be created
+  + resource "aws_iam_role" "analytics" {
+      + arn                   = (known after apply)
+      + assume_role_policy    = jsonencode(
+            {
+              + Statement = [
+                  + {
+                      + Action    = "sts:AssumeRole"
+                      + Condition = {
+                          + ArnLikeIfExists      = {
+                              + "aws:SourceArn" = [
+                                  + "arn:aws:redshift-serverless:us-east-1:672049777597:*",
+                                  + "arn:aws:redshift:us-east-1:672049777597:*",
+                                ]
+                            }
+                          + StringEqualsIfExists = {
+                              + "aws:SourceAccount" = "672049777597"
+                            }
+                          + StringLike           = {
+                              + "sts:ExternalId" = "arn:aws:redshift:us-east-1:672049777597:dbuser:serverless-672049777597-*/*"
+                            }
+                        }
+                      + Effect    = "Allow"
+                      + Principal = {
+                          + Service = [
+                              + "redshift.amazonaws.com",
+                              + "redshift-serverless.amazonaws.com",
+                            ]
+                        }
+                    },
+                ]
+              + Version   = "2012-10-17"
+            }
+        )
+      + create_date           = (known after apply)
+      + force_detach_policies = false
+      + id                    = (known after apply)
+      + managed_policy_arns   = (known after apply)
+      + max_session_duration  = 3600
+      + name                  = "coderhouse-cap-6a3b6845b1-analytics-execution"
+      + name_prefix           = (known after apply)
+      + path                  = "/"
+      + tags_all              = {
+          + "Environment" = "cap-6a3b6845b1"
+          + "ManagedBy"   = "Terraform"
+          + "Project"     = "coderhouse-data-platform"
+        }
+      + unique_id             = (known after apply)
+
+      + inline_policy (known after apply)
+    }
+
+  # module.platform.module.redshift[0].aws_iam_role_policy.read_sources will be created
+  + resource "aws_iam_role_policy" "read_sources" {
+      + id          = (known after apply)
+      + name        = "read-kinesis-and-iceberg"
+      + name_prefix = (known after apply)
+      + policy      = (known after apply)
+      + role        = (known after apply)
+    }
+
+  # module.platform.module.redshift[0].aws_redshiftserverless_namespace.analytics will be created
+  + resource "aws_redshiftserverless_namespace" "analytics" {
+      + admin_password_secret_arn        = (known after apply)
+      + admin_password_secret_kms_key_id = (known after apply)
+      + admin_user_password_wo           = (write-only attribute)
+      + admin_username                   = (sensitive value)
+      + arn                              = (known after apply)
+      + db_name                          = "analytics"
+      + default_iam_role_arn             = (known after apply)
+      + iam_roles                        = (known after apply)
+      + id                               = (known after apply)
+      + kms_key_id                       = (known after apply)
+      + namespace_id                     = (known after apply)
+      + namespace_name                   = "coderhouse-cap-6a3b6845b1-analytics"
+      + region                           = "us-east-1"
+      + tags                             = {
+          + "Checkpoint" = "6"
+        }
+      + tags_all                         = {
+          + "Checkpoint"  = "6"
+          + "Environment" = "cap-6a3b6845b1"
+          + "ManagedBy"   = "Terraform"
+          + "Project"     = "coderhouse-data-platform"
+        }
+    }
+
+  # module.platform.module.redshift[0].aws_redshiftserverless_usage_limit.daily will be created
+  + resource "aws_redshiftserverless_usage_limit" "daily" {
+      + amount        = 8
+      + arn           = (known after apply)
+      + breach_action = "deactivate"
+      + id            = (known after apply)
+      + period        = "daily"
+      + region        = "us-east-1"
+      + resource_arn  = (known after apply)
+      + usage_type    = "serverless-compute"
+    }
+
+  # module.platform.module.redshift[0].aws_redshiftserverless_workgroup.analytics will be created
+  + resource "aws_redshiftserverless_workgroup" "analytics" {
+      + arn                  = (known after apply)
+      + base_capacity        = 4
+      + endpoint             = (known after apply)
+      + enhanced_vpc_routing = false
+      + id                   = (known after apply)
+      + max_capacity         = 4
+      + namespace_name       = "coderhouse-cap-6a3b6845b1-analytics"
+      + port                 = (known after apply)
+      + publicly_accessible  = false
+      + region               = "us-east-1"
+      + security_group_ids   = (known after apply)
+      + subnet_ids           = (known after apply)
+      + tags                 = {
+          + "Checkpoint" = "6"
+        }
+      + tags_all             = {
+          + "Checkpoint"  = "6"
+          + "Environment" = "cap-6a3b6845b1"
+          + "ManagedBy"   = "Terraform"
+          + "Project"     = "coderhouse-data-platform"
+        }
+      + track_name           = (known after apply)
+      + workgroup_id         = (known after apply)
+      + workgroup_name       = "coderhouse-cap-6a3b6845b1-analytics"
+
+      + config_parameter {
+          + parameter_key   = "require_ssl"
+          + parameter_value = "true"
+        }
+
+      + price_performance_target (known after apply)
+    }
+
+  # module.platform.module.redshift[0].aws_security_group.kinesis_endpoint will be created
+  + resource "aws_security_group" "kinesis_endpoint" {
+      + arn                    = (known after apply)
+      + description            = "HTTPS only from Redshift to Kinesis endpoint"
+      + egress                 = (known after apply)
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = []
+              + from_port        = 443
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = (known after apply)
+              + self             = false
+              + to_port          = 443
+                # (1 unchanged attribute hidden)
+            },
+        ]
+      + name                   = (known after apply)
+      + name_prefix            = "coderhouse-cap-6a3b6845b1-analytics-kds-"
+      + owner_id               = (known after apply)
+      + region                 = "us-east-1"
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Checkpoint" = "6"
+        }
+      + tags_all               = {
+          + "Checkpoint"  = "6"
+          + "Environment" = "cap-6a3b6845b1"
+          + "ManagedBy"   = "Terraform"
+          + "Project"     = "coderhouse-data-platform"
+        }
+      + vpc_id                 = (known after apply)
+    }
+
+  # module.platform.module.redshift[0].aws_security_group.warehouse will be created
+  + resource "aws_security_group" "warehouse" {
+      + arn                    = (known after apply)
+      + description            = "Private Redshift; Data API access, no inbound TCP"
+      + egress                 = [
+          + {
+              + cidr_blocks      = [
+                  + "0.0.0.0/0",
+                ]
+              + from_port        = 443
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 443
+                # (1 unchanged attribute hidden)
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = (known after apply)
+      + name                   = (known after apply)
+      + name_prefix            = "coderhouse-cap-6a3b6845b1-analytics-"
+      + owner_id               = (known after apply)
+      + region                 = "us-east-1"
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Checkpoint" = "6"
+        }
+      + tags_all               = {
+          + "Checkpoint"  = "6"
+          + "Environment" = "cap-6a3b6845b1"
+          + "ManagedBy"   = "Terraform"
+          + "Project"     = "coderhouse-data-platform"
+        }
+      + vpc_id                 = (known after apply)
+    }
+
+  # module.platform.module.redshift[0].aws_vpc_endpoint.kinesis will be created
+  + resource "aws_vpc_endpoint" "kinesis" {
+      + arn                   = (known after apply)
+      + cidr_blocks           = (known after apply)
+      + dns_entry             = (known after apply)
+      + id                    = (known after apply)
+      + ip_address_type       = (known after apply)
+      + network_interface_ids = (known after apply)
+      + owner_id              = (known after apply)
+      + policy                = (known after apply)
+      + prefix_list_id        = (known after apply)
+      + private_dns_enabled   = true
+      + region                = "us-east-1"
+      + requester_managed     = (known after apply)
+      + route_table_ids       = (known after apply)
+      + security_group_ids    = (known after apply)
+      + service_name          = "com.amazonaws.us-east-1.kinesis-streams"
+      + service_region        = (known after apply)
+      + state                 = (known after apply)
+      + subnet_ids            = (known after apply)
+      + tags                  = {
+          + "Checkpoint" = "6"
+        }
+      + tags_all              = {
+          + "Checkpoint"  = "6"
+          + "Environment" = "cap-6a3b6845b1"
+          + "ManagedBy"   = "Terraform"
+          + "Project"     = "coderhouse-data-platform"
+        }
+      + vpc_endpoint_type     = "Interface"
+      + vpc_id                = (known after apply)
+
+      + dns_options (known after apply)
+
+      + subnet_configuration (known after apply)
+    }
+
+Plan: 36 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + platform = {
+      + bucket      = (known after apply)
+      + environment = "cap-6a3b6845b1"
+      + flink       = {
+          + application_arn  = (known after apply)
+          + application_name = "coderhouse-cap-6a3b6845b1-transactions-flink"
+          + log_group_name   = "/aws/kinesis-analytics/coderhouse-cap-6a3b6845b1-transactions-flink"
+        }
+      + lakehouse   = {
+          + catalog_id     = (known after apply)
+          + database       = "cap_6a3b6845b1_lakehouse"
+          + table          = "transaction_aggregates"
+          + table_location = (known after apply)
+          + warehouse      = (known after apply)
+        }
+      + redshift    = {
+          + database      = "analytics"
+          + endpoint      = (known after apply)
+          + iam_role_arn  = (known after apply)
+          + namespace     = "coderhouse-cap-6a3b6845b1-analytics"
+          + workgroup     = "coderhouse-cap-6a3b6845b1-analytics"
+          + workgroup_arn = (known after apply)
+        }
+      + stream      = "cap-6a3b6845b1-transactions-stream"
+    }
+
+Warning: Backend configuration ignored
+
+  on ..\..\..\terraform\backend.tf line 7, in terraform:
+   7:   backend "s3" {}
+
+Any selected backend applies to the entire configuration, so Terraform
+expects backend configurations only in the root module.
+
+This is a warning rather than an error because it's sometimes convenient to
+temporarily call a root module as a child module for testing purposes, but
+this backend configuration block will have no effect.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Saved the plan to: ../preview.tfplan
+
+To perform exactly these actions, run the following command to apply:
+    terraform apply "../preview.tfplan"
