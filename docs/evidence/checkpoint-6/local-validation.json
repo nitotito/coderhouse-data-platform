@@ -26,12 +26,14 @@
     ]
   },
   "aws_smoke": "PASSED: pe6_20261107_033721",
-  "screenshots_redshift": "PENDING",
+  "screenshots_redshift": "PASSED: 3 real Query Editor v2 screenshots visually reviewed",
   "flink": "READY observed by preflight; not started",
   "terraform_disabled_plan": "NO_CHANGES",
   "deployment_cost_approval": "AUTHORIZED_SINGLE_TEST_AND_REMOVAL",
   "terraform_apply": "PASSED: 8 temporary resources created",
   "sql_engine_execution": "PASSED for deployed schemas, MV, views, grants and monitoring",
   "security_smoke": "PASSED",
-  "temporary_resources": "REMOVED; verified by cleanup-verification.json"
+  "temporary_resources": "REMOVED; verified by cleanup-verification.json",
+  "capture_session_cleanup": "PASSED: all temporary resources removed, verified in capture-session/cleanup-verification.json",
+  "pdf_pages": 15
 }

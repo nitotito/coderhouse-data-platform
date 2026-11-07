@@ -4,8 +4,8 @@
 
 **Prueba funcional y seguridad PASSED en AWS el 07/11/2026**, en
 `feature/redshift-streaming-analytics`. Ensayo único con retiro posterior de los
-recursos temporales. Resultados reales guardados; capturas de consola Redshift
-pendientes. El PR sigue sin fusionar.
+recursos temporales. Resultados reales y tres capturas de Query Editor v2
+incorporados al PDF. El PR sigue sin fusionar.
 
 Kinesis alimenta una MV de Streaming Ingestion; vistas SQL validan cinco campos
 JSON y calculan métricas por minuto. Un esquema externo lee la tabla Iceberg
@@ -20,8 +20,8 @@ minuto UTC y método de pago. La rama conserva el pipeline Flink y las entregas 
   `sql/redshift/`, separados por esquemas, ingesta, métricas, Iceberg, permisos y diagnóstico.
 - [Runner Data API y prueba controlada](scripts/redshift-checkpoint6.py): sin
   argumentos solo genera SQL; `--execute` exige despliegue/costos autorizados.
-- [Evidencias y capturas pendientes](docs/evidence/checkpoint-6/README.md).
-- [PDF del checkpoint, resultados y pendiente visual](output/pdf/CheckPoint_Redshift_Lopez_Nicolas.pdf).
+- [Evidencias y capturas reales](docs/evidence/checkpoint-6/README.md).
+- [PDF final del checkpoint](output/pdf/CheckPoint_Redshift_Lopez_Nicolas.pdf).
 
 Validaciones: Terraform fmt/validate/plan/apply, parser SQL parcial y tres tests
 locales. El lote `pe6_20261107_033721` llegó a Redshift: 9 registros conservados,

@@ -1,0 +1,17 @@
+{
+  "Id": "76cfb384-3757-47d5-9f4f-871c4807e51c",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 168177008,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-07T00:57:44.865000-03:00",
+  "UpdatedAt": "2026-11-07T00:57:45.474000-03:00",
+  "RedshiftPid": 1073856668,
+  "HasResultSet": false,
+  "QueryString": "GRANT SELECT ON analytics.transactions_per_minute TO ROLE checkpoint6_analyst",
+  "ResultRows": 0,
+  "ResultSize": 0,
+  "RedshiftQueryId": 0,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

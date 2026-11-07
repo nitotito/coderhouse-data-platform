@@ -12,8 +12,10 @@ from reportlab.lib.enums import TA_CENTER
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import mm
 from reportlab.graphics.shapes import Drawing, Rect, String, Line, Polygon
-from reportlab.platypus import (SimpleDocTemplate, Paragraph, Spacer, PageBreak,
+from reportlab.platypus import (BaseDocTemplate, PageTemplate, Frame, NextPageTemplate,
+                                Flowable, Paragraph, Spacer, PageBreak,
                                 Preformatted, Table, TableStyle, KeepTogether, Image)
+from reportlab.lib.utils import ImageReader
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'output/pdf/CheckPoint_Redshift_Lopez_Nicolas.pdf'
@@ -139,12 +141,37 @@ def markdown_blocks(source):
 def footer(canvas, doc):
     canvas.saveState()
     canvas.setStrokeColor(BLUE)
-    canvas.line(22*mm,19*mm,188*mm,19*mm)
+    page_width = canvas._pagesize[0]
+    canvas.line(22*mm,19*mm,page_width-22*mm,19*mm)
     canvas.setFont('Helvetica',8)
     canvas.setFillColor(NAVY)
     canvas.drawString(22*mm,14*mm,'Nicolas Lopez | Data Engineering | Checkpoint 6')
-    canvas.drawRightString(188*mm,14*mm,str(doc.page))
+    canvas.drawRightString(page_width-22*mm,14*mm,str(doc.page))
     canvas.restoreState()
+
+
+class ScreenshotRegion(Flowable):
+    """PDF viewport into an unchanged original PNG; no raster file is edited."""
+    def __init__(self, path, region, width):
+        super().__init__()
+        self.path = str(path)
+        iw, ih = ImageReader(self.path).getSize()
+        left, top, right, bottom = region
+        self.scale = width / ((right-left)*iw)
+        self.width = width
+        self.height = (bottom-top)*ih*self.scale
+        self.image_width, self.image_height = iw*self.scale, ih*self.scale
+        self.x_offset = -left*iw*self.scale
+        self.y_offset = -(1-bottom)*ih*self.scale
+
+    def draw(self):
+        self.canv.saveState()
+        clip = self.canv.beginPath()
+        clip.rect(0,0,self.width,self.height)
+        self.canv.clipPath(clip,stroke=0,fill=0)
+        self.canv.drawImage(self.path,self.x_offset,self.y_offset,
+                           width=self.image_width,height=self.image_height,mask='auto')
+        self.canv.restoreState()
 
 
 def main():
@@ -153,7 +180,10 @@ def main():
     evidence = ROOT/'docs/evidence/checkpoint-6'
     actual = json.loads((evidence/'test-summary.json').read_text(encoding='utf-8'))
     security = json.loads((evidence/'security-summary.json').read_text(encoding='utf-8'))
-    cleanup = json.loads((evidence/'cleanup-summary.json').read_text(encoding='utf-8'))
+    cleanup_file = evidence/'capture-session/cleanup-summary.json'
+    if not cleanup_file.exists():
+        cleanup_file = evidence/'cleanup-summary.json'
+    cleanup = json.loads(cleanup_file.read_text(encoding='utf-8'))
     state = 'Pruebas funcionales y seguridad: PASSED. '
     state += 'Recursos temporales retirados.' if cleanup['executed'] else 'Retiro temporal en proceso.'
     story = [Spacer(1,35*mm), p('CODERHOUSE / DATA ENGINEERING','ReportH2'),
@@ -163,7 +193,7 @@ def main():
              Spacer(1,14*mm),
              p(state),
              p('Informe de ensayo real - 7 de noviembre de 2026','ReportCaption'),
-             p('Pendiente visual: capturas de consola Redshift. Resultados API reales incluidos.','ReportCaption'),
+             p('Incluye capturas reales de Query Editor v2 y resultados API verificados.','ReportCaption'),
              p('Repositorio: https://github.com/nitotito/coderhouse-data-platform'),
              PageBreak()]
     story.extend(markdown_blocks((ROOT/'docs/redshift-checkpoint-6.md').read_text(encoding='utf-8')))
@@ -210,15 +240,40 @@ def main():
                   p('La separación de ingesta, validación y métricas reduce el riesgo de bloquear el '
                     'stream por conversiones. La conciliación por minuto y método respeta la granularidad '
                     'de Iceberg. Se comprobaron ingesta, conversiones, metricas, JOIN y privilegios SQL. '
-                    'Faltan capturas de consola Redshift para completar ese requisito visual de la consigna. '
-                    'El PDF no las reemplaza con imagenes sinteticas.'), PageBreak(),p('Anexo: SQL reproducible','ReportH1')])
+                    'Las capturas reales de Query Editor v2 documentan eventos, metricas y conciliacion. '
+                    'Los originales PNG permanecen sin modificar en el repositorio.')])
+    captures = [
+        ('Eventos recibidos desde Kinesis','redshift-eventos.png',
+         'Cinco campos JSON extraidos y seis registros validos del lote retenido.',
+         [((.21,.08,1,.175),'SQL ejecutado'),((.21,.64,1,.89),'Resultado: seis eventos validos')]),
+        ('Metricas por minuto y metodo','redshift-metricas.png',
+         'Dos ventanas: tres transacciones, dos aprobadas, una rechazada; aprobado 30.30 en cada una.',
+         [((.15,.075,.55,.145),'SQL ejecutado'),((.14,.65,.54,.75),'Resultado: identificacion, cantidad y total'),
+          ((.53,.65,.945,.75),'Mismas filas: promedio, aprobadas, rechazadas e importe aprobado')]),
+        ('JOIN con el Lakehouse Iceberg','redshift-join.png',
+         'Una fila conciliada: 2/2 aprobadas, importes 30.30/30.30 y diferencias cero.',
+         [((.15,.10,.56,.155),'SQL ejecutado'),((.14,.71,.535,.785),'Resultado: ventana, metodo y cantidades'),
+          ((.525,.71,.92,.785),'Misma fila: importes y diferencias')]),
+    ]
+    story.append(NextPageTemplate('captures'))
+    for title, filename, caption, regions in captures:
+        story.extend([PageBreak(),p('Captura real: '+title,'ReportH1'),p(caption),
+                      p('AWS Query Editor v2. Vistas ampliadas del original; archivo: '+filename,'ReportCaption')])
+        for region, label in regions:
+            story.extend([p(label,'ReportCaption'),ScreenshotRegion(evidence/filename,region,253*mm),Spacer(1,4*mm)])
+    story.extend([NextPageTemplate('portrait'),PageBreak(),p('Anexo: SQL reproducible','ReportH1')])
     for part in sorted((ROOT/'sql/redshift').glob('[0-9][0-9]_*.sql')):
         story.append(p(part.name,'ReportH2'))
         story.append(Preformatted(part.read_text(encoding='utf-8'),styles['ReportCode'],maxLineLength=99))
-    doc = SimpleDocTemplate(str(OUT),pagesize=(210*mm,297*mm),rightMargin=22*mm,
+    doc = BaseDocTemplate(str(OUT),pagesize=(210*mm,297*mm),rightMargin=22*mm,
                             leftMargin=22*mm,topMargin=20*mm,bottomMargin=25*mm,
                             title='Checkpoint 6 - Redshift Streaming Analytics',author='Nicolas Lopez')
-    doc.build(story,onFirstPage=footer,onLaterPages=footer)
+    doc.addPageTemplates([
+        PageTemplate(id='portrait',pagesize=(210*mm,297*mm),onPage=footer,
+                     frames=[Frame(22*mm,25*mm,166*mm,252*mm,leftPadding=0,rightPadding=0,topPadding=0,bottomPadding=0)]),
+        PageTemplate(id='captures',pagesize=(297*mm,210*mm),onPage=footer,
+                     frames=[Frame(18*mm,23*mm,261*mm,169*mm,leftPadding=0,rightPadding=0,topPadding=0,bottomPadding=0)])])
+    doc.build(story)
     import pymupdf
     document = pymupdf.open(OUT)
     for index,page in enumerate(document):

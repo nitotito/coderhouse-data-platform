@@ -1,0 +1,17 @@
+{
+  "Id": "8a9d4e53-f1ed-4751-b450-af17fce16231",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 105861428,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-07T01:02:45.801000-03:00",
+  "UpdatedAt": "2026-11-07T01:02:46.460000-03:00",
+  "RedshiftPid": 1073791111,
+  "HasResultSet": true,
+  "QueryString": "SELECT current_database() AS database_name, schema_name FROM svv_all_schemas WHERE schema_name='analytics'",
+  "ResultRows": 1,
+  "ResultSize": 18,
+  "RedshiftQueryId": 0,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

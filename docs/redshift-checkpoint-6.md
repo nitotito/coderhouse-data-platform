@@ -3,7 +3,7 @@
 Autor: Nicolás López. Cuenta AWS: 672049777597. Región: us-east-1.
 Rama: `feature/redshift-streaming-analytics`. **Prueba funcional y seguridad PASSED
 en AWS el 07/11/2026. Ensayo único autorizado con retiro posterior del módulo
-temporal. Pendiente visual: capturas de consola Redshift.**
+temporal. Capturas reales de eventos, métricas y JOIN incorporadas al PDF.**
 
 ## Objetivo y arquitectura
 
@@ -230,13 +230,19 @@ ausencia universal de errores.
 [Índice checkpoint 6](evidence/checkpoint-6/README.md). Se conservan inventario,
 apply exitoso, ejecuciones/resultados Data API, JSON del lote y recibos Kinesis,
 monitoreo, pruebas de identidad/grants y planes de retiro. La captura Glue de PE5
-se reutiliza identificando su origen. No se obtuvieron capturas de consola Redshift:
-los resultados tabulados del PDF son exportaciones reales de API, no capturas.
+se reutiliza identificando su origen. Una segunda sesión autorizada permitió
+obtener tres capturas reales de Query Editor v2: `redshift-eventos.png`,
+`redshift-metricas.png` y `redshift-join.png`. Muestran SQL y resultados sobre la
+base analytics. El usuario de consola observado fue `IAM:RootIdentity`, al que
+se asignó únicamente el rol SQL checkpoint6_analyst. Se reutilizaron los nueve
+registros retenidos en Kinesis sin publicar nuevos eventos ni modificar Iceberg.
+Los PNG originales se conservan sin modificar; el PDF presenta detalles ampliados
+mediante ventanas de visualización para hacer legibles el SQL y las tablas.
 
 El [PDF](../output/pdf/CheckPoint_Redshift_Lopez_Nicolas.pdf) se genera con estas
-limitaciones explícitas. La funcionalidad y seguridad están probadas; el requisito
-visual específico de la consigna permanece pendiente. No se mantiene un warehouse
-facturable abierto para obtenerlo después del ensayo único autorizado.
+limitaciones explícitas. La funcionalidad, seguridad y capturas de resultados
+solicitadas están documentadas. La segunda sesión tuvo autorización de costos y
+retiro al terminar; su estado final se registra en `capture-session/`.
 
 El análisis local SQLGlot inicial interpretó 28 de 32 sentencias;
 dos CREATE EXTERNAL SCHEMA, CREATE ROLE y REFRESH MATERIALIZED VIEW quedan fuera

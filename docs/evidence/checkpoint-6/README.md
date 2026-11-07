@@ -47,13 +47,24 @@ errores de desarrollo y las denegaciones esperadas se conservan; sus FAILED no
 invalidan el PASSED del ensayo final. El JSON original last-failure documenta
 el primer intento de asumir el rol, anterior a la corrección por ExternalId.
 
-## Capturas pendientes de consola
+## Capturas reales de consola incorporadas
 
-No se obtuvo acceso visual fiable durante la sesión; no se fabricaron capturas.
-La evidencia tabulada del PDF proviene de respuestas reales de APIs y está
-identificada como tal. Al retirar el ensayo no quedan pantallas del warehouse
-activo que capturar. Una nueva activación para obtenerlas requiere autorización;
-no está incluida en el ensayo único ni se ejecutará automáticamente.
+El propietario autorizó una segunda sesión breve y guardó tres capturas reales,
+revisadas visualmente e incorporadas al PDF. Incluyen el SQL, la base analytics y
+las grillas de resultados:
+
+- [Eventos](redshift-eventos.png): cinco campos JSON y seis filas válidas.
+- [Métricas](redshift-metricas.png): dos ventanas, cantidades e importes esperados.
+- [JOIN](redshift-join.png): una fila conciliada, 2/2 aprobadas y diferencias cero.
+
+El usuario SQL de consola fue IAM:RootIdentity, con checkpoint6_analyst. Los nueve
+registros se recuperaron de la retención Kinesis; no se reenviaron. Los originales
+PNG no se editaron. Las vistas ampliadas del PDF son recortes de visualización
+del original, no imágenes sintéticas. Plan, apply, consultas y retiro de esta
+sesión se guardan en `capture-session/`.
+
+Las siguientes son capturas adicionales opcionales; las tres exigidas de resultados
+ya están guardadas. No se vuelve a desplegar para obtener más sin autorización.
 
 1. `01-workgroup.png`: consola Redshift Serverless, workgroup y namespace
    coderhouse-dev-analytics, 4 RPU, estado disponible y acceso privado.

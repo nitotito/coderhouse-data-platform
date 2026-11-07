@@ -31,4 +31,5 @@ infra/*.log
 **/__pycache__/
 .codex/checkpoint6-python/
 tmp/pdfs/
+docs/evidence/checkpoint-6/capture-session/timeout-helper*.log
 
