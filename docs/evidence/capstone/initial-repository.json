@@ -1,0 +1,1478 @@
+{
+  "checked_at_utc": "2026-11-07T04:35:18.539181+00:00",
+  "git_branch": "feature/final-capstone-audit",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 13,
+      "sha256": "547f59603028195ff9f8a87d04c4651551e8bd0d68f075257dfd549cd846b25b"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 568,
+      "sha256": "ef39d25b95040a3cbff715c86350bedf71b6daf9df4d77667c1c6896cfd75a42"
+    },
+    {
+      "path": "PLAN_OUTPUT.md",
+      "bytes": 3866,
+      "sha256": "00e048d8d60d1650e98e56faf75ee9e711f1a880df5e913a427dc216e0fb86e6"
+    },
+    {
+      "path": "README.md",
+      "bytes": 32580,
+      "sha256": "5bf67afe2d0abd769d550cc791c0efadac5e3f6c2e9ea8731f3d40ac957373b6"
+    },
+    {
+      "path": "app/flink-transactions/pom.xml",
+      "bytes": 8464,
+      "sha256": "dde786f41001a51611e3af034efbea23b64cc8e0e81b3eb2fe92bd2390afebd8"
+    },
+    {
+      "path": "app/flink-transactions/src/main/java/com/coderhouse/flink/IcebergLakehouse.java",
+      "bytes": 5077,
+      "sha256": "0b8870655e58ee2d1dbb61e4b11365fb6776307115ac6adecd4c2e50886ac5f5"
+    },
+    {
+      "path": "app/flink-transactions/src/main/java/com/coderhouse/flink/JobSettings.java",
+      "bytes": 1247,
+      "sha256": "311fc7aa882470a3cef593f089cb8f72d4bdf29d892edd8862c11909b174bdf5"
+    },
+    {
+      "path": "app/flink-transactions/src/main/java/com/coderhouse/flink/TransactionAccumulator.java",
+      "bytes": 187,
+      "sha256": "60a942eb981b2608b8235442b8e69745c7da363ac47a3b7a88f8993865b0990c"
+    },
+    {
+      "path": "app/flink-transactions/src/main/java/com/coderhouse/flink/TransactionAggregate.java",
+      "bytes": 1153,
+      "sha256": "1548e3454e148f42e7c2d321075f2966b9087db578df732ba78294241d589c21"
+    },
+    {
+      "path": "app/flink-transactions/src/main/java/com/coderhouse/flink/TransactionEvent.java",
+      "bytes": 1664,
+      "sha256": "8ecb3efe444c4f67e5ac8b931ef2e298d1371ea38c30f0730cd0383c79f31a1c"
+    },
+    {
+      "path": "app/flink-transactions/src/main/java/com/coderhouse/flink/TransactionJob.java",
+      "bytes": 5552,
+      "sha256": "92ef684e0fcea6175bc668029768bc83f9b639172505afb96d59628f0383cf38"
+    },
+    {
+      "path": "app/flink-transactions/src/main/java/com/coderhouse/flink/TransactionParser.java",
+      "bytes": 1673,
+      "sha256": "be564e4d93f093f5e1c07cc7e55cf1d1582895cf54746f49bc0ee54e9cde1d7f"
+    },
+    {
+      "path": "app/flink-transactions/src/main/java/com/coderhouse/flink/TransactionSummary.java",
+      "bytes": 909,
+      "sha256": "f3ad0633844c752ad8e953b3902695a686ead14da0a65b2c9db89280d6316a80"
+    },
+    {
+      "path": "app/flink-transactions/src/main/java/com/coderhouse/flink/TransactionWindowResult.java",
+      "bytes": 927,
+      "sha256": "ad54c56ef7cfd37509f7a0eadcb124a330710b884b133084ba2704acbf768be8"
+    },
+    {
+      "path": "app/flink-transactions/src/test/java/com/coderhouse/flink/IcebergCheckpointTest.java",
+      "bytes": 3550,
+      "sha256": "cf9fc0a307799f451a44f723f2afee9c535e1e52081c112a653571a1ce35d8ca"
+    },
+    {
+      "path": "app/flink-transactions/src/test/java/com/coderhouse/flink/TransactionPipelineTest.java",
+      "bytes": 4352,
+      "sha256": "137e415eb73b7e76c6753fbaf4493ceec6b971ee8f975668cf87884e2d2ccdf5"
+    },
+    {
+      "path": "applications/flink-transactions/README.md",
+      "bytes": 345,
+      "sha256": "2c87d2bdc6395f3a80ca86c8ed6a23b97d31da017fd6e496302d4a6961fcdf34"
+    },
+    {
+      "path": "bootstrap/bootstrap.ps1",
+      "bytes": 2327,
+      "sha256": "8a1a1b11e67911aaff1b7ffb91bce2f8e60e47bac46527fa741a419a070c2ed8"
+    },
+    {
+      "path": "docker-compose.flink.yml",
+      "bytes": 1789,
+      "sha256": "47cf64a025808f892445fbceec83d2d12d371fdea3c33671c0214fc36f7e038e"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/001-01_schemas-1-execution.json",
+      "bytes": 509,
+      "sha256": "820c635322236e7b467a206f9211e8d42fd72d05fa330ad8e9ff97aaf0e5e854"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/001-03_analytics-1-execution.json",
+      "bytes": 2372,
+      "sha256": "0531de3bdd67e276fbeb2954b2acf648aba4ea3cb3ff0397ed228d6e3583695e"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/001-historical-baseline-execution.json",
+      "bytes": 665,
+      "sha256": "fce9058651893693bb53f94fbcc3f407bc1a61a763e0764e7ac33048d08abb26"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/001-historical-baseline-results.json",
+      "bytes": 74,
+      "sha256": "885ac4107a6b2b4d69e12e551993cebcd99b36042c728fecefd83552af14374e"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/001-security-create-user-execution.json",
+      "bytes": 597,
+      "sha256": "1d8cd841959d0a57d594e63b29927b9b03fd59022adec5d0e8de575172c4ef56"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/001-security-existing-user-execution.json",
+      "bytes": 621,
+      "sha256": "1fdd0ad0ad2f74d7e4a24d7954d76db06b24eb96c6029fa78fb2a302698e6f95"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/001-security-existing-user-results.json",
+      "bytes": 32,
+      "sha256": "e991256044998cfab6a833a4b9cd2e98b5d2b8759f66ab15c9121231a7ea196e"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/001-security-external-schema-usage-execution.json",
+      "bytes": 548,
+      "sha256": "bbaa0f4b87c9111bf45fc4c3fabb2044b03991f32fb03140f387ec19528c341f"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/001-serverless-usage-execution.json",
+      "bytes": 563,
+      "sha256": "370507717d43818d2f7ddbf18d3c6e05aff8bf3d9d415b84b7b94fa637e62a1c"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/001-serverless-usage-results.json",
+      "bytes": 2525,
+      "sha256": "c72b5b5f3c30809fa90c6706f0937285e7083c6f2eacc48189dd783fcc489162"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/001-streaming-external-id-execution.json",
+      "bytes": 896,
+      "sha256": "5f5f6a8f311659fac9739d692701636e2086e40722ce8366ef29e27e61396731"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/001-streaming-retry-execution.json",
+      "bytes": 1376,
+      "sha256": "000e8fa57aff561f70177049c6dbe1fa656883cff6fe61b2a39fe78692130dff"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/002-01_schemas-2-execution.json",
+      "bytes": 527,
+      "sha256": "6f8773795ffca82711428a5d576ca0546d4454571f57d2185601958af38e4623"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/002-03_analytics-2-execution.json",
+      "bytes": 1071,
+      "sha256": "47c6aee32e369a10de0bacc5f0d9ae25f79c5b3ad42b612e72a597d89994a318"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/002-replay-guard-execution.json",
+      "bytes": 600,
+      "sha256": "ca1efd1c656c2222978381bdd475f5675e04712f251fbce0a87f0cccbc4b1feb"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/002-replay-guard-results.json",
+      "bytes": 34,
+      "sha256": "9458f3e69121e575c8ae1a707611aba232ff5d0a9c21c16f1ed69436a63cd005"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/002-schema-grants-execution.json",
+      "bytes": 566,
+      "sha256": "0dc4e3f1b04196107c67922c3241bbd35787cb5b3178d6cc72be3fa843e00e88"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/002-schema-grants-results.json",
+      "bytes": 491,
+      "sha256": "902667187c63b91a81896a903cba97f58042c165299f9cb8d77182b837cf9ca9"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/002-security-grant-role-execution.json",
+      "bytes": 602,
+      "sha256": "ba847fb4e33205d7fd768a47648eef795b08adfdd683ad47ee22d438288759db"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/003-01_schemas-3-execution.json",
+      "bytes": 526,
+      "sha256": "4f8ccec150e7622e37d4875b3bdea335668534526d084de9730a621a189e4509"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/003-04_iceberg-1-execution.json",
+      "bytes": 1531,
+      "sha256": "fe301bac0acaba01b48aabf4264520468807b4328e914aecf9c6c4a9daa1fa54"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/003-database-identity-execution.json",
+      "bytes": 548,
+      "sha256": "856884e83975af6faa55a90a9489e389e2f177c9c697981c75b16eca0173bd5b"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/003-database-identity-results.json",
+      "bytes": 201,
+      "sha256": "a39dbbd0bcf0c78f3a869031c084826045dc17f1c4c2b34fa14abe559ae000ef"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/003-refresh-execution.json",
+      "bytes": 545,
+      "sha256": "d3510fa3ebec24ceb39e07d14af2a40fb84afbcf34588b91edf2af3eb8708b76"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/003-security-grants-execution.json",
+      "bytes": 624,
+      "sha256": "185ca7e18be13a6e8edcf5986460b72c19d639088007c79ae21be427f1dab661"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/003-security-grants-results.json",
+      "bytes": 771,
+      "sha256": "1d7ced465123cef41c94cead11cc2f154e778f2f58909d84bb0647acab1fffd6"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/004-01_schemas-4-execution.json",
+      "bytes": 567,
+      "sha256": "f7f7e91a02dc2961cc0923d4fc705ad252625f9506334171749c99ff88b6443e"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/004-05_security-1-execution.json",
+      "bytes": 520,
+      "sha256": "f8069cbac72236dec6bbb45eeb476f6408f6529bb5b7c6ee6cd1a14e49167c63"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/004-mv-definition-execution.json",
+      "bytes": 651,
+      "sha256": "b56c0124e3d261b8e12e90ddec713e8cfee2ba1251b5106ef1076a2279887a60"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/004-security-switch-user-execution.json",
+      "bytes": 592,
+      "sha256": "4c701363777752493b98598e4581f40aa4418470a721d832d94530fdb0a87807"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/004-typed-execution.json",
+      "bytes": 585,
+      "sha256": "f66120d06b3125a32bb0b7870be29d5549846009446a1f04a845dc9fc2a64054"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/004-typed-results.json",
+      "bytes": 3773,
+      "sha256": "48b867402907b84ea32b568522513ee0f627fb4c6d4cb3dd6a78360795bcc3ea"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/005-01_schemas-5-execution.json",
+      "bytes": 591,
+      "sha256": "c2f300aa185dcebcd45cea5dfcdc5c860c2e63a896b6abc6b71adcfd9ed03e01"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/005-05_security-2-execution.json",
+      "bytes": 531,
+      "sha256": "534845f1db28af4df45facbcf56e68bcca3e50c25209ec990b584d8d4b57ca62"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/005-metrics-execution.json",
+      "bytes": 588,
+      "sha256": "3abe640e6da66b58cbfd8b3bf96ab79dbaeaad570881b030444680d08a423b80"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/005-metrics-results.json",
+      "bytes": 293,
+      "sha256": "076bdf5398983bc54c0c9c3d0e4525ce1895f7dc1c74dbacfcdb7256463510f6"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/005-security-identity-execution.json",
+      "bytes": 574,
+      "sha256": "5f304e847bd24b60a733486f1ca4c1b6229fe397914a62e2553fdb34a19fd334"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/005-security-identity-results.json",
+      "bytes": 58,
+      "sha256": "1d1f5a9b837ec1b44782d41cabe2cf6b007a4ded03e28aeeaa6be679cbed5011"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/006-02_streaming-1-execution.json",
+      "bytes": 1376,
+      "sha256": "b2745d766a0ebaff5d6f3df5ff3a03d2e190809d171e6c87b69b4e0f28b0b29a"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/006-05_security-3-execution.json",
+      "bytes": 531,
+      "sha256": "2a86df77abd5131956d23a0eac9586198b6d61932f2d3df24dd61b93484e3be8"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/006-iceberg-join-execution.json",
+      "bytes": 583,
+      "sha256": "4cdaed6743525831b8857d3d19c621c726e94c487009e9b3e4442c570aecc82c"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/006-iceberg-join-results.json",
+      "bytes": 320,
+      "sha256": "db123aaaa20e2906a94d2b0d0328ef80aca7b70b9ea3d8ad99b39c61dc1204aa"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/006-security-allowed-metrics-execution.json",
+      "bytes": 610,
+      "sha256": "8c2eaa4344aa98b415ae4054047ec844b56ae28377d745f5f5a06a7639987eb0"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/006-security-allowed-metrics-results.json",
+      "bytes": 31,
+      "sha256": "7f3ed547854c66e2718e7758b8107f6032c1ab74551d1ab3fc4031f71b8c7a59"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/007-05_security-4-execution.json",
+      "bytes": 536,
+      "sha256": "cd93c64579527e5b5ccc23926711d7d0443f0d517cb401d5cadb8e1aec94de9a"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/007-invalid-json-execution.json",
+      "bytes": 611,
+      "sha256": "45f1e877821ef5c7406cbf4d47d99dd088e9ae4ef0daafbeb3706b34273d39c1"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/007-invalid-json-results.json",
+      "bytes": 34,
+      "sha256": "dbf8fbef7bcc0c1f7fd70f9a6b734bc78687702eb421401c62b0f18dfeffd3b2"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/007-security-allowed-join-execution.json",
+      "bytes": 605,
+      "sha256": "0720e361fa11e7e18f62a1b6103660398d2088406f5431141230aa188766e256"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/007-security-allowed-join-results.json",
+      "bytes": 31,
+      "sha256": "0b51de8358b1623e603bedbead46e5b1a72ed4b5982811eeabff16126f8f8012"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/008-05_security-5-execution.json",
+      "bytes": 531,
+      "sha256": "96e0ea3a04ae52d407c2e192fe3fef4312572a32dc13eef7ed7481e3e99110e3"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/008-monitor-1-execution.json",
+      "bytes": 613,
+      "sha256": "fbfef50d574732aa67de240b4bf009b5831701e2d59bf63f59dcb5a47a1a4d20"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/008-monitor-1-results.json",
+      "bytes": 27285,
+      "sha256": "21810fa8339a606adc6fb752b58234f6796a8e814603f90a3a8f5308efb7c3d8"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/008-security-denied-raw-execution.json",
+      "bytes": 649,
+      "sha256": "d8f48b4c3ec4d1a1a03b3715d6d3e931e08c2e3671fbdf49a60e7af7928f5d72"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/009-05_security-6-execution.json",
+      "bytes": 548,
+      "sha256": "ec28544e5526b4dbae902e5daad4a618a927b95415dc481bc2cbeeb08e3f2433"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/009-monitor-2-execution.json",
+      "bytes": 608,
+      "sha256": "80c7d9815901f40d697119c0f84d087758769a04c6d2a67d0aaab3966bd4d9c2"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/009-monitor-2-results.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/009-security-denied-refresh-execution.json",
+      "bytes": 654,
+      "sha256": "b93c1be89164f6a63fb1d5a9a498550e78d6849f833d26e2203c7e494ae24965"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/010-05_security-7-execution.json",
+      "bytes": 561,
+      "sha256": "0fb941dc06cb495ded426d3c85764a41f142e5229a7d17f4bcbb46ac6256b272"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/010-monitor-3-execution.json",
+      "bytes": 651,
+      "sha256": "d7628e20c6018fc5ff4f5dcd6bf6d732b847402ea37ac49a4f26cf655b32831a"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/010-monitor-3-results.json",
+      "bytes": 406,
+      "sha256": "2594180f45f1328c2e0f480b6926d5f6f59ee51884a4a92875d29eaebc214180"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/010-security-reset-user-execution.json",
+      "bytes": 573,
+      "sha256": "72a7ca1d563af859e29771e139c3a7fe2918db4b8d335f24f37ead6001ca8dbe"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/011-05_security-8-execution.json",
+      "bytes": 566,
+      "sha256": "cffb0b7d16dd6dd31f69d8f9f7917451fec0d54ea736a050466133386fe670ac"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/011-monitor-4-execution.json",
+      "bytes": 551,
+      "sha256": "09b8d6052d7e1ed764493a801eb1fa9f1a1b2d12041ebcd99e796ce6bf6fe9f9"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/011-monitor-4-results.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/012-05_security-9-execution.json",
+      "bytes": 560,
+      "sha256": "23239533e3d665916819d0a9fac7705f845c5c4fc08672efbad2ad23b861259a"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/012-monitor-5-execution.json",
+      "bytes": 660,
+      "sha256": "ff6092d1e23e7d5f733810e9e509f28009a9be57bf89b6bca02e500352d4c03f"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/012-monitor-5-results.json",
+      "bytes": 140,
+      "sha256": "074a631342c8a76e9168d05e225e39892c9e9d56ab3652ec1facf38111137382"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/013-monitor-6-execution.json",
+      "bytes": 582,
+      "sha256": "b373894208a6050754d349fdefc19d3d89c9e2161effe7322bcbd720047098f6"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/013-monitor-6-results.json",
+      "bytes": 282,
+      "sha256": "c9ab235fd27480c80d9afdfc65f8a97a40aed4383ffbaeb95ebd3a5ca6115c4a"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/014-monitor-7-execution.json",
+      "bytes": 743,
+      "sha256": "8b2bcc593b5b2c905ade4121b6230e8768f12251419f853ed082b2a0447d1d31"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/014-monitor-7-results.json",
+      "bytes": 2468,
+      "sha256": "7bcc831453e58a8878ba39bbdf269a5f91ba02b71e00572b928fbc0bab57369c"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/README.md",
+      "bytes": 6151,
+      "sha256": "361a0a35abadf33e55bf1f1a82b469fb5f991c7e8081d7dcc80e09289eba5480"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/001-01_schemas-1-execution.json",
+      "bytes": 509,
+      "sha256": "8dc648acfac7843395e630c5f8e397792a31e5d18967ebbf88b5f2a18c9b89bf"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/001-capture-console-identity-execution.json",
+      "bytes": 548,
+      "sha256": "258d2bb3cfbc19f346d8102d78718c8a01db98d2629a8760954f4b7bca375a3e"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/001-capture-console-identity-results.json",
+      "bytes": 51,
+      "sha256": "e63a5d68683495b88c7ca4bcf8faff2edb82d501dd14f58fa49b20630b202997"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/001-capture-schema-check-execution.json",
+      "bytes": 595,
+      "sha256": "1cd050480a606e98601e411021c9368c39977d786e001cfb7d587a78ea5fd567"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/001-capture-schema-check-results.json",
+      "bytes": 83,
+      "sha256": "af0a8d8a6c345ef6720d1e8ab3c276fe76d986f0309a116973b1beb7af7ad072"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/001-console-users-execution.json",
+      "bytes": 541,
+      "sha256": "9eecf87a7b03076296de4803de3e0a81473a9fb136f9a33c8f4636b234a6db43"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/001-console-users-results.json",
+      "bytes": 52,
+      "sha256": "2782009af41c2276e0d04259e24af0793c04a75354a1fd542655798eb9b90fc2"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/002-01_schemas-2-execution.json",
+      "bytes": 526,
+      "sha256": "ff6dfa932fd484871518e33ff44e253e94e175f973091d0a958c9acc403e0fe4"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/002-capture-console-grant-execution.json",
+      "bytes": 543,
+      "sha256": "d1e8dddce821475cf1f92def58e9618bf72bc9af1d8498f09fdd536b6fac6a91"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/003-01_schemas-3-execution.json",
+      "bytes": 527,
+      "sha256": "f3c361fd25f44b889c132b6e365486b30fbce1d41b956b3f24c1a2d50663f850"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/004-01_schemas-4-execution.json",
+      "bytes": 566,
+      "sha256": "cb9f21be40e01aaf3a57ee7b88777089549a9bdf13140986308f800008e4a53c"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/005-01_schemas-5-execution.json",
+      "bytes": 591,
+      "sha256": "cb383602537878dcfd718b8c27537b753162112a798aeb75504ce1da08957c18"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/006-02_streaming-1-execution.json",
+      "bytes": 896,
+      "sha256": "2b4df175631b27aa2ab2ebecdecc3beda4d5c9479171db32059ff09c33358ba2"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/007-03_analytics-1-execution.json",
+      "bytes": 2372,
+      "sha256": "4b8b7bf49120fae0ef3dc41cb9d14838671e42920388f06bc159d85d6e3dd563"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/008-03_analytics-2-execution.json",
+      "bytes": 1071,
+      "sha256": "8f69661aa18a2d7eec392969ef9cda3c100136caeb3fa5c060b9f5bc3f485275"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/009-04_iceberg-1-execution.json",
+      "bytes": 1531,
+      "sha256": "1555d4a89a8814ab9fac7137a2cbf143f13e1f8196e2bfc47f54df3700a6c5e5"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/010-05_security-1-execution.json",
+      "bytes": 520,
+      "sha256": "5c06dd9a50cb20a0b78e2e01b772dda646e60c75b007a9ead481c4b5bedf4a32"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/011-05_security-2-execution.json",
+      "bytes": 531,
+      "sha256": "a54f9738dab3af1414a8f68ba930645697b9dce4bae107c687a6061073ddb5e1"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/012-05_security-3-execution.json",
+      "bytes": 531,
+      "sha256": "e4f2933a86cebe86848fc27718ebd0d60c33da9c22878c3ad51ea503a67de5fe"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/013-05_security-4-execution.json",
+      "bytes": 536,
+      "sha256": "7f81b7a08b5917fb66f3a7db4b638712d249e12d8fd6ea822fff1f44cc9b1d58"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/014-05_security-5-execution.json",
+      "bytes": 531,
+      "sha256": "ca7073747f94b510b2a3b2f95d9cf236fdb8679d2671625ef87e728a70225593"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/015-05_security-6-execution.json",
+      "bytes": 548,
+      "sha256": "b3031ad11c421e17505cff943c6e7e0c1ef904e12b699df54b6e9d485de50b2e"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/016-05_security-7-execution.json",
+      "bytes": 548,
+      "sha256": "2cc25aedac29061a7fdaa6ed18437acb6870efa1f290479646bfe833bb73f484"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/017-05_security-8-execution.json",
+      "bytes": 561,
+      "sha256": "f97e7b7f058d214ea53791ae76abc9f64a53d564c269ff093b0bd4c21f9c9457"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/018-05_security-9-execution.json",
+      "bytes": 566,
+      "sha256": "8e322a8dcac627a662af2a13b32614e5476b4fc146c419b63631bae351f0339a"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/019-05_security-10-execution.json",
+      "bytes": 560,
+      "sha256": "e022a76cc0d9bc25433da00b40f196843ece39419268ab28640259f4209858b2"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/020-capture-refresh-execution.json",
+      "bytes": 546,
+      "sha256": "dae02fc6de3ad580270584656e28429d343b258738f86e4296f37fd3bd6c9cec"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/021-capture-join-execution.json",
+      "bytes": 535,
+      "sha256": "2e7895166ef2204d022c5f5f4a1e10982043fa479a34a1c7793ea9b011957e57"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/021-capture-join-results.json",
+      "bytes": 320,
+      "sha256": "db123aaaa20e2906a94d2b0d0328ef80aca7b70b9ea3d8ad99b39c61dc1204aa"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/README.md",
+      "bytes": 1870,
+      "sha256": "9736dda6bf2484ec9b627d9272990ee332e87c84e8da7061028733b553aeb0f0"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/capture-readiness.json",
+      "bytes": 413,
+      "sha256": "4d7fea34ccee2c1e5ff1f388285b76f3c6d7206b943f671519b9b207b965af77"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/capture-window.json",
+      "bytes": 222,
+      "sha256": "4407d6a89d1598822481d0efce08e3261bc8152ceeb311203e15102c5179b63d"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/cleanup-done.json",
+      "bytes": 88,
+      "sha256": "1486514ab64e0711eb695bba71cc76816a18636f210ab3e6e04cb89755a73bfc"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/cleanup-summary.json",
+      "bytes": 204,
+      "sha256": "f8206ffdda99c8a603fa47d2c47942a05065b97204959182aa2795e4e72c3712"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/cleanup-verification.json",
+      "bytes": 1289,
+      "sha256": "7699901f201ac39fc2d447c38042f5eea6c0495b33f8980faceb267e829511ce"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/deployed-workgroup.json",
+      "bytes": 2804,
+      "sha256": "05d6ace94fc7f86b4a1cf2effb4727d1e1ddb1fc10c37004b8ce5f64af7156fd"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/initial-cleanup-summary.json",
+      "bytes": 615,
+      "sha256": "b39265d1ef13c02a8ee185dafdd56368af9dc5d0ca78ea7c3dd9c3d960beb912"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/initial-terraform-cleanup-apply.txt",
+      "bytes": 6006,
+      "sha256": "9ca2e6fe243d84dec32a6bf25d979e8ed88dab2f0589d64a339cb0c0dbb3dc4d"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/initial-terraform-cleanup-plan.txt",
+      "bytes": 34857,
+      "sha256": "1d3f074f5a8082abe792d827d88ad97bc21b99a358119a254368e5b857a5e27d"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/role-removal.json",
+      "bytes": 496,
+      "sha256": "197578e2ba9ceb2fbc19d105ef1e184fe777466618cbf9deeb5f06b0e87416ca"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/screenshots.json",
+      "bytes": 942,
+      "sha256": "f7de69b28d2347af50287b774d7ac54621f4714ab4c45f8e7fdee92a5f1ed782"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/terraform-apply.txt",
+      "bytes": 4512,
+      "sha256": "bba6b4a5ae4be8b6eba2aac5d252dfd1161de218a88b4560f91c5f0b3fdd67c1"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/terraform-cleanup-apply.txt",
+      "bytes": 1044,
+      "sha256": "79cb545755e6563021671fef5f69c7f7df603308110d50ae87b820ab40638d6f"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/terraform-cleanup-plan.txt",
+      "bytes": 5705,
+      "sha256": "62bad80442e9d28e8a2ced95b5c1490bc9fcb0223138645b980a06e00619c5cb"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/terraform-final-plan.txt",
+      "bytes": 5602,
+      "sha256": "0ece7da668443ee096c27690632af29ec5c5362874ac1b400479ccdae397ece5"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/capture-session/terraform-plan.txt",
+      "bytes": 21034,
+      "sha256": "75cba1ff0544276b3048ca497d414c65612c2fd9308fcbc948e0871728b26ae8"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/cleanup-summary.json",
+      "bytes": 235,
+      "sha256": "3990a4e3210c28f38643cc29824241aee944623e841579d311f6b80d748e19ca"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/cleanup-verification.json",
+      "bytes": 1289,
+      "sha256": "62dff5987db69172ddd820d86240c3446221f11063be5c31dbadcd23507fbf73"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/deployed-execution-role.json",
+      "bytes": 1233,
+      "sha256": "0c4d3693204411dd8b2c2004d04989aec43aa70acb0474170712ee210e4625ae"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/deployed-kinesis-endpoint.json",
+      "bytes": 3670,
+      "sha256": "461e602083e8c33c51f73e35627b4eae669eb1c3d65e9d1f666fdf45f6ac9ed3"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/deployed-namespace.json",
+      "bytes": 757,
+      "sha256": "ec075dec5e2f30705dab1827f98fd71eab824a62251f0d4b62b22f36d8cdab86"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/deployed-usage-limit.json",
+      "bytes": 481,
+      "sha256": "71327ca0d080dcc9bdcca9f8965480cab23c437d3639774bb969066e3b22c4a0"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/deployed-workgroup.json",
+      "bytes": 2803,
+      "sha256": "c733dc6f4984e0928e59706697d07c1060266fe769c64863dc6950e83401dd1a"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/initial-cleanup-summary.json",
+      "bytes": 615,
+      "sha256": "b39265d1ef13c02a8ee185dafdd56368af9dc5d0ca78ea7c3dd9c3d960beb912"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/initial-terraform-cleanup-apply.txt",
+      "bytes": 5508,
+      "sha256": "43a5ed7ea32c4896b09b0c7b05cd47ba04755516382b26c637c835f18b336e1d"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/initial-terraform-cleanup-plan.txt",
+      "bytes": 34859,
+      "sha256": "470d7e336fceb80a5fa2a527ebbc275ee0dbe04f51338a49e87542b3f0f5076f"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/last-failure.json",
+      "bytes": 534,
+      "sha256": "048a5e49c4419ad9bed8b575b448cb8e47183c86e2b32389a7e69bffe8e7ad75"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/local-validation.json",
+      "bytes": 1360,
+      "sha256": "1df8b0828de59e94157903d15466ed3922a824f6719a4f2418816ce102f2ec1e"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/pe6_20261107_033721-events.json",
+      "bytes": 3362,
+      "sha256": "0aefd5158c9b527db3005bbb86e10ebd187f973152e018f11823d603d35a1e03"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/preflight-flink.json",
+      "bytes": 481,
+      "sha256": "1ab2fe0e3855766ec04fd6cfea263181a3cdc81bc1b5f3046dc84caea7c15b21"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/preflight-glue-table.json",
+      "bytes": 3270,
+      "sha256": "26ec42a622599d81ae759d4b5b9e194270b8081e2540bb434d0c403770738aba"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/preflight-identity.json",
+      "bytes": 308,
+      "sha256": "3f3cb3868caa60abc9a85e36de19660a723f40a630d7b74138d6a581fcc09f25"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/preflight-kinesis-key.json",
+      "bytes": 324,
+      "sha256": "4ae2ce9c0d67d3ec7722b8a967b854b2be093cca40e8e17d75cb56894fb13a00"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/preflight-redshift-provisioned.json",
+      "bytes": 229,
+      "sha256": "f365c546c16a0066774ce18d1ed8166649cf8b11b93619370aee870ed5e2ddbb"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/preflight-redshift-serverless.json",
+      "bytes": 211,
+      "sha256": "66ca4c20980fc398041071cf4c83f288db9f36a07e2bd7e524569f3206b17afd"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/preflight-stream.json",
+      "bytes": 912,
+      "sha256": "f55dabc9cba4fe246fb5528f683fc79bd73b4c5a00253d3c977b54464b1fdc25"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/preflight-subnets.json",
+      "bytes": 700,
+      "sha256": "7ed18396d5da1b9c10bd9070bdb2a302fe6d5d404a03f8b526bd38e9324f3ad8"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/preflight-versioning.json",
+      "bytes": 265,
+      "sha256": "82aecdac4136802c44bf72c19f120ed1a6824d0b3feac793a8e78ec3aa4a378d"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/redshift-eventos.png",
+      "bytes": 183873,
+      "sha256": "bfed62f579225f88ba8e92e89970bcd9ba2e53bff0ecee748c550b88c4baf5c1"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/redshift-join.png",
+      "bytes": 112910,
+      "sha256": "f0c1c7d6fd3e2f6d99e21526355e68691c4ff624d72015ebcdf70581ceef75e5"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/redshift-metricas.png",
+      "bytes": 129265,
+      "sha256": "4966e6a372d2820d2899a2897b154eec6a28c6ce4c36118ca4ba169254e678d7"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/security-summary.json",
+      "bytes": 1148,
+      "sha256": "4cc14d0a93ee07af1ce6538c85d5d708b7de17579790fc504dec505da258e52c"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/sql-parser-results.json",
+      "bytes": 3455,
+      "sha256": "c25547994ee6cb9bd309a1e7ae3e8779c42c0011fe92c07d93f900bfc84c2a9a"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/terraform-apply-second.txt",
+      "bytes": 4609,
+      "sha256": "8da3204f0921df3113dbf7d6232bfb270e13993e7e95e15218065893008c8788"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/terraform-apply.txt",
+      "bytes": 3242,
+      "sha256": "2448a1c997756ab8fe9c11be28e17dbc5171e4735029c128ac4b9c9e275ee0ff"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/terraform-cleanup-apply.txt",
+      "bytes": 1044,
+      "sha256": "79cb545755e6563021671fef5f69c7f7df603308110d50ae87b820ab40638d6f"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/terraform-cleanup-plan.txt",
+      "bytes": 5705,
+      "sha256": "d7cc05f485c1e18b5be5cc6a247655b51d1c92773569b35fc0a9b8d1d8eefd1e"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/terraform-final-plan.txt",
+      "bytes": 5669,
+      "sha256": "b3d23537f17154414fddd7ea5cc96deb3cfc87fca1457d7cc71e365573d8087c"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/terraform-final-state-addresses.txt",
+      "bytes": 2088,
+      "sha256": "706432801d4f572b86be9fb6cc94612b4d1c22aab17228d49ce091d5d7852785"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/terraform-plan.txt",
+      "bytes": 20645,
+      "sha256": "0c2f82cfc8a8757e7130719ffea43b5a9da0fa650293a8ba7d8c47123900b3dd"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/terraform-trust-apply.txt",
+      "bytes": 2463,
+      "sha256": "8fa9510f2d6594a538ef1b0209a57a5ab90759ddde4897a90e6899847e90dd3f"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/terraform-trust-external-id.txt",
+      "bytes": 9155,
+      "sha256": "b8caec58cb9b440f7a529f37850f0798b795e752586c8868c05d9ca428c971bc"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/terraform-trust-fix.txt",
+      "bytes": 8419,
+      "sha256": "c8ab0b8b0d725f18fe2f14a44d9217219be2ec2aad1b76cfb7eb531e7cb69ac5"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/test-authorization.md",
+      "bytes": 2495,
+      "sha256": "e8d149c09d72e2f4a5f3dc75426c9936961d008e0674bfd9903bf3cad9fabdfd"
+    },
+    {
+      "path": "docs/evidence/checkpoint-6/test-summary.json",
+      "bytes": 969,
+      "sha256": "33d9dd45c5f9b7e9c2e93046b23b00c161dd610561255c74dc26d8acd3641e4d"
+    },
+    {
+      "path": "docs/evidence/dashboard flink.png",
+      "bytes": 312750,
+      "sha256": "4c6290ee7922d9c5de5f00b63de74e1dcfcfa7ba45df1d788b33a0deb0fc82cf"
+    },
+    {
+      "path": "docs/evidence/glue-transaction-aggregates.png",
+      "bytes": 298096,
+      "sha256": "720a0b99cdbf47789ed1b5e054b5e8c54760e546b92fe51524c7b1302708e9cd"
+    },
+    {
+      "path": "docs/evidence/iceberg-apply-attempt.txt",
+      "bytes": 1476,
+      "sha256": "04769cf1613cac935633ff3dea02afa7686c601a24a4c2a6868850349c1021ee"
+    },
+    {
+      "path": "docs/evidence/iceberg-apply-success.txt",
+      "bytes": 2016,
+      "sha256": "6196a3f152005382dd3ea6f301845c51051c91d36648e474430b2aa1560c9dce"
+    },
+    {
+      "path": "docs/evidence/iceberg-athena-files-execution.json",
+      "bytes": 3043,
+      "sha256": "8e3efe8f3edba8e230626e443e6a90d8552048f513808c73652ef3c773fd7dc3"
+    },
+    {
+      "path": "docs/evidence/iceberg-athena-files-results.json",
+      "bytes": 6765,
+      "sha256": "67aa30ca24f54c52003548249d914a5225f4811c0b8bada8e58bb8be06e28d8e"
+    },
+    {
+      "path": "docs/evidence/iceberg-athena-snapshots-execution.json",
+      "bytes": 3067,
+      "sha256": "06229c6a8cd55ec6b8db0588ceb7be74f6fcea85a3680fe2fd3d40126edfb849"
+    },
+    {
+      "path": "docs/evidence/iceberg-athena-snapshots-results.json",
+      "bytes": 7149,
+      "sha256": "f34785af0d22d22ea65647e893de62a094f464b09c5b7911e5648fc285ca65ba"
+    },
+    {
+      "path": "docs/evidence/iceberg-athena-validation-execution.json",
+      "bytes": 3122,
+      "sha256": "a01314e98cb97ac7535bedd2d96754137bd40420ebefbd651a428fba41e3422f"
+    },
+    {
+      "path": "docs/evidence/iceberg-athena-validation-results.json",
+      "bytes": 9599,
+      "sha256": "bbc29f509f2b1181620a71efd3754c2d4372405d1133b1b980488bc9f1fc739d"
+    },
+    {
+      "path": "docs/evidence/iceberg-aws-flink-after.json",
+      "bytes": 3312,
+      "sha256": "5855e677291118f0280a58664e0b989497337f77cbc82564214d17d8799f6055"
+    },
+    {
+      "path": "docs/evidence/iceberg-aws-flink-before.json",
+      "bytes": 761,
+      "sha256": "3642b762e52068c8b11fff3ee13474b54842508b22927f21b6ac7f714b38039e"
+    },
+    {
+      "path": "docs/evidence/iceberg-aws-flink-running.json",
+      "bytes": 3599,
+      "sha256": "f5532751b2f8d1df7e3e23b1606493f0e7072c14f33a11a17f0122e949f9aba4"
+    },
+    {
+      "path": "docs/evidence/iceberg-aws-preflight.json",
+      "bytes": 2123,
+      "sha256": "931a3f303e94586272a2b15c7a1183a1d8d86af163ab6d4fdaf0fe3d395811b7"
+    },
+    {
+      "path": "docs/evidence/iceberg-aws-test-summary.json",
+      "bytes": 1063,
+      "sha256": "908d2868140a067b052adab4837c5914cc6e59e25fdd96b5774b727affc6e72c"
+    },
+    {
+      "path": "docs/evidence/iceberg-aws-versioning.json",
+      "bytes": 31,
+      "sha256": "c09f5c2ec78beeb6322bd85f53999dfd2bb6a0db15c1596d9781e483e98604f9"
+    },
+    {
+      "path": "docs/evidence/iceberg-build.txt",
+      "bytes": 56427,
+      "sha256": "033e5cf7033c321daab61cd79085fcd73a9c584188a1f85de25a79e38f1e8221"
+    },
+    {
+      "path": "docs/evidence/iceberg-checkpoint-logs.json",
+      "bytes": 2266,
+      "sha256": "1795fd84ba682bee0e7685862ce5a54625fa632a2bb6b4a8936fc1a89ef2be44"
+    },
+    {
+      "path": "docs/evidence/iceberg-deployed-artifact.json",
+      "bytes": 431,
+      "sha256": "9d54a32c8c2e95884bee97fb97e2606e864ef88418a1f0519ac1b492d9a0de39"
+    },
+    {
+      "path": "docs/evidence/iceberg-deployment-plan.txt",
+      "bytes": 11787,
+      "sha256": "0891ea918e88ead6ca06d830087c23cdee72e80d158fd1c73b6927f5dc41aa44"
+    },
+    {
+      "path": "docs/evidence/iceberg-errors.json",
+      "bytes": 105,
+      "sha256": "69f4d763e0665cd004d555f5ce19d9e682c7d7dd9943c995c81c99363076984d"
+    },
+    {
+      "path": "docs/evidence/iceberg-final-plan.txt",
+      "bytes": 5667,
+      "sha256": "7ebfabfeb570e7d17318e0f0f6ded014d0f87c96a877c1555d1ce66c8139d68c"
+    },
+    {
+      "path": "docs/evidence/iceberg-glue-access.txt",
+      "bytes": 643,
+      "sha256": "94d416f7899daf2ecbd14055926ed419e87a3c6920a0c0b1b27f559b5b4aac06"
+    },
+    {
+      "path": "docs/evidence/iceberg-glue-before-events.json",
+      "bytes": 6795,
+      "sha256": "ee7133477dfc24080972c692acec3f9c81fb18e08f8c85ba0dcaa4cc5a5a370b"
+    },
+    {
+      "path": "docs/evidence/iceberg-glue-table.json",
+      "bytes": 7018,
+      "sha256": "c74bc852247b1186a2de6e59b1adc8cdbbc36cad6b93d87d1652a39f63ac350e"
+    },
+    {
+      "path": "docs/evidence/iceberg-jar-inspection.txt",
+      "bytes": 669,
+      "sha256": "b2620c4e33bed15ffadaa100a184605d8628ccb62e53473c2b4bd68ab22cb00f"
+    },
+    {
+      "path": "docs/evidence/iceberg-jar-sha256.txt",
+      "bytes": 240,
+      "sha256": "126d3348da91d342324f93236547b997a67c7fa08c67d5f00ca7ed877366fc72"
+    },
+    {
+      "path": "docs/evidence/iceberg-kinesis-test-events.txt",
+      "bytes": 1590,
+      "sha256": "d053fba180b6bd54ca5e5c33a6640716f341a5a93992396fc7d175ac562d4376"
+    },
+    {
+      "path": "docs/evidence/iceberg-layout-plan.txt",
+      "bytes": 5667,
+      "sha256": "e70bf9b209ccf5ffca98c2a386cd9864e09680b1e1656692b29977f76fc1c667"
+    },
+    {
+      "path": "docs/evidence/iceberg-layout-tests.txt",
+      "bytes": 682,
+      "sha256": "0006e3cfc098ccca977f616c49b8069d89ff3631bf4f3a6e39a933e35ff15904"
+    },
+    {
+      "path": "docs/evidence/iceberg-metadata.json",
+      "bytes": 2480,
+      "sha256": "20e26f1d8b3c418f2c530f497bed424e9279d921dfa65584ffad3be907ce5532"
+    },
+    {
+      "path": "docs/evidence/iceberg-plan.txt",
+      "bytes": 13612,
+      "sha256": "3865660c439b757f341b9d3c3de3dac9a584adedfa418ed6c7e4d5a218716997"
+    },
+    {
+      "path": "docs/evidence/iceberg-s3-objects.json",
+      "bytes": 3460,
+      "sha256": "12f1742f129b5748f486aefaed3eb2a8965637da51e16d4d2803febc7b963f87"
+    },
+    {
+      "path": "docs/evidence/iceberg-state-addresses-after-layout.txt",
+      "bytes": 2088,
+      "sha256": "706432801d4f572b86be9fb6cc94612b4d1c22aab17228d49ce091d5d7852785"
+    },
+    {
+      "path": "docs/evidence/iceberg-state-addresses-before-layout.txt",
+      "bytes": 2088,
+      "sha256": "706432801d4f572b86be9fb6cc94612b4d1c22aab17228d49ce091d5d7852785"
+    },
+    {
+      "path": "docs/evidence/iceberg-terraform-validate.txt",
+      "bytes": 38,
+      "sha256": "933ab06a1b6e69161bbc44f02242ef793194f4537737f1ba2ed52c0ee473deb7"
+    },
+    {
+      "path": "docs/evidence/iceberg-tests.txt",
+      "bytes": 682,
+      "sha256": "8287a44b8f7898212031cab9b35fd9a852d8b95ffa282ef37f4f2577ec598d83"
+    },
+    {
+      "path": "docs/evidence/iceberg-validation-status.md",
+      "bytes": 7884,
+      "sha256": "8da26ff9dda143f78888d74c6d4f806984359207fee72e3e7c44fc8e578b7e6a"
+    },
+    {
+      "path": "docs/evidence/kubernetes-pods.txt",
+      "bytes": 277,
+      "sha256": "b501e083c57f049230a62fdb88de7c6bceca4dcfba0ee4df33545ba12f49f99b"
+    },
+    {
+      "path": "docs/evidence/producer-logs.txt",
+      "bytes": 2261,
+      "sha256": "ff6bd78507807393a0ca7a55bbd388df6452a7b605d52824f1b807f8e77dba2e"
+    },
+    {
+      "path": "docs/evidence/spark-logs.txt",
+      "bytes": 23500,
+      "sha256": "f026ddac7c79d1abdddc1da985cb38dddfa1050a8193c6b3376e2b6b0bfc16a9"
+    },
+    {
+      "path": "docs/glue-screenshots.md",
+      "bytes": 1543,
+      "sha256": "59d3479b1ef5de504a611c2db3b2cf41c4d0f25886a0ec545984b1b93775d87a"
+    },
+    {
+      "path": "docs/iceberg-deployment.md",
+      "bytes": 13026,
+      "sha256": "13c1d3d7bfc7016f0449a85dbc850daa579fc769c57b2821bf9f459bc7a999e7"
+    },
+    {
+      "path": "docs/iceberg-operator-access.json",
+      "bytes": 4014,
+      "sha256": "9cd5a9720c387dd188c36bb1881f103f3df1d9c64ca1a7417fa982e34f78b608"
+    },
+    {
+      "path": "docs/iceberg-validation.sql",
+      "bytes": 1054,
+      "sha256": "e4ae9207c31b9446bb82cbba8b9b30096d2d0a72de3e218f96912760e24f1c23"
+    },
+    {
+      "path": "docs/redshift-checkpoint-6.md",
+      "bytes": 18791,
+      "sha256": "e3f3483af60f88561a8824589b7877b70db66997cfafefbb85e1ba6ae8d4ad01"
+    },
+    {
+      "path": "docs/redshift-inventory-access.json",
+      "bytes": 712,
+      "sha256": "a52c15ea01d2eb28474d65bef5b187e7bdf2bb15680eb77240b3631989385071"
+    },
+    {
+      "path": "docs/redshift-test-operator-access.json",
+      "bytes": 5599,
+      "sha256": "f5e973c47fe3cd73f6736993b2292d6652a09f4d1e0b2ac33502f90d461ef010"
+    },
+    {
+      "path": "environments/dev/README.md",
+      "bytes": 504,
+      "sha256": "54ae3c3aa333dd20ca963894962f9fe82e4db8e6fc441026892e4cefd6e76bde"
+    },
+    {
+      "path": "evidence/year=2026/month=10/day=21/dev-transactions-firehose-1-2026-10-21-22-01-51-722f108b-3cec-443d-a232-909f054fce76",
+      "bytes": 128,
+      "sha256": "fdd0123cf21c4a2f892d85eb87308ef08a350cb0031e4078afe46378fb2e943a"
+    },
+    {
+      "path": "evidence/year=2026/month=10/day=21/dev-transactions-firehose-1-2026-10-21-22-10-03-98b4b386-4b41-4daa-b062-c85ed684f9c0",
+      "bytes": 8307,
+      "sha256": "fd59c8d04e0064f57a85611f3e385221f46104dd0692370f0887cba3ddcdd910"
+    },
+    {
+      "path": "evidence/year=2026/month=10/day=21/dev-transactions-firehose-1-2026-10-21-22-10-03-c230302f-f8ef-40ee-b959-4033f05c76e1",
+      "bytes": 9376,
+      "sha256": "99bd93500a082c6bf8e91eda8bcb08c5adc0a3f556b159547f03e320bf40cd98"
+    },
+    {
+      "path": "infra/.terraform.lock.hcl",
+      "bytes": 1507,
+      "sha256": "6a84bbd0d4a7e69af0634ef243c8c2f27907ba5c01dec19a6dc5983b2822c560"
+    },
+    {
+      "path": "infra/backend.tf",
+      "bytes": 319,
+      "sha256": "8cb8a8dc5acfa0a04b5a32a024113274629a5b10f3e168d907e71bb5adf41e2c"
+    },
+    {
+      "path": "infra/lakehouse.tf",
+      "bytes": 409,
+      "sha256": "b23450be847f2dec4001837a3b922c0169aaeefde1c62c42757fda81c620457e"
+    },
+    {
+      "path": "infra/main.tf",
+      "bytes": 793,
+      "sha256": "3ec4a377cb92564977baf2af17433ea852edb9daff1e56841f6182d13f4ffc08"
+    },
+    {
+      "path": "infra/managed-flink.tf",
+      "bytes": 651,
+      "sha256": "8bfa71cd369fa889b5da38189b6cb3b0160927e7cee082d761f0a1bd3590c667"
+    },
+    {
+      "path": "infra/modules/identity/main.tf",
+      "bytes": 2666,
+      "sha256": "52a642912ce41149592bb36dc77ac164e383f758611f69282b838ce1afac56ce"
+    },
+    {
+      "path": "infra/modules/identity/outputs.tf",
+      "bytes": 246,
+      "sha256": "0de33e42c6f488eb4f0be33504ddef731f03e2900818482b9c67925d15ac388a"
+    },
+    {
+      "path": "infra/modules/identity/variables.tf",
+      "bytes": 341,
+      "sha256": "b7122dd187b56c8bf1680bffd1ec501bd981b759a2c49fa02cdaf63b4e399ba5"
+    },
+    {
+      "path": "infra/modules/identity/versions.tf",
+      "bytes": 169,
+      "sha256": "683f678d2cf6c5769682af45a86859455ababd576c1161d8aba8ac8c80e2d971"
+    },
+    {
+      "path": "infra/modules/kinesis/firehose.tf",
+      "bytes": 985,
+      "sha256": "36d1b6801c7efef69f37b77bfbfa69d4657b8e269c8ba3481ffff35178024447"
+    },
+    {
+      "path": "infra/modules/kinesis/iam.tf",
+      "bytes": 1769,
+      "sha256": "f81da595d18a9f68cb286874d0152081c6e0c2b63747abc6dd75e180c8eb3f76"
+    },
+    {
+      "path": "infra/modules/kinesis/main.tf",
+      "bytes": 486,
+      "sha256": "c4de86649225268363fbf048ad380ea37c3b0c6229b872e340540628c2e1b3a8"
+    },
+    {
+      "path": "infra/modules/kinesis/monitoring.tf",
+      "bytes": 1545,
+      "sha256": "6417033ad43fc123fb225595fe8b55f1393959fef9b2b93accf75d4a957b27a8"
+    },
+    {
+      "path": "infra/modules/kinesis/outputs.tf",
+      "bytes": 589,
+      "sha256": "9e27926c8236eae7dd723cac05769c9ff2b160c742ad15c2d89cc4593aea1472"
+    },
+    {
+      "path": "infra/modules/kinesis/variables.tf",
+      "bytes": 899,
+      "sha256": "01655b24c79572c0ee4d76319577b8584e18d8ac94a962ca00b6ea36d8bd436b"
+    },
+    {
+      "path": "infra/modules/lakehouse/main.tf",
+      "bytes": 1204,
+      "sha256": "2c6e6f1d78f53084ee7ee291e213f69268a4c24d80cde11b6b98d7a0a6c5e5d4"
+    },
+    {
+      "path": "infra/modules/managed-flink/lakehouse.tf",
+      "bytes": 2028,
+      "sha256": "4ef03e249af38004939a4112783ce01c23abc543b66799808a008f27dfafb218"
+    },
+    {
+      "path": "infra/modules/managed-flink/main.tf",
+      "bytes": 3827,
+      "sha256": "5e43a892d84fc3de0226e615dd0fefec42f5fc115a14eca9a112f51224f6c673"
+    },
+    {
+      "path": "infra/modules/managed-flink/outputs.tf",
+      "bytes": 553,
+      "sha256": "9d83ee45e1e08aa27c2646fa9c2748a22db3dbb6b5ae5c39d453dd056960bede"
+    },
+    {
+      "path": "infra/modules/managed-flink/variables.tf",
+      "bytes": 1120,
+      "sha256": "0200049674aceb7600a1ab334792dc69aae1f285a295746c4416c4ca11c568c5"
+    },
+    {
+      "path": "infra/modules/network/main.tf",
+      "bytes": 1458,
+      "sha256": "52b0b8c408aa35a09dccb70259e302c5a9653a4ac2518d7564d700cda3c7bc87"
+    },
+    {
+      "path": "infra/modules/network/outputs.tf",
+      "bytes": 476,
+      "sha256": "bac412f37d9702a6e279dfbd9d3817565064dfefd0b848e874d21afad6d50b90"
+    },
+    {
+      "path": "infra/modules/network/variables.tf",
+      "bytes": 464,
+      "sha256": "7d5169d3e0f572d893437f94a82b1ffd565ab58b25950f12029b210715072fff"
+    },
+    {
+      "path": "infra/modules/network/versions.tf",
+      "bytes": 169,
+      "sha256": "683f678d2cf6c5769682af45a86859455ababd576c1161d8aba8ac8c80e2d971"
+    },
+    {
+      "path": "infra/modules/redshift/main.tf",
+      "bytes": 7615,
+      "sha256": "5fc5259be3fbfdbebdfa61cacf545e39e89ccc033bce4286bd376f2db80b30c4"
+    },
+    {
+      "path": "infra/outputs.tf",
+      "bytes": 935,
+      "sha256": "44a1cdcc529834e9788b70421f78a855b4db388ccf6f77127babbec029a11d37"
+    },
+    {
+      "path": "infra/providers.tf",
+      "bytes": 371,
+      "sha256": "2a261be3a8e08f9724a530d740c7f74a43e0ec9129e59df1e83ebb37b2afbc87"
+    },
+    {
+      "path": "infra/redshift.tf",
+      "bytes": 1214,
+      "sha256": "5d73e08b6187dfd0cae2707e6a24190638107f8d3e343314023797128af11ecf"
+    },
+    {
+      "path": "infra/storage.tf",
+      "bytes": 777,
+      "sha256": "185773b5a67d5a6665f271a726f92613d5fe6be03bf28ff92a0f246aea559b85"
+    },
+    {
+      "path": "infra/variables.tf",
+      "bytes": 532,
+      "sha256": "1031b7edbcf319e4a9af30b30044cc99a80f5a6df6c9371f4d5917bfabc8439f"
+    },
+    {
+      "path": "k8s/kafka-configmap.yaml",
+      "bytes": 712,
+      "sha256": "a9e0bade365054adcd203f86cc66e5d64d0397283f2e5a6584447fb4fb20c718"
+    },
+    {
+      "path": "k8s/kafka-deployment.yaml",
+      "bytes": 909,
+      "sha256": "31c98bbe97927a6bdf49904550aa6b54c83dca174af0fe17ec88fefa03eadf68"
+    },
+    {
+      "path": "k8s/kafka-service.yaml",
+      "bytes": 282,
+      "sha256": "a5e97294a32b13c93498c7f69450672bdfc804fd0b2c05ae33ed11a6c6d4bf85"
+    },
+    {
+      "path": "k8s/kafka-topic-job.yaml",
+      "bytes": 1021,
+      "sha256": "134072f7846149d329cba4e74c12247f50153214c3bc39ab9e407865bc0f36fb"
+    },
+    {
+      "path": "k8s/namespace.yaml",
+      "bytes": 129,
+      "sha256": "b174271892879a56cca664b1c775fb84fa14af56a7b2027e54ff2cddc3ff5a5f"
+    },
+    {
+      "path": "k8s/producer-deployment.yaml",
+      "bytes": 748,
+      "sha256": "f0e2800f3660ff47aacea70876f0e411ec55e093eb5b332c6f9a3f502effc294"
+    },
+    {
+      "path": "k8s/spark-configmap.yaml",
+      "bytes": 206,
+      "sha256": "bf84282f5a9e7b5f56e96bea000149b70adb9f8931461e591291ec8fba12f23b"
+    },
+    {
+      "path": "k8s/spark-deployment.yaml",
+      "bytes": 651,
+      "sha256": "ded87feb1703db24fc195ff046293e48ae63cbe3464549c61be64dca73ac1436"
+    },
+    {
+      "path": "output/pdf/CheckPoint_Redshift_Lopez_Nicolas.pdf",
+      "bytes": 627320,
+      "sha256": "5afc7690791c9b31e1bacc9ecfa1d06538e9e686583886bb74c5ad0f5d42db56"
+    },
+    {
+      "path": "scripts/build-checkpoint6-pdf.py",
+      "bytes": 15755,
+      "sha256": "84210c6e172c3657e595b4f54dbce17db411c17ebeb85c028d7a48304a943477"
+    },
+    {
+      "path": "scripts/iceberg-aws-smoke.ps1",
+      "bytes": 10480,
+      "sha256": "87b208322c5318adb4c0dc7a66bbf3cd684bb20ef64f87289c2f752c80ca0729"
+    },
+    {
+      "path": "scripts/iceberg-preflight.ps1",
+      "bytes": 1744,
+      "sha256": "90ca61b1287d2d45af0ad8703d9c2c20be20ab7a81b470f732f2ee6ba1894246"
+    },
+    {
+      "path": "scripts/iceberg-test-events.ps1",
+      "bytes": 1858,
+      "sha256": "8efcb79da3366ba208dd19dc87634f67249fce4383363e6293a67b0088e55d77"
+    },
+    {
+      "path": "scripts/producer.py",
+      "bytes": 1163,
+      "sha256": "d0265e70b06efaff9b108568d585148d1d643da8b1f682304c040c7eb3f07853"
+    },
+    {
+      "path": "scripts/redshift-capture-timeout.py",
+      "bytes": 3158,
+      "sha256": "35b30482ce9caefec1e94a60f9e42ce5a2a63eea804d024d3cba4701bdc2c1ef"
+    },
+    {
+      "path": "scripts/redshift-checkpoint6.py",
+      "bytes": 11336,
+      "sha256": "92ae7489edaed400886c1dd56c1a1ee5425385ad41d691d1469c7b428451e722"
+    },
+    {
+      "path": "scripts/redshift-cleanup.py",
+      "bytes": 2828,
+      "sha256": "9c2a4c0d77c997fd91cdb2ea024246c056f4c9476734e347a2633b86c7074dea"
+    },
+    {
+      "path": "scripts/redshift-preflight.py",
+      "bytes": 2094,
+      "sha256": "39b4c0c653e5f4469493dae2b0e12fb0ece80385b76f69665920c72fb8b775bd"
+    },
+    {
+      "path": "scripts/redshift-security-smoke.py",
+      "bytes": 3621,
+      "sha256": "42e2b14a4873e80c2ea3b0469078d88b1491f5ec520b686b7dec8415226f35e4"
+    },
+    {
+      "path": "scripts/test_redshift_runner.py",
+      "bytes": 2569,
+      "sha256": "29e6cc59ce04af02f3bceb8d5f767310b9c6af0c54c7b3d1a9e9a53f71fac5f2"
+    },
+    {
+      "path": "scripts/verify-iceberg-jar.py",
+      "bytes": 1632,
+      "sha256": "010797ac331141df5bbc14f012877aaef5db2e4d1b051b824a85d7a587f09a88"
+    },
+    {
+      "path": "spark/Dockerfile",
+      "bytes": 599,
+      "sha256": "a8369f2ef1fe9804d7adc9673feffb239b7158017ae7759ae47856f78ecaa62c"
+    },
+    {
+      "path": "spark/streaming_job.py",
+      "bytes": 1905,
+      "sha256": "4075489a299e448fe07d6b7d5ef8d4ac1df8610f142b96fe9e2a10fb301a52d1"
+    },
+    {
+      "path": "sql/redshift/01_schemas.sql",
+      "bytes": 480,
+      "sha256": "fa60b24ff653ce468f4b893eb6152954ffea37719e8262bf0ba075201861e30f"
+    },
+    {
+      "path": "sql/redshift/02_streaming.sql",
+      "bytes": 628,
+      "sha256": "21c3053ab22db0835e5bd0ba978d0b44425dec0a10e68053a115df556758140b"
+    },
+    {
+      "path": "sql/redshift/03_analytics.sql",
+      "bytes": 2744,
+      "sha256": "64cf431a23a7d056cf24cffab39af895d71f0ff58c46c803a8e2b116e6b8a9f5"
+    },
+    {
+      "path": "sql/redshift/04_iceberg.sql",
+      "bytes": 1327,
+      "sha256": "64f1d0430f81b589757cce444b0d21d8204fe91e00f99c156a2442cc6752b305"
+    },
+    {
+      "path": "sql/redshift/05_security.sql",
+      "bytes": 1015,
+      "sha256": "268fec5ac619cfd727d8ae9138098d6c22562e79c50505e37793557017859d46"
+    },
+    {
+      "path": "sql/redshift/06_validation.sql",
+      "bytes": 855,
+      "sha256": "83ea7dd48d31f8463c1dcb11ab6c4c83b15ea3b1d808f70491a3fa23027bc4fa"
+    },
+    {
+      "path": "sql/redshift/07_monitoring.sql",
+      "bytes": 1282,
+      "sha256": "49390cc81719a4aa801521f8d647bf78cdc27ddd9689724e6f8fd9cdac1eec29"
+    },
+    {
+      "path": "sql/redshift/capture_results.sql",
+      "bytes": 1712,
+      "sha256": "fc72893d94e2274cba91f27248d4d784c10d30e90c6c610757e73e398171f8ae"
+    },
+    {
+      "path": "sql/redshift/checkpoint_6_complete.sql",
+      "bytes": 8903,
+      "sha256": "5b2254324fd9d239973087a96d9f2eb9ff6a918f09a93b698ac45724ff743bb1"
+    },
+    {
+      "path": "terraform-dev-kinesis-read.json",
+      "bytes": 430,
+      "sha256": "02165e396009f7d25509a1f2856e255b6e19e31b700bef8e9770f071e3d0e0e0"
+    },
+    {
+      "path": "urban-producer/Dockerfile",
+      "bytes": 183,
+      "sha256": "0bbad0f8175a6d191cab6097543dcb556e319f183d0bebb8b728b7ae56d04f56"
+    },
+    {
+      "path": "urban-producer/producer.py",
+      "bytes": 1607,
+      "sha256": "f09a0c6cc496a9e16ffed0e948492fdeca20d52736da861cf08fbcd63235c628"
+    },
+    {
+      "path": "urban-producer/requirements.txt",
+      "bytes": 24,
+      "sha256": "3e430609196ae12e531de29984d903850a63ea73c196f97981720c73ebc25c64"
+    }
+  ],
+  "credential_pattern_findings": [],
+  "note": "Pattern scan is not proof that every historical secret is absent."
+}

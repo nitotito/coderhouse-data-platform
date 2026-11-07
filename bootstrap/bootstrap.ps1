@@ -1,9 +1,13 @@
 
+param(
+    [Parameter(Mandatory = $true)][string]$Profile,
+    [string]$Region = "us-east-1",
+    [switch]$Execute
+)
 $ErrorActionPreference = "Stop"
-
-$Profile = "coderhouse-dev"
-$Region = "us-east-1"
-$AccountId = "672049777597"
+if (-not $Execute) { throw "Bootstrap historico: requiere -Execute y autorizacion AWS. Para Capstone usar terraform/bootstrap." }
+$AccountId = (& aws sts get-caller-identity --profile $Profile --region $Region --query Account --output text)
+if ($LASTEXITCODE -ne 0 -or $AccountId -notmatch '^\d{12}$') { throw "No se pudo identificar la cuenta AWS" }
 
 $Bucket = "coderhouse-terraform-$AccountId"
 $Table = "coderhouse-terraform-locks"

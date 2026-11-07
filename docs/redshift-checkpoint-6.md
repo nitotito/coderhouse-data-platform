@@ -91,7 +91,7 @@ continúan; Flink no se inicia en la prueba propuesta.
 
 ## Terraform y despliegue
 
-`infra/redshift.tf` habilita `infra/modules/redshift/` mediante
+`terraform/redshift.tf` habilita `terraform/modules/redshift/` mediante
 `enable_redshift=false` por defecto. Los ocho recursos nuevos son rol IAM,
 política del rol, dos security groups, endpoint Kinesis, namespace, workgroup y
 usage limit. El apply exitoso registró **8 altas, 0 cambios, 0 bajas**. Dos
@@ -100,15 +100,15 @@ verificar su funcionamiento con ExternalId. El retiro planifica exclusivamente
 esas ocho bajas. El backend y las direcciones de entregas previas se conservan.
 
 ```powershell
-terraform -chdir=infra init
-terraform -chdir=infra fmt -check -recursive
-terraform -chdir=infra validate
-terraform -chdir=infra plan -var='enable_ingestion=true' -var='enable_redshift=true' `
+terraform -chdir=terraform init
+terraform -chdir=terraform fmt -check -recursive
+terraform -chdir=terraform validate
+terraform -chdir=terraform plan -var='enable_ingestion=true' -var='enable_redshift=true' `
   -var='redshift_kinesis_kms_key_arn=arn:aws:kms:us-east-1:672049777597:key/8cd750a2-438b-42dc-935d-24f3cb6855f4' `
   -out=checkpoint6.tfplan
 # Solo después de revisar inventario, permisos, costo y recibir autorización:
-terraform -chdir=infra apply checkpoint6.tfplan
-terraform -chdir=infra output -json redshift
+terraform -chdir=terraform apply checkpoint6.tfplan
+terraform -chdir=terraform output -json redshift
 ```
 
 Antes del apply, confirmar ausencia o reutilización/importación de un workgroup

@@ -1,8 +1,11 @@
 """Inspect the actual deployment artifact; no AWS access required."""
 from pathlib import Path
 from zipfile import ZipFile
+import argparse
 
-jar = Path(__file__).resolve().parents[1] / "app/flink-transactions/target/flink-transactions-1.1.0.jar"
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--jar',type=Path,default=Path(__file__).resolve().parents[1] / "flink-app/target/flink-transactions-1.2.0.jar")
+jar=parser.parse_args().jar
 required = [
     "com/coderhouse/flink/TransactionJob.class",
     "org/apache/iceberg/flink/sink/FlinkSink.class",

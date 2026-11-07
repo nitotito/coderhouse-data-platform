@@ -39,7 +39,7 @@ function Query($Name, $Sql) {
         ResultConfiguration = @{ OutputLocation = "s3://$bucket/athena-results/pre-entrega-5/" }
         WorkGroup = "primary"
     }
-    $requestPath = Join-Path $repo "app/flink-transactions/target/athena-$Name.json"
+    $requestPath = Join-Path $repo "flink-app/target/athena-$Name.json"
     [IO.File]::WriteAllText($requestPath, ($request | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
     $execution = Invoke-AwsJson -Arguments @("athena", "start-query-execution", "--cli-input-json", "file://$requestPath")
     $id = $execution.QueryExecutionId
@@ -66,7 +66,7 @@ function Query($Name, $Sql) {
 
 try {
     if ((App-State) -ne "READY") { throw "Application must be READY before this isolated test" }
-    $configPath = Join-Path $repo "app/flink-transactions/target/iceberg-run.json"
+    $configPath = Join-Path $repo "flink-app/target/iceberg-run.json"
     [IO.File]::WriteAllText($configPath, '{"ApplicationRestoreConfiguration":{"ApplicationRestoreType":"SKIP_RESTORE_FROM_SNAPSHOT"}}', [Text.UTF8Encoding]::new($false))
     $started = $true
     Invoke-AwsJson -Arguments @("kinesisanalyticsv2", "start-application", "--application-name", $appName, "--run-configuration", "file://$configPath") | Out-Null

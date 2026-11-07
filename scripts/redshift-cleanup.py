@@ -13,7 +13,7 @@ OUT = ROOT/'docs/evidence/checkpoint-6'
 
 
 def terraform(*args):
-    result = subprocess.run(['terraform','-chdir=infra',*args],cwd=ROOT,
+    result = subprocess.run(['terraform','-chdir=terraform',*args],cwd=ROOT,
                             capture_output=True,text=True,encoding='utf-8',timeout=1800)
     if result.returncode:
         raise RuntimeError(result.stdout+'\n'+result.stderr)
@@ -44,7 +44,7 @@ def main():
     # Apply also when there are no deletions: refresh may have detected a resource
     # already removed through its authorized service API and must persist state.
     if args.execute:
-        result = subprocess.run(['terraform','-chdir=infra','apply','-no-color','-input=false',
+        result = subprocess.run(['terraform','-chdir=terraform','apply','-no-color','-input=false',
                                   'checkpoint6-cleanup.tfplan'],cwd=ROOT,
                                  stdout=(OUT/'terraform-cleanup-apply.txt').open('w',encoding='utf-8'),
                                  stderr=subprocess.STDOUT,timeout=1800)

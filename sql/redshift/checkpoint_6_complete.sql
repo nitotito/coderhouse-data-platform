@@ -63,7 +63,8 @@ SELECT approximate_arrival_timestamp, refresh_time, shard_id, sequence_number,
               OR precise_amount <> ROUND(precise_amount,2)
               OR TRY_CAST(precise_amount AS decimal(18,2)) IS NULL THEN 'invalid_amount'
             WHEN event_time IS NULL THEN 'invalid_timestamp'
-            ELSE NULL END AS validation_error
+            ELSE NULL END AS validation_error,
+       approximate_arrival_timestamp AS arrival_timestamp
 FROM converted;
 
 -- Ordinary aggregate view avoids assumptions about incremental eligibility of
@@ -72,7 +73,8 @@ CREATE OR REPLACE VIEW analytics.transactions_per_minute AS
 SELECT DATE_TRUNC('minute',event_time) AS window_start, payment_method,
        COUNT(*) AS transaction_count,
        SUM(amount) AS total_amount,
-       AVG(amount)::decimal(38,6) AS average_amount,
+       -- AVG preserves input scale: widen BEFORE aggregating, not afterwards.
+       AVG(amount::decimal(24,6))::decimal(38,6) AS average_amount,
        SUM(CASE WHEN status='approved' THEN 1 ELSE 0 END) AS approved_count,
        SUM(CASE WHEN status='rejected' THEN 1 ELSE 0 END) AS rejected_count,
        SUM(CASE WHEN status='approved' THEN amount ELSE 0 END) AS approved_amount

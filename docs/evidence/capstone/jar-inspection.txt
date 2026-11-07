@@ -1,0 +1,12 @@
+OK com/coderhouse/flink/TransactionJob.class
+OK org/apache/iceberg/flink/sink/FlinkSink.class
+OK org/apache/iceberg/aws/glue/GlueCatalog.class
+OK org/apache/iceberg/aws/s3/S3FileIO.class
+OK org/apache/flink/connector/kinesis/source/KinesisStreamsSource.class
+OK software/amazon/awssdk/services/glue/GlueClient.class
+OK software/amazon/awssdk/services/s3/S3Client.class
+OK software/amazon/awssdk/services/kinesis/KinesisClient.class
+OK software/amazon/awssdk/http/apache5/Apache5HttpClient.class
+OK org/apache/hadoop/conf/Configuration.class
+OK AWS SDK 2.54.17 with Apache5 transport
+OK provided Flink classes excluded; main class set; JAR 127,695,969 bytes
