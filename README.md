@@ -1,5 +1,43 @@
 # Coderhouse Data Platform — Infraestructura Base
 
+## Pre-entrega 6 — Analítica avanzada in-stream con Redshift
+
+**Prueba funcional y seguridad PASSED en AWS el 07/11/2026**, en
+`feature/redshift-streaming-analytics`. Ensayo único con retiro posterior de los
+recursos temporales. Resultados reales y tres capturas de Query Editor v2
+incorporados al PDF. El PR sigue sin fusionar.
+
+Kinesis alimenta una MV de Streaming Ingestion; vistas SQL validan cinco campos
+JSON y calculan métricas por minuto. Un esquema externo lee la tabla Iceberg
+existente mediante Glue y permite comparar agregados aprobados con un JOIN por
+minuto UTC y método de pago. La rama conserva el pipeline Flink y las entregas previas.
+
+- [Arquitectura, despliegue, seguridad, refresco y monitoreo](docs/redshift-checkpoint-6.md).
+- [Módulo Terraform](infra/modules/redshift/main.tf), activado desde
+  [infra/redshift.tf](infra/redshift.tf): Serverless privado 4 RPU, IAM específico,
+  endpoint Kinesis y límite diario. Plan validado: 8 altas, 0 cambios, 0 bajas.
+- [SQL consolidado](sql/redshift/checkpoint_6_complete.sql); originales 01-07 en
+  `sql/redshift/`, separados por esquemas, ingesta, métricas, Iceberg, permisos y diagnóstico.
+- [Runner Data API y prueba controlada](scripts/redshift-checkpoint6.py): sin
+  argumentos solo genera SQL; `--execute` exige despliegue/costos autorizados.
+- [Evidencias y capturas reales](docs/evidence/checkpoint-6/README.md).
+- [PDF final del checkpoint](output/pdf/CheckPoint_Redshift_Lopez_Nicolas.pdf).
+
+Validaciones: Terraform fmt/validate/plan/apply, parser SQL parcial y tres tests
+locales. El lote `pe6_20261107_033721` llegó a Redshift: 9 registros conservados,
+3 transacciones actuales válidas, 2 aprobadas, importe aprobado 30.30. El JOIN
+con Iceberg devolvió una fila con diferencias cero. El analista pudo leer métricas
+y JOIN; raw y REFRESH fueron denegados. Estimación: 1.50 USD/h de cómputo activo
+a 4 RPU y 0.02 USD/h del endpoint privado en dos AZ, más almacenamiento/tráfico.
+AUTO REFRESH NO evita una ingesta continua en el laboratorio. Serverless se vuelve
+inactivo sin consultas; PrivateLink y storage siguen facturando. El retiro del
+módulo temporal requiere un plan revisado y autorización; no se ejecuta destroy.
+
+La [política del operador](docs/redshift-test-operator-access.json) se utilizó para
+desplegar, probar y retirar el ensayo. [Scripts de retiro](scripts/redshift-cleanup.py)
+verifican que el plan solo elimine `module.redshift[0]`. Los recursos anteriores
+Kinesis/S3 conservan sus cargos; la baja temporal no equivale a costo total cero.
+
 **Pre-entrega 1: Infraestructura Base con Entorno de Desarrollo e IAM Core**
 
 ## Descripción

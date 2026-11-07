@@ -1,0 +1,18 @@
+{
+  "Id": "c812dc78-2e23-423b-b96b-8eeef35cfebd",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 3833860,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-07T00:40:44.594000-03:00",
+  "UpdatedAt": "2026-11-07T00:40:44.836000-03:00",
+  "RedshiftPid": 1073881507,
+  "HasResultSet": false,
+  "QueryString": "SET SESSION AUTHORIZATION checkpoint6_access_test",
+  "ResultRows": 0,
+  "ResultSize": 0,
+  "RedshiftQueryId": 0,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json",
+  "SessionId": "862ad120-fe2d-464a-88ec-63815b3c6b37"
+}

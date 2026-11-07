@@ -1,0 +1,17 @@
+{
+  "Id": "b9f74f55-54c9-48f3-9e66-c0b923e4f78a",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 486922431,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-07T00:33:26.894000-03:00",
+  "UpdatedAt": "2026-11-07T00:33:27.888000-03:00",
+  "RedshiftPid": 1073938545,
+  "HasResultSet": false,
+  "QueryString": "CREATE EXTERNAL SCHEMA IF NOT EXISTS lakehouse\nFROM DATA CATALOG DATABASE 'lakehouse_db'\nIAM_ROLE ''",
+  "ResultRows": 0,
+  "ResultSize": 0,
+  "RedshiftQueryId": 0,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

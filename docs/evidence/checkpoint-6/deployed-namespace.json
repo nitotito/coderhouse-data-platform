@@ -1,0 +1,18 @@
+{
+  "namespace": {
+    "adminUsername": "admin",
+    "creationDate": "2026-11-07T03:30:48.091000+00:00",
+    "dbName": "analytics",
+    "defaultIamRoleArn": "arn:aws:iam::672049777597:role/coderhouse-dev-analytics-execution",
+    "iamRoles": [
+      "IamRole(applyStatus=in-sync, iamRoleArn=arn:aws:iam::672049777597:role/coderhouse-dev-analytics-execution)"
+    ],
+    "kmsKeyId": "AWS_OWNED_KMS_KEY",
+    "lakehouseRegistrationStatus": "NOT_REGISTERED",
+    "logExports": [],
+    "namespaceArn": "arn:aws:redshift-serverless:us-east-1:672049777597:namespace/94526e4f-ac94-4c72-aaf3-61fea350157a",
+    "namespaceId": "94526e4f-ac94-4c72-aaf3-61fea350157a",
+    "namespaceName": "coderhouse-dev-analytics",
+    "status": "AVAILABLE"
+  }
+}

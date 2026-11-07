@@ -1,0 +1,17 @@
+{
+  "Id": "633b753b-fa31-419b-b0c4-85ce6b0e651c",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 293935688,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-07T00:38:49.417000-03:00",
+  "UpdatedAt": "2026-11-07T00:38:50.276000-03:00",
+  "RedshiftPid": 1073971367,
+  "HasResultSet": true,
+  "QueryString": "SELECT COUNT(*) AS stored_records, MAX(approximate_arrival_timestamp) AS last_arrival,\n       MAX(refresh_time) AS last_ingest_refresh\nFROM streaming.transactions_raw",
+  "ResultRows": 1,
+  "ResultSize": 62,
+  "RedshiftQueryId": 1733,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

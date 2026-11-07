@@ -1,0 +1,33 @@
+[
+  {
+    "operation": [
+      "iam",
+      "list-role-policies"
+    ],
+    "exit_code": 0,
+    "response": {
+      "PolicyNames": []
+    },
+    "error": ""
+  },
+  {
+    "operation": [
+      "iam",
+      "list-attached-role-policies"
+    ],
+    "exit_code": 0,
+    "response": {
+      "AttachedPolicies": []
+    },
+    "error": ""
+  },
+  {
+    "operation": [
+      "iam",
+      "delete-role"
+    ],
+    "exit_code": 0,
+    "response": null,
+    "error": ""
+  }
+]

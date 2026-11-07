@@ -1,0 +1,108 @@
+{
+  "VpcEndpoints": [
+    {
+      "VpcEndpointId": "vpce-03f84a6b7b3b60b23",
+      "VpcEndpointType": "Interface",
+      "VpcId": "vpc-0b85171c643372dba",
+      "ServiceName": "com.amazonaws.us-east-1.kinesis-streams",
+      "State": "available",
+      "PolicyDocument": "{\"Statement\":[{\"Action\":[\"kinesis:DescribeStream\",\"kinesis:DescribeStreamSummary\",\"kinesis:ListShards\",\"kinesis:GetShardIterator\",\"kinesis:GetRecords\",\"kinesis:ListStreams\"],\"Condition\":{\"ArnEquals\":{\"aws:PrincipalArn\":\"arn:aws:iam::672049777597:role/coderhouse-dev-analytics-execution\"}},\"Effect\":\"Allow\",\"Principal\":\"*\",\"Resource\":\"*\"}],\"Version\":\"2012-10-17\"}",
+      "RouteTableIds": [],
+      "SubnetIds": [
+        "subnet-001ae24851059e5ed",
+        "subnet-0e484b46487a0220c"
+      ],
+      "Groups": [
+        {
+          "GroupId": "sg-0f4748139d0a0fb25",
+          "GroupName": "coderhouse-dev-analytics-kds-3b2761b9e266bc056ceb9210ae"
+        }
+      ],
+      "IpAddressType": "ipv4",
+      "DnsOptions": {
+        "DnsRecordIpType": "ipv4"
+      },
+      "PrivateDnsEnabled": true,
+      "RequesterManaged": false,
+      "NetworkInterfaceIds": [
+        "eni-039179d851772c433",
+        "eni-020aeaece7f641d33"
+      ],
+      "DnsEntries": [
+        {
+          "DnsName": "vpce-03f84a6b7b3b60b23-7bm4ymwc.kinesis.us-east-1.vpce.amazonaws.com",
+          "HostedZoneId": "Z7HUB22UULQXV"
+        },
+        {
+          "DnsName": "vpce-03f84a6b7b3b60b23-7bm4ymwc-us-east-1b.kinesis.us-east-1.vpce.amazonaws.com",
+          "HostedZoneId": "Z7HUB22UULQXV"
+        },
+        {
+          "DnsName": "vpce-03f84a6b7b3b60b23-7bm4ymwc-us-east-1a.kinesis.us-east-1.vpce.amazonaws.com",
+          "HostedZoneId": "Z7HUB22UULQXV"
+        },
+        {
+          "DnsName": "kinesis.us-east-1.amazonaws.com",
+          "HostedZoneId": "Z09805133IYMVNPI0U8AR"
+        },
+        {
+          "DnsName": "data-kinesis.us-east-1.api.aws",
+          "HostedZoneId": "Z06778603JQ4IQBVDA0DN"
+        },
+        {
+          "DnsName": "*.data-kinesis.us-east-1.api.aws",
+          "HostedZoneId": "Z06778603JQ4IQBVDA0DN"
+        },
+        {
+          "DnsName": "control-kinesis.us-east-1.amazonaws.com",
+          "HostedZoneId": "Z09818072BCHZAVVDIRFM"
+        },
+        {
+          "DnsName": "*.control-kinesis.us-east-1.amazonaws.com",
+          "HostedZoneId": "Z09818072BCHZAVVDIRFM"
+        },
+        {
+          "DnsName": "kinesis.us-east-1.api.aws",
+          "HostedZoneId": "Z06772932LKGXBQTGZJO8"
+        },
+        {
+          "DnsName": "control-kinesis.us-east-1.api.aws",
+          "HostedZoneId": "Z09798043OXDMDDK0Q83R"
+        },
+        {
+          "DnsName": "*.control-kinesis.us-east-1.api.aws",
+          "HostedZoneId": "Z09798043OXDMDDK0Q83R"
+        },
+        {
+          "DnsName": "data-kinesis.us-east-1.amazonaws.com",
+          "HostedZoneId": "Z09818003VQ3XLXC9110F"
+        },
+        {
+          "DnsName": "*.data-kinesis.us-east-1.amazonaws.com",
+          "HostedZoneId": "Z09818003VQ3XLXC9110F"
+        }
+      ],
+      "CreationTimestamp": "2026-11-07T03:30:54.836000+00:00",
+      "Tags": [
+        {
+          "Key": "Project",
+          "Value": "coderhouse-data-platform"
+        },
+        {
+          "Key": "Environment",
+          "Value": "dev"
+        },
+        {
+          "Key": "Checkpoint",
+          "Value": "6"
+        },
+        {
+          "Key": "ManagedBy",
+          "Value": "Terraform"
+        }
+      ],
+      "OwnerId": "672049777597",
+      "ServiceRegion": "us-east-1"
+    }
+  ]
+}

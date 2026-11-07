@@ -1,0 +1,17 @@
+{
+  "Id": "451d1027-c856-4302-b0e2-01c599e7516d",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 248890928,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-07T00:38:11.824000-03:00",
+  "UpdatedAt": "2026-11-07T00:38:12.648000-03:00",
+  "RedshiftPid": 1073750184,
+  "HasResultSet": true,
+  "QueryString": "SELECT COUNT(*) AS records FROM streaming.transactions_raw WHERE partition_key='pe6_20261107_033721' AND NOT valid_json",
+  "ResultRows": 1,
+  "ResultSize": 20,
+  "RedshiftQueryId": 1703,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

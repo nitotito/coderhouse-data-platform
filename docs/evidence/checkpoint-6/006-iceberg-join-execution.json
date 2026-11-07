@@ -1,0 +1,17 @@
+{
+  "Id": "06630b26-3d70-45a5-a885-c5af4b44efc3",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 1097921523,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-07T00:38:03.069000-03:00",
+  "UpdatedAt": "2026-11-07T00:38:04.726000-03:00",
+  "RedshiftPid": 1073815730,
+  "HasResultSet": true,
+  "QueryString": "SELECT * FROM analytics.recent_vs_iceberg WHERE payment_method='card_pe5_20261104_113142'",
+  "ResultRows": 1,
+  "ResultSize": 117,
+  "RedshiftQueryId": 1697,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

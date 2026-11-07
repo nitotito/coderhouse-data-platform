@@ -1,0 +1,17 @@
+{
+  "Id": "f453962f-6303-427e-9e94-ec54dd13af4d",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 178056679,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-07T00:57:22.898000-03:00",
+  "UpdatedAt": "2026-11-07T00:57:23.522000-03:00",
+  "RedshiftPid": 1073914005,
+  "HasResultSet": false,
+  "QueryString": "CREATE ROLE checkpoint6_analyst",
+  "ResultRows": 0,
+  "ResultSize": 0,
+  "RedshiftQueryId": 0,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

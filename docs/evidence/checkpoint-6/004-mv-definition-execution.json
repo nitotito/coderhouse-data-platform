@@ -1,0 +1,18 @@
+{
+  "Id": "033fb250-d760-4701-8f76-309c74a2828e",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": -1,
+  "Error": "ERROR: syntax error at or near \"VIEW\" in context \"SHOW MATERIALIZED VIEW\", at line 1\n  Position: 19",
+  "Status": "FAILED",
+  "CreatedAt": "2026-11-07T00:41:14.928000-03:00",
+  "UpdatedAt": "2026-11-07T00:41:15.486000-03:00",
+  "RedshiftPid": 1073783089,
+  "HasResultSet": false,
+  "QueryString": "SHOW MATERIALIZED VIEW streaming.transactions_raw",
+  "ResultRows": -1,
+  "ResultSize": -1,
+  "RedshiftQueryId": 0,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}
