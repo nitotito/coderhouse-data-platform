@@ -1,0 +1,33 @@
+{
+  "checked_at_utc": "2026-11-07T02:04:21.425895+00:00",
+  "terraform_fmt": "PASSED",
+  "terraform_validate": "PASSED",
+  "terraform_plan": {
+    "create": 8,
+    "update": 0,
+    "delete": 0,
+    "applied": false
+  },
+  "sql_parser": {
+    "parsed": 28,
+    "unsupported": 4,
+    "errors": 0,
+    "engine_execution": "PENDING"
+  },
+  "python_runner": {
+    "compiled": true,
+    "dry_run_no_aws": true,
+    "unit_tests": 3,
+    "failures": 0,
+    "cases": [
+      "pagination preserves decimal strings and nulls",
+      "failed query raises and stores error",
+      "timeout cancels active statement"
+    ]
+  },
+  "aws_smoke": "NOT_EXECUTED",
+  "screenshots_redshift": "PENDING",
+  "flink": "READY observed by preflight; not started",
+  "terraform_disabled_plan": "NO_CHANGES",
+  "deployment_cost_approval": "PENDING"
+}

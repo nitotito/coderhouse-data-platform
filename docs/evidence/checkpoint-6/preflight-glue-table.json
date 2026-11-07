@@ -1,0 +1,98 @@
+{
+  "checked_at_utc": "2026-11-07T02:02:26.086161+00:00",
+  "command": [
+    "aws",
+    "glue",
+    "get-table",
+    "--database-name",
+    "lakehouse_db",
+    "--name",
+    "transaction_aggregates"
+  ],
+  "exit_code": 0,
+  "response": {
+    "Table": {
+      "Name": "transaction_aggregates",
+      "DatabaseName": "lakehouse_db",
+      "CreateTime": "2026-11-04T08:33:12-03:00",
+      "UpdateTime": "2026-11-04T08:34:43-03:00",
+      "Retention": 0,
+      "StorageDescriptor": {
+        "Columns": [
+          {
+            "Name": "window_start",
+            "Type": "timestamp",
+            "Parameters": {
+              "iceberg.field.current": "true",
+              "iceberg.field.id": "1",
+              "iceberg.field.optional": "false"
+            }
+          },
+          {
+            "Name": "window_end",
+            "Type": "timestamp",
+            "Parameters": {
+              "iceberg.field.current": "true",
+              "iceberg.field.id": "2",
+              "iceberg.field.optional": "false"
+            }
+          },
+          {
+            "Name": "payment_method",
+            "Type": "string",
+            "Parameters": {
+              "iceberg.field.current": "true",
+              "iceberg.field.id": "3",
+              "iceberg.field.optional": "false"
+            }
+          },
+          {
+            "Name": "transaction_count",
+            "Type": "bigint",
+            "Parameters": {
+              "iceberg.field.current": "true",
+              "iceberg.field.id": "4",
+              "iceberg.field.optional": "false"
+            }
+          },
+          {
+            "Name": "total_amount",
+            "Type": "decimal(38,2)",
+            "Parameters": {
+              "iceberg.field.current": "true",
+              "iceberg.field.id": "5",
+              "iceberg.field.optional": "false"
+            }
+          },
+          {
+            "Name": "average_amount",
+            "Type": "decimal(38,6)",
+            "Parameters": {
+              "iceberg.field.current": "true",
+              "iceberg.field.id": "6",
+              "iceberg.field.optional": "false"
+            }
+          }
+        ],
+        "Location": "s3://coderhouse-data-lake-672049777597/lakehouse/lakehouse_db/transaction_aggregates",
+        "AdditionalLocations": [],
+        "Compressed": false,
+        "NumberOfBuckets": 0,
+        "SortColumns": [],
+        "StoredAsSubDirectories": false
+      },
+      "TableType": "EXTERNAL_TABLE",
+      "Parameters": {
+        "metadata_location": "s3://coderhouse-data-lake-672049777597/lakehouse/lakehouse_db/transaction_aggregates/metadata/00001-a6ac508c-2e43-4de5-9437-57f0bb426279.metadata.json",
+        "previous_metadata_location": "s3://coderhouse-data-lake-672049777597/lakehouse/lakehouse_db/transaction_aggregates/metadata/00000-270ceb65-5454-460a-9fa4-175dd5d9040e.metadata.json",
+        "table_type": "ICEBERG"
+      },
+      "CreatedBy": "arn:aws:sts::672049777597:assumed-role/coderhouse-dev-flink/kiam-flink",
+      "IsRegisteredWithLakeFormation": false,
+      "CatalogId": "672049777597",
+      "VersionId": "1",
+      "IsMultiDialectView": false,
+      "IsMaterializedView": false
+    }
+  }
+}

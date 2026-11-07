@@ -1,0 +1,18 @@
+{
+  "checked_at_utc": "2026-11-07T02:02:31.128929+00:00",
+  "command": [
+    "aws",
+    "kinesisanalyticsv2",
+    "describe-application",
+    "--application-name",
+    "coderhouse-dev-transactions-flink",
+    "--query",
+    "ApplicationDetail.{Name:ApplicationName,Status:ApplicationStatus,Runtime:RuntimeEnvironment}"
+  ],
+  "exit_code": 0,
+  "response": {
+    "Name": "coderhouse-dev-transactions-flink",
+    "Status": "READY",
+    "Runtime": "FLINK-2_2"
+  }
+}

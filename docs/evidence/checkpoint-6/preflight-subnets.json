@@ -1,0 +1,29 @@
+{
+  "checked_at_utc": "2026-11-07T02:02:29.892782+00:00",
+  "command": [
+    "aws",
+    "ec2",
+    "describe-subnets",
+    "--filters",
+    "Name=tag:Name,Values=dev-private-*",
+    "--query",
+    "Subnets[].{Id:SubnetId,Vpc:VpcId,AZ:AvailabilityZone,Free:AvailableIpAddressCount,Cidr:CidrBlock}"
+  ],
+  "exit_code": 0,
+  "response": [
+    {
+      "Id": "subnet-001ae24851059e5ed",
+      "Vpc": "vpc-0b85171c643372dba",
+      "AZ": "us-east-1b",
+      "Free": 251,
+      "Cidr": "10.10.2.0/24"
+    },
+    {
+      "Id": "subnet-0e484b46487a0220c",
+      "Vpc": "vpc-0b85171c643372dba",
+      "AZ": "us-east-1a",
+      "Free": 251,
+      "Cidr": "10.10.1.0/24"
+    }
+  ]
+}

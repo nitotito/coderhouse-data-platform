@@ -1,0 +1,14 @@
+{
+  "checked_at_utc": "2026-11-07T02:02:24.803860+00:00",
+  "command": [
+    "aws",
+    "sts",
+    "get-caller-identity"
+  ],
+  "exit_code": 0,
+  "response": {
+    "UserId": "AIDAZY6KJZO6Z7U6KERKV",
+    "Account": "672049777597",
+    "Arn": "arn:aws:iam::672049777597:user/terraform-dev"
+  }
+}

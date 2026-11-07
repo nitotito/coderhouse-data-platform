@@ -29,4 +29,6 @@ applications/flink-transactions/target-*.log
 app/flink-transactions/target-*.log
 infra/*.log
 **/__pycache__/
+.codex/checkpoint6-python/
+tmp/pdfs/
 

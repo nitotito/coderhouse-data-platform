@@ -1,0 +1,10 @@
+{
+  "checked_at_utc": "2026-11-07T02:02:32.343964+00:00",
+  "command": [
+    "aws",
+    "redshift-serverless",
+    "list-workgroups"
+  ],
+  "exit_code": 254,
+  "error": "aws: [ERROR]: An error occurred (AccessDeniedException) when calling the ListWorkgroups operation: User: arn:aws:iam::672049777597:user/terraform-dev is not authorized to perform: redshift-serverless:ListWorkgroups on resource: arn:aws:redshift-serverless:us-east-1:672049777597:workgroup/* because no identity-based policy allows the redshift-serverless:ListWorkgroups action"
+}
