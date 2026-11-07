@@ -141,6 +141,7 @@ resource "aws_vpc_endpoint" "kinesis" {
 }
 
 resource "aws_redshiftserverless_namespace" "analytics" {
+  tags                 = { Checkpoint = "6" }
   namespace_name       = local.name
   db_name              = "analytics"
   iam_roles            = [aws_iam_role.analytics.arn]
@@ -150,6 +151,7 @@ resource "aws_redshiftserverless_namespace" "analytics" {
 }
 
 resource "aws_redshiftserverless_workgroup" "analytics" {
+  tags                 = { Checkpoint = "6" }
   workgroup_name       = local.name
   namespace_name       = aws_redshiftserverless_namespace.analytics.namespace_name
   base_capacity        = 4

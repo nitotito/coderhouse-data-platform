@@ -1,0 +1,60 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "InventoryAndUsageLimitsInDeliveryRegion",
+      "Effect": "Allow",
+      "Action": [
+        "redshift-serverless:ListWorkgroups", "redshift-serverless:ListNamespaces",
+        "redshift-serverless:GetWorkgroup", "redshift-serverless:GetNamespace",
+        "redshift-serverless:ListTagsForResource", "redshift:DescribeClusters",
+        "redshift-serverless:CreateUsageLimit", "redshift-serverless:GetUsageLimit",
+        "redshift-serverless:ListUsageLimits", "redshift-serverless:UpdateUsageLimit",
+        "redshift-serverless:DeleteUsageLimit"
+      ],
+      "Resource": "*",
+      "Condition": { "StringEquals": { "aws:RequestedRegion": "us-east-1" } }
+    },
+    {
+      "Sid": "CreateTaggedTestWarehouse",
+      "Effect": "Allow",
+      "Action": ["redshift-serverless:CreateNamespace", "redshift-serverless:CreateWorkgroup", "redshift-serverless:TagResource"],
+      "Resource": "*",
+      "Condition": { "StringEquals": { "aws:RequestedRegion": "us-east-1", "aws:RequestTag/Checkpoint": "6", "aws:RequestTag/Project": "coderhouse-data-platform" } }
+    },
+    {
+      "Sid": "ManageAndRemoveOnlyTaggedTestWarehouse",
+      "Effect": "Allow",
+      "Action": ["redshift-serverless:UpdateNamespace", "redshift-serverless:DeleteNamespace", "redshift-serverless:UpdateWorkgroup", "redshift-serverless:DeleteWorkgroup", "redshift-serverless:GetCredentials"],
+      "Resource": ["arn:aws:redshift-serverless:us-east-1:672049777597:namespace/*", "arn:aws:redshift-serverless:us-east-1:672049777597:workgroup/*"],
+      "Condition": { "StringEquals": { "aws:ResourceTag/Checkpoint": "6", "aws:ResourceTag/Project": "coderhouse-data-platform" } }
+    },
+    {
+      "Sid": "ExecuteOnlyInTestWarehouse",
+      "Effect": "Allow",
+      "Action": "redshift-data:ExecuteStatement",
+      "Resource": "arn:aws:redshift-serverless:us-east-1:672049777597:workgroup/*",
+      "Condition": { "StringEquals": { "aws:ResourceTag/Checkpoint": "6", "aws:ResourceTag/Project": "coderhouse-data-platform" } }
+    },
+    {
+      "Sid": "ReadAndCancelOwnStatements",
+      "Effect": "Allow",
+      "Action": ["redshift-data:DescribeStatement", "redshift-data:GetStatementResult", "redshift-data:CancelStatement"],
+      "Resource": "*",
+      "Condition": { "StringEquals": { "redshift-data:statement-owner-iam-userid": "${aws:userid}", "aws:RequestedRegion": "us-east-1" } }
+    },
+    {
+      "Sid": "ConfirmExistingKinesisKey",
+      "Effect": "Allow",
+      "Action": "kms:DescribeKey",
+      "Resource": "arn:aws:kms:us-east-1:672049777597:key/8cd750a2-438b-42dc-935d-24f3cb6855f4"
+    },
+    {
+      "Sid": "PassOnlyTestExecutionRole",
+      "Effect": "Allow",
+      "Action": "iam:PassRole",
+      "Resource": "arn:aws:iam::672049777597:role/coderhouse-dev-analytics-execution",
+      "Condition": { "StringEquals": { "iam:PassedToService": ["redshift.amazonaws.com", "redshift-serverless.amazonaws.com"] } }
+    }
+  ]
+}
