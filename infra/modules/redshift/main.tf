@@ -98,6 +98,7 @@ resource "aws_iam_role_policy" "read_sources" {
 
 # No inbound database port: local operators use HTTPS Redshift Data API.
 resource "aws_security_group" "warehouse" {
+  tags        = { Checkpoint = "6" }
   name_prefix = "${local.name}-"
   description = "Private Redshift; Data API access, no inbound TCP"
   vpc_id      = var.vpc_id
@@ -110,6 +111,7 @@ resource "aws_security_group" "warehouse" {
 }
 
 resource "aws_security_group" "kinesis_endpoint" {
+  tags        = { Checkpoint = "6" }
   name_prefix = "${local.name}-kds-"
   description = "HTTPS only from Redshift to Kinesis endpoint"
   vpc_id      = var.vpc_id
@@ -123,6 +125,7 @@ resource "aws_security_group" "kinesis_endpoint" {
 
 # Existing private route tables have no NAT. This endpoint is required for KDS.
 resource "aws_vpc_endpoint" "kinesis" {
+  tags                = { Checkpoint = "6" }
   vpc_id              = var.vpc_id
   service_name        = "com.amazonaws.${var.region}.kinesis-streams"
   vpc_endpoint_type   = "Interface"

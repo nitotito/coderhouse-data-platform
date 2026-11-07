@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-07T02:02:33.554189+00:00",
+  "checked_at_utc": "2026-11-07T02:19:14.860530+00:00",
   "command": [
     "aws",
     "redshift",
@@ -7,6 +7,6 @@
     "--query",
     "Clusters[].ClusterIdentifier"
   ],
-  "exit_code": 254,
-  "error": "aws: [ERROR]: An error occurred (AccessDenied) when calling the DescribeClusters operation: User: arn:aws:iam::672049777597:user/terraform-dev is not authorized to perform: redshift:DescribeClusters on resource: arn:aws:redshift:us-east-1:672049777597:cluster:* because no identity-based policy allows the redshift:DescribeClusters action"
+  "exit_code": 0,
+  "response": []
 }

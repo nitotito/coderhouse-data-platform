@@ -29,5 +29,6 @@
   "screenshots_redshift": "PENDING",
   "flink": "READY observed by preflight; not started",
   "terraform_disabled_plan": "NO_CHANGES",
-  "deployment_cost_approval": "PENDING"
+  "deployment_cost_approval": "AUTHORIZED_SINGLE_TEST_AND_REMOVAL",
+  "terraform_apply": "FAILED: iam:CreateRole and ec2:CreateSecurityGroup denied; no managed resources created"
 }

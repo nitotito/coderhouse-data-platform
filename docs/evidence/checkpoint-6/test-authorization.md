@@ -24,3 +24,17 @@ ausencia del workgroup, namespace y endpoint temporal. No crear snapshots de pag
 sin necesidad; conservar las evidencias en Git antes del retiro.
 
 Los recursos anteriores, especialmente Kinesis y S3, mantienen sus cargos.
+
+## Segundo intento: permisos de inventario habilitados
+
+El propietario agregó la política y confirmó su instalación. ListWorkgroups y
+DescribeClusters devolvieron listas vacías y DescribeKey confirmó el ARN esperado.
+El plan actualizado volvió a proponer 8 altas, 0 cambios y 0 bajas.
+
+El apply autorizado se detuvo en CreateRole y CreateSecurityGroup por AccessDenied.
+Ambas creaciones fallaron: no hay workgroups ni security groups temporales, y el
+estado solo contiene los dos data sources del módulo, sin recursos administrados.
+Se amplió la misma política propuesta con gestión del rol de ejecución exacto y
+red etiquetada Checkpoint=6, incluyendo permisos de eliminación. El archivo
+compactado tiene 4736 caracteres y cabe en una política administrada de 6144.
+No se ejecutará otro apply hasta que esos permisos estén habilitados.

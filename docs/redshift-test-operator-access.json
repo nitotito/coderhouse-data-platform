@@ -50,6 +50,47 @@
       "Resource": "arn:aws:kms:us-east-1:672049777597:key/8cd750a2-438b-42dc-935d-24f3cb6855f4"
     },
     {
+      "Sid": "ManageOnlyTestExecutionRole",
+      "Effect": "Allow",
+      "Action": ["iam:CreateRole", "iam:GetRole", "iam:DeleteRole", "iam:UpdateAssumeRolePolicy", "iam:PutRolePolicy", "iam:GetRolePolicy", "iam:DeleteRolePolicy", "iam:ListRolePolicies", "iam:ListAttachedRolePolicies", "iam:TagRole", "iam:UntagRole"],
+      "Resource": "arn:aws:iam::672049777597:role/coderhouse-dev-analytics-execution"
+    },
+    {
+      "Sid": "AllowRedshiftServiceLinkedRoleIfMissing",
+      "Effect": "Allow",
+      "Action": "iam:CreateServiceLinkedRole",
+      "Resource": "arn:aws:iam::672049777597:role/aws-service-role/redshift.amazonaws.com/AWSServiceRoleForRedshift",
+      "Condition": { "StringEquals": { "iam:AWSServiceName": "redshift.amazonaws.com" } }
+    },
+    {
+      "Sid": "UseExistingVpcAndSubnetsForTestNetwork",
+      "Effect": "Allow",
+      "Action": ["ec2:CreateSecurityGroup", "ec2:CreateVpcEndpoint"],
+      "Resource": ["arn:aws:ec2:us-east-1:672049777597:vpc/vpc-0b85171c643372dba", "arn:aws:ec2:us-east-1:672049777597:subnet/subnet-0e484b46487a0220c", "arn:aws:ec2:us-east-1:672049777597:subnet/subnet-001ae24851059e5ed"],
+      "Condition": { "StringEquals": { "aws:RequestedRegion": "us-east-1" } }
+    },
+    {
+      "Sid": "CreateAndTagOnlyTestNetwork",
+      "Effect": "Allow",
+      "Action": ["ec2:CreateSecurityGroup", "ec2:CreateVpcEndpoint", "ec2:CreateTags"],
+      "Resource": ["arn:aws:ec2:us-east-1:672049777597:security-group/*", "arn:aws:ec2:us-east-1:672049777597:vpc-endpoint/*"],
+      "Condition": { "StringEquals": { "aws:RequestTag/Checkpoint": "6", "aws:RequestTag/Project": "coderhouse-data-platform" } }
+    },
+    {
+      "Sid": "ManageAndRemoveOnlyTestNetwork",
+      "Effect": "Allow",
+      "Action": ["ec2:AuthorizeSecurityGroupIngress", "ec2:AuthorizeSecurityGroupEgress", "ec2:RevokeSecurityGroupIngress", "ec2:RevokeSecurityGroupEgress", "ec2:DeleteSecurityGroup", "ec2:ModifyVpcEndpoint", "ec2:DeleteVpcEndpoints"],
+      "Resource": ["arn:aws:ec2:us-east-1:672049777597:security-group/*", "arn:aws:ec2:us-east-1:672049777597:vpc-endpoint/*"],
+      "Condition": { "StringEquals": { "aws:ResourceTag/Checkpoint": "6", "aws:ResourceTag/Project": "coderhouse-data-platform" } }
+    },
+    {
+      "Sid": "ReferenceOnlyTestSecurityGroupsForEndpoint",
+      "Effect": "Allow",
+      "Action": "ec2:CreateVpcEndpoint",
+      "Resource": "arn:aws:ec2:us-east-1:672049777597:security-group/*",
+      "Condition": { "StringEquals": { "aws:ResourceTag/Checkpoint": "6", "aws:ResourceTag/Project": "coderhouse-data-platform" } }
+    },
+    {
       "Sid": "PassOnlyTestExecutionRole",
       "Effect": "Allow",
       "Action": "iam:PassRole",

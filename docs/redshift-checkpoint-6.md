@@ -40,12 +40,13 @@ cifrado alias/aws/kinesis. Bucket `coderhouse-data-lake-672049777597`:
 versionado Enabled. Flink `coderhouse-dev-transactions-flink`: READY.
 Glue mantiene la tabla ICEBERG y el metadata_location del snapshot probado en PE5.
 
-La consulta KMS DescribeKey fue denegada; el error identifica el ARN de la clave
+La primera consulta KMS DescribeKey fue denegada; el error identificó el ARN de la clave
 `arn:aws:kms:us-east-1:672049777597:key/8cd750a2-438b-42dc-935d-24f3cb6855f4`.
-Se usa como parámetro explícito, pendiente de confirmación con DescribeKey antes
-del apply. ListWorkgroups y DescribeClusters también fueron denegados: **no se
-afirma que Redshift no exista**. Un administrador debe habilitar lectura para
-descartar duplicados antes de desplegar.
+Tras habilitar permisos de inventario, DescribeKey confirmó ese ARN y las consultas
+ListWorkgroups/DescribeClusters devolvieron listas vacías. El ensayo y su retiro
+fueron autorizados. El apply se detuvo en CreateRole/CreateSecurityGroup por
+permisos del operador todavía faltantes; no se creó ningún recurso temporal.
+La política actualizada está en `docs/redshift-test-operator-access.json`.
 
 Las pruebas reales PE5 están en [el índice anterior](evidence/iceberg-validation-status.md).
 Son antecedentes, no resultados Redshift. La tabla tiene seis columnas y
@@ -93,7 +94,8 @@ continúan; Flink no se inicia en la prueba propuesta.
 `enable_redshift=false` por defecto. Los ocho recursos nuevos son rol IAM,
 política del rol, dos security groups, endpoint Kinesis, namespace, workgroup y
 usage limit. El plan realizado propone **8 altas, 0 cambios, 0 bajas**.
-No se aplicó. El backend y todas las direcciones de entregas previas se conservan.
+El primer apply autorizado falló antes de crear recursos por permisos IAM/EC2.
+El backend y todas las direcciones de entregas previas se conservan.
 
 ```powershell
 terraform -chdir=infra init
