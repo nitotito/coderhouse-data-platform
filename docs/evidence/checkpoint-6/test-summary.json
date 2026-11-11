@@ -1,0 +1,31 @@
+{
+  "status": "PASSED",
+  "run_id": "pe6_20261107_033721",
+  "metrics": [
+    {
+      "window_start": "2026-11-07 03:37:00",
+      "payment_method": "card_pe6_20261107_033721",
+      "transaction_count": 3,
+      "total_amount": "1029.30",
+      "average_amount": "343.100000",
+      "approved_count": 2,
+      "rejected_count": 1,
+      "approved_amount": "30.30"
+    }
+  ],
+  "join": [
+    {
+      "window_start": "2026-11-04 11:33:00",
+      "payment_method": "card_pe5_20261104_113142",
+      "recent_approved_count": 2,
+      "iceberg_approved_count": 2,
+      "recent_approved_amount": "30.30",
+      "iceberg_approved_amount": "30.30",
+      "count_difference": 0,
+      "amount_difference": "0.00"
+    }
+  ],
+  "observation_upper_bound_seconds": 92.785636,
+  "note": "New Kinesis arrivals with both current and historical event times; existing Iceberg fixture read-only. Flink not started.",
+  "automatic_refresh_tested": false
+}

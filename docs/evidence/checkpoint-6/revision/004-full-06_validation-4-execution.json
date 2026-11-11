@@ -1,0 +1,18 @@
+{
+  "Id": "726100cf-451e-4c19-b5f6-b34b318db669",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 554359377,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-11T19:25:02.424000-03:00",
+  "UpdatedAt": "2026-11-11T19:25:03.254000-03:00",
+  "RedshiftPid": 1073865218,
+  "HasResultSet": true,
+  "QueryString": "SELECT * FROM lakehouse.transaction_aggregates\nWHERE window_start >= TIMESTAMP '2026-11-04 00:00:00'\n  AND window_start < TIMESTAMP '2026-11-05 00:00:00'",
+  "ResultRows": 1,
+  "ResultSize": 96,
+  "RedshiftQueryId": 1773,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json",
+  "SessionId": "714dd1ea-9acb-4ba0-bd66-0975dae70429"
+}

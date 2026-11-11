@@ -1,0 +1,74 @@
+[
+  {
+    "transaction_id": null,
+    "event_time": null,
+    "amount": null,
+    "payment_method": null,
+    "status": null,
+    "validation_error": "invalid_json"
+  },
+  {
+    "transaction_id": "pe6_20261111_222257-no-time",
+    "event_time": null,
+    "amount": "1.00",
+    "payment_method": "card_pe6_20261111_222257",
+    "status": "approved",
+    "validation_error": "invalid_timestamp"
+  },
+  {
+    "transaction_id": "pe6_20261111_222257-bad-amount",
+    "event_time": "2026-11-11 22:22:00",
+    "amount": null,
+    "payment_method": "card_pe6_20261111_222257",
+    "status": "approved",
+    "validation_error": "invalid_amount"
+  },
+  {
+    "transaction_id": "pe6_20261111_222257-1-2",
+    "event_time": "2026-11-04 11:33:03",
+    "amount": "999.00",
+    "payment_method": "card_pe5_20261104_113142",
+    "status": "rejected",
+    "validation_error": null
+  },
+  {
+    "transaction_id": "pe6_20261111_222257-1-1",
+    "event_time": "2026-11-04 11:33:02",
+    "amount": "20.20",
+    "payment_method": "card_pe5_20261104_113142",
+    "status": "approved",
+    "validation_error": null
+  },
+  {
+    "transaction_id": "pe6_20261111_222257-1-0",
+    "event_time": "2026-11-04 11:33:01",
+    "amount": "10.10",
+    "payment_method": "card_pe5_20261104_113142",
+    "status": "approved",
+    "validation_error": null
+  },
+  {
+    "transaction_id": "pe6_20261111_222257-0-2",
+    "event_time": "2026-11-11 22:22:03",
+    "amount": "999.00",
+    "payment_method": "card_pe6_20261111_222257",
+    "status": "rejected",
+    "validation_error": null
+  },
+  {
+    "transaction_id": "pe6_20261111_222257-0-1",
+    "event_time": "2026-11-11 22:22:02",
+    "amount": "20.20",
+    "payment_method": "card_pe6_20261111_222257",
+    "status": "approved",
+    "validation_error": null
+  },
+  {
+    "transaction_id": "pe6_20261111_222257-0-0",
+    "event_time": "2026-11-11 22:22:01",
+    "amount": "10.10",
+    "payment_method": "card_pe6_20261111_222257",
+    "status": "approved",
+    "validation_error": null
+  }
+]

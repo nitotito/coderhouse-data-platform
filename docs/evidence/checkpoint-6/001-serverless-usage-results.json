@@ -1,0 +1,82 @@
+[
+  {
+    "start_time": "2026-11-07 03:40:00",
+    "end_time": "2026-11-07 03:41:00",
+    "compute_seconds": 7.0,
+    "compute_capacity": 4.0,
+    "data_storage": 132,
+    "cross_region_transferred_data": 0,
+    "charged_seconds": 240,
+    "charged_extra_compute_for_automatic_optimization_seconds": 0
+  },
+  {
+    "start_time": "2026-11-07 03:39:00",
+    "end_time": "2026-11-07 03:40:00",
+    "compute_seconds": 4.0,
+    "compute_capacity": 4.0,
+    "data_storage": 132,
+    "cross_region_transferred_data": 0,
+    "charged_seconds": 240,
+    "charged_extra_compute_for_automatic_optimization_seconds": 0
+  },
+  {
+    "start_time": "2026-11-07 03:38:00",
+    "end_time": "2026-11-07 03:39:00",
+    "compute_seconds": 37.0,
+    "compute_capacity": 4.0,
+    "data_storage": 134,
+    "cross_region_transferred_data": 0,
+    "charged_seconds": 240,
+    "charged_extra_compute_for_automatic_optimization_seconds": 0
+  },
+  {
+    "start_time": "2026-11-07 03:37:00",
+    "end_time": "2026-11-07 03:38:00",
+    "compute_seconds": 52.0,
+    "compute_capacity": 4.0,
+    "data_storage": 127,
+    "cross_region_transferred_data": 0,
+    "charged_seconds": 240,
+    "charged_extra_compute_for_automatic_optimization_seconds": 0
+  },
+  {
+    "start_time": "2026-11-07 03:36:00",
+    "end_time": "2026-11-07 03:37:00",
+    "compute_seconds": 10.0,
+    "compute_capacity": 4.0,
+    "data_storage": 92,
+    "cross_region_transferred_data": 0,
+    "charged_seconds": 240,
+    "charged_extra_compute_for_automatic_optimization_seconds": 0
+  },
+  {
+    "start_time": "2026-11-07 03:35:00",
+    "end_time": "2026-11-07 03:36:00",
+    "compute_seconds": 1.0,
+    "compute_capacity": 4.0,
+    "data_storage": 92,
+    "cross_region_transferred_data": 0,
+    "charged_seconds": 240,
+    "charged_extra_compute_for_automatic_optimization_seconds": 0
+  },
+  {
+    "start_time": "2026-11-07 03:34:00",
+    "end_time": "2026-11-07 03:35:00",
+    "compute_seconds": 0.0,
+    "compute_capacity": 0.0,
+    "data_storage": 92,
+    "cross_region_transferred_data": 0,
+    "charged_seconds": 240,
+    "charged_extra_compute_for_automatic_optimization_seconds": 0
+  },
+  {
+    "start_time": "2026-11-07 03:33:00",
+    "end_time": "2026-11-07 03:34:00",
+    "compute_seconds": 19.0,
+    "compute_capacity": 4.0,
+    "data_storage": 91,
+    "cross_region_transferred_data": 0,
+    "charged_seconds": 240,
+    "charged_extra_compute_for_automatic_optimization_seconds": 0
+  }
+]

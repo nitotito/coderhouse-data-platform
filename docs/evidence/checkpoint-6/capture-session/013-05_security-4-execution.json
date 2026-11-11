@@ -1,0 +1,17 @@
+{
+  "Id": "ae068289-c441-470d-b798-62be77ab2198",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 154699301,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-07T00:57:31.134000-03:00",
+  "UpdatedAt": "2026-11-07T00:57:31.769000-03:00",
+  "RedshiftPid": 1073954967,
+  "HasResultSet": false,
+  "QueryString": "REVOKE ALL ON SCHEMA kinesis_source FROM PUBLIC",
+  "ResultRows": 0,
+  "ResultSize": 0,
+  "RedshiftQueryId": 0,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

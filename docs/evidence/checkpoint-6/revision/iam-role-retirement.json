@@ -1,0 +1,6 @@
+{
+  "reason": "Operator lacks provider enumeration ListInstanceProfilesForRole; direct DeleteRole after warehouse absence",
+  "role": "coderhouse-dev-analytics-execution",
+  "exit_code": 0,
+  "completed_at_utc": "2026-11-11T22:53:35.103221+00:00"
+}

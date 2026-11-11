@@ -1,0 +1,15 @@
+{
+  "status": "LOCAL_CHECKS_PASSED",
+  "pdf_pages": 18,
+  "parsed_view_statements": {
+    "03_analytics.sql": 2,
+    "04_iceberg.sql": 1
+  },
+  "temporary_fixture_statements": 11,
+  "fixture_cases": 9,
+  "all_source_code_lines_present_in_pdf": true,
+  "consolidated_sha256": "b51176a029026b80b8bbac5f6147fbe56ab724ec7b1df64e811b174c0ec8e30c",
+  "aws_clean_execution": "PASSED_ALL_SOURCE_STATEMENTS",
+  "effective_role_membership_capture": "PRESENT",
+  "verified_actual_statements": 42
+}

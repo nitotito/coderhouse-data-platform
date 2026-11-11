@@ -1,0 +1,17 @@
+{
+  "Id": "5bd61c9b-db52-449e-a476-4741c2c81006",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 28226108,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-07T01:01:24.050000-03:00",
+  "UpdatedAt": "2026-11-07T01:01:24.673000-03:00",
+  "RedshiftPid": 1073807593,
+  "HasResultSet": true,
+  "QueryString": "SELECT usename FROM pg_user WHERE usename='IAM:RootIdentity'",
+  "ResultRows": 1,
+  "ResultSize": 16,
+  "RedshiftQueryId": 0,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

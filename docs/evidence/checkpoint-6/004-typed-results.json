@@ -1,0 +1,98 @@
+[
+  {
+    "approximate_arrival_timestamp": "2026-11-07 03:37:28.545",
+    "refresh_time": "2026-11-07 03:37:39",
+    "shard_id": "shardId-000000000000",
+    "sequence_number": "49679759770194942529568556189394211812505606979598680066",
+    "transaction_id": "pe6_20261107_033721-0-0",
+    "payment_method": "card_pe6_20261107_033721",
+    "status": "approved",
+    "event_time": "2026-11-07 03:37:01",
+    "amount": "10.10",
+    "validation_error": null
+  },
+  {
+    "approximate_arrival_timestamp": "2026-11-07 03:37:29.724",
+    "refresh_time": "2026-11-07 03:37:39",
+    "shard_id": "shardId-000000000000",
+    "sequence_number": "49679759770194942529568556190788103282521274486754377730",
+    "transaction_id": "pe6_20261107_033721-0-1",
+    "payment_method": "card_pe6_20261107_033721",
+    "status": "approved",
+    "event_time": "2026-11-07 03:37:02",
+    "amount": "20.20",
+    "validation_error": null
+  },
+  {
+    "approximate_arrival_timestamp": "2026-11-07 03:37:30.908",
+    "refresh_time": "2026-11-07 03:37:39",
+    "shard_id": "shardId-000000000000",
+    "sequence_number": "49679759770194942529568556192221889304584224756675379202",
+    "transaction_id": "pe6_20261107_033721-0-2",
+    "payment_method": "card_pe6_20261107_033721",
+    "status": "rejected",
+    "event_time": "2026-11-07 03:37:03",
+    "amount": "999.00",
+    "validation_error": null
+  },
+  {
+    "approximate_arrival_timestamp": "2026-11-07 03:37:32.12",
+    "refresh_time": "2026-11-07 03:37:39",
+    "shard_id": "shardId-000000000000",
+    "sequence_number": "49679759770194942529568556193731837653282896733322346498",
+    "transaction_id": "pe6_20261107_033721-1-0",
+    "payment_method": "card_pe5_20261104_113142",
+    "status": "approved",
+    "event_time": "2026-11-04 11:33:01",
+    "amount": "10.10",
+    "validation_error": null
+  },
+  {
+    "approximate_arrival_timestamp": "2026-11-07 03:37:33.296",
+    "refresh_time": "2026-11-07 03:37:39",
+    "shard_id": "shardId-000000000000",
+    "sequence_number": "49679759770194942529568556195155952268788929969845698562",
+    "transaction_id": "pe6_20261107_033721-1-1",
+    "payment_method": "card_pe5_20261104_113142",
+    "status": "approved",
+    "event_time": "2026-11-04 11:33:02",
+    "amount": "20.20",
+    "validation_error": null
+  },
+  {
+    "approximate_arrival_timestamp": "2026-11-07 03:37:34.50",
+    "refresh_time": "2026-11-07 03:37:39",
+    "shard_id": "shardId-000000000000",
+    "sequence_number": "49679759770194942529568556196738436166664479628255559682",
+    "transaction_id": "pe6_20261107_033721-1-2",
+    "payment_method": "card_pe5_20261104_113142",
+    "status": "rejected",
+    "event_time": "2026-11-04 11:33:03",
+    "amount": "999.00",
+    "validation_error": null
+  },
+  {
+    "approximate_arrival_timestamp": "2026-11-07 03:37:35.64",
+    "refresh_time": "2026-11-07 03:37:39",
+    "shard_id": "shardId-000000000000",
+    "sequence_number": "49679759770194942529568556198110566971927083810266546178",
+    "transaction_id": "pe6_20261107_033721-bad-amount",
+    "payment_method": "card_pe6_20261107_033721",
+    "status": "approved",
+    "event_time": "2026-11-07 03:37:00",
+    "amount": null,
+    "validation_error": "invalid_amount"
+  },
+  {
+    "approximate_arrival_timestamp": "2026-11-07 03:37:36.807",
+    "refresh_time": "2026-11-07 03:37:39",
+    "shard_id": "shardId-000000000000",
+    "sequence_number": "49679759770194942529568556199528636958335043900916367362",
+    "transaction_id": "pe6_20261107_033721-no-time",
+    "payment_method": "card_pe6_20261107_033721",
+    "status": "approved",
+    "event_time": null,
+    "amount": "1.00",
+    "validation_error": "invalid_timestamp"
+  }
+]

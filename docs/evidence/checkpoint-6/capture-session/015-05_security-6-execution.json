@@ -1,0 +1,17 @@
+{
+  "Id": "e91afad9-3ce3-4a4d-b9c6-1c20be9cd8a3",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 152846308,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-07T00:57:36.643000-03:00",
+  "UpdatedAt": "2026-11-07T00:57:37.287000-03:00",
+  "RedshiftPid": 1073766547,
+  "HasResultSet": false,
+  "QueryString": "GRANT USAGE ON SCHEMA analytics TO ROLE checkpoint6_analyst",
+  "ResultRows": 0,
+  "ResultSize": 0,
+  "RedshiftQueryId": 0,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

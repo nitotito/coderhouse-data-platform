@@ -1,0 +1,65 @@
+[
+  {
+    "shard_id": "shardId-000000000000",
+    "sequence_number": "49679759770194942529568556200914065947613409003849121794",
+    "approximate_arrival_timestamp": "2026-11-07 03:37:37.988",
+    "refresh_time": "2026-11-07 03:37:39",
+    "arrival_age_ms": 79012
+  },
+  {
+    "shard_id": "shardId-000000000000",
+    "sequence_number": "49679759770194942529568556199528636958335043900916367362",
+    "approximate_arrival_timestamp": "2026-11-07 03:37:36.807",
+    "refresh_time": "2026-11-07 03:37:39",
+    "arrival_age_ms": 80193
+  },
+  {
+    "shard_id": "shardId-000000000000",
+    "sequence_number": "49679759770194942529568556198110566971927083810266546178",
+    "approximate_arrival_timestamp": "2026-11-07 03:37:35.64",
+    "refresh_time": "2026-11-07 03:37:39",
+    "arrival_age_ms": 81360
+  },
+  {
+    "shard_id": "shardId-000000000000",
+    "sequence_number": "49679759770194942529568556196738436166664479628255559682",
+    "approximate_arrival_timestamp": "2026-11-07 03:37:34.50",
+    "refresh_time": "2026-11-07 03:37:39",
+    "arrival_age_ms": 82500
+  },
+  {
+    "shard_id": "shardId-000000000000",
+    "sequence_number": "49679759770194942529568556195155952268788929969845698562",
+    "approximate_arrival_timestamp": "2026-11-07 03:37:33.296",
+    "refresh_time": "2026-11-07 03:37:39",
+    "arrival_age_ms": 83704
+  },
+  {
+    "shard_id": "shardId-000000000000",
+    "sequence_number": "49679759770194942529568556193731837653282896733322346498",
+    "approximate_arrival_timestamp": "2026-11-07 03:37:32.12",
+    "refresh_time": "2026-11-07 03:37:39",
+    "arrival_age_ms": 84880
+  },
+  {
+    "shard_id": "shardId-000000000000",
+    "sequence_number": "49679759770194942529568556192221889304584224756675379202",
+    "approximate_arrival_timestamp": "2026-11-07 03:37:30.908",
+    "refresh_time": "2026-11-07 03:37:39",
+    "arrival_age_ms": 86092
+  },
+  {
+    "shard_id": "shardId-000000000000",
+    "sequence_number": "49679759770194942529568556190788103282521274486754377730",
+    "approximate_arrival_timestamp": "2026-11-07 03:37:29.724",
+    "refresh_time": "2026-11-07 03:37:39",
+    "arrival_age_ms": 87276
+  },
+  {
+    "shard_id": "shardId-000000000000",
+    "sequence_number": "49679759770194942529568556189394211812505606979598680066",
+    "approximate_arrival_timestamp": "2026-11-07 03:37:28.545",
+    "refresh_time": "2026-11-07 03:37:39",
+    "arrival_age_ms": 88455
+  }
+]

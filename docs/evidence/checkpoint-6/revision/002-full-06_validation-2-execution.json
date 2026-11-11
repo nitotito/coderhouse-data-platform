@@ -1,0 +1,18 @@
+{
+  "Id": "c1d2afc1-23c6-4c53-b0ad-012b7740eb59",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 413064019,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-11T19:24:54.278000-03:00",
+  "UpdatedAt": "2026-11-11T19:24:55.034000-03:00",
+  "RedshiftPid": 1073865218,
+  "HasResultSet": true,
+  "QueryString": "SELECT transaction_id,event_time,amount,payment_method,status,validation_error\nFROM analytics.transactions_typed ORDER BY approximate_arrival_timestamp DESC LIMIT 20",
+  "ResultRows": 9,
+  "ResultSize": 663,
+  "RedshiftQueryId": 1766,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json",
+  "SessionId": "714dd1ea-9acb-4ba0-bd66-0975dae70429"
+}

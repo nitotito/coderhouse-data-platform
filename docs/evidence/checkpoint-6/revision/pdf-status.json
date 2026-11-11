@@ -1,0 +1,10 @@
+{
+  "ready": true,
+  "pages": 18,
+  "missing_screenshots": [],
+  "clean_sql_passed": true,
+  "security_passed": true,
+  "conversion_regression_passed": true,
+  "cleanup_executed": true,
+  "consolidated_sha256": "b51176a029026b80b8bbac5f6147fbe56ab724ec7b1df64e811b174c0ec8e30c"
+}

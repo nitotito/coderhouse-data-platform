@@ -1,0 +1,17 @@
+{
+  "Id": "6e84f081-0921-44a2-872f-de3b06f46584",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 486265051,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-11T19:23:07.821000-03:00",
+  "UpdatedAt": "2026-11-11T19:23:08.860000-03:00",
+  "RedshiftPid": 1073848549,
+  "HasResultSet": true,
+  "QueryString": "SELECT COUNT(*) AS records FROM analytics.transactions_typed WHERE payment_method='card_pe5_20261104_113142'",
+  "ResultRows": 1,
+  "ResultSize": 20,
+  "RedshiftQueryId": 1664,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

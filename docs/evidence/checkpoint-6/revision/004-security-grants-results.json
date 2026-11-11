@@ -1,0 +1,29 @@
+[
+  {
+    "namespace_name": "analytics",
+    "relation_name": "recent_vs_iceberg",
+    "privilege_type": "SELECT",
+    "identity_id": 107905,
+    "identity_name": "checkpoint6_analyst",
+    "identity_type": "role",
+    "admin_option": false
+  },
+  {
+    "namespace_name": "analytics",
+    "relation_name": "transactions_per_minute",
+    "privilege_type": "SELECT",
+    "identity_id": 107905,
+    "identity_name": "checkpoint6_analyst",
+    "identity_type": "role",
+    "admin_option": false
+  },
+  {
+    "namespace_name": "analytics",
+    "relation_name": "transactions_typed",
+    "privilege_type": "SELECT",
+    "identity_id": 107905,
+    "identity_name": "checkpoint6_analyst",
+    "identity_type": "role",
+    "admin_option": false
+  }
+]

@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "checked_at_utc": "2026-11-11T22:56:05.792454+00:00",
+  "temporary_resources": [
+    {
+      "address": "module.redshift[0].aws_iam_role.analytics",
+      "id": "coderhouse-dev-analytics-execution",
+      "absent": true,
+      "exit_code": 254,
+      "response": {},
+      "error": "aws: [ERROR]: An error occurred (NoSuchEntity) when calling the GetRole operation: The role with name coderhouse-dev-analytics-execution cannot be found."
+    },
+    {
+      "address": "module.redshift[0].aws_iam_role_policy.read_sources",
+      "id": "coderhouse-dev-analytics-execution:read-kinesis-and-iceberg",
+      "absent": true,
+      "exit_code": 254,
+      "response": {},
+      "error": "aws: [ERROR]: An error occurred (NoSuchEntity) when calling the GetRolePolicy operation: The role with name coderhouse-dev-analytics-execution cannot be found."
+    },
+    {
+      "address": "module.redshift[0].aws_redshiftserverless_namespace.analytics",
+      "id": "coderhouse-dev-analytics",
+      "absent": true,
+      "exit_code": 254,
+      "response": {},
+      "error": "aws: [ERROR]: An error occurred (ResourceNotFoundException) when calling the GetNamespace operation: Serverless namespace coderhouse-dev-analytics not found."
+    },
+    {
+      "address": "module.redshift[0].aws_redshiftserverless_usage_limit.daily",
+      "id": "7ae9e644-a4bf-4c03-8fa5-e9627e7ba0a8",
+      "absent": true,
+      "exit_code": 254,
+      "response": {},
+      "error": "aws: [ERROR]: An error occurred (ValidationException) when calling the GetUsageLimit operation: The usage limit ID is not valid. 7ae9e644-a4bf-4c03-8fa5-e9627e7ba0a8 does not exist"
+    },
+    {
+      "address": "module.redshift[0].aws_redshiftserverless_workgroup.analytics",
+      "id": "coderhouse-dev-analytics",
+      "absent": true,
+      "exit_code": 254,
+      "response": {},
+      "error": "aws: [ERROR]: An error occurred (ResourceNotFoundException) when calling the GetWorkgroup operation: Serverless workgroup coderhouse-dev-analytics not found."
+    },
+    {
+      "address": "module.redshift[0].aws_security_group.kinesis_endpoint",
+      "id": "sg-0e332b4cd75b314c3",
+      "absent": true,
+      "exit_code": 254,
+      "response": {},
+      "error": "aws: [ERROR]: An error occurred (InvalidGroup.NotFound) when calling the DescribeSecurityGroups operation: The security group 'sg-0e332b4cd75b314c3' does not exist"
+    },
+    {
+      "address": "module.redshift[0].aws_security_group.warehouse",
+      "id": "sg-06e7fa3ae5c5330f4",
+      "absent": true,
+      "exit_code": 254,
+      "response": {},
+      "error": "aws: [ERROR]: An error occurred (InvalidGroup.NotFound) when calling the DescribeSecurityGroups operation: The security group 'sg-06e7fa3ae5c5330f4' does not exist"
+    },
+    {
+      "address": "module.redshift[0].aws_vpc_endpoint.kinesis",
+      "id": "vpce-00c85bd74a0a1f339",
+      "absent": true,
+      "exit_code": 254,
+      "response": {},
+      "error": "aws: [ERROR]: An error occurred (InvalidVpcEndpointId.NotFound) when calling the DescribeVpcEndpoints operation: The Vpc Endpoint Id 'vpce-00c85bd74a0a1f339' does not exist"
+    }
+  ],
+  "prior_components": {
+    "stream_active": true,
+    "flink_still_ready": true,
+    "iceberg_metadata_unchanged": true
+  }
+}

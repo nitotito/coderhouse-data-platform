@@ -1,0 +1,342 @@
+{
+  "status": "PASSED",
+  "consolidated_sha256": "b51176a029026b80b8bbac5f6147fbe56ab724ec7b1df64e811b174c0ec8e30c",
+  "statements": [
+    {
+      "source": "01_schemas.sql",
+      "statement": 1,
+      "execution_id": "82d3be4e-d639-46ca-adeb-7ad37d60378c",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "01_schemas.sql",
+      "statement": 2,
+      "execution_id": "e9fce8bb-8d1a-4be1-b0ae-734608beaad5",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "01_schemas.sql",
+      "statement": 3,
+      "execution_id": "fdbed04d-6315-46c0-a264-81be3040e3ad",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "01_schemas.sql",
+      "statement": 4,
+      "execution_id": "4ecd10af-725f-4b6c-bad6-881fa91dc312",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "external_schema_prefix_authentication_redacted_by_service"
+    },
+    {
+      "source": "01_schemas.sql",
+      "statement": 5,
+      "execution_id": "838c87b4-b524-4d7d-a8e2-20353c1d2762",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "external_schema_prefix_authentication_redacted_by_service"
+    },
+    {
+      "source": "02_streaming.sql",
+      "statement": 1,
+      "execution_id": "70c9b9c0-3cdb-4191-8fb0-45fafec195a2",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "03_analytics.sql",
+      "statement": 1,
+      "execution_id": "1ab534f8-31fd-4183-b65c-738963e9f16d",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "03_analytics.sql",
+      "statement": 2,
+      "execution_id": "bc853af0-4638-4d7e-b7dd-5dbd2a05793e",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "04_iceberg.sql",
+      "statement": 1,
+      "execution_id": "866c75df-8932-4891-86f0-898ff86587c2",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "05_security.sql",
+      "statement": 1,
+      "execution_id": "9250a802-58ea-4b47-82ea-a3aa75b8671d",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "05_security.sql",
+      "statement": 2,
+      "execution_id": "aeee293a-1c87-49ea-8368-4ee2fe7bbbdf",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "05_security.sql",
+      "statement": 3,
+      "execution_id": "9c8ab155-afc3-4ccc-b032-7e3d7a3fe144",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "05_security.sql",
+      "statement": 4,
+      "execution_id": "8b066840-aeb9-4347-9adb-4dc8453d5439",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "05_security.sql",
+      "statement": 5,
+      "execution_id": "b8823854-a1f8-4a8f-a2c0-f28a375ebacb",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "05_security.sql",
+      "statement": 6,
+      "execution_id": "52c36d78-0b95-4777-aadb-0712b090eba7",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "05_security.sql",
+      "statement": 7,
+      "execution_id": "7dbc6bf7-2528-4863-a5c5-e77425f822ab",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "05_security.sql",
+      "statement": 8,
+      "execution_id": "6e5635be-e2b3-49ee-bc09-be1583413c89",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "05_security.sql",
+      "statement": 9,
+      "execution_id": "63776007-2521-4e2c-a9b8-54017d596490",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "05_security.sql",
+      "statement": 10,
+      "execution_id": "e630a1f4-55b2-47a8-9f86-c10b74928c99",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "06_validation.sql",
+      "statement": 1,
+      "execution_id": "2c1c3d98-5709-433a-84a2-d315e6b17385",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "06_validation.sql",
+      "statement": 2,
+      "execution_id": "c1d2afc1-23c6-4c53-b0ad-012b7740eb59",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "06_validation.sql",
+      "statement": 3,
+      "execution_id": "5f7f2425-1e7e-4ae2-8974-ca01a2615b5b",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "06_validation.sql",
+      "statement": 4,
+      "execution_id": "726100cf-451e-4c19-b5f6-b34b318db669",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "06_validation.sql",
+      "statement": 5,
+      "execution_id": "40bab10f-eb70-4525-91bd-bebe78486fd7",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "06_validation.sql",
+      "statement": 6,
+      "execution_id": "8c74a454-8985-4342-a61a-ae5362c8c5bd",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "06_validation.sql",
+      "statement": 7,
+      "execution_id": "0c416352-0e4e-448e-acd3-6d3213264e94",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "07_monitoring.sql",
+      "statement": 1,
+      "execution_id": "ea9b7d94-d78e-4bf6-a6da-576660658d5f",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "07_monitoring.sql",
+      "statement": 2,
+      "execution_id": "6e66bb58-6b78-45b3-b9fa-4619e6a52fa1",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "07_monitoring.sql",
+      "statement": 3,
+      "execution_id": "8dd497fc-eb09-4533-8ee7-0322ebe37005",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "07_monitoring.sql",
+      "statement": 4,
+      "execution_id": "e251e110-29cf-47a7-88d7-8c92a78c8955",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "07_monitoring.sql",
+      "statement": 5,
+      "execution_id": "8d854825-e036-4fcb-895c-23d5c2c8b43a",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "07_monitoring.sql",
+      "statement": 6,
+      "execution_id": "a47d3d8f-807b-4d50-b500-ad0ccca5a4b2",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "07_monitoring.sql",
+      "statement": 7,
+      "execution_id": "816de4bf-f735-466c-a08c-f42aa4330083",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "08_membership.sql",
+      "statement": 1,
+      "execution_id": "7bd951a5-528f-4c62-9b15-ee99c1f15526",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "08_membership.sql",
+      "statement": 2,
+      "execution_id": "8773db4f-f4d4-4c1c-a662-c22d468ca712",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "08_membership.sql",
+      "statement": 3,
+      "execution_id": "514b8e34-4465-4f6b-a42c-32dbf52183a3",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "08_membership.sql",
+      "statement": 4,
+      "execution_id": "86393644-8242-42d4-9a92-7ddcf0fe0949",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "08_membership.sql",
+      "statement": 5,
+      "execution_id": "1d7a54e0-a2b8-4214-9c90-babc1b1c2dee",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "08_membership.sql",
+      "statement": 6,
+      "execution_id": "cefbc806-f2cc-473f-8df2-02aea809449d",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "08_membership.sql",
+      "statement": 7,
+      "execution_id": "23b03326-09b0-4053-9abe-d205860f2b5b",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "08_membership.sql",
+      "statement": 8,
+      "execution_id": "75364236-4fc4-4620-9fbf-d0b1d4c3c92b",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    },
+    {
+      "source": "08_membership.sql",
+      "statement": 9,
+      "execution_id": "baf2e997-c70f-4e1f-8f4d-b77d118780cd",
+      "db_user": "IAM:terraform-dev",
+      "status": "FINISHED",
+      "comparison": "exact_returned_sql"
+    }
+  ]
+}

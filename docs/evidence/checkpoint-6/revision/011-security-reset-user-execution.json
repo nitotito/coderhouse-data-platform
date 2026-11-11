@@ -1,0 +1,18 @@
+{
+  "Id": "baf2e997-c70f-4e1f-8f4d-b77d118780cd",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 4446423,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-11T19:27:16.540000-03:00",
+  "UpdatedAt": "2026-11-11T19:27:16.753000-03:00",
+  "RedshiftPid": 1073799421,
+  "HasResultSet": false,
+  "QueryString": "RESET SESSION AUTHORIZATION",
+  "ResultRows": 0,
+  "ResultSize": 0,
+  "RedshiftQueryId": 1888,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json",
+  "SessionId": "24ab20cc-626a-47e6-bdab-00203210f39f"
+}

@@ -1,0 +1,699 @@
+
+Warning: Deprecated Parameter
+
+The parameter "dynamodb_table" is deprecated. Use parameter "use_lockfile"
+instead.
+Acquiring state lock. This may take a few moments...
+module.network.data.aws_availability_zones.available: Reading...
+module.identity.data.aws_caller_identity.current: Reading...
+module.managed_flink[0].data.aws_caller_identity.lakehouse: Reading...
+module.managed_flink[0].data.aws_partition.flink: Reading...
+module.network.data.aws_region.current: Reading...
+module.identity.data.aws_iam_policy_document.processing_trust: Reading...
+module.managed_flink[0].data.aws_caller_identity.flink: Reading...
+data.aws_caller_identity.platform: Reading...
+module.kinesis[0].data.aws_caller_identity.current: Reading...
+module.managed_flink[0].aws_cloudwatch_log_group.flink: Refreshing state... [id=/aws/kinesis-analytics/coderhouse-dev-transactions-flink]
+module.managed_flink[0].data.aws_partition.flink: Read complete after 0s [id=aws]
+module.network.data.aws_region.current: Read complete after 0s [id=us-east-1]
+module.identity.data.aws_iam_policy_document.processing_trust: Read complete after 0s [id=1237821689]
+module.redshift[0].aws_iam_role.analytics: Refreshing state... [id=coderhouse-dev-analytics-execution]
+module.kinesis[0].aws_kinesis_stream.transactions: Refreshing state... [id=arn:aws:kinesis:us-east-1:672049777597:stream/dev-transactions-stream]
+module.network.aws_vpc.main: Refreshing state... [id=vpc-0b85171c643372dba]
+module.kinesis[0].data.aws_caller_identity.current: Read complete after 0s [id=672049777597]
+module.kinesis[0].data.aws_iam_policy_document.firehose_trust: Reading...
+module.kinesis[0].data.aws_iam_policy_document.firehose_trust: Read complete after 0s [id=414810265]
+module.managed_flink[0].data.aws_partition.lakehouse: Reading...
+module.managed_flink[0].data.aws_partition.lakehouse: Read complete after 0s [id=aws]
+module.kinesis[0].data.aws_region.current: Reading...
+module.kinesis[0].data.aws_region.current: Read complete after 0s [id=us-east-1]
+module.identity.aws_iam_role.processing: Refreshing state... [id=coderhouse-dev-processing]
+module.identity.data.aws_caller_identity.current: Read complete after 0s [id=672049777597]
+module.identity.data.aws_iam_policy_document.audit_trust: Reading...
+module.identity.data.aws_iam_policy_document.audit_trust: Read complete after 0s [id=81669632]
+module.identity.aws_iam_role.audit: Refreshing state... [id=coderhouse-dev-audit]
+data.aws_caller_identity.platform: Read complete after 0s [id=672049777597]
+aws_s3_bucket.data_lake: Refreshing state... [id=coderhouse-data-lake-672049777597]
+module.managed_flink[0].data.aws_caller_identity.lakehouse: Read complete after 0s [id=672049777597]
+module.managed_flink[0].data.aws_caller_identity.flink: Read complete after 0s [id=672049777597]
+module.managed_flink[0].data.aws_iam_policy_document.flink_assume_role: Reading...
+module.managed_flink[0].data.aws_iam_policy_document.flink_assume_role: Read complete after 0s [id=28356347]
+module.managed_flink[0].aws_iam_role.flink: Refreshing state... [id=coderhouse-dev-flink]
+module.network.data.aws_availability_zones.available: Read complete after 1s [id=us-east-1]
+module.managed_flink[0].aws_cloudwatch_log_stream.flink: Refreshing state... [id=application]
+module.kinesis[0].aws_cloudwatch_metric_alarm.read_throughput: Refreshing state... [id=dev-kinesis-read-throughput]
+module.kinesis[0].aws_cloudwatch_metric_alarm.write_throughput: Refreshing state... [id=dev-kinesis-write-throughput]
+module.network.aws_route_table.private[1]: Refreshing state... [id=rtb-0c79918ca994c2b15]
+module.network.aws_route_table.private[0]: Refreshing state... [id=rtb-0d69ac0f1349cb262]
+module.network.aws_subnet.private[1]: Refreshing state... [id=subnet-001ae24851059e5ed]
+module.network.aws_subnet.private[0]: Refreshing state... [id=subnet-0e484b46487a0220c]
+module.redshift[0].aws_security_group.warehouse: Refreshing state... [id=sg-06e7fa3ae5c5330f4]
+module.network.aws_vpc_endpoint.s3: Refreshing state... [id=vpce-05376664b99da4447]
+module.network.aws_route_table_association.private[0]: Refreshing state... [id=rtbassoc-023b6337c44b93796]
+module.network.aws_route_table_association.private[1]: Refreshing state... [id=rtbassoc-01cd4f41ab8ae837f]
+module.redshift[0].aws_security_group.kinesis_endpoint: Refreshing state... [id=sg-0e332b4cd75b314c3]
+module.redshift[0].aws_vpc_endpoint.kinesis: Refreshing state... [id=vpce-00c85bd74a0a1f339]
+aws_s3_bucket_public_access_block.data_lake: Refreshing state... [id=coderhouse-data-lake-672049777597]
+aws_s3_bucket_versioning.data_lake: Refreshing state... [id=coderhouse-data-lake-672049777597]
+aws_s3_bucket_server_side_encryption_configuration.data_lake: Refreshing state... [id=coderhouse-data-lake-672049777597]
+module.identity.data.aws_iam_policy_document.audit: Reading...
+module.identity.data.aws_iam_policy_document.processing: Reading...
+module.lakehouse.aws_glue_catalog_database.lakehouse: Refreshing state... [id=672049777597:lakehouse_db]
+module.managed_flink[0].data.aws_iam_policy_document.flink_permissions: Reading...
+module.identity.data.aws_iam_policy_document.audit: Read complete after 0s [id=3870355238]
+module.identity.data.aws_iam_policy_document.processing: Read complete after 0s [id=3847773883]
+module.managed_flink[0].data.aws_iam_policy_document.flink_permissions: Read complete after 0s [id=1492791529]
+module.managed_flink[0].aws_iam_role_policy.flink: Refreshing state... [id=coderhouse-dev-flink:coderhouse-dev-flink-access]
+module.identity.aws_iam_role_policy.processing: Refreshing state... [id=coderhouse-dev-processing:coderhouse-processing-s3]
+module.identity.aws_iam_role_policy.audit: Refreshing state... [id=coderhouse-dev-audit:coderhouse-audit-readonly]
+module.redshift[0].aws_iam_role_policy.read_sources: Refreshing state... [id=coderhouse-dev-analytics-execution:read-kinesis-and-iceberg]
+module.managed_flink[0].data.aws_iam_policy_document.lakehouse: Reading...
+module.managed_flink[0].data.aws_iam_policy_document.lakehouse: Read complete after 0s [id=3338619822]
+module.managed_flink[0].aws_iam_role_policy.lakehouse: Refreshing state... [id=coderhouse-dev-flink:coderhouse-dev-flink-lakehouse]
+module.redshift[0].aws_redshiftserverless_namespace.analytics: Refreshing state... [id=coderhouse-dev-analytics]
+module.managed_flink[0].aws_kinesisanalyticsv2_application.flink: Refreshing state... [id=arn:aws:kinesisanalytics:us-east-1:672049777597:application/coderhouse-dev-transactions-flink]
+module.redshift[0].aws_redshiftserverless_workgroup.analytics: Refreshing state... [id=coderhouse-dev-analytics]
+module.redshift[0].aws_redshiftserverless_usage_limit.daily: Refreshing state... [id=7ae9e644-a4bf-4c03-8fa5-e9627e7ba0a8]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # module.redshift[0].aws_iam_role.analytics will be destroyed
+  # (because module.redshift[0] is not in configuration)
+  - resource "aws_iam_role" "analytics" {
+      - arn                   = "arn:aws:iam::672049777597:role/coderhouse-dev-analytics-execution" -> null
+      - assume_role_policy    = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action    = "sts:AssumeRole"
+                      - Condition = {
+                          - ArnLikeIfExists      = {
+                              - "aws:SourceArn" = [
+                                  - "arn:aws:redshift-serverless:us-east-1:672049777597:*",
+                                  - "arn:aws:redshift:us-east-1:672049777597:*",
+                                ]
+                            }
+                          - StringEqualsIfExists = {
+                              - "aws:SourceAccount" = "672049777597"
+                            }
+                          - StringLike           = {
+                              - "sts:ExternalId" = "arn:aws:redshift:us-east-1:672049777597:dbuser:serverless-672049777597-*/*"
+                            }
+                        }
+                      - Effect    = "Allow"
+                      - Principal = {
+                          - Service = [
+                              - "redshift.amazonaws.com",
+                              - "redshift-serverless.amazonaws.com",
+                            ]
+                        }
+                    },
+                ]
+              - Version   = "2012-10-17"
+            }
+        ) -> null
+      - create_date           = "2026-11-11T22:19:21Z" -> null
+      - force_detach_policies = false -> null
+      - id                    = "coderhouse-dev-analytics-execution" -> null
+      - managed_policy_arns   = [] -> null
+      - max_session_duration  = 3600 -> null
+      - name                  = "coderhouse-dev-analytics-execution" -> null
+      - path                  = "/" -> null
+      - tags                  = {} -> null
+      - tags_all              = {
+          - "Environment" = "dev"
+          - "ManagedBy"   = "Terraform"
+          - "Project"     = "coderhouse-data-platform"
+        } -> null
+      - unique_id             = "AROAZY6KJZO63Q3IUEMGZ" -> null
+        # (3 unchanged attributes hidden)
+
+      - inline_policy {
+          - name   = "read-kinesis-and-iceberg" -> null
+          - policy = jsonencode(
+                {
+                  - Statement = [
+                      - {
+                          - Action   = [
+                              - "kinesis:DescribeStream",
+                              - "kinesis:DescribeStreamSummary",
+                              - "kinesis:ListShards",
+                              - "kinesis:GetShardIterator",
+                              - "kinesis:GetRecords",
+                            ]
+                          - Effect   = "Allow"
+                          - Resource = "arn:aws:kinesis:us-east-1:672049777597:stream/dev-transactions-stream"
+                          - Sid      = "ReadOnlyExistingStream"
+                        },
+                      - {
+                          - Action   = "kinesis:ListStreams"
+                          - Effect   = "Allow"
+                          - Resource = "*"
+                          - Sid      = "DiscoverStreamNames"
+                        },
+                      - {
+                          - Action    = "kms:Decrypt"
+                          - Condition = {
+                              - StringEquals = {
+                                  - "kms:EncryptionContext:aws:kinesis:arn" = "arn:aws:kinesis:us-east-1:672049777597:stream/dev-transactions-stream"
+                                  - "kms:ViaService"                        = "kinesis.us-east-1.amazonaws.com"
+                                }
+                            }
+                          - Effect    = "Allow"
+                          - Resource  = "arn:aws:kms:us-east-1:672049777597:key/8cd750a2-438b-42dc-935d-24f3cb6855f4"
+                          - Sid       = "DecryptOnlyStream"
+                        },
+                      - {
+                          - Action   = [
+                              - "glue:GetDatabase",
+                              - "glue:GetTable",
+                              - "glue:GetPartitions",
+                              - "glue:GetPartition",
+                            ]
+                          - Effect   = "Allow"
+                          - Resource = [
+                              - "arn:aws:glue:us-east-1:672049777597:catalog",
+                              - "arn:aws:glue:us-east-1:672049777597:database/lakehouse_db",
+                              - "arn:aws:glue:us-east-1:672049777597:table/lakehouse_db/transaction_aggregates",
+                            ]
+                          - Sid      = "ReadLakehouseMetadata"
+                        },
+                      - {
+                          - Action   = "glue:GetTables"
+                          - Effect   = "Allow"
+                          - Resource = [
+                              - "arn:aws:glue:us-east-1:672049777597:catalog",
+                              - "arn:aws:glue:us-east-1:672049777597:database/lakehouse_db",
+                              - "arn:aws:glue:us-east-1:672049777597:table/lakehouse_db/*",
+                            ]
+                          - Sid      = "DiscoverLakehouseTables"
+                        },
+                      - {
+                          - Action   = "s3:GetBucketLocation"
+                          - Effect   = "Allow"
+                          - Resource = "arn:aws:s3:::coderhouse-data-lake-672049777597"
+                          - Sid      = "LocateBucket"
+                        },
+                      - {
+                          - Action    = "s3:ListBucket"
+                          - Condition = {
+                              - StringLike = {
+                                  - "s3:prefix" = [
+                                      - "lakehouse/lakehouse_db/transaction_aggregates",
+                                      - "lakehouse/lakehouse_db/transaction_aggregates/*",
+                                    ]
+                                }
+                            }
+                          - Effect    = "Allow"
+                          - Resource  = "arn:aws:s3:::coderhouse-data-lake-672049777597"
+                          - Sid       = "ListOnlyIceberg"
+                        },
+                      - {
+                          - Action   = [
+                              - "s3:GetObject",
+                              - "s3:GetObjectVersion",
+                            ]
+                          - Effect   = "Allow"
+                          - Resource = "arn:aws:s3:::coderhouse-data-lake-672049777597/lakehouse/lakehouse_db/transaction_aggregates/*"
+                          - Sid      = "ReadOnlyIceberg"
+                        },
+                    ]
+                  - Version   = "2012-10-17"
+                }
+            ) -> null
+        }
+    }
+
+  # module.redshift[0].aws_iam_role_policy.read_sources will be destroyed
+  # (because module.redshift[0] is not in configuration)
+  - resource "aws_iam_role_policy" "read_sources" {
+      - id          = "coderhouse-dev-analytics-execution:read-kinesis-and-iceberg" -> null
+      - name        = "read-kinesis-and-iceberg" -> null
+      - policy      = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action   = [
+                          - "kinesis:DescribeStream",
+                          - "kinesis:DescribeStreamSummary",
+                          - "kinesis:ListShards",
+                          - "kinesis:GetShardIterator",
+                          - "kinesis:GetRecords",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = "arn:aws:kinesis:us-east-1:672049777597:stream/dev-transactions-stream"
+                      - Sid      = "ReadOnlyExistingStream"
+                    },
+                  - {
+                      - Action   = "kinesis:ListStreams"
+                      - Effect   = "Allow"
+                      - Resource = "*"
+                      - Sid      = "DiscoverStreamNames"
+                    },
+                  - {
+                      - Action    = "kms:Decrypt"
+                      - Condition = {
+                          - StringEquals = {
+                              - "kms:EncryptionContext:aws:kinesis:arn" = "arn:aws:kinesis:us-east-1:672049777597:stream/dev-transactions-stream"
+                              - "kms:ViaService"                        = "kinesis.us-east-1.amazonaws.com"
+                            }
+                        }
+                      - Effect    = "Allow"
+                      - Resource  = "arn:aws:kms:us-east-1:672049777597:key/8cd750a2-438b-42dc-935d-24f3cb6855f4"
+                      - Sid       = "DecryptOnlyStream"
+                    },
+                  - {
+                      - Action   = [
+                          - "glue:GetDatabase",
+                          - "glue:GetTable",
+                          - "glue:GetPartitions",
+                          - "glue:GetPartition",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "arn:aws:glue:us-east-1:672049777597:catalog",
+                          - "arn:aws:glue:us-east-1:672049777597:database/lakehouse_db",
+                          - "arn:aws:glue:us-east-1:672049777597:table/lakehouse_db/transaction_aggregates",
+                        ]
+                      - Sid      = "ReadLakehouseMetadata"
+                    },
+                  - {
+                      - Action   = "glue:GetTables"
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "arn:aws:glue:us-east-1:672049777597:catalog",
+                          - "arn:aws:glue:us-east-1:672049777597:database/lakehouse_db",
+                          - "arn:aws:glue:us-east-1:672049777597:table/lakehouse_db/*",
+                        ]
+                      - Sid      = "DiscoverLakehouseTables"
+                    },
+                  - {
+                      - Action   = "s3:GetBucketLocation"
+                      - Effect   = "Allow"
+                      - Resource = "arn:aws:s3:::coderhouse-data-lake-672049777597"
+                      - Sid      = "LocateBucket"
+                    },
+                  - {
+                      - Action    = "s3:ListBucket"
+                      - Condition = {
+                          - StringLike = {
+                              - "s3:prefix" = [
+                                  - "lakehouse/lakehouse_db/transaction_aggregates",
+                                  - "lakehouse/lakehouse_db/transaction_aggregates/*",
+                                ]
+                            }
+                        }
+                      - Effect    = "Allow"
+                      - Resource  = "arn:aws:s3:::coderhouse-data-lake-672049777597"
+                      - Sid       = "ListOnlyIceberg"
+                    },
+                  - {
+                      - Action   = [
+                          - "s3:GetObject",
+                          - "s3:GetObjectVersion",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = "arn:aws:s3:::coderhouse-data-lake-672049777597/lakehouse/lakehouse_db/transaction_aggregates/*"
+                      - Sid      = "ReadOnlyIceberg"
+                    },
+                ]
+              - Version   = "2012-10-17"
+            }
+        ) -> null
+      - role        = "coderhouse-dev-analytics-execution" -> null
+        # (1 unchanged attribute hidden)
+    }
+
+  # module.redshift[0].aws_redshiftserverless_namespace.analytics will be destroyed
+  # (because module.redshift[0] is not in configuration)
+  - resource "aws_redshiftserverless_namespace" "analytics" {
+      - admin_user_password_wo           = (write-only attribute) -> null
+      - admin_username                   = (sensitive value) -> null
+      - arn                              = "arn:aws:redshift-serverless:us-east-1:672049777597:namespace/c3b68580-105e-49cf-aa70-7ff8e24603a1" -> null
+      - db_name                          = "analytics" -> null
+      - default_iam_role_arn             = "arn:aws:iam::672049777597:role/coderhouse-dev-analytics-execution" -> null
+      - iam_roles                        = [
+          - "arn:aws:iam::672049777597:role/coderhouse-dev-analytics-execution",
+        ] -> null
+      - id                               = "coderhouse-dev-analytics" -> null
+      - kms_key_id                       = "AWS_OWNED_KMS_KEY" -> null
+      - log_exports                      = [] -> null
+      - namespace_id                     = "c3b68580-105e-49cf-aa70-7ff8e24603a1" -> null
+      - namespace_name                   = "coderhouse-dev-analytics" -> null
+      - region                           = "us-east-1" -> null
+      - tags                             = {
+          - "Checkpoint" = "6"
+        } -> null
+      - tags_all                         = {
+          - "Checkpoint"  = "6"
+          - "Environment" = "dev"
+          - "ManagedBy"   = "Terraform"
+          - "Project"     = "coderhouse-data-platform"
+        } -> null
+        # (2 unchanged attributes hidden)
+    }
+
+  # module.redshift[0].aws_redshiftserverless_usage_limit.daily will be destroyed
+  # (because module.redshift[0] is not in configuration)
+  - resource "aws_redshiftserverless_usage_limit" "daily" {
+      - amount        = 8 -> null
+      - arn           = "arn:aws:redshift-serverless:us-east-1:672049777597:usagelimit/7ae9e644-a4bf-4c03-8fa5-e9627e7ba0a8" -> null
+      - breach_action = "deactivate" -> null
+      - id            = "7ae9e644-a4bf-4c03-8fa5-e9627e7ba0a8" -> null
+      - period        = "daily" -> null
+      - region        = "us-east-1" -> null
+      - resource_arn  = "arn:aws:redshift-serverless:us-east-1:672049777597:workgroup/488bc734-fa2f-401e-ae80-4eaa70ee460f" -> null
+      - usage_type    = "serverless-compute" -> null
+    }
+
+  # module.redshift[0].aws_redshiftserverless_workgroup.analytics will be destroyed
+  # (because module.redshift[0] is not in configuration)
+  - resource "aws_redshiftserverless_workgroup" "analytics" {
+      - arn                  = "arn:aws:redshift-serverless:us-east-1:672049777597:workgroup/488bc734-fa2f-401e-ae80-4eaa70ee460f" -> null
+      - base_capacity        = 4 -> null
+      - endpoint             = [
+          - {
+              - address      = "coderhouse-dev-analytics.672049777597.us-east-1.redshift-serverless.amazonaws.com"
+              - port         = 5439
+              - vpc_endpoint = [
+                  - {
+                      - network_interface = [
+                          - {
+                              - availability_zone    = "us-east-1a"
+                              - network_interface_id = "eni-02c94a7d2774c31fa"
+                              - private_ip_address   = "10.10.1.200"
+                              - subnet_id            = "subnet-0e484b46487a0220c"
+                            },
+                          - {
+                              - availability_zone    = "us-east-1b"
+                              - network_interface_id = "eni-0fa4a2a7e53c1c438"
+                              - private_ip_address   = "10.10.2.244"
+                              - subnet_id            = "subnet-001ae24851059e5ed"
+                            },
+                        ]
+                      - vpc_endpoint_id   = "vpce-0b0271d470414db12"
+                      - vpc_id            = "vpc-0b85171c643372dba"
+                    },
+                ]
+            },
+        ] -> null
+      - enhanced_vpc_routing = false -> null
+      - id                   = "coderhouse-dev-analytics" -> null
+      - max_capacity         = 4 -> null
+      - namespace_name       = "coderhouse-dev-analytics" -> null
+      - port                 = 5439 -> null
+      - publicly_accessible  = false -> null
+      - region               = "us-east-1" -> null
+      - security_group_ids   = [
+          - "sg-06e7fa3ae5c5330f4",
+        ] -> null
+      - subnet_ids           = [
+          - "subnet-001ae24851059e5ed",
+          - "subnet-0e484b46487a0220c",
+        ] -> null
+      - tags                 = {
+          - "Checkpoint" = "6"
+        } -> null
+      - tags_all             = {
+          - "Checkpoint"  = "6"
+          - "Environment" = "dev"
+          - "ManagedBy"   = "Terraform"
+          - "Project"     = "coderhouse-data-platform"
+        } -> null
+      - track_name           = "current" -> null
+      - workgroup_id         = "488bc734-fa2f-401e-ae80-4eaa70ee460f" -> null
+      - workgroup_name       = "coderhouse-dev-analytics" -> null
+
+      - config_parameter {
+          - parameter_key   = "require_ssl" -> null
+          - parameter_value = "true" -> null
+        }
+
+      - price_performance_target {
+          - enabled = false -> null
+          - level   = 0 -> null
+        }
+    }
+
+  # module.redshift[0].aws_security_group.kinesis_endpoint will be destroyed
+  # (because module.redshift[0] is not in configuration)
+  - resource "aws_security_group" "kinesis_endpoint" {
+      - arn                    = "arn:aws:ec2:us-east-1:672049777597:security-group/sg-0e332b4cd75b314c3" -> null
+      - description            = "HTTPS only from Redshift to Kinesis endpoint" -> null
+      - egress                 = [] -> null
+      - id                     = "sg-0e332b4cd75b314c3" -> null
+      - ingress                = [
+          - {
+              - cidr_blocks      = []
+              - from_port        = 443
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = [
+                  - "sg-06e7fa3ae5c5330f4",
+                ]
+              - self             = false
+              - to_port          = 443
+                # (1 unchanged attribute hidden)
+            },
+        ] -> null
+      - name                   = "coderhouse-dev-analytics-kds-512525863ca328436510a8257d" -> null
+      - name_prefix            = "coderhouse-dev-analytics-kds-" -> null
+      - owner_id               = "672049777597" -> null
+      - region                 = "us-east-1" -> null
+      - revoke_rules_on_delete = false -> null
+      - tags                   = {
+          - "Checkpoint" = "6"
+        } -> null
+      - tags_all               = {
+          - "Checkpoint"  = "6"
+          - "Environment" = "dev"
+          - "ManagedBy"   = "Terraform"
+          - "Project"     = "coderhouse-data-platform"
+        } -> null
+      - vpc_id                 = "vpc-0b85171c643372dba" -> null
+    }
+
+  # module.redshift[0].aws_security_group.warehouse will be destroyed
+  # (because module.redshift[0] is not in configuration)
+  - resource "aws_security_group" "warehouse" {
+      - arn                    = "arn:aws:ec2:us-east-1:672049777597:security-group/sg-06e7fa3ae5c5330f4" -> null
+      - description            = "Private Redshift; Data API access, no inbound TCP" -> null
+      - egress                 = [
+          - {
+              - cidr_blocks      = [
+                  - "0.0.0.0/0",
+                ]
+              - from_port        = 443
+              - ipv6_cidr_blocks = []
+              - prefix_list_ids  = []
+              - protocol         = "tcp"
+              - security_groups  = []
+              - self             = false
+              - to_port          = 443
+                # (1 unchanged attribute hidden)
+            },
+        ] -> null
+      - id                     = "sg-06e7fa3ae5c5330f4" -> null
+      - ingress                = [] -> null
+      - name                   = "coderhouse-dev-analytics-739c8ea3c80ea335b5dc18f199" -> null
+      - name_prefix            = "coderhouse-dev-analytics-" -> null
+      - owner_id               = "672049777597" -> null
+      - region                 = "us-east-1" -> null
+      - revoke_rules_on_delete = false -> null
+      - tags                   = {
+          - "Checkpoint" = "6"
+        } -> null
+      - tags_all               = {
+          - "Checkpoint"  = "6"
+          - "Environment" = "dev"
+          - "ManagedBy"   = "Terraform"
+          - "Project"     = "coderhouse-data-platform"
+        } -> null
+      - vpc_id                 = "vpc-0b85171c643372dba" -> null
+    }
+
+  # module.redshift[0].aws_vpc_endpoint.kinesis will be destroyed
+  # (because module.redshift[0] is not in configuration)
+  - resource "aws_vpc_endpoint" "kinesis" {
+      - arn                        = "arn:aws:ec2:us-east-1:672049777597:vpc-endpoint/vpce-00c85bd74a0a1f339" -> null
+      - cidr_blocks                = [] -> null
+      - dns_entry                  = [
+          - {
+              - dns_name       = "vpce-00c85bd74a0a1f339-66tzctx6.kinesis.us-east-1.vpce.amazonaws.com"
+              - hosted_zone_id = "Z7HUB22UULQXV"
+            },
+          - {
+              - dns_name       = "vpce-00c85bd74a0a1f339-66tzctx6-us-east-1b.kinesis.us-east-1.vpce.amazonaws.com"
+              - hosted_zone_id = "Z7HUB22UULQXV"
+            },
+          - {
+              - dns_name       = "vpce-00c85bd74a0a1f339-66tzctx6-us-east-1a.kinesis.us-east-1.vpce.amazonaws.com"
+              - hosted_zone_id = "Z7HUB22UULQXV"
+            },
+          - {
+              - dns_name       = "kinesis.us-east-1.amazonaws.com"
+              - hosted_zone_id = "Z0302299RM41MUMETD7Y"
+            },
+          - {
+              - dns_name       = "data-kinesis.us-east-1.api.aws"
+              - hosted_zone_id = "Z02957537W4LOZ0OETZY"
+            },
+          - {
+              - dns_name       = "*.data-kinesis.us-east-1.api.aws"
+              - hosted_zone_id = "Z02957537W4LOZ0OETZY"
+            },
+          - {
+              - dns_name       = "control-kinesis.us-east-1.amazonaws.com"
+              - hosted_zone_id = "Z03023023R0DB2LPW7LWP"
+            },
+          - {
+              - dns_name       = "*.control-kinesis.us-east-1.amazonaws.com"
+              - hosted_zone_id = "Z03023023R0DB2LPW7LWP"
+            },
+          - {
+              - dns_name       = "kinesis.us-east-1.api.aws"
+              - hosted_zone_id = "Z0300770RO5TVIZEWP9E"
+            },
+          - {
+              - dns_name       = "control-kinesis.us-east-1.api.aws"
+              - hosted_zone_id = "Z03007961QETQ9TUFR15H"
+            },
+          - {
+              - dns_name       = "*.control-kinesis.us-east-1.api.aws"
+              - hosted_zone_id = "Z03007961QETQ9TUFR15H"
+            },
+          - {
+              - dns_name       = "data-kinesis.us-east-1.amazonaws.com"
+              - hosted_zone_id = "Z045566850D23SKUFZA7"
+            },
+          - {
+              - dns_name       = "*.data-kinesis.us-east-1.amazonaws.com"
+              - hosted_zone_id = "Z045566850D23SKUFZA7"
+            },
+        ] -> null
+      - id                         = "vpce-00c85bd74a0a1f339" -> null
+      - ip_address_type            = "ipv4" -> null
+      - network_interface_ids      = [
+          - "eni-06a6b79ba10588c9b",
+          - "eni-0958f51b2346521e8",
+        ] -> null
+      - owner_id                   = "672049777597" -> null
+      - policy                     = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action    = [
+                          - "kinesis:DescribeStream",
+                          - "kinesis:DescribeStreamSummary",
+                          - "kinesis:ListShards",
+                          - "kinesis:GetShardIterator",
+                          - "kinesis:GetRecords",
+                          - "kinesis:ListStreams",
+                        ]
+                      - Condition = {
+                          - ArnEquals = {
+                              - "aws:PrincipalArn" = "arn:aws:iam::672049777597:role/coderhouse-dev-analytics-execution"
+                            }
+                        }
+                      - Effect    = "Allow"
+                      - Principal = "*"
+                      - Resource  = "*"
+                    },
+                ]
+              - Version   = "2012-10-17"
+            }
+        ) -> null
+      - private_dns_enabled        = true -> null
+      - region                     = "us-east-1" -> null
+      - requester_managed          = false -> null
+      - route_table_ids            = [] -> null
+      - security_group_ids         = [
+          - "sg-0e332b4cd75b314c3",
+        ] -> null
+      - service_name               = "com.amazonaws.us-east-1.kinesis-streams" -> null
+      - service_region             = "us-east-1" -> null
+      - state                      = "available" -> null
+      - subnet_ids                 = [
+          - "subnet-001ae24851059e5ed",
+          - "subnet-0e484b46487a0220c",
+        ] -> null
+      - tags                       = {
+          - "Checkpoint" = "6"
+        } -> null
+      - tags_all                   = {
+          - "Checkpoint"  = "6"
+          - "Environment" = "dev"
+          - "ManagedBy"   = "Terraform"
+          - "Project"     = "coderhouse-data-platform"
+        } -> null
+      - vpc_endpoint_type          = "Interface" -> null
+      - vpc_id                     = "vpc-0b85171c643372dba" -> null
+        # (2 unchanged attributes hidden)
+
+      - dns_options {
+          - dns_record_ip_type                             = "ipv4" -> null
+          - private_dns_only_for_inbound_resolver_endpoint = false -> null
+          - private_dns_specified_domains                  = [] -> null
+            # (1 unchanged attribute hidden)
+        }
+
+      - subnet_configuration {
+          - ipv4      = "10.10.1.249" -> null
+          - subnet_id = "subnet-0e484b46487a0220c" -> null
+            # (1 unchanged attribute hidden)
+        }
+      - subnet_configuration {
+          - ipv4      = "10.10.2.62" -> null
+          - subnet_id = "subnet-001ae24851059e5ed" -> null
+            # (1 unchanged attribute hidden)
+        }
+    }
+
+Plan: 0 to add, 0 to change, 8 to destroy.
+
+Changes to Outputs:
+  - redshift              = {
+      - database      = "analytics"
+      - endpoint      = [
+          - {
+              - address      = "coderhouse-dev-analytics.672049777597.us-east-1.redshift-serverless.amazonaws.com"
+              - port         = 5439
+              - vpc_endpoint = [
+                  - {
+                      - network_interface = [
+                          - {
+                              - availability_zone    = "us-east-1a"
+                              - network_interface_id = "eni-02c94a7d2774c31fa"
+                              - private_ip_address   = "10.10.1.200"
+                              - subnet_id            = "subnet-0e484b46487a0220c"
+                            },
+                          - {
+                              - availability_zone    = "us-east-1b"
+                              - network_interface_id = "eni-0fa4a2a7e53c1c438"
+                              - private_ip_address   = "10.10.2.244"
+                              - subnet_id            = "subnet-001ae24851059e5ed"
+                            },
+                        ]
+                      - vpc_endpoint_id   = "vpce-0b0271d470414db12"
+                      - vpc_id            = "vpc-0b85171c643372dba"
+                    },
+                ]
+            },
+        ]
+      - iam_role_arn  = "arn:aws:iam::672049777597:role/coderhouse-dev-analytics-execution"
+      - namespace     = "coderhouse-dev-analytics"
+      - workgroup     = "coderhouse-dev-analytics"
+      - workgroup_arn = "arn:aws:redshift-serverless:us-east-1:672049777597:workgroup/488bc734-fa2f-401e-ae80-4eaa70ee460f"
+    } -> null
+
+─────────────────────────────────────────────────────────────────────────────
+
+Saved the plan to: checkpoint6-cleanup.tfplan
+
+To perform exactly these actions, run the following command to apply:
+    terraform apply "checkpoint6-cleanup.tfplan"

@@ -1,0 +1,18 @@
+{
+  "Id": "aa0f2c7d-4e02-4157-b314-b0a3e008162d",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 50482368,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-11T19:22:39.073000-03:00",
+  "UpdatedAt": "2026-11-11T19:22:39.329000-03:00",
+  "RedshiftPid": 1073946762,
+  "HasResultSet": false,
+  "QueryString": "INSERT INTO pe6_raw_fixture VALUES (GETDATE(),GETDATE(),'fixture','empty-time',true,JSON_PARSE('{\"transaction_id\": \"empty-time\", \"payment_method\": \"card\", \"status\": \"approved\", \"timestamp\": \"\", \"amount\": \"1.00\"}'))",
+  "ResultRows": 1,
+  "ResultSize": 0,
+  "RedshiftQueryId": 1615,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json",
+  "SessionId": "6df00387-b606-4f50-b7a0-b07ef4f7abdb"
+}

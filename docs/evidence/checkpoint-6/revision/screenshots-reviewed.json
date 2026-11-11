@@ -1,0 +1,42 @@
+{
+  "session_date": "2026-11-11",
+  "reviewed": [
+    {
+      "file": "eventos.png",
+      "sha256": "42c9be15bd61baba6eda4a7bef2a2249dede65629122fec1050eb08e1db2c2d2",
+      "width": 2334,
+      "height": 1441,
+      "file_saved_at_utc": "2026-11-11T22:40:16.551530+00:00",
+      "source": "AWS Query Editor v2; manual capture by user",
+      "visual_review": "6 typed records; new arrival timestamps on 2026-11-11"
+    },
+    {
+      "file": "metricas.png",
+      "sha256": "1a100d87d3e25d5910b3d97241b8992f563077faa16d6fe43223a4e2c96a9506",
+      "width": 3204,
+      "height": 1569,
+      "file_saved_at_utc": "2026-11-11T22:47:29.112103+00:00",
+      "source": "AWS Query Editor v2; manual capture by user",
+      "visual_review": "2 windows; count3, approved2, total1029.3, approved30.3"
+    },
+    {
+      "file": "join.png",
+      "sha256": "a198f5986fe0d0036c1cd543b7b223bc403f20a4f83d740017c079dfb6156835",
+      "width": 2970,
+      "height": 1449,
+      "file_saved_at_utc": "2026-11-11T22:42:12.864736+00:00",
+      "source": "AWS Query Editor v2; manual capture by user",
+      "visual_review": "counts2/2, totals30.3/30.3, differences0/0"
+    },
+    {
+      "file": "membresia.png",
+      "sha256": "26249c86396d4c2473543e095b4db55ef035f4287d73b2bf2dbdfb2c18d92d53",
+      "width": 2698,
+      "height": 1375,
+      "file_saved_at_utc": "2026-11-11T22:42:43.963549+00:00",
+      "source": "AWS Query Editor v2; manual capture by user",
+      "visual_review": "IAM:RootIdentity, checkpoint6_analyst, admin_option=false"
+    }
+  ],
+  "original_files_modified": false
+}

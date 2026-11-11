@@ -1,0 +1,15 @@
+{
+  "scope": "module.redshift[0] only",
+  "deletions": [
+    "module.redshift[0].aws_iam_role.analytics",
+    "module.redshift[0].aws_iam_role_policy.read_sources",
+    "module.redshift[0].aws_redshiftserverless_namespace.analytics",
+    "module.redshift[0].aws_redshiftserverless_usage_limit.daily",
+    "module.redshift[0].aws_redshiftserverless_workgroup.analytics",
+    "module.redshift[0].aws_security_group.kinesis_endpoint",
+    "module.redshift[0].aws_security_group.warehouse",
+    "module.redshift[0].aws_vpc_endpoint.kinesis"
+  ],
+  "other_resources_changed": false,
+  "executed": false
+}

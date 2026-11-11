@@ -1,0 +1,17 @@
+{
+  "Id": "70ce6105-c650-48ea-9eec-9ce46f97873e",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 27956391,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-11T19:21:44.515000-03:00",
+  "UpdatedAt": "2026-11-11T19:21:45.473000-03:00",
+  "RedshiftPid": 1073995926,
+  "HasResultSet": true,
+  "QueryString": "SELECT COUNT(*) AS schemas FROM pg_namespace WHERE nspname IN ('streaming','analytics','kinesis_source','lakehouse')",
+  "ResultRows": 1,
+  "ResultSize": 20,
+  "RedshiftQueryId": 0,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

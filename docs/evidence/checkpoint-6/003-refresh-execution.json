@@ -1,0 +1,17 @@
+{
+  "Id": "2077da6d-125a-45d2-9630-31c742c85f4f",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 9938313086,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-07T00:37:39.393000-03:00",
+  "UpdatedAt": "2026-11-07T00:37:49.786000-03:00",
+  "RedshiftPid": 1073881266,
+  "HasResultSet": false,
+  "QueryString": "REFRESH MATERIALIZED VIEW streaming.transactions_raw",
+  "ResultRows": 0,
+  "ResultSize": 0,
+  "RedshiftQueryId": 1682,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "window_start": "2026-11-11 22:22:00",
+    "payment_method": "card_pe6_20261111_222257",
+    "transaction_count": 3,
+    "total_amount": "1029.30",
+    "average_amount": "343.100000",
+    "approved_count": 2,
+    "rejected_count": 1,
+    "approved_amount": "30.30"
+  },
+  {
+    "window_start": "2026-11-04 11:33:00",
+    "payment_method": "card_pe5_20261104_113142",
+    "transaction_count": 3,
+    "total_amount": "1029.30",
+    "average_amount": "343.100000",
+    "approved_count": 2,
+    "rejected_count": 1,
+    "approved_amount": "30.30"
+  }
+]

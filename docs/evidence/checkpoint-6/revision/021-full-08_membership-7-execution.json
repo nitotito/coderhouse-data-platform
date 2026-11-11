@@ -1,0 +1,18 @@
+{
+  "Id": "23b03326-09b0-4053-9abe-d205860f2b5b",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 378693925,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-11T19:26:15.983000-03:00",
+  "UpdatedAt": "2026-11-11T19:26:16.634000-03:00",
+  "RedshiftPid": 1073865218,
+  "HasResultSet": true,
+  "QueryString": "SELECT COUNT(*) AS visible_metric_rows FROM analytics.transactions_per_minute",
+  "ResultRows": 1,
+  "ResultSize": 20,
+  "RedshiftQueryId": 1844,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json",
+  "SessionId": "714dd1ea-9acb-4ba0-bd66-0975dae70429"
+}
