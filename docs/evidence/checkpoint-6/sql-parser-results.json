@@ -1,0 +1,194 @@
+[
+  {
+    "file": "01_schemas.sql",
+    "statement": 1,
+    "type": "Set",
+    "parsed": true
+  },
+  {
+    "file": "01_schemas.sql",
+    "statement": 2,
+    "type": "Create",
+    "parsed": true
+  },
+  {
+    "file": "01_schemas.sql",
+    "statement": 3,
+    "type": "Create",
+    "parsed": true
+  },
+  {
+    "file": "01_schemas.sql",
+    "statement": 4,
+    "type": "Command",
+    "parsed": false
+  },
+  {
+    "file": "01_schemas.sql",
+    "statement": 5,
+    "type": "Command",
+    "parsed": false
+  },
+  {
+    "file": "02_streaming.sql",
+    "statement": 1,
+    "type": "Create",
+    "parsed": true
+  },
+  {
+    "file": "03_analytics.sql",
+    "statement": 1,
+    "type": "Create",
+    "parsed": true
+  },
+  {
+    "file": "03_analytics.sql",
+    "statement": 2,
+    "type": "Create",
+    "parsed": true
+  },
+  {
+    "file": "04_iceberg.sql",
+    "statement": 1,
+    "type": "Create",
+    "parsed": true
+  },
+  {
+    "file": "05_security.sql",
+    "statement": 1,
+    "type": "Command",
+    "parsed": false
+  },
+  {
+    "file": "05_security.sql",
+    "statement": 2,
+    "type": "Revoke",
+    "parsed": true
+  },
+  {
+    "file": "05_security.sql",
+    "statement": 3,
+    "type": "Revoke",
+    "parsed": true
+  },
+  {
+    "file": "05_security.sql",
+    "statement": 4,
+    "type": "Revoke",
+    "parsed": true
+  },
+  {
+    "file": "05_security.sql",
+    "statement": 5,
+    "type": "Revoke",
+    "parsed": true
+  },
+  {
+    "file": "05_security.sql",
+    "statement": 6,
+    "type": "Grant",
+    "parsed": true
+  },
+  {
+    "file": "05_security.sql",
+    "statement": 7,
+    "type": "Grant",
+    "parsed": true
+  },
+  {
+    "file": "05_security.sql",
+    "statement": 8,
+    "type": "Grant",
+    "parsed": true
+  },
+  {
+    "file": "05_security.sql",
+    "statement": 9,
+    "type": "Grant",
+    "parsed": true
+  },
+  {
+    "file": "06_validation.sql",
+    "statement": 1,
+    "type": "Command",
+    "parsed": false
+  },
+  {
+    "file": "06_validation.sql",
+    "statement": 2,
+    "type": "Select",
+    "parsed": true
+  },
+  {
+    "file": "06_validation.sql",
+    "statement": 3,
+    "type": "Select",
+    "parsed": true
+  },
+  {
+    "file": "06_validation.sql",
+    "statement": 4,
+    "type": "Select",
+    "parsed": true
+  },
+  {
+    "file": "06_validation.sql",
+    "statement": 5,
+    "type": "Select",
+    "parsed": true
+  },
+  {
+    "file": "06_validation.sql",
+    "statement": 6,
+    "type": "Select",
+    "parsed": true
+  },
+  {
+    "file": "06_validation.sql",
+    "statement": 7,
+    "type": "Select",
+    "parsed": true
+  },
+  {
+    "file": "07_monitoring.sql",
+    "statement": 1,
+    "type": "Select",
+    "parsed": true
+  },
+  {
+    "file": "07_monitoring.sql",
+    "statement": 2,
+    "type": "Select",
+    "parsed": true
+  },
+  {
+    "file": "07_monitoring.sql",
+    "statement": 3,
+    "type": "Select",
+    "parsed": true
+  },
+  {
+    "file": "07_monitoring.sql",
+    "statement": 4,
+    "type": "Select",
+    "parsed": true
+  },
+  {
+    "file": "07_monitoring.sql",
+    "statement": 5,
+    "type": "Select",
+    "parsed": true
+  },
+  {
+    "file": "07_monitoring.sql",
+    "statement": 6,
+    "type": "Select",
+    "parsed": true
+  },
+  {
+    "file": "07_monitoring.sql",
+    "statement": 7,
+    "type": "Select",
+    "parsed": true
+  }
+]

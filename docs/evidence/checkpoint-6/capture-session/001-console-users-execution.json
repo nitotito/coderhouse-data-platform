@@ -1,0 +1,17 @@
+{
+  "Id": "d50f85df-d5fb-4721-8c58-573b4d159c09",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 24660762,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-07T00:58:18.564000-03:00",
+  "UpdatedAt": "2026-11-07T00:58:19.208000-03:00",
+  "RedshiftPid": 1073889416,
+  "HasResultSet": true,
+  "QueryString": "SELECT usename FROM pg_user WHERE usename LIKE 'IAM%'",
+  "ResultRows": 1,
+  "ResultSize": 17,
+  "RedshiftQueryId": 0,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

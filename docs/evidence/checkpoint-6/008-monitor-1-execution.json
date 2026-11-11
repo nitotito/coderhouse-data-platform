@@ -1,0 +1,17 @@
+{
+  "Id": "a43adf65-2c0f-438d-932e-1e2297745448",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 1851133128,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-07T00:38:15.891000-03:00",
+  "UpdatedAt": "2026-11-07T00:38:18.286000-03:00",
+  "RedshiftPid": 1073954999,
+  "HasResultSet": true,
+  "QueryString": "SELECT * FROM sys_stream_scan_states\nWHERE external_schema_name='kinesis_source' ORDER BY record_time DESC LIMIT 20",
+  "ResultRows": 20,
+  "ResultSize": 20748,
+  "RedshiftQueryId": 1708,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

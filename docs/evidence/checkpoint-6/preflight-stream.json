@@ -1,0 +1,34 @@
+{
+  "checked_at_utc": "2026-11-07T02:19:08.624617+00:00",
+  "command": [
+    "aws",
+    "kinesis",
+    "describe-stream-summary",
+    "--stream-name",
+    "dev-transactions-stream"
+  ],
+  "exit_code": 0,
+  "response": {
+    "StreamDescriptionSummary": {
+      "StreamName": "dev-transactions-stream",
+      "StreamARN": "arn:aws:kinesis:us-east-1:672049777597:stream/dev-transactions-stream",
+      "StreamStatus": "ACTIVE",
+      "StreamModeDetails": {
+        "StreamMode": "PROVISIONED"
+      },
+      "RetentionPeriodHours": 24,
+      "StreamCreationTimestamp": "2026-10-30T16:31:19-03:00",
+      "EnhancedMonitoring": [
+        {
+          "ShardLevelMetrics": []
+        }
+      ],
+      "EncryptionType": "KMS",
+      "KeyId": "alias/aws/kinesis",
+      "OpenShardCount": 2,
+      "ConsumerCount": 0,
+      "MaxRecordSizeInKiB": 1024,
+      "ChannelCount": 0
+    }
+  }
+}

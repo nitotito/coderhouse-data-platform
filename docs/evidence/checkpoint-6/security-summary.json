@@ -1,0 +1,51 @@
+{
+  "status": "PASSED",
+  "identity": [
+    {
+      "db_user": "checkpoint6_access_test"
+    }
+  ],
+  "grants": [
+    {
+      "namespace_name": "analytics",
+      "relation_name": "recent_vs_iceberg",
+      "privilege_type": "SELECT",
+      "identity_id": 107903,
+      "identity_name": "checkpoint6_analyst",
+      "identity_type": "role",
+      "admin_option": false
+    },
+    {
+      "namespace_name": "analytics",
+      "relation_name": "transactions_per_minute",
+      "privilege_type": "SELECT",
+      "identity_id": 107903,
+      "identity_name": "checkpoint6_analyst",
+      "identity_type": "role",
+      "admin_option": false
+    },
+    {
+      "namespace_name": "analytics",
+      "relation_name": "transactions_typed",
+      "privilege_type": "SELECT",
+      "identity_id": 107903,
+      "identity_name": "checkpoint6_analyst",
+      "identity_type": "role",
+      "admin_option": false
+    }
+  ],
+  "allowed_metrics": [
+    {
+      "rows": 2
+    }
+  ],
+  "allowed_join": [
+    {
+      "rows": 1
+    }
+  ],
+  "denied": [
+    "security-denied-raw",
+    "security-denied-refresh"
+  ]
+}

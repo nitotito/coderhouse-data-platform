@@ -1,0 +1,48 @@
+{
+  "Role": {
+    "Path": "/",
+    "RoleName": "coderhouse-dev-analytics-execution",
+    "RoleId": "AROAZY6KJZO6TH4NCCO5O",
+    "Arn": "arn:aws:iam::672049777597:role/coderhouse-dev-analytics-execution",
+    "CreateDate": "2026-11-07T03:30:46+00:00",
+    "AssumeRolePolicyDocument": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Principal": {
+            "Service": [
+              "redshift-serverless.amazonaws.com",
+              "redshift.amazonaws.com"
+            ]
+          },
+          "Action": "sts:AssumeRole",
+          "Condition": {
+            "StringEquals": {
+              "aws:SourceAccount": "672049777597"
+            },
+            "ArnLike": {
+              "aws:SourceArn": "arn:aws:redshift-serverless:us-east-1:672049777597:workgroup/*"
+            }
+          }
+        }
+      ]
+    },
+    "MaxSessionDuration": 3600,
+    "Tags": [
+      {
+        "Key": "Environment",
+        "Value": "dev"
+      },
+      {
+        "Key": "ManagedBy",
+        "Value": "Terraform"
+      },
+      {
+        "Key": "Project",
+        "Value": "coderhouse-data-platform"
+      }
+    ],
+    "RoleLastUsed": {}
+  }
+}

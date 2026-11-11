@@ -1,0 +1,32 @@
+[
+  {
+    "file": "redshift-eventos.png",
+    "width": 2068,
+    "height": 1428,
+    "bytes": 183873,
+    "sha256": "bfed62f579225f88ba8e92e89970bcd9ba2e53bff0ecee748c550b88c4baf5c1",
+    "visually_reviewed": true,
+    "source": "AWS Query Editor v2; captured by owner",
+    "original_edited": false
+  },
+  {
+    "file": "redshift-metricas.png",
+    "width": 3072,
+    "height": 1498,
+    "bytes": 129265,
+    "sha256": "4966e6a372d2820d2899a2897b154eec6a28c6ce4c36118ca4ba169254e678d7",
+    "visually_reviewed": true,
+    "source": "AWS Query Editor v2; captured by owner",
+    "original_edited": false
+  },
+  {
+    "file": "redshift-join.png",
+    "width": 3190,
+    "height": 1404,
+    "bytes": 112910,
+    "sha256": "f0c1c7d6fd3e2f6d99e21526355e68691c4ff624d72015ebcdf70581ceef75e5",
+    "visually_reviewed": true,
+    "source": "AWS Query Editor v2; captured by owner",
+    "original_edited": false
+  }
+]

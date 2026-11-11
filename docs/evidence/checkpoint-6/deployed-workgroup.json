@@ -1,0 +1,95 @@
+{
+  "workgroup": {
+    "baseCapacity": 4,
+    "configParameters": [
+      {
+        "parameterKey": "auto_mv",
+        "parameterValue": "true"
+      },
+      {
+        "parameterKey": "datestyle",
+        "parameterValue": "ISO, MDY"
+      },
+      {
+        "parameterKey": "enable_case_sensitive_identifier",
+        "parameterValue": "false"
+      },
+      {
+        "parameterKey": "enable_large_strings_opt_in",
+        "parameterValue": ""
+      },
+      {
+        "parameterKey": "enable_user_activity_logging",
+        "parameterValue": "true"
+      },
+      {
+        "parameterKey": "query_group",
+        "parameterValue": "default"
+      },
+      {
+        "parameterKey": "require_ssl",
+        "parameterValue": "true"
+      },
+      {
+        "parameterKey": "search_path",
+        "parameterValue": "$user, public"
+      },
+      {
+        "parameterKey": "use_fips_ssl",
+        "parameterValue": "false"
+      },
+      {
+        "parameterKey": "max_query_execution_time",
+        "parameterValue": "14400"
+      }
+    ],
+    "creationDate": "2026-11-07T03:31:50.637000+00:00",
+    "endpoint": {
+      "address": "coderhouse-dev-analytics.672049777597.us-east-1.redshift-serverless.amazonaws.com",
+      "port": 5439,
+      "vpcEndpoints": [
+        {
+          "networkInterfaces": [
+            {
+              "availabilityZone": "us-east-1a",
+              "networkInterfaceId": "eni-014a8fc8b23d6cf57",
+              "privateIpAddress": "10.10.1.169",
+              "subnetId": "subnet-0e484b46487a0220c"
+            },
+            {
+              "availabilityZone": "us-east-1b",
+              "networkInterfaceId": "eni-0a320c6547df5f4c7",
+              "privateIpAddress": "10.10.2.93",
+              "subnetId": "subnet-001ae24851059e5ed"
+            }
+          ],
+          "vpcEndpointId": "vpce-0f8a9891a12f26edd",
+          "vpcId": "vpc-0b85171c643372dba"
+        }
+      ]
+    },
+    "enhancedVpcRouting": false,
+    "extraComputeForAutomaticOptimization": false,
+    "ipAddressType": "ipv4",
+    "maxCapacity": 4,
+    "namespaceName": "coderhouse-dev-analytics",
+    "patchVersion": "206",
+    "pricePerformanceTarget": {
+      "status": "DISABLED"
+    },
+    "publiclyAccessible": false,
+    "securityGroupIds": [
+      "sg-035675a4c781c7db5"
+    ],
+    "status": "AVAILABLE",
+    "subnetIds": [
+      "subnet-001ae24851059e5ed",
+      "subnet-0e484b46487a0220c"
+    ],
+    "trackName": "current",
+    "workgroupArn": "arn:aws:redshift-serverless:us-east-1:672049777597:workgroup/61d28bbb-a858-42a9-b4f1-ce9e3abac76c",
+    "workgroupId": "61d28bbb-a858-42a9-b4f1-ce9e3abac76c",
+    "workgroupName": "coderhouse-dev-analytics",
+    "workgroupVersion": "1.0.535482"
+  }
+}

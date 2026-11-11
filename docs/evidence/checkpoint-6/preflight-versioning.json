@@ -1,0 +1,14 @@
+{
+  "checked_at_utc": "2026-11-07T02:19:09.852202+00:00",
+  "command": [
+    "aws",
+    "s3api",
+    "get-bucket-versioning",
+    "--bucket",
+    "coderhouse-data-lake-672049777597"
+  ],
+  "exit_code": 0,
+  "response": {
+    "Status": "Enabled"
+  }
+}
