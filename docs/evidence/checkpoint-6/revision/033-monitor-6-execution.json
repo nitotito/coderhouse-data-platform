@@ -1,0 +1,17 @@
+{
+  "Id": "f38830b7-b976-4d76-9020-e687dba1b140",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 302579646,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-11T19:24:39.168000-03:00",
+  "UpdatedAt": "2026-11-11T19:24:40.031000-03:00",
+  "RedshiftPid": 1073946773,
+  "HasResultSet": true,
+  "QueryString": "SELECT validation_error,COUNT(*) AS records\nFROM analytics.transactions_typed GROUP BY 1",
+  "ResultRows": 4,
+  "ResultSize": 123,
+  "RedshiftQueryId": 1745,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

@@ -1,0 +1,18 @@
+{
+  "Id": "9227422d-86a7-4e31-af70-b2593be1c84e",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 85354526,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-11T19:22:44.284000-03:00",
+  "UpdatedAt": "2026-11-11T19:22:44.549000-03:00",
+  "RedshiftPid": 1073946762,
+  "HasResultSet": false,
+  "QueryString": "INSERT INTO pe6_raw_fixture VALUES (GETDATE(),GETDATE(),'fixture','bad-money',true,JSON_PARSE('{\"transaction_id\": \"bad-money\", \"payment_method\": \"card\", \"status\": \"approved\", \"timestamp\": \"2026-11-11T15:00:00Z\", \"amount\": \"bad\"}'))",
+  "ResultRows": 1,
+  "ResultSize": 0,
+  "RedshiftQueryId": 1626,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json",
+  "SessionId": "6df00387-b606-4f50-b7a0-b07ef4f7abdb"
+}

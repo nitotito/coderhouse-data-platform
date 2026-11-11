@@ -6,6 +6,7 @@ from pathlib import Path
 from xml.sax.saxutils import escape
 import re
 import json
+import hashlib
 
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_CENTER
@@ -37,6 +38,8 @@ styles.add(ParagraphStyle(name='ReportCode', fontName='Courier', fontSize=7.2,
                          leading=10, backColor=LIGHT, borderPadding=7, spaceAfter=10))
 styles.add(ParagraphStyle(name='ReportCaption', fontSize=8, leading=11,
                          textColor=colors.HexColor('#506174'), spaceAfter=8))
+styles['ReportH1'].keepWithNext = True
+styles['ReportH2'].keepWithNext = True
 
 
 def markup(text):
@@ -118,7 +121,8 @@ def markdown_blocks(source):
                 if not all(re.fullmatch(r'[-:]+', x) for x in cells):
                     rows.append([p(x,'ReportCaption') for x in cells])
                 i += 1
-            table = Table(rows, colWidths=[99*mm/3, 167*mm/3, 214*mm/3], repeatRows=1,
+            widths=([48*mm,118*mm] if len(rows[0])==2 else [99*mm/3,167*mm/3,214*mm/3])
+            table = Table(rows, colWidths=widths, repeatRows=1,
                           hAlign='LEFT')
             table.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,0),LIGHT),
                                        ('VALIGN',(0,0),(-1,-1),'TOP'),
@@ -132,7 +136,9 @@ def markdown_blocks(source):
         i += 1
         if line.startswith('- '):
             result.append(p('• '+line[2:])); continue
-        while i < len(lines) and lines[i].strip() and not lines[i].startswith(('#','```','|','- ')):
+        if re.match(r'^\d+[.] ',line):
+            result.append(p(line)); continue
+        while i < len(lines) and lines[i].strip() and not lines[i].startswith(('#','```','|','- ')) and not re.match(r'^\d+[.] ',lines[i]):
             paragraph.append(lines[i]); i += 1
         result.append(p(' '.join(paragraph)))
     return result
@@ -175,6 +181,13 @@ class ScreenshotRegion(Flowable):
 
 
 def main():
+    revision=ROOT/'docs/evidence/checkpoint-6/revision'
+    if (revision/'executed-source-proof.json').exists() and (revision/'security-summary.json').exists():
+        import importlib.util
+        spec=importlib.util.spec_from_file_location('resubmission',ROOT/'scripts/build-redshift-resubmission.py')
+        report=importlib.util.module_from_spec(spec);spec.loader.exec_module(report)
+        report.main()
+        return
     OUT.parent.mkdir(parents=True,exist_ok=True)
     TMP.mkdir(parents=True,exist_ok=True)
     evidence = ROOT/'docs/evidence/checkpoint-6'
@@ -184,18 +197,21 @@ def main():
     if not cleanup_file.exists():
         cleanup_file = evidence/'cleanup-summary.json'
     cleanup = json.loads(cleanup_file.read_text(encoding='utf-8'))
-    state = 'Pruebas funcionales y seguridad: PASSED. '
+    state = 'Antecedente del 07/11/2026: pruebas funcionales y seguridad PASSED. '
     state += 'Recursos temporales retirados.' if cleanup['executed'] else 'Retiro temporal en proceso.'
     story = [Spacer(1,35*mm), p('CODERHOUSE / DATA ENGINEERING','ReportH2'),
              p('Redshift<br/>Streaming Analytics','ReportTitle'),
              p('Pre-entrega 6 · Nicolás López','ReportH1'),
              p('Kinesis, Apache Flink, Iceberg, AWS Glue y Amazon Redshift'),
              Spacer(1,14*mm),
+             p('Revisión 11/11/2026: pendiente de ejecución desde base limpia.','ReportH2'),
              p(state),
              p('Informe de ensayo real - 7 de noviembre de 2026','ReportCaption'),
              p('Incluye capturas reales de Query Editor v2 y resultados API verificados.','ReportCaption'),
              p('Repositorio: https://github.com/nitotito/coderhouse-data-platform'),
              PageBreak()]
+    story.extend(markdown_blocks((ROOT/'docs/redshift-revision-6.md').read_text(encoding='utf-8')))
+    story.append(PageBreak())
     story.extend(markdown_blocks((ROOT/'docs/redshift-checkpoint-6.md').read_text(encoding='utf-8')))
     story.extend([PageBreak(),p('Resultados reales del ensayo AWS','ReportH1'),
                   p('RunId: '+actual['run_id']+'. Un único envío de nueve registros a Kinesis.'),
@@ -261,10 +277,15 @@ def main():
                       p('AWS Query Editor v2. Vistas ampliadas del original; archivo: '+filename,'ReportCaption')])
         for region, label in regions:
             story.extend([p(label,'ReportCaption'),ScreenshotRegion(evidence/filename,region,253*mm),Spacer(1,4*mm)])
-    story.extend([NextPageTemplate('portrait'),PageBreak(),p('Anexo: SQL reproducible','ReportH1')])
+    digest=hashlib.sha256((ROOT/'sql/redshift/checkpoint_6_complete.sql').read_bytes()).hexdigest()
+    story.extend([PageBreak(),p('Anexo: SQL fuente de esta revisión','ReportH1'),
+                  p('Archivo ejecutable: sql/redshift/checkpoint_6_complete.sql. '
+                    'El anexo usa las mismas fuentes numeradas; no hay correcciones manuales ocultas.'),
+                  p('SHA256 del consolidado: '+digest,'ReportCaption')])
+    appendix=ParagraphStyle(name='RevisionSQL',parent=styles['ReportCode'],fontSize=9,leading=12)
     for part in sorted((ROOT/'sql/redshift').glob('[0-9][0-9]_*.sql')):
         story.append(p(part.name,'ReportH2'))
-        story.append(Preformatted(part.read_text(encoding='utf-8'),styles['ReportCode'],maxLineLength=99))
+        story.append(Preformatted(part.read_text(encoding='utf-8'),appendix))
     doc = BaseDocTemplate(str(OUT),pagesize=(210*mm,297*mm),rightMargin=22*mm,
                             leftMargin=22*mm,topMargin=20*mm,bottomMargin=25*mm,
                             title='Checkpoint 6 - Redshift Streaming Analytics',author='Nicolas Lopez')

@@ -1,0 +1,105 @@
+{
+  "status": "PASSED",
+  "setup_sources": [
+    "01_schemas.sql",
+    "02_streaming.sql",
+    "03_analytics.sql",
+    "04_iceberg.sql",
+    "05_security.sql"
+  ],
+  "validation_statements": [
+    {
+      "source": "06_validation.sql",
+      "statement": 1
+    },
+    {
+      "source": "06_validation.sql",
+      "statement": 2
+    },
+    {
+      "source": "06_validation.sql",
+      "statement": 3
+    },
+    {
+      "source": "06_validation.sql",
+      "statement": 4
+    },
+    {
+      "source": "06_validation.sql",
+      "statement": 5
+    },
+    {
+      "source": "06_validation.sql",
+      "statement": 6
+    },
+    {
+      "source": "06_validation.sql",
+      "statement": 7
+    },
+    {
+      "source": "07_monitoring.sql",
+      "statement": 1
+    },
+    {
+      "source": "07_monitoring.sql",
+      "statement": 2
+    },
+    {
+      "source": "07_monitoring.sql",
+      "statement": 3
+    },
+    {
+      "source": "07_monitoring.sql",
+      "statement": 4
+    },
+    {
+      "source": "07_monitoring.sql",
+      "statement": 5
+    },
+    {
+      "source": "07_monitoring.sql",
+      "statement": 6
+    },
+    {
+      "source": "07_monitoring.sql",
+      "statement": 7
+    },
+    {
+      "source": "08_membership.sql",
+      "statement": 1
+    },
+    {
+      "source": "08_membership.sql",
+      "statement": 2
+    },
+    {
+      "source": "08_membership.sql",
+      "statement": 3
+    },
+    {
+      "source": "08_membership.sql",
+      "statement": 4
+    },
+    {
+      "source": "08_membership.sql",
+      "statement": 5
+    },
+    {
+      "source": "08_membership.sql",
+      "statement": 6
+    },
+    {
+      "source": "08_membership.sql",
+      "statement": 7
+    },
+    {
+      "source": "08_membership.sql",
+      "statement": 8
+    },
+    {
+      "source": "08_membership.sql",
+      "statement": 9
+    }
+  ],
+  "note": "All numbered sources executed; smoke fixture published before SQL06."
+}

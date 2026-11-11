@@ -1,11 +1,22 @@
 # Coderhouse Data Platform — Infraestructura Base
 
+## Pre-entrega 6 — revisión ejecutada el 11/11/2026
+
+SQL01-08 ejecutado desde una base Redshift limpia: 42 sentencias verificadas,
+nueve casos de conversión correctos, ingesta y JOIN conciliados, membresía
+efectiva y permisos allow/deny comprobados. [Detalle de correcciones y
+procedimiento](docs/redshift-revision-6.md), [recibos de la sesión](docs/evidence/checkpoint-6/revision/)
+y [PDF actualizado](output/pdf/CheckPoint_Redshift_Lopez_Nicolas.pdf).
+Incluye cuatro capturas actuales. Los ocho recursos temporales están retirados;
+ausencia verificada por API y plan final Terraform sin cambios.
+Las evidencias PE6 anteriores se conservan como antecedentes separados.
+
 ## Pre-entrega 6 — Analítica avanzada in-stream con Redshift
 
 **Prueba funcional y seguridad PASSED en AWS el 07/11/2026**, en
 `feature/redshift-streaming-analytics`. Ensayo único con retiro posterior de los
 recursos temporales. Resultados reales y tres capturas de Query Editor v2
-incorporados al PDF. El PR sigue sin fusionar.
+incorporados al PDF. Esta secci?n conserva el ensayo hist?rico; la revisi?n vigente figura arriba.
 
 Kinesis alimenta una MV de Streaming Ingestion; vistas SQL validan cinco campos
 JSON y calculan métricas por minuto. Un esquema externo lee la tabla Iceberg
@@ -16,7 +27,7 @@ minuto UTC y método de pago. La rama conserva el pipeline Flink y las entregas 
 - [Módulo Terraform](infra/modules/redshift/main.tf), activado desde
   [infra/redshift.tf](infra/redshift.tf): Serverless privado 4 RPU, IAM específico,
   endpoint Kinesis y límite diario. Plan validado: 8 altas, 0 cambios, 0 bajas.
-- [SQL consolidado](sql/redshift/checkpoint_6_complete.sql); originales 01-07 en
+- [SQL consolidado](sql/redshift/checkpoint_6_complete.sql); originales 01-08 en
   `sql/redshift/`, separados por esquemas, ingesta, métricas, Iceberg, permisos y diagnóstico.
 - [Runner Data API y prueba controlada](scripts/redshift-checkpoint6.py): sin
   argumentos solo genera SQL; `--execute` exige despliegue/costos autorizados.

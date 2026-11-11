@@ -1,0 +1,34 @@
+
+Warning: Deprecated Parameter
+
+The parameter "dynamodb_table" is deprecated. Use parameter "use_lockfile"
+instead.
+Acquiring state lock. This may take a few moments...
+
+Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+audit_role_arn = "arn:aws:iam::672049777597:role/coderhouse-dev-audit"
+data_lake_bucket_name = "coderhouse-data-lake-672049777597"
+flink = {
+  "application_arn" = "arn:aws:kinesisanalytics:us-east-1:672049777597:application/coderhouse-dev-transactions-flink"
+  "application_name" = "coderhouse-dev-transactions-flink"
+  "log_group_name" = "/aws/kinesis-analytics/coderhouse-dev-transactions-flink"
+}
+kinesis_stream_arn = "arn:aws:kinesis:us-east-1:672049777597:stream/dev-transactions-stream"
+kinesis_stream_name = "dev-transactions-stream"
+lakehouse = {
+  "catalog_id" = "672049777597"
+  "database" = "lakehouse_db"
+  "table" = "transaction_aggregates"
+  "table_location" = "s3://coderhouse-data-lake-672049777597/lakehouse/lakehouse_db/transaction_aggregates"
+  "warehouse" = "s3://coderhouse-data-lake-672049777597/lakehouse"
+}
+private_subnet_ids = [
+  "subnet-0e484b46487a0220c",
+  "subnet-001ae24851059e5ed",
+]
+processing_role_arn = "arn:aws:iam::672049777597:role/coderhouse-dev-processing"
+s3_endpoint_id = "vpce-05376664b99da4447"
+vpc_id = "vpc-0b85171c643372dba"

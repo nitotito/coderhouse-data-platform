@@ -1,0 +1,46 @@
+[
+  {
+    "column_name": "approximate_arrival_timestamp",
+    "data_type": "timestamp without time zone"
+  },
+  {
+    "column_name": "refresh_time",
+    "data_type": "timestamp without time zone"
+  },
+  {
+    "column_name": "shard_id",
+    "data_type": "character"
+  },
+  {
+    "column_name": "sequence_number",
+    "data_type": "character varying"
+  },
+  {
+    "column_name": "transaction_id",
+    "data_type": "text"
+  },
+  {
+    "column_name": "payment_method",
+    "data_type": "text"
+  },
+  {
+    "column_name": "status",
+    "data_type": "text"
+  },
+  {
+    "column_name": "event_time",
+    "data_type": "timestamp without time zone"
+  },
+  {
+    "column_name": "amount",
+    "data_type": "numeric"
+  },
+  {
+    "column_name": "validation_error",
+    "data_type": "text"
+  },
+  {
+    "column_name": "arrival_timestamp",
+    "data_type": "timestamp without time zone"
+  }
+]

@@ -1,0 +1,6 @@
+{
+  "table_type": "ICEBERG",
+  "metadata_location": "s3://coderhouse-data-lake-672049777597/lakehouse/lakehouse_db/transaction_aggregates/metadata/00001-a6ac508c-2e43-4de5-9437-57f0bb426279.metadata.json",
+  "current_snapshot_id": 8171898520026477263,
+  "scope": "Existing PE5 table read only; not a new Flink commit"
+}

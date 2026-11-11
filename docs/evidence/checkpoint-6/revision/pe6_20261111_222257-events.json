@@ -1,0 +1,107 @@
+{
+  "events": [
+    {
+      "transaction_id": "pe6_20261111_222257-0-0",
+      "amount": 10.1,
+      "status": "APPROVED",
+      "payment_method": "card_pe6_20261111_222257",
+      "timestamp": "2026-11-11T22:22:01+00:00"
+    },
+    {
+      "transaction_id": "pe6_20261111_222257-0-1",
+      "amount": 20.2,
+      "status": "approved",
+      "payment_method": "card_pe6_20261111_222257",
+      "timestamp": "2026-11-11T22:22:02+00:00"
+    },
+    {
+      "transaction_id": "pe6_20261111_222257-0-2",
+      "amount": 999,
+      "status": "rejected",
+      "payment_method": "card_pe6_20261111_222257",
+      "timestamp": "2026-11-11T22:22:03+00:00"
+    },
+    {
+      "transaction_id": "pe6_20261111_222257-1-0",
+      "amount": 10.1,
+      "status": "APPROVED",
+      "payment_method": "card_pe5_20261104_113142",
+      "timestamp": "2026-11-04T11:33:01+00:00"
+    },
+    {
+      "transaction_id": "pe6_20261111_222257-1-1",
+      "amount": 20.2,
+      "status": "approved",
+      "payment_method": "card_pe5_20261104_113142",
+      "timestamp": "2026-11-04T11:33:02+00:00"
+    },
+    {
+      "transaction_id": "pe6_20261111_222257-1-2",
+      "amount": 999,
+      "status": "rejected",
+      "payment_method": "card_pe5_20261104_113142",
+      "timestamp": "2026-11-04T11:33:03+00:00"
+    },
+    {
+      "transaction_id": "pe6_20261111_222257-bad-amount",
+      "amount": "invalid",
+      "status": "approved",
+      "payment_method": "card_pe6_20261111_222257",
+      "timestamp": "2026-11-11T22:22:00+00:00"
+    },
+    {
+      "transaction_id": "pe6_20261111_222257-no-time",
+      "amount": 1,
+      "status": "approved",
+      "payment_method": "card_pe6_20261111_222257"
+    }
+  ],
+  "invalid_json": "{invalid-json",
+  "receipts": [
+    {
+      "ShardId": "shardId-000000000000",
+      "SequenceNumber": "49679759770194942529569022135482830145525095638193143810",
+      "EncryptionType": "KMS"
+    },
+    {
+      "ShardId": "shardId-000000000000",
+      "SequenceNumber": "49679759770194942529569022136897273354474211910038323202",
+      "EncryptionType": "KMS"
+    },
+    {
+      "ShardId": "shardId-000000000000",
+      "SequenceNumber": "49679759770194942529569022138108617025728070411813388290",
+      "EncryptionType": "KMS"
+    },
+    {
+      "ShardId": "shardId-000000000000",
+      "SequenceNumber": "49679759770194942529569022139411839059272640730866122754",
+      "EncryptionType": "KMS"
+    },
+    {
+      "ShardId": "shardId-000000000000",
+      "SequenceNumber": "49679759770194942529569022140958055182559751514034798594",
+      "EncryptionType": "KMS"
+    },
+    {
+      "ShardId": "shardId-000000000000",
+      "SequenceNumber": "49679759770194942529569022142362826984951950752482328578",
+      "EncryptionType": "KMS"
+    },
+    {
+      "ShardId": "shardId-000000000000",
+      "SequenceNumber": "49679759770194942529569022143612856282433477387847991298",
+      "EncryptionType": "KMS"
+    },
+    {
+      "ShardId": "shardId-000000000000",
+      "SequenceNumber": "49679759770194942529569022145029717343021822849323106306",
+      "EncryptionType": "KMS"
+    },
+    {
+      "ShardId": "shardId-000000000000",
+      "SequenceNumber": "49679759770194942529569022146383714260990207593713500162",
+      "EncryptionType": "KMS"
+    }
+  ]
+}

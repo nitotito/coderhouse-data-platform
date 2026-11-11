@@ -1,0 +1,62 @@
+
+Warning: Deprecated Parameter
+
+The parameter "dynamodb_table" is deprecated. Use parameter "use_lockfile"
+instead.
+Acquiring state lock. This may take a few moments...
+module.redshift[0].aws_redshiftserverless_usage_limit.daily: Destroying... [id=7ae9e644-a4bf-4c03-8fa5-e9627e7ba0a8]
+module.redshift[0].aws_redshiftserverless_usage_limit.daily: Destruction complete after 1s
+module.redshift[0].aws_redshiftserverless_workgroup.analytics: Destroying... [id=coderhouse-dev-analytics]
+module.redshift[0].aws_redshiftserverless_workgroup.analytics: Still destroying... [id=coderhouse-dev-analytics, 00m10s elapsed]
+module.redshift[0].aws_redshiftserverless_workgroup.analytics: Still destroying... [id=coderhouse-dev-analytics, 00m20s elapsed]
+module.redshift[0].aws_redshiftserverless_workgroup.analytics: Still destroying... [id=coderhouse-dev-analytics, 00m30s elapsed]
+module.redshift[0].aws_redshiftserverless_workgroup.analytics: Still destroying... [id=coderhouse-dev-analytics, 00m40s elapsed]
+module.redshift[0].aws_redshiftserverless_workgroup.analytics: Still destroying... [id=coderhouse-dev-analytics, 00m50s elapsed]
+module.redshift[0].aws_redshiftserverless_workgroup.analytics: Still destroying... [id=coderhouse-dev-analytics, 01m00s elapsed]
+module.redshift[0].aws_redshiftserverless_workgroup.analytics: Still destroying... [id=coderhouse-dev-analytics, 01m10s elapsed]
+module.redshift[0].aws_redshiftserverless_workgroup.analytics: Still destroying... [id=coderhouse-dev-analytics, 01m20s elapsed]
+module.redshift[0].aws_redshiftserverless_workgroup.analytics: Still destroying... [id=coderhouse-dev-analytics, 01m30s elapsed]
+module.redshift[0].aws_redshiftserverless_workgroup.analytics: Still destroying... [id=coderhouse-dev-analytics, 01m40s elapsed]
+module.redshift[0].aws_redshiftserverless_workgroup.analytics: Still destroying... [id=coderhouse-dev-analytics, 01m50s elapsed]
+module.redshift[0].aws_redshiftserverless_workgroup.analytics: Destruction complete after 1m54s
+module.redshift[0].aws_redshiftserverless_namespace.analytics: Destroying... [id=coderhouse-dev-analytics]
+module.redshift[0].aws_vpc_endpoint.kinesis: Destroying... [id=vpce-00c85bd74a0a1f339]
+module.redshift[0].aws_redshiftserverless_namespace.analytics: Still destroying... [id=coderhouse-dev-analytics, 00m10s elapsed]
+module.redshift[0].aws_vpc_endpoint.kinesis: Still destroying... [id=vpce-00c85bd74a0a1f339, 00m10s elapsed]
+module.redshift[0].aws_redshiftserverless_namespace.analytics: Still destroying... [id=coderhouse-dev-analytics, 00m20s elapsed]
+module.redshift[0].aws_vpc_endpoint.kinesis: Still destroying... [id=vpce-00c85bd74a0a1f339, 00m20s elapsed]
+module.redshift[0].aws_redshiftserverless_namespace.analytics: Still destroying... [id=coderhouse-dev-analytics, 00m30s elapsed]
+module.redshift[0].aws_vpc_endpoint.kinesis: Still destroying... [id=vpce-00c85bd74a0a1f339, 00m30s elapsed]
+module.redshift[0].aws_redshiftserverless_namespace.analytics: Still destroying... [id=coderhouse-dev-analytics, 00m40s elapsed]
+module.redshift[0].aws_vpc_endpoint.kinesis: Still destroying... [id=vpce-00c85bd74a0a1f339, 00m40s elapsed]
+module.redshift[0].aws_redshiftserverless_namespace.analytics: Still destroying... [id=coderhouse-dev-analytics, 00m50s elapsed]
+module.redshift[0].aws_vpc_endpoint.kinesis: Still destroying... [id=vpce-00c85bd74a0a1f339, 00m50s elapsed]
+module.redshift[0].aws_redshiftserverless_namespace.analytics: Still destroying... [id=coderhouse-dev-analytics, 01m00s elapsed]
+module.redshift[0].aws_vpc_endpoint.kinesis: Still destroying... [id=vpce-00c85bd74a0a1f339, 01m00s elapsed]
+module.redshift[0].aws_redshiftserverless_namespace.analytics: Still destroying... [id=coderhouse-dev-analytics, 01m10s elapsed]
+module.redshift[0].aws_vpc_endpoint.kinesis: Still destroying... [id=vpce-00c85bd74a0a1f339, 01m10s elapsed]
+module.redshift[0].aws_redshiftserverless_namespace.analytics: Still destroying... [id=coderhouse-dev-analytics, 01m20s elapsed]
+module.redshift[0].aws_vpc_endpoint.kinesis: Still destroying... [id=vpce-00c85bd74a0a1f339, 01m20s elapsed]
+module.redshift[0].aws_redshiftserverless_namespace.analytics: Still destroying... [id=coderhouse-dev-analytics, 01m30s elapsed]
+module.redshift[0].aws_vpc_endpoint.kinesis: Still destroying... [id=vpce-00c85bd74a0a1f339, 01m30s elapsed]
+module.redshift[0].aws_redshiftserverless_namespace.analytics: Still destroying... [id=coderhouse-dev-analytics, 01m40s elapsed]
+module.redshift[0].aws_vpc_endpoint.kinesis: Still destroying... [id=vpce-00c85bd74a0a1f339, 01m40s elapsed]
+module.redshift[0].aws_redshiftserverless_namespace.analytics: Still destroying... [id=coderhouse-dev-analytics, 01m50s elapsed]
+module.redshift[0].aws_vpc_endpoint.kinesis: Still destroying... [id=vpce-00c85bd74a0a1f339, 01m50s elapsed]
+module.redshift[0].aws_redshiftserverless_namespace.analytics: Destruction complete after 1m59s
+module.redshift[0].aws_vpc_endpoint.kinesis: Still destroying... [id=vpce-00c85bd74a0a1f339, 02m00s elapsed]
+module.redshift[0].aws_iam_role_policy.read_sources: Destroying... [id=coderhouse-dev-analytics-execution:read-kinesis-and-iceberg]
+module.redshift[0].aws_iam_role_policy.read_sources: Destruction complete after 1s
+module.redshift[0].aws_vpc_endpoint.kinesis: Still destroying... [id=vpce-00c85bd74a0a1f339, 02m10s elapsed]
+module.redshift[0].aws_vpc_endpoint.kinesis: Still destroying... [id=vpce-00c85bd74a0a1f339, 02m20s elapsed]
+module.redshift[0].aws_vpc_endpoint.kinesis: Still destroying... [id=vpce-00c85bd74a0a1f339, 02m30s elapsed]
+module.redshift[0].aws_vpc_endpoint.kinesis: Still destroying... [id=vpce-00c85bd74a0a1f339, 02m40s elapsed]
+module.redshift[0].aws_vpc_endpoint.kinesis: Still destroying... [id=vpce-00c85bd74a0a1f339, 02m50s elapsed]
+module.redshift[0].aws_vpc_endpoint.kinesis: Destruction complete after 2m54s
+module.redshift[0].aws_security_group.kinesis_endpoint: Destroying... [id=sg-0e332b4cd75b314c3]
+module.redshift[0].aws_iam_role.analytics: Destroying... [id=coderhouse-dev-analytics-execution]
+module.redshift[0].aws_security_group.kinesis_endpoint: Destruction complete after 1s
+module.redshift[0].aws_security_group.warehouse: Destroying... [id=sg-06e7fa3ae5c5330f4]
+module.redshift[0].aws_security_group.warehouse: Destruction complete after 2s
+
+Error: deleting IAM Role (coderhouse-dev-analytics-execution): reading IAM Instance Profiles for Role (coderhouse-dev-analytics-execution): operation error IAM: ListInstanceProfilesForRole, https response error StatusCode: 403, RequestID: 0f0113a6-45d9-46ec-8ca0-252467108e71, api error AccessDenied: User: arn:aws:iam::672049777597:user/terraform-dev is not authorized to perform: iam:ListInstanceProfilesForRole on resource: role coderhouse-dev-analytics-execution because no identity-based policy allows the iam:ListInstanceProfilesForRole action. Go to https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-1#/authorization-details/7ucxk7bpnlfgw9mrr35broty2 for complete details, or call the GetRequestAuthorizationDetails API with the following authorization id: 7ucxk7bpnlfgw9mrr35broty2

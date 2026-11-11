@@ -1,0 +1,17 @@
+{
+  "Id": "2fab9f2f-78f3-4194-8a23-e5fe552e2d17",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 88836231,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-11T19:25:35.318000-03:00",
+  "UpdatedAt": "2026-11-11T19:25:35.951000-03:00",
+  "RedshiftPid": 1073807584,
+  "HasResultSet": true,
+  "QueryString": "SELECT column_name,data_type FROM information_schema.columns WHERE table_schema='analytics' AND table_name='transactions_typed' ORDER BY ordinal_position",
+  "ResultRows": 11,
+  "ResultSize": 304,
+  "RedshiftQueryId": 0,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

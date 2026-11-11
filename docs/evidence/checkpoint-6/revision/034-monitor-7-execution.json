@@ -1,0 +1,17 @@
+{
+  "Id": "dc305264-de6c-4d1f-9cde-fb4a92e410c7",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 258980548,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-11T19:24:43.076000-03:00",
+  "UpdatedAt": "2026-11-11T19:24:43.832000-03:00",
+  "RedshiftPid": 1073750150,
+  "HasResultSet": true,
+  "QueryString": "SELECT shard_id,sequence_number,approximate_arrival_timestamp,refresh_time,\n       DATEDIFF(millisecond,approximate_arrival_timestamp,GETDATE()) AS arrival_age_ms\nFROM streaming.transactions_raw ORDER BY approximate_arrival_timestamp DESC LIMIT 20",
+  "ResultRows": 9,
+  "ResultSize": 1241,
+  "RedshiftQueryId": 1749,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

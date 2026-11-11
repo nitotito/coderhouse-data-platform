@@ -1,0 +1,18 @@
+{
+  "Id": "97b56a4b-9680-4443-a283-af17b2cff1f8",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 680827344,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-11T19:27:07.377000-03:00",
+  "UpdatedAt": "2026-11-11T19:27:08.308000-03:00",
+  "RedshiftPid": 1073799421,
+  "HasResultSet": true,
+  "QueryString": "SELECT COUNT(*) AS rows FROM analytics.recent_vs_iceberg",
+  "ResultRows": 1,
+  "ResultSize": 20,
+  "RedshiftQueryId": 1888,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json",
+  "SessionId": "24ab20cc-626a-47e6-bdab-00203210f39f"
+}

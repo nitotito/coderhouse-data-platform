@@ -58,6 +58,8 @@ class Runner:
     def query(self, sql, label):
         self.counter += 1
         prefix = f'{self.counter:03d}-{label}'
+        self.save(prefix + '-request.json',{'submitted_sql':sql,'workgroup':self.args.workgroup,
+                                           'database':'analytics'})
         response = self.aws('redshift-data', 'execute-statement',
                             '--workgroup-name', self.args.workgroup,
                             '--database', 'analytics', '--sql', sql)
@@ -159,6 +161,8 @@ class Runner:
                 raise AssertionError(f'{field}: {metric[field]} != {expected}')
         if Decimal(str(metric['total_amount'])) != Decimal('1029.30') or Decimal(str(metric['approved_amount'])) != Decimal('30.30'):
             raise AssertionError('Incorrect business totals')
+        if Decimal(str(metric['average_amount'])) != Decimal('343.100000'):
+            raise AssertionError('Incorrect decimal average')
         comparison = self.query("SELECT * FROM analytics.recent_vs_iceberg WHERE payment_method='"+methods[1]+"'", 'iceberg-join')
         if len(comparison) != 1 or int(comparison[0]['recent_approved_count']) != 2 or Decimal(str(comparison[0]['amount_difference'])) != 0 or int(comparison[0]['count_difference']) != 0:
             raise AssertionError('Expected a single reconciled historical join row')
@@ -178,6 +182,7 @@ class Runner:
 
 
 def main():
+    global EVIDENCE
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--execute', action='store_true')
     parser.add_argument('--setup', action='store_true')
@@ -185,7 +190,16 @@ def main():
     parser.add_argument('--profile', default='coderhouse-dev')
     parser.add_argument('--region', default='us-east-1')
     parser.add_argument('--workgroup', default='coderhouse-dev-analytics')
+    parser.add_argument('--require-clean', action='store_true',
+                        help='Refuse setup if any delivery schema already exists')
+    parser.add_argument('--evidence-dir', type=Path)
+    parser.add_argument('--full-validation',action='store_true',
+                        help='After setup/smoke execute every SQL06-08 statement in one retained session')
     args = parser.parse_args()
+    if args.full_validation and not (args.setup and args.smoke and args.require_clean):
+        parser.error('--full-validation requires --setup --smoke --require-clean')
+    if args.evidence_dir:
+        EVIDENCE = args.evidence_dir.resolve()
     print(consolidate().relative_to(ROOT))
     if not args.execute:
         print('Dry run: SQL consolidated. No AWS API calls. --execute only after cost approval.')
@@ -193,9 +207,39 @@ def main():
     runner = Runner(args)
     try:
         if args.setup:
+            if args.require_clean:
+                existing = runner.query("SELECT COUNT(*) AS schemas FROM pg_namespace "
+                    "WHERE nspname IN ('streaming','analytics','kinesis_source','lakehouse')",
+                    'clean-database-precondition')
+                if int(existing[0]['schemas']) != 0:
+                    raise RuntimeError('Clean setup refused: delivery schemas already exist; no DROP is performed')
             runner.setup()
         if args.smoke:
             runner.smoke()
+        if args.full_validation:
+            import importlib.util
+            spec=importlib.util.spec_from_file_location('security_full',ROOT/'scripts/redshift-security-smoke.py')
+            security=importlib.util.module_from_spec(spec);spec.loader.exec_module(security)
+            security.m.EVIDENCE=EVIDENCE
+            session=security.SessionRunner(args)
+            completed=[]
+            try:
+                for part in PARTS:
+                    if int(part.name[:2])<6:continue
+                    for index,sql in enumerate(statements(part.read_text(encoding='utf-8'))):
+                        rows=session.query(sql,'full-'+part.stem+'-'+str(index+1))
+                        if part.name.startswith('08_') and sql.startswith('SELECT user_name'):
+                            if len(rows)!=1 or rows[0]['user_name']!='checkpoint6_access_test':
+                                raise AssertionError('Effective analyst membership not proven')
+                        if sql=='SELECT current_user AS effective_user':
+                            if rows[0]['effective_user']!='checkpoint6_access_test':
+                                raise AssertionError('SQL identity switch failed')
+                        completed.append({'source':part.name,'statement':index+1})
+            finally:
+                # Reset also when a permission/query assertion interrupts SQL08.
+                session.query('RESET SESSION AUTHORIZATION','full-final-reset')
+            session.save('full-script-summary.json',{'status':'PASSED','setup_sources':[p.name for p in PARTS if int(p.name[:2])<=5],
+                'validation_statements':completed,'note':'All numbered sources executed; smoke fixture published before SQL06.'})
     except Exception as error:
         runner.save('last-failure.json', {'status': 'FAILED', 'error': str(error)})
         raise

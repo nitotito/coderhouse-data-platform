@@ -21,11 +21,15 @@ def terraform(*args):
 
 
 def main():
+    global OUT
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--execute',action='store_true')
+    parser.add_argument('--profile',default='coderhouse-dev')
+    parser.add_argument('--evidence-dir',type=Path)
     args = parser.parse_args()
+    if args.evidence_dir:OUT=args.evidence_dir.resolve()
     OUT.mkdir(parents=True,exist_ok=True)
-    plan = terraform('plan','-no-color','-input=false','-var=enable_ingestion=true',
+    plan = terraform('plan','-no-color','-input=false','-var=aws_profile='+args.profile,'-var=enable_ingestion=true',
                      '-var=enable_redshift=false','-out=checkpoint6-cleanup.tfplan')
     (OUT/'terraform-cleanup-plan.txt').write_text(plan,encoding='utf-8')
     data = json.loads(terraform('show','-json','checkpoint6-cleanup.tfplan'))

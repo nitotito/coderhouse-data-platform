@@ -1,0 +1,17 @@
+{
+  "Id": "4ecd10af-725f-4b6c-bad6-881fa91dc312",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 543457201,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-11T19:22:00.954000-03:00",
+  "UpdatedAt": "2026-11-11T19:22:01.969000-03:00",
+  "RedshiftPid": 1073979542,
+  "HasResultSet": false,
+  "QueryString": "CREATE EXTERNAL SCHEMA IF NOT EXISTS kinesis_source\nFROM KINESIS IAM_ROLE ''",
+  "ResultRows": 0,
+  "ResultSize": 0,
+  "RedshiftQueryId": 0,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

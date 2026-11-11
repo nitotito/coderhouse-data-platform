@@ -22,10 +22,13 @@ def aws(*args):
 
 
 def main():
+    global OUT
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--workgroup-id',required=True)
     p.add_argument('--minutes',type=int,default=30)
+    p.add_argument('--evidence-dir',type=Path)
     args=p.parse_args()
+    if args.evidence_dir:OUT=args.evidence_dir.resolve()
     deadline=dt.datetime.now(dt.timezone.utc)+dt.timedelta(minutes=args.minutes)
     OUT.mkdir(parents=True,exist_ok=True)
     marker=OUT/'capture-window.json'

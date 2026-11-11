@@ -1,0 +1,93 @@
+
+Warning: Deprecated Parameter
+
+The parameter "dynamodb_table" is deprecated. Use parameter "use_lockfile"
+instead.
+Acquiring state lock. This may take a few moments...
+module.redshift[0].aws_security_group.warehouse: Creating...
+module.redshift[0].aws_iam_role.analytics: Creating...
+module.redshift[0].aws_iam_role.analytics: Creation complete after 1s [id=coderhouse-dev-analytics-execution]
+module.redshift[0].aws_iam_role_policy.read_sources: Creating...
+module.redshift[0].aws_iam_role_policy.read_sources: Creation complete after 1s [id=coderhouse-dev-analytics-execution:read-kinesis-and-iceberg]
+module.redshift[0].aws_redshiftserverless_namespace.analytics: Creating...
+module.redshift[0].aws_redshiftserverless_namespace.analytics: Creation complete after 1s [id=coderhouse-dev-analytics]
+module.redshift[0].aws_security_group.warehouse: Creation complete after 4s [id=sg-06e7fa3ae5c5330f4]
+module.redshift[0].aws_security_group.kinesis_endpoint: Creating...
+module.redshift[0].aws_security_group.kinesis_endpoint: Creation complete after 4s [id=sg-0e332b4cd75b314c3]
+module.redshift[0].aws_vpc_endpoint.kinesis: Creating...
+module.redshift[0].aws_vpc_endpoint.kinesis: Still creating... [00m10s elapsed]
+module.redshift[0].aws_vpc_endpoint.kinesis: Still creating... [00m20s elapsed]
+module.redshift[0].aws_vpc_endpoint.kinesis: Still creating... [00m30s elapsed]
+module.redshift[0].aws_vpc_endpoint.kinesis: Still creating... [00m40s elapsed]
+module.redshift[0].aws_vpc_endpoint.kinesis: Creation complete after 45s [id=vpce-00c85bd74a0a1f339]
+module.redshift[0].aws_redshiftserverless_workgroup.analytics: Creating...
+module.redshift[0].aws_redshiftserverless_workgroup.analytics: Still creating... [00m10s elapsed]
+module.redshift[0].aws_redshiftserverless_workgroup.analytics: Still creating... [00m20s elapsed]
+module.redshift[0].aws_redshiftserverless_workgroup.analytics: Still creating... [00m30s elapsed]
+module.redshift[0].aws_redshiftserverless_workgroup.analytics: Still creating... [00m40s elapsed]
+module.redshift[0].aws_redshiftserverless_workgroup.analytics: Still creating... [00m50s elapsed]
+module.redshift[0].aws_redshiftserverless_workgroup.analytics: Still creating... [01m00s elapsed]
+module.redshift[0].aws_redshiftserverless_workgroup.analytics: Creation complete after 1m10s [id=coderhouse-dev-analytics]
+module.redshift[0].aws_redshiftserverless_usage_limit.daily: Creating...
+module.redshift[0].aws_redshiftserverless_usage_limit.daily: Creation complete after 1s [id=7ae9e644-a4bf-4c03-8fa5-e9627e7ba0a8]
+
+Apply complete! Resources: 8 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+audit_role_arn = "arn:aws:iam::672049777597:role/coderhouse-dev-audit"
+data_lake_bucket_name = "coderhouse-data-lake-672049777597"
+flink = {
+  "application_arn" = "arn:aws:kinesisanalytics:us-east-1:672049777597:application/coderhouse-dev-transactions-flink"
+  "application_name" = "coderhouse-dev-transactions-flink"
+  "log_group_name" = "/aws/kinesis-analytics/coderhouse-dev-transactions-flink"
+}
+kinesis_stream_arn = "arn:aws:kinesis:us-east-1:672049777597:stream/dev-transactions-stream"
+kinesis_stream_name = "dev-transactions-stream"
+lakehouse = {
+  "catalog_id" = "672049777597"
+  "database" = "lakehouse_db"
+  "table" = "transaction_aggregates"
+  "table_location" = "s3://coderhouse-data-lake-672049777597/lakehouse/lakehouse_db/transaction_aggregates"
+  "warehouse" = "s3://coderhouse-data-lake-672049777597/lakehouse"
+}
+private_subnet_ids = [
+  "subnet-0e484b46487a0220c",
+  "subnet-001ae24851059e5ed",
+]
+processing_role_arn = "arn:aws:iam::672049777597:role/coderhouse-dev-processing"
+redshift = {
+  "database" = "analytics"
+  "endpoint" = tolist([
+    {
+      "address" = "coderhouse-dev-analytics.672049777597.us-east-1.redshift-serverless.amazonaws.com"
+      "port" = 5439
+      "vpc_endpoint" = tolist([
+        {
+          "network_interface" = tolist([
+            {
+              "availability_zone" = "us-east-1a"
+              "network_interface_id" = "eni-02c94a7d2774c31fa"
+              "private_ip_address" = "10.10.1.200"
+              "subnet_id" = "subnet-0e484b46487a0220c"
+            },
+            {
+              "availability_zone" = "us-east-1b"
+              "network_interface_id" = "eni-0fa4a2a7e53c1c438"
+              "private_ip_address" = "10.10.2.244"
+              "subnet_id" = "subnet-001ae24851059e5ed"
+            },
+          ])
+          "vpc_endpoint_id" = "vpce-0b0271d470414db12"
+          "vpc_id" = "vpc-0b85171c643372dba"
+        },
+      ])
+    },
+  ])
+  "iam_role_arn" = "arn:aws:iam::672049777597:role/coderhouse-dev-analytics-execution"
+  "namespace" = "coderhouse-dev-analytics"
+  "workgroup" = "coderhouse-dev-analytics"
+  "workgroup_arn" = "arn:aws:redshift-serverless:us-east-1:672049777597:workgroup/488bc734-fa2f-401e-ae80-4eaa70ee460f"
+}
+s3_endpoint_id = "vpce-05376664b99da4447"
+vpc_id = "vpc-0b85171c643372dba"

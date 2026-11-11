@@ -1,0 +1,18 @@
+[
+  {
+    "mv_name": "transactions_raw                                                                                                                ",
+    "refresh_type": "Manual                          ",
+    "status": "Refresh successfully updated MV incrementally. Stream returned no new data",
+    "start_time": "2026-11-11 22:24:47.681857",
+    "end_time": "2026-11-11 22:24:49.038063",
+    "duration": 1356206
+  },
+  {
+    "mv_name": "transactions_raw                                                                                                                ",
+    "refresh_type": "Manual                          ",
+    "status": "Refresh successfully updated MV incrementally",
+    "start_time": "2026-11-11 22:23:23.890244",
+    "end_time": "2026-11-11 22:23:41.011374",
+    "duration": 17121130
+  }
+]

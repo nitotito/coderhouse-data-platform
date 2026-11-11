@@ -1,5 +1,8 @@
 # Pre-entrega 6 - Analítica avanzada in-stream con Redshift
 
+> Antecedente del 07/11/2026. La [revisión vigente del 11/11/2026](redshift-revision-6.md)
+> ejecutó el SQL corregido desde una base limpia e incorporó capturas nuevas.
+
 Autor: Nicolás López. Cuenta AWS: 672049777597. Región: us-east-1.
 Rama: `feature/redshift-streaming-analytics`. **Prueba funcional y seguridad PASSED
 en AWS el 07/11/2026. Ensayo único autorizado con retiro posterior del módulo

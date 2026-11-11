@@ -1,0 +1,17 @@
+{
+  "Id": "866c75df-8932-4891-86f0-898ff86587c2",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 461507304,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-11T19:22:27.246000-03:00",
+  "UpdatedAt": "2026-11-11T19:22:28.179000-03:00",
+  "RedshiftPid": 1073774835,
+  "HasResultSet": false,
+  "QueryString": "CREATE OR REPLACE VIEW analytics.recent_vs_iceberg AS\nWITH recent AS (\n  SELECT DATE_TRUNC('minute',event_time) AS window_start, payment_method,\n         COUNT(*) AS approved_count, SUM(amount) AS approved_amount\n  FROM analytics.transactions_typed\n  WHERE validation_error IS NULL AND status='approved'\n  GROUP BY 1,2\n), historical AS (\n  SELECT window_start, payment_method,\n         SUM(transaction_count) AS approved_count, SUM(total_amount) AS approved_amount\n  FROM lakehouse.transaction_aggregates\n  GROUP BY 1,2\n)\nSELECT r.window_start, r.payment_method,\n       r.approved_count AS recent_approved_count,\n       h.approved_count AS iceberg_approved_count,\n       r.approved_amount AS recent_approved_amount,\n       h.approved_amount AS iceberg_approved_amount,\n       r.approved_count-h.approved_count AS count_difference,\n       r.approved_amount-h.approved_amount AS amount_difference\nFROM recent r JOIN historical h\nON r.window_start=h.window_start AND r.payment_method=h.payment_method\nWITH NO SCHEMA BINDING",
+  "ResultRows": 0,
+  "ResultSize": 0,
+  "RedshiftQueryId": 0,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}
