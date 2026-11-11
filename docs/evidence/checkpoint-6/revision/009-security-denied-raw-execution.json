@@ -1,0 +1,19 @@
+{
+  "Id": "c78bbcfa-b143-496a-80de-d588050b36c7",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": -1,
+  "Error": "ERROR: permission denied for schema streaming",
+  "Status": "FAILED",
+  "CreatedAt": "2026-11-11T19:27:11.164000-03:00",
+  "UpdatedAt": "2026-11-11T19:27:11.378000-03:00",
+  "RedshiftPid": 1073799421,
+  "HasResultSet": false,
+  "QueryString": "SELECT COUNT(*) FROM streaming.transactions_raw",
+  "ResultRows": -1,
+  "ResultSize": -1,
+  "RedshiftQueryId": 1888,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json",
+  "SessionId": "24ab20cc-626a-47e6-bdab-00203210f39f"
+}

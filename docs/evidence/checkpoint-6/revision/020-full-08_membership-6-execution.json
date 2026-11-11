@@ -1,0 +1,18 @@
+{
+  "Id": "cefbc806-f2cc-473f-8df2-02aea809449d",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 20012376,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-11T19:26:12.155000-03:00",
+  "UpdatedAt": "2026-11-11T19:26:12.474000-03:00",
+  "RedshiftPid": 1073865218,
+  "HasResultSet": true,
+  "QueryString": "SELECT user_name,role_name,admin_option\nFROM svv_user_grants\nWHERE user_name=current_user AND role_name='checkpoint6_analyst'",
+  "ResultRows": 1,
+  "ResultSize": 42,
+  "RedshiftQueryId": 1826,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json",
+  "SessionId": "714dd1ea-9acb-4ba0-bd66-0975dae70429"
+}

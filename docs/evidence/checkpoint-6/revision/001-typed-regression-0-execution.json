@@ -1,0 +1,18 @@
+{
+  "Id": "cb0081b7-7737-419e-8003-ff457e876df3",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 200296749,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-11T19:22:18.647000-03:00",
+  "UpdatedAt": "2026-11-11T19:22:19.439000-03:00",
+  "RedshiftPid": 1073946762,
+  "HasResultSet": false,
+  "QueryString": "CREATE TEMP TABLE pe6_raw_fixture (approximate_arrival_timestamp timestamp, refresh_time timestamp,shard_id varchar(128),sequence_number varchar(128),valid_json boolean,payload SUPER)",
+  "ResultRows": 0,
+  "ResultSize": 0,
+  "RedshiftQueryId": 0,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json",
+  "SessionId": "6df00387-b606-4f50-b7a0-b07ef4f7abdb"
+}

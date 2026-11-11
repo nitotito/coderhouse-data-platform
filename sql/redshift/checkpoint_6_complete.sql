@@ -48,7 +48,12 @@ WITH fields AS (
               THEN DATEADD(millisecond, MOD(TRY_CAST(timestamp_text AS bigint),86400000)::integer,
                    DATEADD(day, (TRY_CAST(timestamp_text AS bigint)/86400000)::integer,
                            TIMESTAMP '1970-01-01 00:00:00'))
-              ELSE TRY_CAST(timestamp_text AS timestamptz) AT TIME ZONE 'UTC'
+              -- ISO 8601 requires an explicit timezone; TRY_CAST checks the date.
+              WHEN timestamp_text ~ (
+                   '^[0-9]{4}-[0-9]{2}-[0-9]{2}[T ][0-9]{2}:[0-9]{2}:[0-9]{2}'
+                   || '([.][0-9]{1,6})?(Z|[+-][0-9]{2}:[0-9]{2})$')
+              THEN TRY_CAST(timestamp_text AS timestamptz) AT TIME ZONE 'UTC'
+              ELSE NULL
          END AS event_time
   FROM fields
 )
@@ -58,7 +63,8 @@ SELECT approximate_arrival_timestamp, refresh_time, shard_id, sequence_number,
        CASE WHEN NOT valid_json THEN 'invalid_json'
             WHEN transaction_id IS NULL OR payment_method IS NULL OR status IS NULL
               THEN 'missing_required_field'
-            WHEN amount_text !~ '^[0-9]+([.][0-9]{1,2})?$'
+            WHEN amount_text IS NULL
+              OR NOT (amount_text ~ '^[0-9]+([.][0-9]{1,2})?$')
               OR precise_amount IS NULL OR precise_amount < 0
               OR precise_amount <> ROUND(precise_amount,2)
               OR TRY_CAST(precise_amount AS decimal(18,2)) IS NULL THEN 'invalid_amount'
@@ -144,6 +150,7 @@ WHERE window_start >= TIMESTAMP '2026-11-04 00:00:00'
 -- A comparison, not a UNION of overlapping histories; do not add the two totals.
 SELECT * FROM analytics.recent_vs_iceberg ORDER BY window_start DESC LIMIT 20;
 SELECT * FROM svv_role_grants WHERE role_name='checkpoint6_analyst';
+-- User membership is demonstrated after the explicit binding in SQL08.
 SELECT * FROM svv_relation_privileges WHERE identity_name='checkpoint6_analyst';
 
 
@@ -168,3 +175,29 @@ FROM analytics.transactions_typed GROUP BY 1;
 SELECT shard_id,sequence_number,approximate_arrival_timestamp,refresh_time,
        DATEDIFF(millisecond,approximate_arrival_timestamp,GETDATE()) AS arrival_age_ms
 FROM streaming.transactions_raw ORDER BY approximate_arrival_timestamp DESC LIMIT 20;
+
+
+-- SOURCE: 08_membership.sql
+-- Run ONCE in the clean temporary warehouse as its deployment owner.
+-- Password-disabled SQL test identity: no AWS/IAM user or password is created.
+CREATE USER checkpoint6_access_test PASSWORD DISABLE;
+GRANT ROLE checkpoint6_analyst TO checkpoint6_access_test;
+
+-- Explicit membership, separate from role-to-role and object privilege grants.
+SELECT user_name,role_name,admin_option
+FROM svv_user_grants
+WHERE user_name='checkpoint6_access_test'
+  AND role_name='checkpoint6_analyst';
+
+-- Keep these statements in ONE session. Owner must be allowed to switch identity.
+SET SESSION AUTHORIZATION checkpoint6_access_test;
+SELECT current_user AS effective_user;
+SELECT user_name,role_name,admin_option
+FROM svv_user_grants
+WHERE user_name=current_user AND role_name='checkpoint6_analyst';
+SELECT COUNT(*) AS visible_metric_rows FROM analytics.transactions_per_minute;
+SELECT COUNT(*) AS visible_join_rows FROM analytics.recent_vs_iceberg;
+RESET SESSION AUTHORIZATION;
+
+-- Expected-denial tests are in redshift-security-smoke.py, not unhandled errors
+-- in this consolidated script. Capture membership + effective_user + allow/deny.

@@ -16,7 +16,12 @@ WITH fields AS (
               THEN DATEADD(millisecond, MOD(TRY_CAST(timestamp_text AS bigint),86400000)::integer,
                    DATEADD(day, (TRY_CAST(timestamp_text AS bigint)/86400000)::integer,
                            TIMESTAMP '1970-01-01 00:00:00'))
-              ELSE TRY_CAST(timestamp_text AS timestamptz) AT TIME ZONE 'UTC'
+              -- ISO 8601 requires an explicit timezone; TRY_CAST checks the date.
+              WHEN timestamp_text ~ (
+                   '^[0-9]{4}-[0-9]{2}-[0-9]{2}[T ][0-9]{2}:[0-9]{2}:[0-9]{2}'
+                   || '([.][0-9]{1,6})?(Z|[+-][0-9]{2}:[0-9]{2})$')
+              THEN TRY_CAST(timestamp_text AS timestamptz) AT TIME ZONE 'UTC'
+              ELSE NULL
          END AS event_time
   FROM fields
 )
@@ -26,7 +31,8 @@ SELECT approximate_arrival_timestamp, refresh_time, shard_id, sequence_number,
        CASE WHEN NOT valid_json THEN 'invalid_json'
             WHEN transaction_id IS NULL OR payment_method IS NULL OR status IS NULL
               THEN 'missing_required_field'
-            WHEN amount_text !~ '^[0-9]+([.][0-9]{1,2})?$'
+            WHEN amount_text IS NULL
+              OR NOT (amount_text ~ '^[0-9]+([.][0-9]{1,2})?$')
               OR precise_amount IS NULL OR precise_amount < 0
               OR precise_amount <> ROUND(precise_amount,2)
               OR TRY_CAST(precise_amount AS decimal(18,2)) IS NULL THEN 'invalid_amount'

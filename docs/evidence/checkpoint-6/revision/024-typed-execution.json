@@ -1,0 +1,17 @@
+{
+  "Id": "8880d256-7d2d-410b-a7c2-6d1ce1b838a5",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 336057817,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-11T19:23:43.060000-03:00",
+  "UpdatedAt": "2026-11-11T19:23:43.914000-03:00",
+  "RedshiftPid": 1073864952,
+  "HasResultSet": true,
+  "QueryString": "SELECT * FROM analytics.transactions_typed WHERE transaction_id LIKE 'pe6_20261111_222257%'",
+  "ResultRows": 8,
+  "ResultSize": 1779,
+  "RedshiftQueryId": 1682,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

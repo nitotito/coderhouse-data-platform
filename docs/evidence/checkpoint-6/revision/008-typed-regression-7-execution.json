@@ -1,0 +1,18 @@
+{
+  "Id": "20f1cb88-f537-4062-8e26-7cd6399f92a7",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 49264566,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-11T19:22:41.671000-03:00",
+  "UpdatedAt": "2026-11-11T19:22:41.919000-03:00",
+  "RedshiftPid": 1073946762,
+  "HasResultSet": false,
+  "QueryString": "INSERT INTO pe6_raw_fixture VALUES (GETDATE(),GETDATE(),'fixture','missing-time',true,JSON_PARSE('{\"transaction_id\": \"missing-time\", \"payment_method\": \"card\", \"status\": \"approved\", \"amount\": \"1.00\"}'))",
+  "ResultRows": 1,
+  "ResultSize": 0,
+  "RedshiftQueryId": 1621,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json",
+  "SessionId": "6df00387-b606-4f50-b7a0-b07ef4f7abdb"
+}

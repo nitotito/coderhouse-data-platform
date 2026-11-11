@@ -1,0 +1,17 @@
+{
+  "Id": "70c9b9c0-3cdb-4191-8fb0-45fafec195a2",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 2309591658,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-11T19:22:06.222000-03:00",
+  "UpdatedAt": "2026-11-11T19:22:08.988000-03:00",
+  "RedshiftPid": 1073766541,
+  "HasResultSet": false,
+  "QueryString": "CREATE MATERIALIZED VIEW streaming.transactions_raw\nAUTO REFRESH NO AS\nSELECT approximate_arrival_timestamp, refresh_time, partition_key,\n       shard_id, sequence_number, kinesis_data,\n       CAN_JSON_PARSE(kinesis_data) AS valid_json,\n       CASE WHEN CAN_JSON_PARSE(kinesis_data)\n            THEN JSON_PARSE(kinesis_data) ELSE NULL END AS payload\nFROM kinesis_source.\"dev-transactions-stream\"",
+  "ResultRows": 0,
+  "ResultSize": 0,
+  "RedshiftQueryId": 1568,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

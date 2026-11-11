@@ -1,0 +1,17 @@
+{
+  "Id": "a09190ed-1ff8-48ea-9333-8076857441de",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 1396440504,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-11T19:22:58.342000-03:00",
+  "UpdatedAt": "2026-11-11T19:23:00.272000-03:00",
+  "RedshiftPid": 1073840359,
+  "HasResultSet": true,
+  "QueryString": "SELECT transaction_count,total_amount FROM lakehouse.transaction_aggregates WHERE payment_method='card_pe5_20261104_113142' AND window_start=TIMESTAMP '2026-11-04 11:33:00'",
+  "ResultRows": 1,
+  "ResultSize": 25,
+  "RedshiftQueryId": 1659,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json"
+}

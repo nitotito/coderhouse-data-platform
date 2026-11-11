@@ -1,0 +1,18 @@
+[
+  {
+    "validation_error": "invalid_json",
+    "records": 1
+  },
+  {
+    "validation_error": null,
+    "records": 6
+  },
+  {
+    "validation_error": "invalid_amount",
+    "records": 1
+  },
+  {
+    "validation_error": "invalid_timestamp",
+    "records": 1
+  }
+]

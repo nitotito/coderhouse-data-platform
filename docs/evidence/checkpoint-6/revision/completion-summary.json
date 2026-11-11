@@ -1,0 +1,13 @@
+{
+  "status": "PASSED",
+  "all_42_sql_statements_verified": true,
+  "nine_conversion_cases_passed": true,
+  "four_current_screenshots": true,
+  "analyst_allow_deny_passed": true,
+  "all_temporary_resources_absent": true,
+  "prior_components_preserved": true,
+  "final_terraform_plan": "NO_CHANGES",
+  "session_minutes": 36.84,
+  "billing_total": "Not measured; no actual invoice claimed",
+  "stash_preserved": true
+}

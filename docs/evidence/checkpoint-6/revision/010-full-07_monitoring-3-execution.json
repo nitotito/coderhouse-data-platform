@@ -1,0 +1,18 @@
+{
+  "Id": "8dd497fc-eb09-4533-8ee7-0322ebe37005",
+  "DbUser": "IAM:terraform-dev",
+  "Database": "analytics",
+  "Duration": 1137854942,
+  "Status": "FINISHED",
+  "CreatedAt": "2026-11-11T19:25:33.613000-03:00",
+  "UpdatedAt": "2026-11-11T19:25:35.098000-03:00",
+  "RedshiftPid": 1073865218,
+  "HasResultSet": true,
+  "QueryString": "SELECT mv_name,refresh_type,status,start_time,end_time,duration\nFROM sys_mv_refresh_history\nWHERE schema_name='streaming' ORDER BY start_time DESC LIMIT 20",
+  "ResultRows": 2,
+  "ResultSize": 583,
+  "RedshiftQueryId": 1804,
+  "WorkgroupName": "coderhouse-dev-analytics",
+  "ResultFormat": "json",
+  "SessionId": "714dd1ea-9acb-4ba0-bd66-0975dae70429"
+}

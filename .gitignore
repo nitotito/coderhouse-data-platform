@@ -34,6 +34,7 @@ terraform/*.log
 .codex/checkpoint6-python/
 tmp/pdfs/
 docs/evidence/checkpoint-6/capture-session/timeout-helper*.log
+docs/evidence/checkpoint-6/revision/timeout-helper*.log
 *.backend.hcl
 .capstone/
 

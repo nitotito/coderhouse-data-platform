@@ -1,5 +1,16 @@
 # Coderhouse Data Platform — Infraestructura Base
 
+## Pre-entrega 6 — revisión ejecutada el 11/11/2026
+
+SQL01-08 ejecutado desde una base Redshift limpia: 42 sentencias verificadas,
+nueve casos de conversión correctos, ingesta y JOIN conciliados, membresía
+efectiva y permisos allow/deny comprobados. [Detalle de correcciones y
+procedimiento](docs/redshift-revision-6.md), [recibos de la sesión](docs/evidence/checkpoint-6/revision/)
+y [PDF actualizado](output/pdf/CheckPoint_Redshift_Lopez_Nicolas.pdf).
+Incluye cuatro capturas actuales. Los ocho recursos temporales están retirados;
+ausencia verificada por API y plan final Terraform sin cambios.
+Las evidencias PE6 anteriores se conservan como antecedentes separados.
+
 ## Proyecto Final — Capstone Real-Time Data Platform
 
 Auditoría en `feature/final-capstone-audit`, basada en la entrega 6. **Pendiente

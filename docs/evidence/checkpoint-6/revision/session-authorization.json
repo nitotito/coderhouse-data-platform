@@ -1,0 +1,63 @@
+{
+  "authorized": "User: dale si",
+  "started_at_utc": "2026-11-11T22:19:15.600556+00:00",
+  "maximum_session_minutes": 60,
+  "spend_target_usd": 3,
+  "automatic_billing_cap": false,
+  "cleanup_authorized": true,
+  "identity": {
+    "UserId": "AIDAZY6KJZO6Z7U6KERKV",
+    "Account": "672049777597",
+    "Arn": "arn:aws:iam::672049777597:user/terraform-dev"
+  },
+  "planned_changes": [
+    [
+      "module.redshift[0].aws_iam_role.analytics",
+      [
+        "create"
+      ]
+    ],
+    [
+      "module.redshift[0].aws_iam_role_policy.read_sources",
+      [
+        "create"
+      ]
+    ],
+    [
+      "module.redshift[0].aws_redshiftserverless_namespace.analytics",
+      [
+        "create"
+      ]
+    ],
+    [
+      "module.redshift[0].aws_redshiftserverless_usage_limit.daily",
+      [
+        "create"
+      ]
+    ],
+    [
+      "module.redshift[0].aws_redshiftserverless_workgroup.analytics",
+      [
+        "create"
+      ]
+    ],
+    [
+      "module.redshift[0].aws_security_group.kinesis_endpoint",
+      [
+        "create"
+      ]
+    ],
+    [
+      "module.redshift[0].aws_security_group.warehouse",
+      [
+        "create"
+      ]
+    ],
+    [
+      "module.redshift[0].aws_vpc_endpoint.kinesis",
+      [
+        "create"
+      ]
+    ]
+  ]
+}

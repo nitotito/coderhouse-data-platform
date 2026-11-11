@@ -9,4 +9,5 @@ WHERE window_start >= TIMESTAMP '2026-11-04 00:00:00'
 -- A comparison, not a UNION of overlapping histories; do not add the two totals.
 SELECT * FROM analytics.recent_vs_iceberg ORDER BY window_start DESC LIMIT 20;
 SELECT * FROM svv_role_grants WHERE role_name='checkpoint6_analyst';
+-- User membership is demonstrated after the explicit binding in SQL08.
 SELECT * FROM svv_relation_privileges WHERE identity_name='checkpoint6_analyst';
