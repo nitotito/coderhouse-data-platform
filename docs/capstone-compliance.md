@@ -13,8 +13,8 @@
 | Lag, freshness y checkpoints | Medidos | local/health.json y flink-metrics.json |
 | Roles PostgreSQL | Membresía y denegación comprobadas | local/security.json |
 | Firehose bronze | Cuatro objetos observados | local/firehose-bronze.json |
-| Capturas locales | Pendientes de revisión | local/screenshots/ |
-| PDF final | Borrador pendiente de capturas | local/pdf-status.json |
+| Capturas locales | Tres originales revisados y consistentes | local/screenshots-reviewed.json |
+| PDF final | Capturas incorporadas y revisión visual | local/pdf-status.json |
 
 Rutas relativas a `docs/evidence/capstone/`. La equivalencia multi-shard bajo
 intercalaciones distintas requiere centralizar decisiones temporales; no se afirma

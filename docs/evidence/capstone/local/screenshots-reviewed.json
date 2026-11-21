@@ -1,0 +1,23 @@
+{
+  "flink-checkpoints.png": {
+    "sha256": "a0a0b5329cecc24932a958de5acc0906b5c2e8442b9227ad0c4c6816687d62a4",
+    "width": 3454,
+    "height": 1615,
+    "visually_reviewed": true,
+    "finding": "RUNNING; matching job 84f02cc5f39aabd690f3543ef130f57e; completed 528 failed 0; latest restore checkpoint 7"
+  },
+  "postgres.png": {
+    "sha256": "c1a5d012eaa41ef0d176e887a5bb5fa003c42fc3c0cf89b8d0529db17a2c0437",
+    "width": 1117,
+    "height": 388,
+    "visually_reviewed": true,
+    "finding": "Matching run local_20261121_014317; arrival and insertion timestamps visible; late false; MV 3 / 33.06 / 11.020000; freshness 2775.528711 seconds reflects idle producer"
+  },
+  "duckdb.png": {
+    "sha256": "69e4d64edf8977ac3b6d2fbf461d4cda4f2e1763d51c3424ca9b7cf0702a1e0e",
+    "width": 1111,
+    "height": 139,
+    "visually_reviewed": true,
+    "finding": "Matching run; real iceberg_scan and metadata pointer visible; metrics 3 / 33.06 / 11.020000"
+  }
+}

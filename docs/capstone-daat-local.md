@@ -262,11 +262,19 @@ métricas y entrega bronze. Los archivos development-run conservan el ensayo pre
 y no sustituyen a la ejecución limpia. verification.json distingue comprobaciones
 técnicas aprobadas y disponibilidad de capturas, antes de declarar lista la entrega.
 
-Las tres capturas requeridas muestran Flink local con checkpoints, una consulta
-PostgreSQL con arrival_timestamp y una consulta DuckDB sobre Iceberg. La guía
-capstone-captures.md proporciona los comandos reales. El PDF se regenera desde
-este documento y recibos actuales; su estado de entrega depende de incorporar y
-revisar los originales, sin inventar imágenes de consolas.
+Las tres capturas originales fueron revisadas: mismo job y run del ensayo limpio,
+Flink RUNNING con 528 checkpoints completados y 0 fallidos, timestamps PostgreSQL
+y resultado DuckDB 3 / 33.06 / 11.020000. La captura PostgreSQL posterior al reinicio
+muestra lag máximo 0.315964 s y freshness 2775.53 s por inactividad del productor.
+No contradice la muestra inicial ni representa un SLA de procesamiento.
+El PDF incluye los originales y una ampliación de checkpoints; sus hashes y la
+revisión visual se conservan en screenshots-reviewed.json.
+
+| Original | Comprobación visual | Correspondencia |
+|---|---|---|
+| flink-checkpoints.png | RUNNING y checkpoints sin fallos | Mismo job y restore del checkpoint 7 |
+| postgres.png | Llegada, inserción y vista materializada | Mismo run, tardío excluido y métricas correctas |
+| duckdb.png | iceberg_scan y metadata_location real | Mismo run y agregado equivalente |
 
 Referencias técnicas: [JDBC Catalog de Iceberg](https://iceberg.apache.org/docs/latest/jdbc/),
 [Kinesis en Flink](https://nightlies.apache.org/flink/flink-docs-stable/docs/connectors/datastream/kinesis/),

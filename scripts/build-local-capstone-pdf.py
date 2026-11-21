@@ -6,7 +6,8 @@ import re
 from pathlib import Path
 from reportlab.lib import colors
 from reportlab.lib.units import mm
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak, Image
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak, Image, Flowable
+from io import BytesIO
 from reportlab.graphics.shapes import Drawing, Rect, String, Line, Polygon
 from reportlab.lib.utils import ImageReader
 
@@ -73,6 +74,27 @@ def footer(canvas, doc):
     canvas.drawRightString(188*mm, 13*mm, str(doc.page))
 
 
+class OriginalViewport(Flowable):
+    """A PDF clipping viewport; the original evidence PNG is never modified."""
+    def __init__(self, path, region, width):
+        super().__init__()
+        self.path, self.region, self.width = str(path), region, width
+        self.height = region[3] * width / region[2]
+
+    def draw(self):
+        left, top, width, height = self.region
+        image_width, image_height = ImageReader(self.path).getSize()
+        scale = self.width / width
+        canvas = self.canv
+        canvas.saveState()
+        clip = canvas.beginPath()
+        clip.rect(0, 0, self.width, self.height)
+        canvas.clipPath(clip, stroke=0, fill=0)
+        canvas.drawImage(self.path, -left*scale, (top+height-image_height)*scale,
+                         width=image_width*scale, height=image_height*scale)
+        canvas.restoreState()
+
+
 def main():
     global READY
     verification = json.loads((EVIDENCE / 'verification.json').read_text())
@@ -89,36 +111,70 @@ def main():
     result = json.loads((EVIDENCE/'result.json').read_text())
     assert result['run_id'] in source, 'Update DAAT before rendering a different audit run'
     sections = re.split(r'^## (.+)\n', source, flags=re.M)
-    story = [Spacer(1, 22*mm), h.p('Documento de Arquitectura<br/>y AuditorÃ­a TÃ©cnica', 'ReportTitle'),
+    story = [Spacer(1, 22*mm), h.p('Documento de Arquitectura<br/>y Auditoría Técnica', 'ReportTitle'),
              h.p('Pipeline local de transacciones en tiempo real', 'ReportH1'),
-             h.p('NicolÃ¡s LÃ³pez | Data Engineering | 20 de noviembre de 2026'), Spacer(1, 12*mm),
-             h.p('LocalStack Â· Flink Â· Iceberg Â· PostgreSQL Â· DuckDB', 'ReportH2'),
-             h.p('Despliegue limpio, consistencia de agregaciones y recuperaciÃ³n verificados.'),
-             h.p('Capturas pendientes de incorporaciÃ³n y revisiÃ³n. No presentar todavÃ­a.' if not READY else 'Evidencia tÃ©cnica y capturas revisadas.'),
-             h.p('[CÃ³digo y documentaciÃ³n](https://github.com/nitotito/coderhouse-data-platform/tree/feature/capstone-local)'),
+             h.p('Nicolás López | Data Engineering | 20 de noviembre de 2026'), Spacer(1, 12*mm),
+             h.p('LocalStack · Flink · Iceberg · PostgreSQL · DuckDB', 'ReportH2'),
+             h.p('Despliegue limpio, consistencia de agregaciones y recuperación verificados.'),
+             h.p('Capturas pendientes de incorporación y revisión. No presentar todavía.' if not READY else 'Evidencia técnica y capturas revisadas.'),
+             h.p('[Código y documentación](https://github.com/nitotito/coderhouse-data-platform/tree/feature/capstone-local)'),
              PageBreak(), h.p('Arquitectura local', 'ReportH1'), architecture(), Spacer(1, 8*mm),
              h.p('Cada destino mantiene su progreso. Los archivos bronze y las tablas Iceberg cumplen responsabilidades distintas.'),
              PageBreak()]
     for index, (title, body) in enumerate(zip(sections[1::2], sections[2::2]), 1):
+        if title == 'Evidencia y revisión final':
+            story.append(PageBreak())
         story.append(h.p(f'{index} {title}', 'ReportH1'))
         story.extend(layout.blocks(body))
-    for title, filename in zip(['Flink y checkpoints', 'PostgreSQL y timestamps de llegada', 'DuckDB sobre Iceberg'], filenames):
-        story.extend([PageBreak(), h.p(title, 'ReportH1')])
-        path = EVIDENCE / 'screenshots' / filename
-        if path.exists():
-            width, height = ImageReader(str(path)).getSize()
-            scale = min(166*mm/width, 205*mm/height)
-            story.extend([Image(str(path), width=width*scale, height=height*scale), Spacer(1, 5*mm),
-                          h.p('Captura original del laboratorio local. SHA256: ' + hashlib.sha256(path.read_bytes()).hexdigest(), 'ReportCaption')])
-        else:
-            story.append(h.p('Captura pendiente. La evidencia JSON estÃ¡ disponible; esta pÃ¡gina no simula una captura de consola.'))
     OUT.parent.mkdir(parents=True, exist_ok=True)
     TMP.mkdir(parents=True, exist_ok=True)
     doc = SimpleDocTemplate(str(OUT), pagesize=(210*mm, 297*mm), leftMargin=22*mm,
                             rightMargin=22*mm, topMargin=18*mm, bottomMargin=22*mm,
-                            title='Arquitectura y auditorÃ­a del pipeline local', author='NicolÃ¡s LÃ³pez')
+                            title='Arquitectura y auditoría del pipeline local', author='Nicolás López')
     doc.build(story, onFirstPage=footer, onLaterPages=footer)
     import pymupdf
+    body_bytes = OUT.read_bytes()
+    body_pages = len(pymupdf.open(stream=body_bytes, filetype='pdf'))
+    appendix = []
+    captions = [
+        'Mismo job del ensayo limpio: RUNNING, 528 checkpoints completados, 0 fallidos y restauración del checkpoint 7. Captura posterior a los recibos iniciales.',
+        'Mismo run y timestamps originales de llegada e inserción. MV: 3 / 33.06 / 11.020000. Freshness de 2775.53 s tras permanecer sin nuevos eventos; lag máximo observado en esta captura: 0.315964 s.',
+        'Consulta real con iceberg_scan y puntero de metadatos. Resultado: 3 / 33.06 / 11.020000. La versión del puntero avanzó durante la sesión; el agregado permanece igual.',
+    ]
+    for index, (title, filename) in enumerate(zip(['Flink y checkpoints', 'PostgreSQL y timestamps de llegada', 'DuckDB sobre Iceberg'], filenames)):
+        if appendix:
+            appendix.append(PageBreak())
+        appendix.append(h.p(title, 'ReportH1'))
+        path = EVIDENCE / 'screenshots' / filename
+        if path.exists():
+            width, height = ImageReader(str(path)).getSize()
+            scale = min(253*mm/width, 139*mm/height)
+            appendix.extend([Image(str(path), width=width*scale, height=height*scale), Spacer(1, 3*mm),
+                             h.p(captions[index], 'ReportCaption'),
+                             h.p('SHA256: ' + hashlib.sha256(path.read_bytes()).hexdigest(), 'ReportCaption')])
+            if index == 0:
+                appendix.extend([PageBreak(), h.p('Detalle de checkpoints y restauración', 'ReportH1'),
+                                 OriginalViewport(path, (35, 475, 1850, 815), 245*mm), Spacer(1, 3*mm),
+                                 h.p('Ampliación del original mediante una ventana del PDF; no se alteró el PNG. Se conservan la vista completa y el archivo original.', 'ReportCaption')])
+        else:
+            appendix.append(h.p('Captura pendiente.'))
+    appendix_bytes = BytesIO()
+
+    def appendix_footer(canvas, page):
+        canvas.setFont('Helvetica', 8)
+        canvas.drawString(22*mm, 10*mm, 'Nicolas Lopez | Evidencia local')
+        canvas.drawRightString(275*mm, 10*mm, str(body_pages+page.page))
+
+    SimpleDocTemplate(appendix_bytes, pagesize=(297*mm, 210*mm), leftMargin=22*mm,
+                      rightMargin=22*mm, topMargin=12*mm, bottomMargin=16*mm).build(
+                          appendix, onFirstPage=appendix_footer, onLaterPages=appendix_footer)
+    from pypdf import PdfWriter
+    writer = PdfWriter()
+    writer.append(BytesIO(body_bytes))
+    writer.append(BytesIO(appendix_bytes.getvalue()))
+    writer.add_metadata({'/Title': 'Arquitectura y auditoría del pipeline local', '/Author': 'Nicolás López'})
+    with OUT.open('wb') as target:
+        writer.write(target)
     pdf = pymupdf.open(OUT)
     for i, page in enumerate(pdf):
         page.get_pixmap(matrix=pymupdf.Matrix(1, 1)).save(TMP / f'page-{i+1:02d}.png')

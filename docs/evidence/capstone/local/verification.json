@@ -5,10 +5,7 @@
   "aws_deployed": false,
   "recovery": true,
   "terraform_plan_exit": 0,
-  "missing_screenshots": [
-    "flink-checkpoints.png",
-    "postgres.png",
-    "duckdb.png"
-  ],
-  "ready_to_submit": false
+  "missing_screenshots": [],
+  "ready_to_submit": true,
+  "screenshots_visually_reviewed": true
 }
