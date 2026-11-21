@@ -11,9 +11,9 @@ resource "aws_kinesis_stream" "transactions" {
   encryption_type = "KMS"
   kms_key_id      = "alias/aws/kinesis"
 
-  tags = {
+  tags = var.enable_resource_tags ? {
     Name        = "${var.environment}-${var.stream_name}-stream"
     Environment = var.environment
     Project     = "coderhouse-data-platform"
-  }
+  } : {}
 }

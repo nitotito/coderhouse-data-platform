@@ -1,0 +1,14 @@
+{
+  "technical_checks": "PASSED",
+  "run_id": "local_20261121_014317",
+  "clean_deployment": true,
+  "aws_deployed": false,
+  "recovery": true,
+  "terraform_plan_exit": 0,
+  "missing_screenshots": [
+    "flink-checkpoints.png",
+    "postgres.png",
+    "duckdb.png"
+  ],
+  "ready_to_submit": false
+}

@@ -1,0 +1,14 @@
+{
+  "status": "PASSED",
+  "run_id": "local_20261121_013922",
+  "utc": "2026-11-21 01:39:36.567712+00:00",
+  "published": 10,
+  "unique_valid": 7,
+  "approved_count": 3,
+  "approved_total": "33.06",
+  "approved_average": "11.020000",
+  "late_excluded": true,
+  "duplicates_ignored": true,
+  "checkpoint_completed": 4,
+  "scope": "one partition key; manual recovery test separate"
+}

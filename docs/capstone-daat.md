@@ -1,3 +1,5 @@
+> Documento AWS preliminar conservado como antecedente. El DAAT vigente de la entrega local es [capstone-daat-local.md](capstone-daat-local.md).
+
 # 1. Portada
 
 **Documento de Arquitectura y Auditoría Técnica (DAAT)**

@@ -1,0 +1,12 @@
+{
+  "ready_to_submit": false,
+  "missing_screenshots": [
+    "flink-checkpoints.png",
+    "postgres.png",
+    "duckdb.png"
+  ],
+  "pages": 11,
+  "pdf": "C:\\Users\\Nicolas Lopez\\coderhouse-data-platform\\output\\pdf\\Nicolas_Lopez_Capstone_RealTime.pdf",
+  "sha256": "bbc990e76f1bfbd2017a89c7193fe1306d443b126e3988ca87e7dd9d7d8b888a",
+  "source_sha256": "7e0cb0ccbe8b9dd52b0ec9985711841b6436fad1cad6173ab3689bb01d9fa666"
+}

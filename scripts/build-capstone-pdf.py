@@ -112,6 +112,10 @@ def captures():
     return story
 
 def main():
+    if (ROOT/"docs/evidence/capstone/local/result.json").exists():
+        import subprocess, sys
+        subprocess.run([sys.executable, str(ROOT/"scripts/build-local-capstone-pdf.py")], check=True)
+        return
     OUT.parent.mkdir(parents=True,exist_ok=True);TMP.mkdir(parents=True,exist_ok=True)
     source=(ROOT/'docs/capstone-daat.md').read_text(encoding='utf-8')
     sections=re.split(r'^# (.+)\n',source,flags=re.M)[1:]

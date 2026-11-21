@@ -1,0 +1,3 @@
+boto3==1.40.70
+psycopg[binary]==3.2.12
+duckdb==1.4.1

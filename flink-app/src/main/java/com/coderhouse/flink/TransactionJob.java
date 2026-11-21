@@ -28,15 +28,22 @@ public class TransactionJob {
                 StreamExecutionEnvironment.getExecutionEnvironment();
 
         // 2. Habilitar checkpoints cada 60 segundos
-        env.enableCheckpointing(60000, org.apache.flink.core.execution.CheckpointingMode.EXACTLY_ONCE);
+
 
         Properties properties = JobSettings.load();
+        env.enableCheckpointing(Long.parseLong(properties.getProperty("CHECKPOINT_INTERVAL_MS", "60000")), org.apache.flink.core.execution.CheckpointingMode.EXACTLY_ONCE);
+        env.setParallelism(Integer.parseInt(properties.getProperty("FLINK_PARALLELISM", "1")));
         String streamArn = JobSettings.require(properties, "KINESIS_STREAM_ARN");
         env.getCheckpointConfig().setMinPauseBetweenCheckpoints(5000);
         env.getCheckpointConfig().setMaxConcurrentCheckpoints(1);
 
         // 4. Configurar Kinesis como fuente de datos
        Configuration kinesisConfig = new Configuration();
+       kinesisConfig.setString("aws.region", properties.getProperty("AWS_REGION", "us-east-1"));
+       if (properties.containsKey("AWS_ENDPOINT_URL")) {
+           kinesisConfig.setString("aws.endpoint", properties.getProperty("AWS_ENDPOINT_URL"));
+           kinesisConfig.set(KinesisSourceConfigOptions.READER_TYPE, KinesisSourceConfigOptions.ReaderType.POLLING);
+       }
 
                     kinesisConfig.set(
                             KinesisSourceConfigOptions.STREAM_INITIAL_POSITION,
@@ -60,6 +67,10 @@ public class TransactionJob {
 
         var transactions = rawTransactions.flatMap(new TransactionPipeline.Validate())
                 .returns(TransactionEvent.class).uid("validate-json");
+        if (Boolean.parseBoolean(properties.getProperty("DEDUPLICATE", "false"))) {
+            transactions = transactions.keyBy(TransactionEvent::getTransactionId)
+                .filter(new Deduplicate()).uid("deduplicate-business-id");
+        }
         var eventTimeTransactions = transactions.assignTimestampsAndWatermarks(
                 WatermarkStrategy.<TransactionEvent>forBoundedOutOfOrderness(Duration.ofSeconds(10))
                         .withTimestampAssigner((event, previous) -> event.getEventTimeMillis())

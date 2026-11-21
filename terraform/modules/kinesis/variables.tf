@@ -36,3 +36,8 @@ variable "enable_firehose" {
   type        = bool
   default     = false
 }
+variable "enable_resource_tags" {
+  description = "Enable resource tags; disable only for legacy local emulators that lose stream tags."
+  type        = bool
+  default     = true
+}

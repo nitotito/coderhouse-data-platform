@@ -15,7 +15,9 @@ final class JobSettings {
             if (managed != null) settings.putAll(managed);
         }
         for (String key : new String[]{"KINESIS_STREAM_ARN", "ICEBERG_WAREHOUSE",
-                "ICEBERG_DATABASE", "ICEBERG_TABLE", "AWS_REGION"}) {
+                "ICEBERG_DATABASE", "ICEBERG_TABLE", "AWS_REGION", "AWS_ENDPOINT_URL",
+                "ICEBERG_CATALOG_IMPL", "ICEBERG_JDBC_URI", "ICEBERG_JDBC_USER",
+                "ICEBERG_JDBC_PASSWORD", "CHECKPOINT_INTERVAL_MS", "FLINK_PARALLELISM", "DEDUPLICATE"}) {
             String value = System.getenv(key);
             if (value != null && !value.isBlank()) settings.setProperty(key, value);
         }

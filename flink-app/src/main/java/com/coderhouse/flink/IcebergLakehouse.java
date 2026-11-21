@@ -40,15 +40,29 @@ final class IcebergLakehouse {
         String database = settings.getProperty("ICEBERG_DATABASE", "lakehouse_db");
         String name = settings.getProperty("ICEBERG_TABLE", "transaction_aggregates");
         TableIdentifier id = TableIdentifier.of(database, name);
-        Map<String, String> options = Map.of(
+        Map<String, String> options = new java.util.HashMap<>(Map.of(
                 "warehouse", warehouse,
                 "io-impl", "org.apache.iceberg.aws.s3.S3FileIO",
-                "client.region", settings.getProperty("AWS_REGION", "us-east-1"));
-        CatalogLoader loader = CatalogLoader.custom("glue", options, new Configuration(),
-                "org.apache.iceberg.aws.glue.GlueCatalog");
+                "client.region", settings.getProperty("AWS_REGION", "us-east-1")));
+        String implementation = settings.getProperty("ICEBERG_CATALOG_IMPL", "org.apache.iceberg.aws.glue.GlueCatalog");
+        if (settings.containsKey("AWS_ENDPOINT_URL")) {
+            options.put("s3.endpoint", settings.getProperty("AWS_ENDPOINT_URL"));
+            options.put("s3.path-style-access", "true");
+        }
+        if (implementation.endsWith("JdbcCatalog")) {
+            options.put("uri", JobSettings.require(settings, "ICEBERG_JDBC_URI"));
+            options.put("jdbc.user", JobSettings.require(settings, "ICEBERG_JDBC_USER"));
+            options.put("jdbc.password", JobSettings.require(settings, "ICEBERG_JDBC_PASSWORD"));
+        }
+        CatalogLoader loader = CatalogLoader.custom("lakehouse", options, new Configuration(), implementation);
         Catalog catalog = loader.loadCatalog();
         try {
-            // Namespace belongs to Terraform. Do not create a second, competing owner.
+            // Glue namespace belongs to Terraform; JDBC namespace is local application metadata.
+            if (catalog instanceof org.apache.iceberg.catalog.SupportsNamespaces namespaces
+                    && implementation.endsWith("JdbcCatalog")) {
+                try { namespaces.createNamespace(org.apache.iceberg.catalog.Namespace.of(database)); }
+                catch (AlreadyExistsException existing) { /* idempotent namespace setup */ }
+            }
             try {
                 catalog.buildTable(id, SCHEMA).withPartitionSpec(SPEC)
                         .withLocation(warehouse + "/" + database + "/" + name)

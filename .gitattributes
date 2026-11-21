@@ -1,1 +1,7 @@
+* text=auto
+*.sh text eol=lf
+Dockerfile text eol=lf
+*.Dockerfile text eol=lf
 *.pdf binary
+*.png binary
+docs/evidence/** -whitespace

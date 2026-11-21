@@ -51,4 +51,20 @@ class EventTimeSemanticsTest {
         var dropped=observed.stream().filter(s->s.paymentMethod.equals("LATE")).findFirst().orElseThrow();
         assertEquals("1000.00",dropped.totalAmount.toPlainString());
     }
+    @Test @org.junit.jupiter.api.Timeout(60)
+    void localDeduplicationPreservesFirstBusinessEvent() throws Exception {
+        var env=StreamExecutionEnvironment.createLocalEnvironment(1);
+        List<String> input=List.of(event("a",1,"10.01","approved"),
+            event("a",1,"10.01","approved"),event("b",2,"20.02","approved"));
+        var result=env.fromSequence(0,input.size()-1).map(i->input.get(i.intValue()))
+            .flatMap(new TransactionPipeline.Validate()).returns(TransactionEvent.class)
+            .keyBy(TransactionEvent::getTransactionId).filter(new Deduplicate());
+        List<TransactionEvent> observed=new ArrayList<>();
+        try(var iterator=result.executeAndCollect()) {
+            while(iterator.hasNext()) observed.add(iterator.next());
+        }
+        assertEquals(2,observed.size());
+        assertEquals("30.03",observed.stream().map(TransactionEvent::getAmount)
+            .reduce(java.math.BigDecimal.ZERO,java.math.BigDecimal::add).toPlainString());
+    }
 }

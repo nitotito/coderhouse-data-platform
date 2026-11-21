@@ -1,3 +1,5 @@
+> Plan AWS preliminar conservado como antecedente. La entrega final vigente es local: ver [capstone-local.md](capstone-local.md). No ejecutar este plan cloud para el laboratorio.
+
 # Capstone: despliegue limpio, prueba y retiro
 
 Estado: preparado y validado localmente. **No se ejecutó el despliegue aislado.**

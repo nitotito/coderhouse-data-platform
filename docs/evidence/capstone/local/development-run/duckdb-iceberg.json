@@ -1,0 +1,13 @@
+{
+  "pointer": "s3://capstone-local-lakehouse/lakehouse/lakehouse_db/transaction_aggregates/metadata/00001-fc16094d-fa04-45e6-bbc9-f9b45551fa0a.metadata.json",
+  "rows": [
+    [
+      "2026-11-21 01:39:00",
+      "2026-11-21 01:40:00",
+      "local_20261121_013922",
+      3,
+      "33.06",
+      "11.020000"
+    ]
+  ]
+}

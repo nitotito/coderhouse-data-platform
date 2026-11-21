@@ -1,3 +1,25 @@
+# Capstone final: laboratorio local
+
+La entrega final se ejecuta con Docker, sin cuenta AWS ni credenciales reales.
+El historial AWS de las preentregas se conserva debajo y en `sql/redshift/`.
+
+```powershell
+docker compose up -d --build
+docker compose --profile tools run --rm audit
+```
+
+El primer comando construye el JAR, inicializa PostgreSQL, ejecuta `tflocal init`
+y `tflocal apply` desde `terraform/local`, y arranca Flink y el consumidor.
+El segundo publica un fixture nuevo y exige igualdad de agregaciones entre la
+vista materializada de PostgreSQL y una lectura real de Iceberg con DuckDB.
+La primera construcción necesita Internet y varios minutos para las dependencias.
+Flink UI: http://localhost:8081. Parámetros y puertos: `local/example.env`.
+
+Guía: [laboratorio reproducible](docs/capstone-local.md).
+No ejecutar los scripts AWS del runbook anterior para esta entrega.
+
+---
+
 # Coderhouse Data Platform — Infraestructura Base
 
 ## Pre-entrega 6 — revisión ejecutada el 11/11/2026
