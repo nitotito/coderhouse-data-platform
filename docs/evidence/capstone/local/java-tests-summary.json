@@ -1,0 +1,26 @@
+[
+  {
+    "name": "com.coderhouse.flink.EventTimeSemanticsTest",
+    "tests": "2",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "3.657"
+  },
+  {
+    "name": "com.coderhouse.flink.IcebergCheckpointTest",
+    "tests": "2",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "11.455"
+  },
+  {
+    "name": "com.coderhouse.flink.TransactionPipelineTest",
+    "tests": "7",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.792"
+  }
+]

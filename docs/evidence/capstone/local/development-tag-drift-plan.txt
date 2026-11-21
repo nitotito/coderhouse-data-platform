@@ -1,0 +1,164 @@
+ Container capstone-local-localstack-1 Running 
+ Container capstone-local-localstack-1 Waiting 
+ Container capstone-local-localstack-1 Healthy 
+ Container capstone-local-terraform-run-88b8dbf55763 Creating 
+ Container capstone-local-terraform-run-88b8dbf55763 Created 
+module.network.data.aws_availability_zones.available: Reading...
+module.kinesis.data.aws_iam_policy_document.firehose_trust: Reading...
+module.kinesis.aws_cloudwatch_log_group.firehose[0]: Refreshing state... [id=/aws/kinesisfirehose/local-transactions]
+module.kinesis.data.aws_caller_identity.current: Reading...
+module.network.aws_vpc.main: Refreshing state... [id=vpc-d7158564de9770d85]
+module.kinesis.aws_kinesis_stream.transactions: Refreshing state... [id=arn:aws:kinesis:us-east-1:000000000000:stream/local-transactions-stream]
+module.kinesis.data.aws_region.current: Reading...
+module.network.data.aws_region.current: Reading...
+aws_s3_bucket.lakehouse: Refreshing state... [id=capstone-local-lakehouse]
+module.network.data.aws_region.current: Read complete after 0s [id=us-east-1]
+module.kinesis.data.aws_iam_policy_document.firehose_trust: Read complete after 0s [id=414810265]
+module.kinesis.data.aws_region.current: Read complete after 0s [id=us-east-1]
+module.kinesis.aws_iam_role.firehose[0]: Refreshing state... [id=coderhouse-local-firehose]
+module.kinesis.data.aws_caller_identity.current: Read complete after 0s [id=000000000000]
+module.network.data.aws_availability_zones.available: Read complete after 0s [id=us-east-1]
+module.kinesis.aws_cloudwatch_log_stream.firehose[0]: Refreshing state... [id=S3Delivery]
+module.kinesis.aws_cloudwatch_metric_alarm.write_throughput: Refreshing state... [id=local-kinesis-write-throughput]
+module.kinesis.aws_cloudwatch_metric_alarm.read_throughput: Refreshing state... [id=local-kinesis-read-throughput]
+module.network.aws_route_table.private[0]: Refreshing state... [id=rtb-ae417de47b5f4fea2]
+module.network.aws_route_table.private[1]: Refreshing state... [id=rtb-f4412b81958ed5889]
+module.network.aws_subnet.private[0]: Refreshing state... [id=subnet-1292d7e2bd76a3a09]
+module.network.aws_subnet.private[1]: Refreshing state... [id=subnet-ffb3c2bacf9fa934d]
+module.network.aws_vpc_endpoint.s3: Refreshing state... [id=vpce-201309ad041072fc8]
+module.network.aws_route_table_association.private[1]: Refreshing state... [id=rtbassoc-34183377ef2c1ca53]
+module.network.aws_route_table_association.private[0]: Refreshing state... [id=rtbassoc-f3eeeed4d280bcae2]
+aws_s3_bucket_versioning.lakehouse: Refreshing state... [id=capstone-local-lakehouse]
+aws_s3_bucket_public_access_block.lakehouse: Refreshing state... [id=capstone-local-lakehouse]
+aws_s3_bucket_server_side_encryption_configuration.lakehouse: Refreshing state... [id=capstone-local-lakehouse]
+module.kinesis.aws_iam_role_policy.firehose[0]: Refreshing state... [id=coderhouse-local-firehose:coderhouse-firehose-policy]
+module.kinesis.aws_kinesis_firehose_delivery_stream.bronze[0]: Refreshing state... [id=arn:aws:firehose:us-east-1:000000000000:deliverystream/local-transactions-firehose]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+ <= read (data resources)
+
+Terraform will perform the following actions:
+
+  # module.kinesis.data.aws_iam_policy_document.firehose[0] will be read during apply
+  # (depends on a resource or a module with changes pending)
+ <= data "aws_iam_policy_document" "firehose" {
+      + id            = (known after apply)
+      + json          = (known after apply)
+      + minified_json = (known after apply)
+
+      + statement {
+          + actions   = [
+              + "kinesis:DescribeStream",
+              + "kinesis:DescribeStreamSummary",
+              + "kinesis:GetRecords",
+              + "kinesis:GetShardIterator",
+              + "kinesis:ListShards",
+            ]
+          + effect    = "Allow"
+          + resources = [
+              + "arn:aws:kinesis:us-east-1:000000000000:stream/local-transactions-stream",
+            ]
+          + sid       = "ReadKinesis"
+        }
+      + statement {
+          + actions   = [
+              + "s3:AbortMultipartUpload",
+              + "s3:GetBucketLocation",
+              + "s3:ListBucket",
+              + "s3:ListBucketMultipartUploads",
+              + "s3:PutObject",
+            ]
+          + effect    = "Allow"
+          + resources = [
+              + "arn:aws:s3:::capstone-local-lakehouse",
+              + "arn:aws:s3:::capstone-local-lakehouse/ingesta/*",
+            ]
+          + sid       = "WriteS3"
+        }
+      + statement {
+          + actions   = [
+              + "logs:PutLogEvents",
+            ]
+          + effect    = "Allow"
+          + resources = [
+              + "arn:aws:logs:us-east-1:000000000000:log-group:/aws/kinesisfirehose/local-transactions:log-stream:*",
+            ]
+          + sid       = "WriteCloudWatchLogs"
+        }
+    }
+
+  # module.kinesis.aws_iam_role_policy.firehose[0] will be updated in-place
+  ~ resource "aws_iam_role_policy" "firehose" {
+        id          = "coderhouse-local-firehose:coderhouse-firehose-policy"
+        name        = "coderhouse-firehose-policy"
+      ~ policy      = jsonencode(
+            {
+              - Statement = [
+                  - {
+                      - Action   = [
+                          - "kinesis:ListShards",
+                          - "kinesis:GetShardIterator",
+                          - "kinesis:GetRecords",
+                          - "kinesis:DescribeStreamSummary",
+                          - "kinesis:DescribeStream",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = "arn:aws:kinesis:us-east-1:000000000000:stream/local-transactions-stream"
+                      - Sid      = "ReadKinesis"
+                    },
+                  - {
+                      - Action   = [
+                          - "s3:PutObject",
+                          - "s3:ListBucketMultipartUploads",
+                          - "s3:ListBucket",
+                          - "s3:GetBucketLocation",
+                          - "s3:AbortMultipartUpload",
+                        ]
+                      - Effect   = "Allow"
+                      - Resource = [
+                          - "arn:aws:s3:::capstone-local-lakehouse/ingesta/*",
+                          - "arn:aws:s3:::capstone-local-lakehouse",
+                        ]
+                      - Sid      = "WriteS3"
+                    },
+                  - {
+                      - Action   = "logs:PutLogEvents"
+                      - Effect   = "Allow"
+                      - Resource = "arn:aws:logs:us-east-1:000000000000:log-group:/aws/kinesisfirehose/local-transactions:log-stream:*"
+                      - Sid      = "WriteCloudWatchLogs"
+                    },
+                ]
+              - Version   = "2012-10-17"
+            }
+        ) -> (known after apply)
+        # (2 unchanged attributes hidden)
+    }
+
+  # module.kinesis.aws_kinesis_stream.transactions will be updated in-place
+  ~ resource "aws_kinesis_stream" "transactions" {
+        id                        = "arn:aws:kinesis:us-east-1:000000000000:stream/local-transactions-stream"
+        name                      = "local-transactions-stream"
+      ~ tags                      = {
+          + "Environment" = "local"
+          + "Name"        = "local-transactions-stream"
+          + "Project"     = "coderhouse-data-platform"
+        }
+      ~ tags_all                  = {
+          + "Environment" = "local"
+          + "Name"        = "local-transactions-stream"
+          + "Project"     = "coderhouse-data-platform"
+        }
+        # (10 unchanged attributes hidden)
+
+        # (1 unchanged block hidden)
+    }
+
+Plan: 0 to add, 2 to change, 0 to destroy.
+
+─────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.
+

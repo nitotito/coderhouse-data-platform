@@ -1,0 +1,125 @@
+name: ${COMPOSE_PROJECT_NAME:-capstone-local}
+x-aws: &aws
+  AWS_ACCESS_KEY_ID: test
+  AWS_SECRET_ACCESS_KEY: test
+  AWS_DEFAULT_REGION: ${LOCAL_REGION:-us-east-1}
+  AWS_REGION: ${LOCAL_REGION:-us-east-1}
+  AWS_ENDPOINT_URL: http://localstack:4566
+  LOCALSTACK_HOST: localstack
+  AWS_EC2_METADATA_DISABLED: "true"
+x-flink: &flink
+  <<: *aws
+  KINESIS_STREAM_ARN: arn:aws:kinesis:${LOCAL_REGION:-us-east-1}:000000000000:stream/${LOCAL_ENVIRONMENT:-local}-${STREAM_NAME:-transactions}-stream
+  ICEBERG_WAREHOUSE: s3://${LAKEHOUSE_BUCKET:-capstone-local-lakehouse}/lakehouse
+  ICEBERG_DATABASE: ${ICEBERG_DATABASE:-lakehouse_db}
+  ICEBERG_TABLE: ${ICEBERG_TABLE:-transaction_aggregates}
+  ICEBERG_CATALOG_IMPL: org.apache.iceberg.jdbc.JdbcCatalog
+  ICEBERG_JDBC_URI: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-capstone}?currentSchema=iceberg_catalog
+  ICEBERG_JDBC_USER: catalog_app
+  ICEBERG_JDBC_PASSWORD: ${CATALOG_PASSWORD:-local-catalog-only}
+  CHECKPOINT_INTERVAL_MS: ${CHECKPOINT_INTERVAL_MS:-5000}
+  FLINK_PARALLELISM: ${FLINK_PARALLELISM:-1}
+  DEDUPLICATE: "true"
+  FLINK_PROPERTIES: |
+    jobmanager.rpc.address: jobmanager
+    taskmanager.numberOfTaskSlots: 4
+    execution.checkpointing.dir: file:///opt/flink/checkpoints
+    execution.checkpointing.externalized-checkpoint-retention: RETAIN_ON_CANCELLATION
+    restart-strategy.type: fixed-delay
+    restart-strategy.fixed-delay.attempts: 5
+    restart-strategy.fixed-delay.delay: 3 s
+services:
+  localstack:
+    image: localstack/localstack:4.12.0
+    ports: ["127.0.0.1:${LOCALSTACK_PORT:-4566}:4566"]
+    environment:
+      AWS_DEFAULT_REGION: ${LOCAL_REGION:-us-east-1}
+    healthcheck:
+      test: ["CMD", "awslocal", "kinesis", "list-streams"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  postgres:
+    image: postgres:16.6-alpine
+    ports: ["127.0.0.1:${POSTGRES_PORT:-5432}:5432"]
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-capstone}
+      POSTGRES_USER: capstone_admin
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-local-admin-only}
+      INGEST_PASSWORD: ${INGEST_PASSWORD:-local-ingest-only}
+      CATALOG_PASSWORD: ${CATALOG_PASSWORD:-local-catalog-only}
+      ANALYST_PASSWORD: ${ANALYST_PASSWORD:-local-analyst-only}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./sql/local:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U capstone_admin -d $${POSTGRES_DB}"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+  terraform:
+    build: {context: ., dockerfile: local/terraform.Dockerfile}
+    environment:
+      <<: *aws
+      LOCALSTACK_HOSTNAME: localstack
+      S3_ENDPOINT: http://localstack:4566
+      TF_VAR_region: ${LOCAL_REGION:-us-east-1}
+      TF_VAR_environment: ${LOCAL_ENVIRONMENT:-local}
+      TF_VAR_bucket_name: ${LAKEHOUSE_BUCKET:-capstone-local-lakehouse}
+      TF_VAR_stream_name: ${STREAM_NAME:-transactions}
+      TF_VAR_shard_count: ${SHARD_COUNT:-2}
+    volumes:
+      - ./terraform:/workspace/terraform
+    depends_on:
+      localstack: {condition: service_healthy}
+  jobmanager:
+    build: {context: ., dockerfile: local/flink.Dockerfile}
+    image: capstone-flink:local
+    command: standalone-job --job-classname com.coderhouse.flink.TransactionJob
+    ports: ["127.0.0.1:${FLINK_UI_PORT:-8081}:8081"]
+    environment: *flink
+    volumes: ["checkpoints:/opt/flink/checkpoints"]
+    depends_on:
+      terraform: {condition: service_completed_successfully}
+      postgres: {condition: service_healthy}
+  taskmanager:
+    image: capstone-flink:local
+    command: taskmanager
+    restart: on-failure
+    environment: *flink
+    volumes: ["checkpoints:/opt/flink/checkpoints"]
+    depends_on: [jobmanager]
+  consumer:
+    restart: on-failure
+    build: {context: ., dockerfile: ingest-consumer/Dockerfile}
+    environment:
+      <<: *aws
+      STREAM_NAME: ${LOCAL_ENVIRONMENT:-local}-${STREAM_NAME:-transactions}-stream
+      PGHOST: postgres
+      PGDATABASE: ${POSTGRES_DB:-capstone}
+      PGUSER: ingest_app
+      PGPASSWORD: ${INGEST_PASSWORD:-local-ingest-only}
+      REFRESH_SECONDS: ${REFRESH_SECONDS:-2}
+    depends_on:
+      terraform: {condition: service_completed_successfully}
+      postgres: {condition: service_healthy}
+  audit:
+    build: {context: ., dockerfile: ingest-consumer/Dockerfile}
+    profiles: [tools]
+    environment:
+      <<: *aws
+      STREAM_NAME: ${LOCAL_ENVIRONMENT:-local}-${STREAM_NAME:-transactions}-stream
+      PGHOST: postgres
+      PGDATABASE: ${POSTGRES_DB:-capstone}
+      CATALOG_PASSWORD: ${CATALOG_PASSWORD:-local-catalog-only}
+      CATALOG_USER: catalog_app
+      FLINK_REST_URL: http://jobmanager:8081
+      ICEBERG_TABLE: ${ICEBERG_TABLE:-transaction_aggregates}
+      PGUSER: analyst_app
+      PGPASSWORD: ${ANALYST_PASSWORD:-local-analyst-only}
+      LAKEHOUSE_BUCKET: ${LAKEHOUSE_BUCKET:-capstone-local-lakehouse}
+    volumes: ["./:/repo"]
+    command: ["python", "/repo/scripts/local-e2e.py"]
+volumes:
+  pgdata:
+  checkpoints:

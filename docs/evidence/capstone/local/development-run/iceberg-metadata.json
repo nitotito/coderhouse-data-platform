@@ -1,0 +1,132 @@
+{
+  "format-version": 2,
+  "table-uuid": "bedcd950-7096-4499-aa55-fc5dac4394c5",
+  "location": "s3://capstone-local-lakehouse/lakehouse/lakehouse_db/transaction_aggregates",
+  "last-sequence-number": 1,
+  "last-updated-ms": 1795225167375,
+  "last-column-id": 6,
+  "current-schema-id": 0,
+  "schemas": [
+    {
+      "type": "struct",
+      "schema-id": 0,
+      "fields": [
+        {
+          "id": 1,
+          "name": "window_start",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 2,
+          "name": "window_end",
+          "required": true,
+          "type": "timestamp"
+        },
+        {
+          "id": 3,
+          "name": "payment_method",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "id": 4,
+          "name": "transaction_count",
+          "required": true,
+          "type": "long"
+        },
+        {
+          "id": 5,
+          "name": "total_amount",
+          "required": true,
+          "type": "decimal(38, 2)"
+        },
+        {
+          "id": 6,
+          "name": "average_amount",
+          "required": true,
+          "type": "decimal(38, 6)"
+        }
+      ]
+    }
+  ],
+  "default-spec-id": 0,
+  "partition-specs": [
+    {
+      "spec-id": 0,
+      "fields": [
+        {
+          "name": "window_start_day",
+          "transform": "day",
+          "source-id": 1,
+          "field-id": 1000
+        }
+      ]
+    }
+  ],
+  "last-partition-id": 1000,
+  "default-sort-order-id": 0,
+  "sort-orders": [
+    {
+      "order-id": 0,
+      "fields": []
+    }
+  ],
+  "properties": {
+    "write.target-file-size-bytes": "134217728",
+    "write.format.default": "parquet",
+    "write.parquet.compression-codec": "snappy"
+  },
+  "current-snapshot-id": 7949275183301078199,
+  "refs": {
+    "main": {
+      "snapshot-id": 7949275183301078199,
+      "type": "branch"
+    }
+  },
+  "snapshots": [
+    {
+      "sequence-number": 1,
+      "snapshot-id": 7949275183301078199,
+      "timestamp-ms": 1795225167373,
+      "summary": {
+        "operation": "append",
+        "flink.operator-id": "09595c6b02227b9f9644ac1598b42305",
+        "flink.job-id": "3459e637a56a33507b1283cf1ca16531",
+        "manifests-created": "1",
+        "manifests-kept": "0",
+        "manifests-replaced": "0",
+        "flink.max-committed-checkpoint-id": "3",
+        "added-data-files": "1",
+        "added-records": "1",
+        "added-files-size": "2081",
+        "changed-partition-count": "1",
+        "total-records": "1",
+        "total-files-size": "2081",
+        "total-data-files": "1",
+        "total-delete-files": "0",
+        "total-position-deletes": "0",
+        "total-equality-deletes": "0",
+        "engine-version": "2.2.1",
+        "engine-name": "flink",
+        "iceberg-version": "Apache Iceberg 1.12.0 (commit 212aa894e919ff9fdf89160da4aadcbe6858ac01)"
+      },
+      "manifest-list": "s3://capstone-local-lakehouse/lakehouse/lakehouse_db/transaction_aggregates/metadata/snap-7949275183301078199-1-58f59138-58e3-4f40-834a-57d6a5c63922.avro",
+      "schema-id": 0
+    }
+  ],
+  "statistics": [],
+  "partition-statistics": [],
+  "snapshot-log": [
+    {
+      "timestamp-ms": 1795225167373,
+      "snapshot-id": 7949275183301078199
+    }
+  ],
+  "metadata-log": [
+    {
+      "timestamp-ms": 1795225150767,
+      "metadata-file": "s3://capstone-local-lakehouse/lakehouse/lakehouse_db/transaction_aggregates/metadata/00000-32376157-7acd-4c68-9b6e-9a95d67aa121.metadata.json"
+    }
+  ]
+}

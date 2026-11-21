@@ -1,0 +1,13 @@
+Warning: Backend configuration ignored
+
+  on ..\backend.tf line 7, in terraform:
+   7:   backend "s3" {}
+
+Any selected backend applies to the entire configuration, so Terraform
+expects backend configurations only in the root module.
+
+This is a warning rather than an error because it's sometimes convenient to
+temporarily call a root module as a child module for testing purposes, but
+this backend configuration block will have no effect.
+Success! The configuration is valid, but there were some validation warnings
+as shown above.

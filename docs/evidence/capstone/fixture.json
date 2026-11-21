@@ -1,0 +1,88 @@
+{
+  "run_id": "cap_local_fixture",
+  "window_start": "2026-11-07T04:50:00+00:00",
+  "method": "card_cap_local_fixture",
+  "initial": [
+    {
+      "transaction_id": "cap_local_fixture-out-of-order",
+      "timestamp": "2026-11-07T04:50:12+00:00",
+      "amount": "10.01",
+      "payment_method": "card_cap_local_fixture",
+      "status": "approved",
+      "produced_at": "2026-11-07T04:52:35.540569+00:00"
+    },
+    {
+      "transaction_id": "cap_local_fixture-duplicate",
+      "timestamp": "2026-11-07T04:50:01+00:00",
+      "amount": "10.00",
+      "payment_method": "card_cap_local_fixture",
+      "status": "approved",
+      "produced_at": "2026-11-07T04:52:35.540562+00:00"
+    },
+    {
+      "transaction_id": "cap_local_fixture-duplicate",
+      "timestamp": "2026-11-07T04:50:01+00:00",
+      "amount": "10.00",
+      "payment_method": "card_cap_local_fixture",
+      "status": "approved",
+      "produced_at": "2026-11-07T04:52:35.540562+00:00"
+    },
+    {
+      "transaction_id": "cap_local_fixture-rejected",
+      "timestamp": "2026-11-07T04:50:14+00:00",
+      "amount": "999.00",
+      "payment_method": "card_cap_local_fixture",
+      "status": "rejected",
+      "produced_at": "2026-11-07T04:52:35.540573+00:00"
+    },
+    {
+      "transaction_id": "cap_local_fixture-pending",
+      "timestamp": "2026-11-07T04:50:15+00:00",
+      "amount": "22.00",
+      "payment_method": "card_cap_local_fixture",
+      "status": "pending",
+      "produced_at": "2026-11-07T04:52:35.540576+00:00"
+    },
+    "{invalid-json",
+    {
+      "transaction_id": "cap_local_fixture-missing",
+      "amount": "1.00"
+    },
+    {
+      "transaction_id": "cap_local_fixture-barrier-1",
+      "timestamp": "2026-11-07T04:51:15+00:00",
+      "amount": "0.00",
+      "payment_method": "card_cap_local_fixture",
+      "status": "rejected",
+      "produced_at": "2026-11-07T04:52:35.540579+00:00"
+    }
+  ],
+  "after_commit": [
+    {
+      "transaction_id": "cap_local_fixture-late",
+      "timestamp": "2026-11-07T04:50:03+00:00",
+      "amount": "1000.00",
+      "payment_method": "card_cap_local_fixture",
+      "status": "approved",
+      "produced_at": "2026-11-07T04:52:35.540583+00:00"
+    },
+    {
+      "transaction_id": "cap_local_fixture-barrier-2",
+      "timestamp": "2026-11-07T04:52:15+00:00",
+      "amount": "0.00",
+      "payment_method": "card_cap_local_fixture",
+      "status": "rejected",
+      "produced_at": "2026-11-07T04:52:35.540587+00:00"
+    }
+  ],
+  "late_id_sha256": "d5008abf1a543741f00c61a3fb7d66e3a6664b1a758e1a73079b3f228ee5a511",
+  "expected": {
+    "iceberg_count": 3,
+    "iceberg_total": "30.01",
+    "iceberg_average": "10.003333",
+    "redshift_approved_count_all": 4,
+    "redshift_approved_total_all": "1030.01",
+    "excluded_late_count": 1,
+    "duplicates_counted": true
+  }
+}

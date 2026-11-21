@@ -1,0 +1,7 @@
+{
+  "tests": 3,
+  "failures": 0,
+  "errors": 0,
+  "suite": "ingest-consumer/test_consumer.py",
+  "scope": "timestamp timezone, money validity, unknown metadata"
+}
