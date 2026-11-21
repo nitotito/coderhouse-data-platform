@@ -1,0 +1,195 @@
+ Image capstone-local-terraform Building 
+ Image capstone-flink:local Building 
+ Image capstone-local-consumer Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.60kB done
+#1 DONE 0.0s
+
+#2 [jobmanager internal] load build definition from flink.Dockerfile
+#2 transferring dockerfile: 445B done
+#2 DONE 0.0s
+
+#3 [terraform internal] load build definition from terraform.Dockerfile
+#3 transferring dockerfile: 620B done
+#3 DONE 0.0s
+
+#4 [consumer internal] load build definition from Dockerfile
+#4 transferring dockerfile: 307B done
+#4 DONE 0.1s
+
+#5 [jobmanager internal] load metadata for docker.io/library/flink:2.2.1-scala_2.12-java17
+#5 DONE 0.1s
+
+#6 [consumer internal] load metadata for docker.io/library/python:3.12-slim
+#6 DONE 0.7s
+
+#7 [consumer internal] load .dockerignore
+#7 transferring context: 141B done
+#7 DONE 0.0s
+
+#8 [consumer internal] load build context
+#8 transferring context: 181B done
+#8 DONE 0.0s
+
+#9 [consumer 1/5] FROM docker.io/library/python:3.12-slim@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b
+#9 resolve docker.io/library/python:3.12-slim@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b 0.0s done
+#9 DONE 0.0s
+
+#10 [terraform 3/5] RUN curl -fsSLo /tmp/tf.zip https://releases.hashicorp.com/terraform/1.12.2/terraform_1.12.2_linux_amd64.zip && unzip /tmp/tf.zip -d /usr/local/bin && rm /tmp/tf.zip
+#10 CACHED
+
+#11 [terraform 4/5] RUN pip install --no-cache-dir terraform-local==0.24.1 python-hcl2==7.3.1
+#11 CACHED
+
+#12 [terraform 2/5] RUN apt-get update && apt-get install -y --no-install-recommends unzip curl && rm -rf /var/lib/apt/lists/*
+#12 CACHED
+
+#13 [terraform 5/5] WORKDIR /workspace/terraform/local
+#13 CACHED
+
+#14 [consumer 3/5] COPY ingest-consumer/requirements.txt /tmp/requirements.txt
+#14 CACHED
+
+#15 [consumer 4/5] RUN pip install --no-cache-dir -r /tmp/requirements.txt
+#15 CACHED
+
+#16 [consumer 2/5] WORKDIR /workspace
+#16 CACHED
+
+#17 [consumer 5/5] COPY ingest-consumer /workspace/ingest-consumer
+#17 CACHED
+
+#18 [consumer] exporting to image
+#18 exporting layers done
+#18 exporting manifest sha256:b9a28cc45fb1a390bd90fc4c6f7ae4c98f4787e39195bd5b4ddc069c0e233096 done
+#18 exporting config sha256:edef4212d830350c3beaddf9aabfc524d1f27554f8b63291fb7b30091103b129 0.0s done
+#18 exporting attestation manifest sha256:716630319852c86204096249d6b73f25a9a30ea6da0cc1ff5d93a3ac3804dff3 0.0s done
+#18 exporting manifest list sha256:3724da29efa43cace5c0467d63f1fb510e2e773cb679576c4c68fc4054a96f02
+#18 exporting manifest list sha256:3724da29efa43cace5c0467d63f1fb510e2e773cb679576c4c68fc4054a96f02 0.0s done
+#18 naming to docker.io/library/capstone-local-consumer:latest done
+#18 unpacking to docker.io/library/capstone-local-consumer:latest 0.0s done
+#18 DONE 0.2s
+
+#19 [terraform] exporting to image
+#19 exporting layers done
+#19 exporting manifest sha256:4dbd38d669c34f4e33ec9bcb35f31fdf75da2b0991f7b9318e92b24b043c1639 done
+#19 exporting config sha256:6ea49b7c5adc5962abd89f27d7816ba93de8bbb9326a919f3101ea4514eb096e done
+#19 exporting attestation manifest sha256:1f7e9896b297503c4e762deab93b98c148be38ecd6aa068c617dcd8365131565 0.1s done
+#19 exporting manifest list sha256:4a63a8cf86ba194a137377a39aaceba44066f3622bf224db13c361363e30967d 0.0s done
+#19 naming to docker.io/library/capstone-local-terraform:latest 0.0s done
+#19 unpacking to docker.io/library/capstone-local-terraform:latest 0.0s done
+#19 DONE 0.2s
+
+#20 [jobmanager internal] load metadata for docker.io/library/maven:3.9.9-eclipse-temurin-17
+#20 DONE 1.3s
+
+#7 [jobmanager internal] load .dockerignore
+#7 transferring context: 141B done
+#7 DONE 0.0s
+
+#21 [terraform] resolving provenance for metadata file
+#21 DONE 0.0s
+
+#22 [consumer] resolving provenance for metadata file
+#22 DONE 0.0s
+
+#23 [jobmanager build 1/6] FROM docker.io/library/maven:3.9.9-eclipse-temurin-17@sha256:f58d59b6273e785ac0a4477f6e9b5ba1d7731c75b906c0f7b34076f1851318cc
+#23 resolve docker.io/library/maven:3.9.9-eclipse-temurin-17@sha256:f58d59b6273e785ac0a4477f6e9b5ba1d7731c75b906c0f7b34076f1851318cc 0.1s done
+#23 DONE 0.1s
+
+#24 [jobmanager stage-1 1/3] FROM docker.io/library/flink:2.2.1-scala_2.12-java17@sha256:c95f48391db3e191345549b4d06406c08616fe8f99ee57fa4f4c44268c912a46
+#24 resolve docker.io/library/flink:2.2.1-scala_2.12-java17@sha256:c95f48391db3e191345549b4d06406c08616fe8f99ee57fa4f4c44268c912a46 0.1s done
+#24 DONE 0.1s
+
+#25 [jobmanager internal] load build context
+#25 transferring context: 49.52kB 0.0s done
+#25 DONE 0.0s
+
+#26 [jobmanager build 2/6] WORKDIR /build
+#26 CACHED
+
+#27 [jobmanager build 3/6] COPY flink-app/pom.xml .
+#27 CACHED
+
+#28 [jobmanager build 4/6] RUN mvn -q dependency:go-offline
+#28 CACHED
+
+#29 [jobmanager build 5/6] COPY flink-app/src ./src
+#29 DONE 0.1s
+
+#30 [jobmanager build 6/6] RUN mvn -q -DskipTests package
+#30 DONE 11.5s
+
+#24 [jobmanager stage-1 1/3] FROM docker.io/library/flink:2.2.1-scala_2.12-java17@sha256:c95f48391db3e191345549b4d06406c08616fe8f99ee57fa4f4c44268c912a46
+#24 CACHED
+
+#31 [jobmanager stage-1 2/3] COPY --from=build /build/target/flink-transactions-1.2.0.jar /opt/flink/usrlib/job.jar
+#31 DONE 0.3s
+
+#32 [jobmanager stage-1 3/3] RUN mkdir -p /opt/flink/checkpoints && chown -R flink:flink /opt/flink/checkpoints
+#32 DONE 0.2s
+
+#33 [jobmanager] exporting to image
+#33 exporting layers
+#33 exporting layers 3.6s done
+#33 exporting manifest sha256:12c6fafc3eb5393a565f6240aa805e4bb7ca162dc610d22a0e003581efa2198b 0.1s done
+#33 exporting config sha256:e8db10e17aef2264ed25c30083128930a68d2261412c09f303f246f76c5734cf 0.1s done
+#33 exporting attestation manifest sha256:0afb69035c70b48ab9adc3a30026b6da159b9bda9b04455b4cd34b7255cc3fe4 0.1s done
+#33 exporting manifest list sha256:693a898693eae152f15db463f0f4c7cac2d119600cf6fb35222eb0f53e17a20d
+#33 exporting manifest list sha256:693a898693eae152f15db463f0f4c7cac2d119600cf6fb35222eb0f53e17a20d 0.1s done
+#33 naming to docker.io/library/capstone-flink:local done
+#33 unpacking to docker.io/library/capstone-flink:local
+#33 unpacking to docker.io/library/capstone-flink:local 0.5s done
+#33 DONE 4.6s
+
+#34 [jobmanager] resolving provenance for metadata file
+#34 DONE 0.0s
+ Image capstone-flink:local Built 
+ Image capstone-local-terraform Built 
+ Image capstone-local-consumer Built 
+ Volume capstone-local_pgdata Creating 
+ Network capstone-local_default Creating 
+ Volume capstone-local_checkpoints Creating 
+ Network capstone-local_default Creating 
+ Volume capstone-local_checkpoints Creating 
+ Volume capstone-local_pgdata Creating 
+ Volume capstone-local_checkpoints Created 
+ Volume capstone-local_checkpoints Created 
+ Volume capstone-local_pgdata Created 
+ Volume capstone-local_pgdata Created 
+ Network capstone-local_default Created 
+ Network capstone-local_default Created 
+ Container capstone-local-localstack-1 Creating 
+ Container capstone-local-postgres-1 Creating 
+ Container capstone-local-localstack-1 Created 
+ Container capstone-local-terraform-1 Creating 
+ Container capstone-local-postgres-1 Created 
+ Container capstone-local-terraform-1 Created 
+ Container capstone-local-jobmanager-1 Creating 
+ Container capstone-local-consumer-1 Creating 
+ Container capstone-local-consumer-1 Created 
+ Container capstone-local-jobmanager-1 Created 
+ Container capstone-local-taskmanager-1 Creating 
+ Container capstone-local-taskmanager-1 Created 
+ Container capstone-local-postgres-1 Starting 
+ Container capstone-local-localstack-1 Starting 
+ Container capstone-local-postgres-1 Started 
+ Container capstone-local-localstack-1 Started 
+ Container capstone-local-localstack-1 Waiting 
+ Container capstone-local-localstack-1 Healthy 
+ Container capstone-local-terraform-1 Starting 
+ Container capstone-local-terraform-1 Started 
+ Container capstone-local-terraform-1 Waiting 
+ Container capstone-local-postgres-1 Waiting 
+ Container capstone-local-terraform-1 Waiting 
+ Container capstone-local-postgres-1 Waiting 
+ Container capstone-local-postgres-1 Healthy 
+ Container capstone-local-postgres-1 Healthy 
+ Container capstone-local-terraform-1 Exited 
+ Container capstone-local-jobmanager-1 Starting 
+ Container capstone-local-terraform-1 Exited 
+ Container capstone-local-consumer-1 Starting 
+ Container capstone-local-jobmanager-1 Started 
+ Container capstone-local-taskmanager-1 Starting 
+ Container capstone-local-consumer-1 Started 
+ Container capstone-local-taskmanager-1 Started 

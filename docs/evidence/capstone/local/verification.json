@@ -1,0 +1,11 @@
+{
+  "technical_checks": "PASSED",
+  "run_id": "local_20261121_014317",
+  "clean_deployment": true,
+  "aws_deployed": false,
+  "recovery": true,
+  "terraform_plan_exit": 0,
+  "missing_screenshots": [],
+  "ready_to_submit": true,
+  "screenshots_visually_reviewed": true
+}

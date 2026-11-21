@@ -1,0 +1,72 @@
+{
+  "run_id": "local_20261121_014317",
+  "base": "2026-11-21 01:43:00+00:00",
+  "initial": [
+    {
+      "transaction_id": "local_20261121_014317_a",
+      "timestamp": "2026-11-21T01:43:01+00:00",
+      "amount": "10.01",
+      "payment_method": "local_20261121_014317",
+      "status": "approved"
+    },
+    {
+      "transaction_id": "local_20261121_014317_b",
+      "timestamp": "2026-11-21T01:43:03+00:00",
+      "amount": "20.02",
+      "payment_method": "local_20261121_014317",
+      "status": "approved"
+    },
+    {
+      "transaction_id": "local_20261121_014317_a",
+      "timestamp": "2026-11-21T01:43:01+00:00",
+      "amount": "10.01",
+      "payment_method": "local_20261121_014317",
+      "status": "approved"
+    },
+    {
+      "transaction_id": "local_20261121_014317_ooo",
+      "timestamp": "2026-11-21T01:43:02+00:00",
+      "amount": "3.03",
+      "payment_method": "local_20261121_014317",
+      "status": "approved"
+    },
+    {
+      "transaction_id": "local_20261121_014317_reject",
+      "timestamp": "2026-11-21T01:43:04+00:00",
+      "amount": "999.00",
+      "payment_method": "local_20261121_014317",
+      "status": "rejected"
+    },
+    "{bad json",
+    {
+      "transaction_id": "local_20261121_014317_advance",
+      "timestamp": "2026-11-21T01:44:20+00:00",
+      "amount": "0.00",
+      "payment_method": "local_20261121_014317",
+      "status": "rejected"
+    }
+  ],
+  "after_commit": [
+    {
+      "transaction_id": "local_20261121_014317_late",
+      "timestamp": "2026-11-21T01:43:05+00:00",
+      "amount": "1000.00",
+      "payment_method": "local_20261121_014317",
+      "status": "approved"
+    },
+    {
+      "transaction_id": "local_20261121_014317_a",
+      "timestamp": "2026-11-21T01:43:01+00:00",
+      "amount": "10.01",
+      "payment_method": "local_20261121_014317",
+      "status": "approved"
+    },
+    {
+      "transaction_id": "local_20261121_014317_advance2",
+      "timestamp": "2026-11-21T01:45:30+00:00",
+      "amount": "0.00",
+      "payment_method": "local_20261121_014317",
+      "status": "rejected"
+    }
+  ]
+}

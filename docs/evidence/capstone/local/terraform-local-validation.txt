@@ -1,0 +1,12 @@
+ Container capstone-local-localstack-1 Running 
+ Container capstone-local-localstack-1 Waiting 
+ Container capstone-local-localstack-1 Healthy 
+ Container capstone-local-terraform-run-7bc6f0fd44e6 Creating 
+ Container capstone-local-terraform-run-7bc6f0fd44e6 Created 
+{
+  "format_version": "1.0",
+  "valid": true,
+  "error_count": 0,
+  "warning_count": 0,
+  "diagnostics": []
+}

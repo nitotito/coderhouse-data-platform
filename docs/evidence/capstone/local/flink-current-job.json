@@ -1,0 +1,195 @@
+{
+  "jid": "84f02cc5f39aabd690f3543ef130f57e",
+  "name": "Transactions Streaming Job",
+  "isStoppable": false,
+  "state": "RUNNING",
+  "job-type": "STREAMING",
+  "start-time": 1795225375701,
+  "end-time": -1,
+  "duration": 133634,
+  "maxParallelism": -1,
+  "now": 1795225509335,
+  "timestamps": {
+    "CREATED": 1795225375827,
+    "RESTARTING": 1795225417079,
+    "SUSPENDED": 0,
+    "INITIALIZING": 1795225375701,
+    "RUNNING": 1795225420082,
+    "FINISHED": 0,
+    "FAILING": 0,
+    "RECONCILING": 0,
+    "FAILED": 0,
+    "CANCELED": 0,
+    "CANCELLING": 0
+  },
+  "vertices": [
+    {
+      "id": "396a7bbf652c86af3b1e6b782c6c9d5b",
+      "slotSharingGroupId": "58f66d1eb994a04480be22f75028cd6a",
+      "name": "Source: Kinesis Transactions Source -> Flat Map",
+      "maxParallelism": 128,
+      "parallelism": 1,
+      "status": "RUNNING",
+      "start-time": 1795225420221,
+      "end-time": -1,
+      "duration": 89114,
+      "tasks": {
+        "RUNNING": 1,
+        "FAILED": 0,
+        "SCHEDULED": 0,
+        "DEPLOYING": 0,
+        "CANCELING": 0,
+        "INITIALIZING": 0,
+        "CREATED": 0,
+        "FINISHED": 0,
+        "RECONCILING": 0,
+        "CANCELED": 0
+      },
+      "metrics": {
+        "read-bytes": 0,
+        "read-bytes-complete": false,
+        "write-bytes": 0,
+        "write-bytes-complete": false,
+        "read-records": 0,
+        "read-records-complete": false,
+        "write-records": 0,
+        "write-records-complete": false,
+        "accumulated-backpressured-time": 0,
+        "accumulated-idle-time": 0,
+        "accumulated-busy-time": 0.0
+      }
+    },
+    {
+      "id": "e4e836ecb28c0c6daf71cc88488aef7b",
+      "slotSharingGroupId": "58f66d1eb994a04480be22f75028cd6a",
+      "name": "Filter -> Timestamps/Watermarks -> Approved transactions",
+      "maxParallelism": 128,
+      "parallelism": 1,
+      "status": "RUNNING",
+      "start-time": 1795225420222,
+      "end-time": -1,
+      "duration": 89113,
+      "tasks": {
+        "RUNNING": 1,
+        "FAILED": 0,
+        "SCHEDULED": 0,
+        "DEPLOYING": 0,
+        "CANCELING": 0,
+        "INITIALIZING": 0,
+        "CREATED": 0,
+        "FINISHED": 0,
+        "RECONCILING": 0,
+        "CANCELED": 0
+      },
+      "metrics": {
+        "read-bytes": 0,
+        "read-bytes-complete": false,
+        "write-bytes": 0,
+        "write-bytes-complete": false,
+        "read-records": 0,
+        "read-records-complete": false,
+        "write-records": 0,
+        "write-records-complete": false,
+        "accumulated-backpressured-time": 0,
+        "accumulated-idle-time": 0,
+        "accumulated-busy-time": 0.0
+      }
+    },
+    {
+      "id": "ab7107f8bf17a5e04b385ccb8c521cee",
+      "slotSharingGroupId": "58f66d1eb994a04480be22f75028cd6a",
+      "name": "Approved minute aggregates -> (Map -> transaction-aggregates-IcebergStreamWriter -> transaction-aggregates-IcebergFilesCommitter -> transaction-aggregates-IcebergSink lakehouse.lakehouse_db.transaction_aggregates: Writer, Map -> Sink: Print to Std. Out, Map -> Sink: Print to Std. Out)",
+      "maxParallelism": 128,
+      "parallelism": 1,
+      "status": "RUNNING",
+      "start-time": 1795225420222,
+      "end-time": -1,
+      "duration": 89113,
+      "tasks": {
+        "RUNNING": 1,
+        "FAILED": 0,
+        "SCHEDULED": 0,
+        "DEPLOYING": 0,
+        "CANCELING": 0,
+        "INITIALIZING": 0,
+        "CREATED": 0,
+        "FINISHED": 0,
+        "RECONCILING": 0,
+        "CANCELED": 0
+      },
+      "metrics": {
+        "read-bytes": 0,
+        "read-bytes-complete": false,
+        "write-bytes": 0,
+        "write-bytes-complete": false,
+        "read-records": 0,
+        "read-records-complete": false,
+        "write-records": 0,
+        "write-records-complete": false,
+        "accumulated-backpressured-time": 0,
+        "accumulated-idle-time": 0,
+        "accumulated-busy-time": 0.0
+      }
+    }
+  ],
+  "status-counts": {
+    "RUNNING": 3,
+    "FAILED": 0,
+    "SCHEDULED": 0,
+    "DEPLOYING": 0,
+    "CANCELING": 0,
+    "INITIALIZING": 0,
+    "CREATED": 0,
+    "FINISHED": 0,
+    "RECONCILING": 0,
+    "CANCELED": 0
+  },
+  "plan": {
+    "jid": "84f02cc5f39aabd690f3543ef130f57e",
+    "name": "Transactions Streaming Job",
+    "type": "STREAMING",
+    "nodes": [
+      {
+        "id": "ab7107f8bf17a5e04b385ccb8c521cee",
+        "operator": "",
+        "parallelism": 1,
+        "operator_strategy": "",
+        "description": "Window(TumblingEventTimeWindows(60000), EventTimeTrigger, TransactionAggregate, TransactionWindowResult)<br/>:- Map<br/>:  +- transaction-aggregates-IcebergStreamWriter<br/>:     +- transaction-aggregates-IcebergFilesCommitter<br/>:        +- transaction-aggregates-IcebergSink lakehouse.lakehouse_db.transaction_aggregates: Writer<br/>:- Map<br/>:  +- Sink: Print to Std. Out<br/>+- Map<br/>   +- Sink: Print to Std. Out<br/>",
+        "optimizer_properties": {},
+        "inputs": [
+          {
+            "id": "e4e836ecb28c0c6daf71cc88488aef7b",
+            "num": 0,
+            "exchange": "pipelined_bounded",
+            "ship_strategy": "HASH"
+          }
+        ]
+      },
+      {
+        "id": "e4e836ecb28c0c6daf71cc88488aef7b",
+        "operator": "",
+        "parallelism": 1,
+        "operator_strategy": "",
+        "description": "Filter<br/>+- Timestamps/Watermarks<br/>   +- Approved transactions<br/>",
+        "optimizer_properties": {},
+        "inputs": [
+          {
+            "id": "396a7bbf652c86af3b1e6b782c6c9d5b",
+            "num": 0,
+            "exchange": "pipelined_bounded",
+            "ship_strategy": "HASH"
+          }
+        ]
+      },
+      {
+        "id": "396a7bbf652c86af3b1e6b782c6c9d5b",
+        "operator": "",
+        "parallelism": 1,
+        "operator_strategy": "",
+        "description": "Source: Kinesis Transactions Source<br/>+- Flat Map<br/>",
+        "optimizer_properties": {}
+      }
+    ]
+  },
+  "pending-operators": 0
+}

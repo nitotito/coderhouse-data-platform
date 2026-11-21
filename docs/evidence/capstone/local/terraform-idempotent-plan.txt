@@ -1,0 +1,42 @@
+ Container capstone-local-localstack-1 Running 
+ Container capstone-local-localstack-1 Waiting 
+ Container capstone-local-localstack-1 Healthy 
+ Container capstone-local-terraform-run-1168d5cf407f Creating 
+ Container capstone-local-terraform-run-1168d5cf407f Created 
+module.network.data.aws_availability_zones.available: Reading...
+module.kinesis.data.aws_iam_policy_document.firehose_trust: Reading...
+module.kinesis.aws_cloudwatch_log_group.firehose[0]: Refreshing state... [id=/aws/kinesisfirehose/local-transactions]
+module.network.aws_vpc.main: Refreshing state... [id=vpc-d7158564de9770d85]
+module.kinesis.data.aws_caller_identity.current: Reading...
+module.kinesis.aws_kinesis_stream.transactions: Refreshing state... [id=arn:aws:kinesis:us-east-1:000000000000:stream/local-transactions-stream]
+module.network.data.aws_region.current: Reading...
+aws_s3_bucket.lakehouse: Refreshing state... [id=capstone-local-lakehouse]
+module.kinesis.data.aws_region.current: Reading...
+module.kinesis.data.aws_iam_policy_document.firehose_trust: Read complete after 0s [id=414810265]
+module.network.data.aws_region.current: Read complete after 0s [id=us-east-1]
+module.kinesis.data.aws_region.current: Read complete after 0s [id=us-east-1]
+module.kinesis.aws_iam_role.firehose[0]: Refreshing state... [id=coderhouse-local-firehose]
+module.kinesis.data.aws_caller_identity.current: Read complete after 0s [id=000000000000]
+module.network.data.aws_availability_zones.available: Read complete after 0s [id=us-east-1]
+module.kinesis.aws_cloudwatch_log_stream.firehose[0]: Refreshing state... [id=S3Delivery]
+module.kinesis.aws_cloudwatch_metric_alarm.write_throughput: Refreshing state... [id=local-kinesis-write-throughput]
+module.kinesis.aws_cloudwatch_metric_alarm.read_throughput: Refreshing state... [id=local-kinesis-read-throughput]
+module.network.aws_subnet.private[1]: Refreshing state... [id=subnet-ffb3c2bacf9fa934d]
+module.network.aws_route_table.private[0]: Refreshing state... [id=rtb-ae417de47b5f4fea2]
+module.network.aws_route_table.private[1]: Refreshing state... [id=rtb-f4412b81958ed5889]
+module.network.aws_subnet.private[0]: Refreshing state... [id=subnet-1292d7e2bd76a3a09]
+aws_s3_bucket_versioning.lakehouse: Refreshing state... [id=capstone-local-lakehouse]
+aws_s3_bucket_public_access_block.lakehouse: Refreshing state... [id=capstone-local-lakehouse]
+aws_s3_bucket_server_side_encryption_configuration.lakehouse: Refreshing state... [id=capstone-local-lakehouse]
+module.kinesis.data.aws_iam_policy_document.firehose[0]: Reading...
+module.kinesis.data.aws_iam_policy_document.firehose[0]: Read complete after 0s [id=3212949964]
+module.kinesis.aws_iam_role_policy.firehose[0]: Refreshing state... [id=coderhouse-local-firehose:coderhouse-firehose-policy]
+module.network.aws_vpc_endpoint.s3: Refreshing state... [id=vpce-201309ad041072fc8]
+module.network.aws_route_table_association.private[1]: Refreshing state... [id=rtbassoc-34183377ef2c1ca53]
+module.network.aws_route_table_association.private[0]: Refreshing state... [id=rtbassoc-f3eeeed4d280bcae2]
+module.kinesis.aws_kinesis_firehose_delivery_stream.bronze[0]: Refreshing state... [id=arn:aws:firehose:us-east-1:000000000000:deliverystream/local-transactions-firehose]
+
+No changes. Your infrastructure matches the configuration.
+
+Terraform has compared your real infrastructure against your configuration
+and found no differences, so no changes are needed.

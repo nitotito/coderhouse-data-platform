@@ -1,3 +1,25 @@
+# Capstone final: laboratorio local
+
+La entrega final se ejecuta con Docker, sin cuenta AWS ni credenciales reales.
+El historial AWS de las preentregas se conserva debajo y en `sql/redshift/`.
+
+```powershell
+docker compose up -d --build
+docker compose --profile tools run --rm audit
+```
+
+El primer comando construye el JAR, inicializa PostgreSQL, ejecuta `tflocal init`
+y `tflocal apply` desde `terraform/local`, y arranca Flink y el consumidor.
+El segundo publica un fixture nuevo y exige igualdad de agregaciones entre la
+vista materializada de PostgreSQL y una lectura real de Iceberg con DuckDB.
+La primera construcción necesita Internet y varios minutos para las dependencias.
+Flink UI: http://localhost:8081. Parámetros y puertos: `local/example.env`.
+
+Guía: [laboratorio reproducible](docs/capstone-local.md).
+No ejecutar los scripts AWS del runbook anterior para esta entrega.
+
+---
+
 # Coderhouse Data Platform — Infraestructura Base
 
 ## Pre-entrega 6 — revisión ejecutada el 11/11/2026
@@ -16,7 +38,7 @@ Las evidencias PE6 anteriores se conservan como antecedentes separados.
 **Prueba funcional y seguridad PASSED en AWS el 07/11/2026**, en
 `feature/redshift-streaming-analytics`. Ensayo único con retiro posterior de los
 recursos temporales. Resultados reales y tres capturas de Query Editor v2
-incorporados al PDF. Esta secci?n conserva el ensayo hist?rico; la revisi?n vigente figura arriba.
+incorporados al PDF. El PR sigue sin fusionar.
 
 Kinesis alimenta una MV de Streaming Ingestion; vistas SQL validan cinco campos
 JSON y calculan métricas por minuto. Un esquema externo lee la tabla Iceberg
@@ -24,8 +46,8 @@ existente mediante Glue y permite comparar agregados aprobados con un JOIN por
 minuto UTC y método de pago. La rama conserva el pipeline Flink y las entregas previas.
 
 - [Arquitectura, despliegue, seguridad, refresco y monitoreo](docs/redshift-checkpoint-6.md).
-- [Módulo Terraform](infra/modules/redshift/main.tf), activado desde
-  [infra/redshift.tf](infra/redshift.tf): Serverless privado 4 RPU, IAM específico,
+- [Módulo Terraform](terraform/modules/redshift/main.tf), activado desde
+  [terraform/redshift.tf](terraform/redshift.tf): Serverless privado 4 RPU, IAM específico,
   endpoint Kinesis y límite diario. Plan validado: 8 altas, 0 cambios, 0 bajas.
 - [SQL consolidado](sql/redshift/checkpoint_6_complete.sql); originales 01-08 en
   `sql/redshift/`, separados por esquemas, ingesta, métricas, Iceberg, permisos y diagnóstico.
@@ -68,13 +90,13 @@ El proyecto establece los componentes de red, almacenamiento de estado remoto e 
 
 ## Estructura del proyecto
 
-Estructura actual de entrega, ajustada a las carpetas `infra/` y `app/` de la
+Estructura actual de entrega, ajustada a las carpetas `terraform/` y `app/` de la
 consigna. La reorganización conserva las pre-entregas anteriores y las direcciones
 Terraform de todos los recursos. El estado remoto mantiene su clave original
 `environments/dev/terraform.tfstate`: cambiar carpetas no crea otro entorno.
 
 ```text
-infra/
+terraform/
   main.tf                 # Composición de los módulos del entorno dev
   lakehouse.tf            # Base Glue y outputs Iceberg
   managed-flink.tf         # Aplicación, catálogo y permisos
@@ -555,7 +577,7 @@ La aplicación admite timestamps ISO 8601 y Unix epoch en milisegundos.
 
 ### Infraestructura Terraform
 
-La aplicación se define mediante `aws_kinesisanalyticsv2_application`, utilizando el módulo `infra/modules/managed-flink`.
+La aplicación se define mediante `aws_kinesisanalyticsv2_application`, utilizando el módulo `terraform/modules/managed-flink`.
 
 El código Java se compila mediante Maven y se despliega como archivo JAR almacenado en Amazon S3.
 
@@ -618,13 +640,13 @@ No se agregan un crawler, Glue ETL, DynamoDB de locking Iceberg ni otro bucket.
 
 | Consigna | Ubicación real | Responsabilidad |
 |---|---|---|
-| `infra/` | `infra/main.tf` + `infra/modules/` | Terraform modular incremental |
-| `app/` | `app/flink-transactions/` | Código Java, Maven y pruebas |
+| `terraform/` | `terraform/main.tf` + `terraform/modules/` | Terraform modular incremental |
+| `app/` | `flink-app/` | Código Java, Maven y pruebas |
 | Evidencias | `docs/evidence/` | Resultados reales de comandos y pruebas |
 | Procedimiento AWS | `docs/iceberg-deployment.md` | Despliegue, consultas, cierre |
 
-La estructura satisface literalmente la separación `infra/` y `app/`, sin
-mantener dos copias de los recursos. `infra/modules/lakehouse` declara la base
+La estructura satisface literalmente la separación `terraform/` y `app/`, sin
+mantener dos copias de los recursos. `terraform/modules/lakehouse` declara la base
 Glue, ubicación, catálogo y outputs; Managed Flink agrega permisos y propiedades. Se reutiliza el versionado S3 existente, confirmado `Enabled` en AWS.
 
 Terraform **administra la infraestructura necesaria para la tabla**, no su

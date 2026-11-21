@@ -1,0 +1,15 @@
+.git
+.capstone
+.codex
+**/.terraform
+**/target
+**/*.tfstate*
+docs/evidence
+output
+flink-data
+.env
+.env.*
+.aws
+**/*.pem
+**/*.key
+**/__pycache__

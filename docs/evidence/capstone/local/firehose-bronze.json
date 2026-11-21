@@ -1,0 +1,22 @@
+[
+  {
+    "key": "ingesta/year=!{timestamp:yyyy}/month=!{timestamp:MM}/day=!{timestamp:dd}/2026/11/21/01/local-transactions-firehose-2026-11-21-01-43-18-eaa00bb5-7e0d-402c-965b-b49fc27b2481",
+    "bytes": 513,
+    "modified": "2026-11-21 01:43:18+00:00"
+  },
+  {
+    "key": "ingesta/year=!{timestamp:yyyy}/month=!{timestamp:MM}/day=!{timestamp:dd}/2026/11/21/01/local-transactions-firehose-2026-11-21-01-43-19-fdb27a15-3a01-430d-9198-a2ee6333a36a",
+    "bytes": 534,
+    "modified": "2026-11-21 01:43:19+00:00"
+  },
+  {
+    "key": "ingesta/year=!{timestamp:yyyy}/month=!{timestamp:MM}/day=!{timestamp:dd}/2026/11/21/01/local-transactions-firehose-2026-11-21-01-43-24-7b75f8b7-f27c-45cd-bc08-b39866792439",
+    "bytes": 524,
+    "modified": "2026-11-21 01:43:24+00:00"
+  },
+  {
+    "key": "ingesta/year=!{timestamp:yyyy}/month=!{timestamp:MM}/day=!{timestamp:dd}/2026/11/21/01/local-transactions-firehose-2026-11-21-01-43-42-12066422-e72b-49e5-8354-94a415ab8b5f",
+    "bytes": 356,
+    "modified": "2026-11-21 01:43:42+00:00"
+  }
+]

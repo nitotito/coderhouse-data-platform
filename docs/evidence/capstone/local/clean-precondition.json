@@ -1,0 +1,4 @@
+{
+  "state_absent": true,
+  "scope": "only Compose project; AWS dev untouched"
+}

@@ -1,0 +1,12 @@
+python : .....
+En línea: 2 Carácter: 1
++ python -m unittest discover -s scripts -p 'test_*.py' *> docs/evidenc ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (.....:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.008s
+
+OK
+Dry run. Requires an authorized isolated deployment and --execute.
